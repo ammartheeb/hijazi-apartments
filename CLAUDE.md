@@ -44,6 +44,7 @@ This file is read automatically at the start of every Claude Code session. Keep 
   - Booking reference: `HA-DDMMYYYY-<apartment number>` from the check-in date. It is computed, not stored, so it changes if the apartment or check-in date changes.
   - Text positions on the form are `FIELD_LINES` in pixels on the 1536×1024 template. If the owner changes the template design, update them.
   - Admin dialogs cap their height to the window and scroll inside. The page's global input and dialog styles use `!important`, so new admin styles often need it too.
+- Animated page background (`.apartments-page-bg` in `apartments.html`, `.booking-page-bg` in `booking.html`): animate only `transform` and `opacity`. Never animate `background-position`, `left`/`top` or sizes there; that repaints the whole screen every frame and makes scrolling lag. The base gradient is the child span `.cosmic-base` / `.booking-cosmic-base` (230% wide, moved with `translateX`); the dust layers are larger than the screen and moved with `translate`.
 - To add 1- or 2-bedroom apartments: fill the unit type in `amenities-data.js` and set `published: true`, add the apartment there, then add its number, price and order in `main.js`. The type filter on `apartments.html` appears by itself once two types exist.
 
 ## Current status (2026-11-14)
@@ -69,9 +70,14 @@ Done (2026-11-13, pushed straight to `main`, commits 3cdb3f0, 9919682, 28b5242):
 - After saving, the reservation form opens (owner's template): print as A4 landscape, share (WhatsApp on the phone) or download as PNG. Also opens from the «النموذج» row button, the calendar details dialog, and «حفظ وعرض نموذج الحجز» in the edit dialog.
 - Tested on synthetic passport images only. The owner confirmed it works in the live admin; not yet tested on many real passports.
 
+Done (2026-11-13, later, pushed straight to `main`, commit 9cdd489):
+- Scroll lag fix on the apartments and booking pages: the background's base gradient, two dust layers and shine now move with `transform` instead of `background-position`/`left`. Measured in headless Chromium with phone emulation, raster work during a scroll fell from about 8400 ms to 160 ms (apartments) and 2170 ms to 7 ms (booking). The look is the same except that the three dot sizes in each dust layer now move at one speed.
+- Not yet confirmed by the owner on a real phone and laptop.
+
 Search Console findings (2026-11-12): 10 indexed, 8 not. 4 redirects and 2 alternate-canonical are normal; Soft 404 was the API; `faq.html` "crawled, not indexed" was last crawled 2026-06-16 (old version). Sitemap was last read 2026-11-05 with 11 URLs. On this domain property the sitemap must be submitted as the full URL `https://www.hijazi-apartments.com/sitemap.xml`.
 
 ## Next steps
+0. Scroll smoothness: wait for the owner's result on real devices. If the apartments or booking page still lags, look next at `backdrop-filter` on the cards (about 24 blurred elements on the apartments page). If the homepage lags, look at the `filter: blur(1px) brightness(...)` on `.hero-video` in `index.html`; neither was changed.
 1. Booking form and API still accept 1–2 nights although the policy is a 3-night minimum. Enforce it only after the owner agrees (it changes the booking flow).
 2. Owner to send which apartments allow smoking and pets, and which have a toaster or a second parking space; fill them in `amenities-data.js`.
 3. Owner to send the building's Google Maps link and real walking/driving times to each hospital; add them to the landing pages and to the schema (`geo`, full address).
