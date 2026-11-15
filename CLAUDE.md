@@ -23,7 +23,7 @@ This file is read automatically at the start of every Claude Code session. Keep 
 - `backend/`: Node/Express + MongoDB Atlas on Render at `https://api.hijazi-apartments.com`. Apartments, availability and bookings come from the API.
 - `frontend/admin.html` is the PMS (noindex). Do not touch it for SEO work.
 - Tests: `cd backend && npm ci && npm test` (79 tests; some check frontend files, including that the amenities pages match the data file).
-- Workflow: earlier work went branch → PR → Vercel status → squash merge to `main`. On 2026-11-12 the owner chose a direct push to `main` without a PR; ask which they want each time, and never open a PR unless asked. On 2026-11-13 the owner again asked for a direct push to `main`.
+- Workflow: earlier work went branch → PR → Vercel status → squash merge to `main`. On 2026-11-12 the owner chose a direct push to `main` without a PR; ask which they want each time, and never open a PR unless asked. On 2026-11-13 and 2026-11-15 the owner again asked for direct pushes to `main`.
 
 ## Conventions
 - `js/main.js` renders the shared header, footer and WhatsApp widget, and handles language (`localStorage.siteLang`). When `main.js` changes, bump `js/main.js?v=N` on every page (currently `v=11`).
@@ -44,7 +44,8 @@ This file is read automatically at the start of every Claude Code session. Keep 
   - Booking reference: `HA-DDMMYYYY-<apartment number>` from the check-in date. It is computed, not stored, so it changes if the apartment or check-in date changes.
   - Text positions on the form are `FIELD_LINES` in pixels on the 1536×1024 template. If the owner changes the template design, update them.
   - Admin dialogs cap their height to the window and scroll inside. The page's global input and dialog styles use `!important`, so new admin styles often need it too.
-- Animated page background (`.apartments-page-bg` in `apartments.html`, `.booking-page-bg` in `booking.html`): animate only `transform` and `opacity`. Never animate `background-position`, `left`/`top` or sizes there; that repaints the whole screen every frame and makes scrolling lag. The base gradient is the child span `.cosmic-base` / `.booking-cosmic-base` (230% wide, moved with `translateX`); the dust layers are larger than the screen and moved with `translate`.
+- Animated page background (`.apartments-page-bg` in `apartments.html`, `.booking-page-bg` in `booking.html`) and the apartments header background: every layer is a `<canvas data-fx="...">` painted once by `js/cosmic-bg.js` (loaded right after the page header, `?v=1`); the page CSS only sets size, position and animation. Animate only `transform` and `opacity` there. Soft layers (base gradient, smoke, orbs, shine, header) are painted at 1/6 resolution and stretched; dust and twinkle dots at up to 1.5×. Reason: a normal CSS layer costs a full-resolution screen of GPU memory each, and too many of them made scrolling show blank/pixelated tiles. To change a shape or colour, edit the painter in `cosmic-bg.js`. The booking header background is static (its animation never ran, because `background` there is `!important`).
+- Do not put `backdrop-filter` on an element inside another element that already has it (cards, navbar): it costs a GPU layer and blur per element and its only visible effect is a darker tint. Put the tint in the background colour instead (done for `.card-price-box`, `.card-top-badge`, `.navbar-collapse`, `.lang-switcher`).
 - To add 1- or 2-bedroom apartments: fill the unit type in `amenities-data.js` and set `published: true`, add the apartment there, then add its number, price and order in `main.js`. The type filter on `apartments.html` appears by itself once two types exist.
 
 ## Current status (2026-11-14)
@@ -72,12 +73,17 @@ Done (2026-11-13, pushed straight to `main`, commits 3cdb3f0, 9919682, 28b5242):
 
 Done (2026-11-13, later, pushed straight to `main`, commit 9cdd489):
 - Scroll lag fix on the apartments and booking pages: the background's base gradient, two dust layers and shine now move with `transform` instead of `background-position`/`left`. Measured in headless Chromium with phone emulation, raster work during a scroll fell from about 8400 ms to 160 ms (apartments) and 2170 ms to 7 ms (booking). The look is the same except that the three dot sizes in each dust layer now move at one speed.
-- Not yet confirmed by the owner on a real phone and laptop.
+- The owner later reported no visible improvement from this change alone.
+
+Done (2026-11-15, pushed straight to `main`):
+- Backend dependencies updated with `npm audit fix` (lockfile only: body-parser 2.4.0, proxy-addr 2.0.8, mongoose 9.12.1, qs 6.17.1). Two moderate advisories remain in `nodemon` (dev only); left as is.
+- The owner reported that the 2026-11-13 scroll fix changed nothing on real devices (Android and laptop) and that tiles appear blank/pixelated while scrolling; `faq.html` was smooth. Phase 1 fix: the background layers became low-resolution canvases (`js/cosmic-bg.js`), the orb and header `filter: blur` were removed, and nested `backdrop-filter` was removed from the card price box and badge and from the mobile menu and language switch (the mobile menu also lagged when opening). Before/after screenshots match within 1%. In headless Chromium, compositor tile memory fell from 172 MB to 48 MB (apartments, desktop) and 161 MB to 47 MB (booking, desktop); about 55 MB to 20 MB in phone emulation.
+- Not yet confirmed by the owner on real devices.
 
 Search Console findings (2026-11-12): 10 indexed, 8 not. 4 redirects and 2 alternate-canonical are normal; Soft 404 was the API; `faq.html` "crawled, not indexed" was last crawled 2026-06-16 (old version). Sitemap was last read 2026-11-05 with 11 URLs. On this domain property the sitemap must be submitted as the full URL `https://www.hijazi-apartments.com/sitemap.xml`.
 
 ## Next steps
-0. Scroll smoothness: wait for the owner's result on real devices. If the apartments or booking page still lags, look next at `backdrop-filter` on the cards (about 24 blurred elements on the apartments page). If the homepage lags, look at the `filter: blur(1px) brightness(...)` on `.hero-video` in `index.html`; neither was changed.
+0. Scroll smoothness: wait for the owner's result on real devices after phase 1. If the apartments or booking page still shows blank tiles or lag, phase 2 (needs the owner's approval, it changes the look slightly): remove `backdrop-filter` from the cards themselves (8 on the apartments page, each its own GPU layer) and from the booking form fields (about 30 nested ones; their focus states need care), with a darker background instead. If the homepage lags, look at the `filter` on `.hero-video` in `index.html`. Optional, if the owner wants it: animate the booking header background like the apartments one (add the header canvas).
 1. Booking form and API still accept 1–2 nights although the policy is a 3-night minimum. Enforce it only after the owner agrees (it changes the booking flow).
 2. Owner to send which apartments allow smoking and pets, and which have a toaster or a second parking space; fill them in `amenities-data.js`.
 3. Owner to send the building's Google Maps link and real walking/driving times to each hospital; add them to the landing pages and to the schema (`geo`, full address).
