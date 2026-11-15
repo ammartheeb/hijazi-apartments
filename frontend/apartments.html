@@ -44,7 +44,7 @@
     <meta property="og:site_name" content="HIJAZI Apartments">
     <meta property="og:locale" content="ar_JO">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=7" />
+    <link rel="stylesheet" href="css/style.css?v=10" />
     <link rel="stylesheet" href="css/lightbox.css?v=3">
     <link rel="stylesheet" href="css/amenities.css?v=1" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -71,7 +71,6 @@
             color: #fff;
             background: linear-gradient(120deg, #c89116, #5a3b00, #000000, #9b7108, #000000);
             background-size: 350% 350%;
-            animation: luxuryHeaderMove 14s ease-in-out infinite;
         }
 
         .page-header h1 {
@@ -948,6 +947,17 @@
 
         /* ===== APARTMENTS ANIMATED HEADER BACKGROUND ===== */
 
+        /* خلفية الهيدر المتحركة: canvas يرسمه js/cosmic-bg.js ويتحرك بـ transform */
+        .page-header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -3;
+            width: 350%;
+            height: 100%;
+            animation: luxuryHeaderMove 14s ease-in-out infinite;
+        }
+
         .page-header::before {
             content: "";
             position: absolute;
@@ -957,7 +967,6 @@
                 radial-gradient(circle at 20% 30%, rgba(255, 214, 118, 0.45), transparent 28%),
                 radial-gradient(circle at 80% 55%, rgba(255, 255, 255, 0.16), transparent 26%),
                 radial-gradient(circle at 50% 90%, rgba(200, 145, 22, 0.32), transparent 32%);
-            filter: blur(18px);
             animation: floatingLuxuryLights 8s ease-in-out infinite alternate;
         }
 
@@ -985,15 +994,15 @@
 
         @keyframes luxuryHeaderMove {
             0% {
-                background-position: 0% 50%;
+                transform: translateX(0);
             }
 
             50% {
-                background-position: 100% 50%;
+                transform: translateX(-71.4286%);
             }
 
             100% {
-                background-position: 0% 50%;
+                transform: translateX(0);
             }
         }
 
@@ -1041,7 +1050,7 @@
             background: #ffffff;
         }
 
-        /* طبقة التدرّج الأساسية: تتحرك بـ transform (على كرت الشاشة) بدل background-position */
+        /* طبقات الخلفية كلها <canvas> يرسمها js/cosmic-bg.js؛ هنا الحجم والموضع والحركة فقط */
         .cosmic-base {
             position: absolute;
             top: 0;
@@ -1049,13 +1058,6 @@
             z-index: -1;
             width: 230%;
             height: 100%;
-            background:
-                radial-gradient(circle at 12% 20%, rgba(212, 160, 23, 0.30), transparent 25%),
-                radial-gradient(circle at 88% 32%, rgba(0, 0, 0, 0.16), transparent 27%),
-                radial-gradient(circle at 52% 86%, rgba(255, 255, 255, 0.95), transparent 30%),
-                linear-gradient(135deg, #ffffff 0%, #ffffff 42%, #ffffff 72%, #ffffff 100%);
-            background-size: 100% 230%;
-            background-position: 0 50%;
             animation: cosmicBaseMove 16s ease-in-out infinite;
         }
 
@@ -1064,8 +1066,6 @@
             position: absolute;
             display: block;
             border-radius: 50%;
-            filter: blur(20px);
-            background: radial-gradient(circle, rgba(212, 160, 23, 0.75), transparent 68%);
             animation: cosmicOrbFloat 10s ease-in-out infinite alternate;
         }
 
@@ -1103,75 +1103,56 @@
             top: -35%;
             left: -65%;
             transform: rotate(18deg);
-            background: linear-gradient(90deg,
-                    transparent 0%,
-                    rgba(255, 255, 255, 0.70) 38%,
-                    rgba(212, 160, 23, 0.30) 50%,
-                    rgba(0, 0, 0, 0.10) 58%,
-                    transparent 100%);
             animation: cosmicShineMove 9s ease-in-out infinite;
         }
 
         /* طبقة الغبار الذهبية والبيضاء */
         .gold-dust {
             position: absolute;
-            inset: 0;
+            display: block;
         }
 
         .dust-1 {
             top: -160px;
             left: -230px;
             opacity: 0.72;
-            background-image:
-                radial-gradient(rgba(212, 160, 23, 0.75) 1.4px, transparent 1.4px),
-                radial-gradient(rgba(255, 255, 255, 0.98) 1.2px, transparent 1.2px),
-                radial-gradient(rgba(212, 160, 23, 0.45) 2px, transparent 2px);
-            background-size: 34px 34px, 68px 68px, 130px 130px;
-            background-position: 0 0, 22px 28px, 70px 90px;
             animation: cosmicDustMoveOne 22s linear infinite;
+            width: calc(100% + 230px);
+            height: calc(100% + 160px);
         }
 
         /* طبقة الغبار الأسود الناعم */
         /* طبقة غبار أسود واضحة */
         .dust-2 {
             top: -110px;
-            right: -310px;
+            left: 0;
             opacity: 0.72;
-            background-image:
-                radial-gradient(rgba(0, 0, 0, 0.62) 1.4px, transparent 1.4px),
-                radial-gradient(rgba(0, 0, 0, 0.34) 2.4px, transparent 2.4px),
-                radial-gradient(rgba(30, 24, 12, 0.42) 3px, transparent 3px);
-            background-size: 42px 42px, 95px 95px, 160px 160px;
-            background-position: 18px 12px, 60px 80px, 110px 140px;
             animation: cosmicDustMoveTwo 30s linear infinite reverse;
+            width: calc(100% + 310px);
+            height: calc(100% + 110px);
         }
 
         /* دخان كوني أسود واضح لكن ناعم */
-        .apartments-page-bg::before {
-            content: "";
+        .cosmic-smoke {
             position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(circle at 2% 38%, rgba(0, 0, 0, 0.30), transparent 34%),
-                radial-gradient(circle at 98% 66%, rgba(0, 0, 0, 0.26), transparent 38%),
-                radial-gradient(circle at 48% 58%, rgba(0, 0, 0, 0.12), transparent 42%),
-                radial-gradient(circle at 70% 18%, rgba(212, 160, 23, 0.12), transparent 28%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
             opacity: 1;
             animation: blackCosmicSmoke 16s ease-in-out infinite alternate;
         }
 
         /* نجوم أوف وايت + ذهبية + نقاط سوداء */
-        .apartments-page-bg::after {
-            content: "";
+        .cosmic-twinkle {
             position: absolute;
-            inset: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
             opacity: 0.55;
-            background-image:
-                radial-gradient(rgba(255, 255, 255, 1) 1px, transparent 1px),
-                radial-gradient(rgba(212, 160, 23, 0.85) 1.1px, transparent 1.1px),
-                radial-gradient(rgba(0, 0, 0, 0.28) 0.9px, transparent 0.9px);
-            background-size: 95px 95px, 145px 145px, 115px 115px;
-            background-position: 18px 36px, 75px 100px, 44px 70px;
             animation: cosmicTwinkle 4.5s ease-in-out infinite alternate;
         }
 
@@ -1326,15 +1307,13 @@
 
             .dust-1 {
                 opacity: 0.62;
-                background-size: 42px 42px, 82px 82px, 145px 145px;
             }
 
             .dust-2 {
                 opacity: 0.58;
-                background-size: 50px 50px, 105px 105px, 170px 170px;
             }
 
-            .apartments-page-bg::after {
+            .cosmic-twinkle {
                 opacity: 0.45;
             }
         }
@@ -2604,26 +2583,46 @@
             .seo-intro .seo-links a { font-size: 13px; padding: 6px 12px; }
         }
 
+        /* PERF: صندوق السعر وشارة الحالة داخل كرت زجاجي أصلاً. تمويه ثانٍ داخله كان يكلّف
+           كرت الشاشة طبقة وتمويهاً لكل عنصر (16 في الصفحة) وأثره الوحيد تغميق اللون،
+           فعُوِّض التغميق في لون الخلفية نفسه. :not(#_) لرفع الأولوية فقط. */
+        .grid .card-price-box:not(#_),
+        .grid .card-top-badge:not(#_) {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+
+        .grid .card-price-box:not(#_) {
+            background: rgba(86, 86, 86, 0.298) !important;
+        }
+
+        .grid .card-top-badge:not(#_) {
+            background: rgba(0, 0, 0, 0.704) !important;
+        }
     </style>
 </head>
 
 <body>
 
     <div class="apartments-page-bg" aria-hidden="true">
-        <span class="cosmic-base"></span>
-        <span class="gold-orb orb-1"></span>
-        <span class="gold-orb orb-2"></span>
-        <span class="gold-orb orb-3"></span>
-        <span class="luxury-shine"></span>
-        <span class="gold-dust dust-1"></span>
-        <span class="gold-dust dust-2"></span>
+        <canvas class="cosmic-base" data-fx="base" data-page="apartments"></canvas>
+        <canvas class="cosmic-smoke" data-fx="smoke"></canvas>
+        <canvas class="gold-orb orb-1" data-fx="orb"></canvas>
+        <canvas class="gold-orb orb-2" data-fx="orb"></canvas>
+        <canvas class="gold-orb orb-3" data-fx="orb"></canvas>
+        <canvas class="luxury-shine" data-fx="shine"></canvas>
+        <canvas class="gold-dust dust-1" data-fx="dust1" data-page="apartments"></canvas>
+        <canvas class="gold-dust dust-2" data-fx="dust2"></canvas>
+        <canvas class="cosmic-twinkle" data-fx="twinkle"></canvas>
     </div>
     <div id="sharedHeader"></div>
 
     <section class="page-header">
+        <canvas class="page-header-bg" data-fx="header" aria-hidden="true"></canvas>
         <h1 id="pageTitle">شقق مفروشة للإيجار في الشميساني - عمّان</h1>
         <p id="pageSubtitle">اختر الشقة المناسبة حسب تاريخ الدخول والخروج</p>
     </section>
+    <script src="js/cosmic-bg.js?v=1"></script>
 
     <div class="wrap">
 

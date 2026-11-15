@@ -2741,3 +2741,26 @@ html[dir="ltr"] .image-lightbox-caption {
         font-size: 1.05rem !important;
     }
 }
+
+/* PERF: قائمة الموبايل ومبدّل اللغة داخل الناف بار الزجاجي أصلاً. تمويه ثانٍ داخله كان
+   يُعاد حسابه مع كل إطار أثناء فتح القائمة فيسبب تقطيعاً، وأثره الوحيد تغميق اللون،
+   فعُوِّض التغميق في لون الخلفية نفسه. */
+.custom-navbar .navbar-collapse,
+.custom-navbar .lang-switcher {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+.custom-navbar .lang-switcher {
+    background: rgba(24, 24, 24, 0.74) !important;
+}
+
+@media (max-width: 991.98px) {
+    .custom-navbar .navbar-collapse {
+        background: rgba(0, 0, 0, 0.95) !important;
+    }
+
+    .custom-navbar .lang-switcher {
+        background: rgba(21, 21, 21, 0.83) !important;
+    }
+}
