@@ -2720,7 +2720,7 @@
                     <div>
                         <div class="airbnb-gallery-grid" id="detailsGallery"></div>
 
-                        <div class="gallery-hint">
+                        <div class="gallery-hint" id="detailsGalleryHint">
                             اضغط على أي صورة لفتح ألبوم الصور الكامل
                         </div>
 
@@ -3145,6 +3145,13 @@
             const lang = getCurrentLang();
             const galleryEl = document.getElementById("detailsGallery");
             const items = getGalleryItemsForApartment(apt);
+            const hintEl = document.getElementById("detailsGalleryHint");
+
+            if (hintEl) {
+                hintEl.textContent = lang === "ar"
+                    ? "اضغط على أي صورة لفتح ألبوم الصور الكامل"
+                    : "Click any photo to open the full album";
+            }
 
             if (!galleryEl) return;
 
