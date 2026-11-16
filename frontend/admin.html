@@ -5155,16 +5155,16 @@
                         <legend>الدفع</legend>
                         <div class="form-grid">
                             <div class="field"><label for="manualNightlyRate">سعر الليلة (JOD) — من سعر الشقة ويمكن
-                                    تعديله</label><input id="manualNightlyRate" type="number" min="0" step="0.01"
-                                    inputmode="decimal"></div>
+                                    تعديله</label><input id="manualNightlyRate" inputmode="decimal" autocomplete="off" dir="ltr" type="text" step="0.01"
+                                   ></div>
                             <div class="field"><label for="manualPrice">إجمالي الإيجار (JOD) — يُحسب تلقائيًا ويمكن
-                                    تعديله</label><input id="manualPrice" type="number" min="0" step="0.01" value="0">
+                                    تعديله</label><input id="manualPrice" inputmode="decimal" autocomplete="off" dir="ltr" type="text" value="0">
                             </div>
                             <div class="field"><label for="manualDeposit">مبلغ التأمين (JOD)</label><input
-                                    id="manualDeposit" type="number" min="0" step="0.01" value="200"
-                                    inputmode="decimal"></div>
+                                    id="manualDeposit" inputmode="decimal" autocomplete="off" dir="ltr" type="text" value="200"
+                                   ></div>
                             <div class="field"><label for="manualPaid">المبلغ الإجمالي المدفوع (JOD)</label><input
-                                    id="manualPaid" type="number" min="0" step="0.01" inputmode="decimal"
+                                    id="manualPaid" inputmode="decimal" autocomplete="off" dir="ltr" type="text"
                                     placeholder="تلقائي: الإيجار + التأمين"></div>
                             <div class="field"><label for="manualPayment">طريقة الدفع</label><select id="manualPayment">
                                     <option value="CASH">نقدًا (CASH)</option>
@@ -5562,7 +5562,7 @@
 
                 <div class="field">
                     <label for="editBookingPrice">السعر الإجمالي</label>
-                    <input id="editBookingPrice" type="number" min="0" step="0.01">
+                    <input id="editBookingPrice" inputmode="decimal" autocomplete="off" dir="ltr" type="text">
                 </div>
 
                 <div class="field">
@@ -5637,13 +5637,13 @@
                     <legend>الدفع (لنموذج الحجز)</legend>
                     <div class="form-grid">
                         <div class="field"><label for="editBookingNightlyRate">سعر الليلة</label><input
-                                id="editBookingNightlyRate" type="number" min="0" step="0.01" inputmode="decimal"
+                                id="editBookingNightlyRate" inputmode="decimal" autocomplete="off" dir="ltr" type="text"
                                 placeholder="تلقائي"></div>
                         <div class="field"><label for="editBookingDeposit">مبلغ التأمين</label><input
-                                id="editBookingDeposit" type="number" min="0" step="0.01" inputmode="decimal"
+                                id="editBookingDeposit" inputmode="decimal" autocomplete="off" dir="ltr" type="text"
                                 placeholder="200"></div>
                         <div class="field"><label for="editBookingPaid">المبلغ الإجمالي المدفوع</label><input
-                                id="editBookingPaid" type="number" min="0" step="0.01" inputmode="decimal"
+                                id="editBookingPaid" inputmode="decimal" autocomplete="off" dir="ltr" type="text"
                                 placeholder="تلقائي: الإيجار + التأمين"></div>
                         <div class="field"><label for="editBookingPayment">طريقة الدفع</label><select
                                 id="editBookingPayment">
@@ -5980,38 +5980,94 @@
             showNotice(`تم تصدير ${activities.length} عملية.`);
         }
         /* =========================================================
-           السعر: سعر الليلة من الشقة (ويمكن تعديله) × عدد الليالي
-           fromApartment = المالك غيّر الشقة، فنرجع سعر الليلة لسعر الشقة الجديدة
+           الدفع: سعر الليلة، إجمالي الإيجار، التأمين، المبلغ المدفوع مربوطين ببعض
+           - سعر الليلة   → الإيجار = السعر × الليالي، والمدفوع = الإيجار + التأمين
+           - الإيجار      → سعر الليلة = الإيجار ÷ الليالي، والمدفوع = الإيجار + التأمين
+           - التأمين      → المدفوع = الإيجار + التأمين
+           - المدفوع      → الإيجار = المدفوع − التأمين، وسعر الليلة = الإيجار ÷ الليالي
+           - التواريخ/الشقة → نحسب من سعر الليلة
+           الكسور مسموحة (مثل 99.5)، وتُقبل الفاصلة "," أو "٫" والأرقام العربية.
         ========================================================= */
+        const PRICE_FIELDS = Object.freeze({
+            manual: { rate: "manualNightlyRate", rent: "manualPrice", deposit: "manualDeposit", paid: "manualPaid", checkIn: "manualCheckIn", checkOut: "manualCheckOut" },
+            editBooking: { rate: "editBookingNightlyRate", rent: "editBookingPrice", deposit: "editBookingDeposit", paid: "editBookingPaid", checkIn: "editBookingCheckIn", checkOut: "editBookingCheckOut" }
+        });
+
         function roundMoney(value) {
             return Math.round(Number(value) * 100) / 100;
         }
 
+        /* "١٢٠٫٥" أو "120,5" → 120.5 ؛ فاضي → null ؛ غير صالح → NaN */
+        function parseMoney(raw) {
+            let text = String(raw ?? "").trim();
+            if (!text) return null;
+            text = text
+                .replace(/[٠-٩]/g, d => String(d.charCodeAt(0) - 0x0660))
+                .replace(/[۰-۹]/g, d => String(d.charCodeAt(0) - 0x06F0))
+                .replace(/[٫,]/g, ".")
+                .replace(/\s+/g, "");
+            if (!/^\d*\.?\d*$/.test(text) || text === ".") return NaN;
+            return Number(text);
+        }
+
+        function priceInputs(prefix) {
+            return Object.fromEntries(
+                Object.entries(PRICE_FIELDS[prefix]).map(([key, id]) => [key, document.getElementById(id)])
+            );
+        }
+
+        function priceNights(fields) {
+            if (!fields.checkIn.value || !fields.checkOut.value) return 0;
+            return nightsBetween(fields.checkIn.value, fields.checkOut.value) || 0;
+        }
+
+        function setMoney(input, value) {
+            input.value = String(roundMoney(value));
+        }
+
+        function syncPrices(prefix, changed) {
+            const fields = priceInputs(prefix);
+            const nights = priceNights(fields);
+            const rate = parseMoney(fields.rate.value);
+            let rent = parseMoney(fields.rent.value);
+            const depositRaw = parseMoney(fields.deposit.value);
+            const paid = parseMoney(fields.paid.value);
+
+            // خانة فيها رقم غير صالح: لا نغيّر شيئًا حتى يصلحه المالك
+            if ([rate, rent, depositRaw, paid].some(Number.isNaN)) return;
+
+            const deposit = depositRaw ?? window.HijaziReservationForm.DEFAULT_SECURITY_DEPOSIT;
+
+            if (changed === "rate" || changed === "dates") {
+                if (rate !== null && nights > 0) {
+                    rent = rate * nights;
+                    setMoney(fields.rent, rent);
+                } else if (changed === "dates" && rent !== null && nights > 0) {
+                    setMoney(fields.rate, rent / nights);
+                }
+            } else if (changed === "rent") {
+                if (rent !== null && nights > 0) setMoney(fields.rate, rent / nights);
+            } else if (changed === "paid") {
+                if (paid !== null) {
+                    rent = Math.max(0, paid - deposit);
+                    setMoney(fields.rent, rent);
+                    if (nights > 0) setMoney(fields.rate, rent / nights);
+                }
+            }
+
+            // المدفوع يتبع الإيجار + التأمين (إلا إذا المالك هو اللي غيّره الآن)
+            if (changed !== "paid" && rent !== null) setMoney(fields.paid, rent + deposit);
+
+            updatePaidPlaceholder(prefix);
+        }
+
         function updateManualPrice(options = {}) {
-            const apartmentId = Number(
-                document.getElementById("manualApartment").value
-            );
+            const apartmentId = Number(document.getElementById("manualApartment").value);
+            const rateInput = document.getElementById("manualNightlyRate");
+            const apartment = apartments.find(item => Number(item.apartmentId) === apartmentId);
+            const apartmentRate = Number(apartment?.nightlyPriceJod);
 
-            const checkIn =
-                document.getElementById("manualCheckIn").value;
-
-            const checkOut =
-                document.getElementById("manualCheckOut").value;
-
-            const rateInput =
-                document.getElementById("manualNightlyRate");
-
-            const priceInput =
-                document.getElementById("manualPrice");
-
-            const apartment = apartments.find(
-                item => Number(item.apartmentId) === apartmentId
-            );
-
-            const apartmentRate = Number(
-                apartment?.nightlyPriceJod
-            );
-
+            // تغيير الشقة يرجّع سعر الليلة لسعر الشقة الجديدة
             if (options.fromApartment || (rateInput.value === "" && !options.keepRate)) {
                 rateInput.value =
                     apartment && Number.isFinite(apartmentRate) && apartmentRate >= 0
@@ -6019,47 +6075,30 @@
                         : "";
             }
 
-            const nightlyPrice = Number(rateInput.value);
-            const nights = checkIn && checkOut ? nightsBetween(checkIn, checkOut) : 0;
-
-            priceInput.value =
-                rateInput.value !== "" &&
-                Number.isFinite(nightlyPrice) &&
-                nightlyPrice >= 0 &&
-                nights > 0
-                    ? String(roundMoney(nightlyPrice * nights))
-                    : "0";
-
-            updatePaidPlaceholder("manual");
+            syncPrices("manual", options.keepRate ? "rate" : "dates");
         }
 
         /* المدفوع الفاضي = الإيجار + التأمين؛ نعرض الرقم المتوقع داخل الخانة */
         function updatePaidPlaceholder(prefix) {
-            const priceInput = document.getElementById(prefix === "manual" ? "manualPrice" : "editBookingPrice");
-            const depositInput = document.getElementById(prefix === "manual" ? "manualDeposit" : "editBookingDeposit");
-            const paidInput = document.getElementById(prefix === "manual" ? "manualPaid" : "editBookingPaid");
-            const deposit = depositInput.value === ""
+            const fields = priceInputs(prefix);
+            const rent = parseMoney(fields.rent.value) || 0;
+            const depositRaw = parseMoney(fields.deposit.value);
+            const deposit = depositRaw === null || Number.isNaN(depositRaw)
                 ? window.HijaziReservationForm.DEFAULT_SECURITY_DEPOSIT
-                : Number(depositInput.value) || 0;
-            const total = roundMoney((Number(priceInput.value) || 0) + deposit);
+                : depositRaw;
+            const nights = priceNights(fields);
 
-            paidInput.placeholder = `تلقائي: ${total}`;
-
-            // سعر الليلة الفاضي بالتعديل = الإجمالي ÷ الليالي عند الطباعة
-            if (prefix !== "manual") {
-                const nights = nightsBetween(
-                    document.getElementById("editBookingCheckIn").value,
-                    document.getElementById("editBookingCheckOut").value
-                );
-                const price = Number(priceInput.value) || 0;
-                document.getElementById("editBookingNightlyRate").placeholder =
-                    nights > 0 && price > 0 ? `تلقائي: ${roundMoney(price / nights)}` : "تلقائي";
-            }
+            fields.paid.placeholder = `تلقائي: ${roundMoney((Number.isNaN(rent) ? 0 : rent) + deposit)}`;
+            fields.rate.placeholder = nights > 0 && rent > 0 ? `تلقائي: ${roundMoney(rent / nights)}` : "تلقائي";
         }
 
         function amountOrNull(input) {
-            const value = String(input.value || "").trim();
-            return value === "" ? null : Number(value);
+            const value = parseMoney(input.value);
+            if (Number.isNaN(value)) {
+                input.focus();
+                throw new Error("في مبلغ مكتوب بشكل غير صحيح. استخدم أرقام فقط، مثل 120 أو 99.5");
+            }
+            return value;
         }
 
         /* =========================================================
@@ -8275,7 +8314,7 @@ ${connections}
                     sourceReference: document.getElementById("manualReference").value,
                     adults: Number(document.getElementById("manualAdults").value || 0),
                     children: Number(document.getElementById("manualChildren").value || 0),
-                    totalPrice: Number(document.getElementById("manualPrice").value || 0),
+                    totalPrice: amountOrNull(document.getElementById("manualPrice")) ?? 0,
                     currency: "JOD",
                     status: document.getElementById("manualStatus").value,
                     notes: document.getElementById("manualNotes").value,
@@ -8635,11 +8674,7 @@ ${connections}
                             ).value || 0
                         ),
 
-                        totalPrice: Number(
-                            document.getElementById(
-                                "editBookingPrice"
-                            ).value || 0
-                        ),
+                        totalPrice: amountOrNull(document.getElementById("editBookingPrice")) ?? 0,
 
                         currency:
                             document.getElementById(
@@ -9041,40 +9076,16 @@ ${connections}
             updateManualPrice();
         });
 
-        document.getElementById("manualNightlyRate").addEventListener("input", () => {
-            updateManualPrice({ keepRate: true });
-        });
-
-        ["manualPrice", "manualDeposit"].forEach(id => {
-            document.getElementById(id).addEventListener("input", () => updatePaidPlaceholder("manual"));
-        });
-
-        /* نافذة التعديل: تغيير سعر الليلة يحسب الإجمالي من جديد */
-        function updateEditPriceFromRate() {
-            const rate = document.getElementById("editBookingNightlyRate").value;
-            const nights = nightsBetween(
-                document.getElementById("editBookingCheckIn").value,
-                document.getElementById("editBookingCheckOut").value
-            );
-
-            if (rate !== "" && Number(rate) >= 0 && nights > 0) {
-                document.getElementById("editBookingPrice").value = String(roundMoney(Number(rate) * nights));
-            }
-
-            updatePaidPlaceholder("editBooking");
-        }
-
-        document.getElementById("editBookingNightlyRate").addEventListener("input", updateEditPriceFromRate);
-
-        ["editBookingCheckIn", "editBookingCheckOut"].forEach(id => {
-            document.getElementById(id).addEventListener("change", () => {
-                if (document.getElementById("editBookingNightlyRate").value !== "") updateEditPriceFromRate();
-                else updatePaidPlaceholder("editBooking");
+        /* أي تغيير بخانة من خانات الدفع يحدّث الباقي (حجز جديد ونافذة التعديل) */
+        Object.keys(PRICE_FIELDS).forEach(prefix => {
+            const fields = priceInputs(prefix);
+            ["rate", "rent", "deposit", "paid"].forEach(key => {
+                fields[key].addEventListener("input", () => syncPrices(prefix, key));
             });
         });
 
-        ["editBookingPrice", "editBookingDeposit"].forEach(id => {
-            document.getElementById(id).addEventListener("input", () => updatePaidPlaceholder("editBooking"));
+        ["editBookingCheckIn", "editBookingCheckOut"].forEach(id => {
+            document.getElementById(id).addEventListener("change", () => syncPrices("editBooking", "dates"));
         });
 
         /* =========================================================
