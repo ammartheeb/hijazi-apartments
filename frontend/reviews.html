@@ -24,7 +24,7 @@
     <title>آراء وتقييمات الضيوف | HIJAZI Apartments</title>
     <meta name="robots" content="index, follow">
     <meta name="description"
-        content="تقييمات حقيقية من ضيوف HIJAZI Apartments على Booking.com: 11 تقييمًا من السعودية والإمارات والعراق وبريطانيا عن شققنا المفروشة في الشميساني، عمّان.">
+        content="تقييمات حقيقية من ضيوف HIJAZI Apartments على Booking.com: 11 تقييمًا من السعودية والإمارات والعراق وبريطانيا وألمانيا عن شققنا المفروشة في الشميساني، عمّان.">
     <link rel="canonical" href="https://www.hijazi-apartments.com/reviews.html">
     <meta property="og:title" content="آراء وتقييمات الضيوف | HIJAZI Apartments">
     <meta property="og:description"
@@ -41,14 +41,10 @@
 
     <style>
         /* صفحة التقييمات – تستخدم هيكل صفحة المميزات (am-) وتضيف بطاقات التقييم (rv-) */
-        .rv-stats {
-            margin: 28px 0 36px;
-        }
-
         .rv-grid {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 22px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
             align-items: start;
         }
 
@@ -176,6 +172,7 @@
         }
 
         .rv-source {
+            margin-top: 28px;
             margin-bottom: 28px;
         }
 
@@ -225,7 +222,13 @@
             cursor: pointer;
         }
 
-        @media (max-width: 860px) {
+        @media (max-width: 1100px) {
+            .rv-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
             .rv-grid {
                 grid-template-columns: 1fr;
                 gap: 16px;
@@ -248,13 +251,6 @@
     </section>
 
     <main class="am-page-content">
-        <div class="am-stats rv-stats">
-            <div class="am-stat"><strong>11</strong><span data-en="reviews on Booking.com">تقييمًا على Booking.com</span></div>
-            <div class="am-stat"><strong dir="ltr">10/10</strong><span data-en="given by 9 of the 11 guests">من 9 ضيوف من أصل 11</span></div>
-            <div class="am-stat"><strong dir="ltr">9/10</strong><span data-en="the lowest score here">أقل تقييم بينها</span></div>
-            <div class="am-stat"><strong>4</strong><span data-en="countries: Saudi Arabia, UAE, Iraq, UK">دول: السعودية، الإمارات، العراق، بريطانيا</span></div>
-        </div>
-
         <div class="am-varies rv-source">
             <div>
                 <h3 data-en="Where do these reviews come from?">من أين هذه التقييمات؟</h3>
@@ -286,13 +282,13 @@
 
             <article class="rv-card" id="review-sam">
                 <button type="button" class="rv-shot" data-aria-en="Enlarge the review screenshot" aria-label="تكبير صورة التقييم">
-                    <img src="images/reviews/ar/sam.webp" data-src-en="images/reviews/en/sam.webp" alt="لقطة من تقييم سام لشقق HIJAZI Apartments على Booking.com – 10 من 10" data-alt-en="Screenshot of the Booking.com review of HIJAZI Apartments by Sam – 10 out of 10" width="1200" height="1200" loading="eager" decoding="async">
+                    <img src="images/reviews/ar/sam.webp" data-src-en="images/reviews/en/sam.webp" alt="لقطة من تقييم سام من ألمانيا لشقق HIJAZI Apartments على Booking.com – 10 من 10" data-alt-en="Screenshot of the Booking.com review of HIJAZI Apartments by Sam from Germany – 10 out of 10" width="1200" height="1200" loading="eager" decoding="async">
                 </button>
                 <div class="rv-body">
                     <div class="rv-head">
                         <span class="rv-score" title="Booking.com">10</span>
                         <div>
-                            <h3><span data-en="Sam">سام</span></h3>
+                            <h3><span data-en="Sam">سام</span> <span class="rv-from" data-en="from Germany">من ألمانيا</span></h3>
                             <p class="rv-meta"><span data-en="Sep 19, 2026">19 سبتمبر 2026</span> · Booking.com</p>
                         </div>
                     </div>
