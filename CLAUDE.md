@@ -23,7 +23,7 @@ This file is read automatically at the start of every Claude Code session. Keep 
 - `backend/`: Node/Express + MongoDB Atlas on Render at `https://api.hijazi-apartments.com`. Apartments, availability and bookings come from the API.
 - `frontend/admin.html` is the PMS (noindex). Do not touch it for SEO work.
 - Tests: `cd backend && npm ci && npm test` (79 tests; some check frontend files, including that the amenities pages match the data file).
-- Workflow: earlier work went branch → PR → Vercel status → squash merge to `main`. On 2026-11-12 the owner chose a direct push to `main` without a PR; ask which they want each time, and never open a PR unless asked. On 2026-11-13 and 2026-11-15 the owner again asked for direct pushes to `main`.
+- Workflow: earlier work went branch → PR → Vercel status → squash merge to `main`. On 2026-11-12 the owner chose a direct push to `main` without a PR; ask which they want each time, and never open a PR unless asked. On 2026-11-13, 2026-11-15 and 2026-11-16 the owner again asked for direct pushes to `main`.
 
 ## Conventions
 - `js/main.js` renders the shared header, footer and WhatsApp widget, and handles language (`localStorage.siteLang`). When `main.js` changes, bump `js/main.js?v=N` on every page (currently `v=11`).
@@ -40,6 +40,7 @@ This file is read automatically at the start of every Claude Code session. Keep 
   - `js/passport-mrz.js` parses MRZ text (TD3 passports, TD1/TD2 ID cards), checks check digits, fixes common OCR errors and holds the country table (code → country name and nationality). `js/passport-scan.js` runs Tesseract.js 7.0.0 in the browser (pinned on jsDelivr with SRI on the main script, loaded on first use). `js/reservation-form.js` draws the form on `images/reservation-form-template.jpg` with the self-hosted font `fonts/barlow-semi-condensed-500.woff2` (OFL). All three are tested in Node; scripts load in `admin.html` at `?v=1`.
   - The passport photo is never uploaded or stored. Only the text goes in `booking.guestDocument`, which has `select: false`: the booking list never returns it, only `GET /admin/bookings/:id` does, and it is never written to the activity log. The public booking route cannot set it.
   - MRZ has no place of birth, issue date or address. Place of birth is typed by the owner. The issue date is filled only when a printed date fits the passport validity exactly (N years or N years minus one day before the verified expiry). The address defaults to the issuing country name.
+  - Required vs optional guest fields: only apartment, check-in and check-out block saving (frontend `required` and `POST /admin/bookings`). After a scan, empty essential fields get the «ناقص» mark as a warning only (it does not block saving): full name, nationality, passport/ID number, date of birth, phone (`ESSENTIAL_GUEST_KEYS` plus name and phone in `applyPassportScan`). Gender, passport issue and expiry dates, place of birth, address and email carry a grey «اختياري» tag (`OPTIONAL_GUEST_FIELDS`, class `field-optional`) in both the add and the edit forms and are never marked «ناقص». «تحقق» marks are unchanged. The owner chose warning-only, not enforcement (2026-11-16).
   - Payment fields on a booking: `nightlyRate`, `securityDeposit`, `amountPaid` (null means automatic: deposit 200, paid = rent + deposit) and `paymentMethod` (default CASH).
   - Booking reference: `HA-DDMMYYYY-<apartment number>` from the check-in date. It is computed, not stored, so it changes if the apartment or check-in date changes.
   - Text positions on the form are `FIELD_LINES` in pixels on the 1536×1024 template. If the owner changes the template design, update them.
@@ -48,7 +49,7 @@ This file is read automatically at the start of every Claude Code session. Keep 
 - Do not put `backdrop-filter` on an element inside another element that already has it (cards, navbar): it costs a GPU layer and blur per element and its only visible effect is a darker tint. Put the tint in the background colour instead (done for `.card-price-box`, `.card-top-badge`, `.navbar-collapse`, `.lang-switcher`).
 - To add 1- or 2-bedroom apartments: fill the unit type in `amenities-data.js` and set `published: true`, add the apartment there, then add its number, price and order in `main.js`. The type filter on `apartments.html` appears by itself once two types exist.
 
-## Current status (2026-11-14)
+## Current status (2026-11-16)
 Done (PRs #13, #14, #15):
 - Crawlable FAQ and links, descriptive H1s, structured data, sitemap.
 - Unique landing pages, 2 new pages and English twins, `llms.txt`.
@@ -79,6 +80,10 @@ Done (2026-11-15, pushed straight to `main`):
 - Backend dependencies updated with `npm audit fix` (lockfile only: body-parser 2.4.0, proxy-addr 2.0.8, mongoose 9.12.1, qs 6.17.1). Two moderate advisories remain in `nodemon` (dev only); left as is.
 - The owner reported that the 2026-11-13 scroll fix changed nothing on real devices (Android and laptop) and that tiles appear blank/pixelated while scrolling; `faq.html` was smooth. Phase 1 fix: the background layers became low-resolution canvases (`js/cosmic-bg.js`), the orb and header `filter: blur` were removed, and nested `backdrop-filter` was removed from the card price box and badge and from the mobile menu and language switch (the mobile menu also lagged when opening). Before/after screenshots match within 1%. In headless Chromium, compositor tile memory fell from 172 MB to 48 MB (apartments, desktop) and 161 MB to 47 MB (booking, desktop); about 55 MB to 20 MB in phone emulation.
 - Not yet confirmed by the owner on real devices.
+
+Done (2026-11-16, pushed straight to `main`):
+- Apartments details modal: the gallery hint under the photos was Arabic in English mode; now it follows the language (commit 0e78008).
+- Admin booking form: «ناقص» after a passport scan now only marks the essential fields; the other guest fields show «اختياري» (see Conventions).
 
 Search Console findings (2026-11-12): 10 indexed, 8 not. 4 redirects and 2 alternate-canonical are normal; Soft 404 was the API; `faq.html` "crawled, not indexed" was last crawled 2026-06-16 (old version). Sitemap was last read 2026-11-05 with 11 URLs. On this domain property the sitemap must be submitted as the full URL `https://www.hijazi-apartments.com/sitemap.xml`.
 

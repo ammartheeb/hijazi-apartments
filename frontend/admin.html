@@ -4791,6 +4791,17 @@
             background-color: #fff6f5 !important;
         }
 
+        .field.field-optional label::after {
+            content: "اختياري";
+            margin-inline-start: 6px;
+            padding: 1px 7px;
+            border-radius: 99px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #667085;
+            background: #f2f4f7;
+        }
+
         .field.field-verify label::after,
         .field.field-missing label::after {
             margin-inline-start: 6px;
@@ -6075,6 +6086,19 @@
             return document.getElementById(`${prefix}${GUEST_DOCUMENT_INPUTS[key]}`);
         }
 
+        /*
+           الأساسي بعد قراءة الجواز: الاسم + هذه الخانات + الهاتف. إذا فاضية نعلّمها «ناقص» (تنبيه فقط، لا يمنع الحفظ).
+           باقي خانات النزيل اختيارية: تحمل وسم «اختياري» ولا تُعلَّم «ناقص».
+        */
+        const ESSENTIAL_GUEST_KEYS = Object.freeze(["nationality", "passportNumber", "dateOfBirth"]);
+        const OPTIONAL_GUEST_FIELDS = Object.freeze(["Gender", "PassportIssue", "PassportExpiry", "BirthPlace", "Address", "Email"]);
+
+        ["manual", "editBooking"].forEach(prefix => {
+            OPTIONAL_GUEST_FIELDS.forEach(suffix => {
+                document.getElementById(`${prefix}${suffix}`)?.closest(".field")?.classList.add("field-optional");
+            });
+        });
+
         /* 2017-01-11 ← 11/01/2017 */
         function isoToDisplayDate(value) {
             const key = dateOnly(value);
@@ -6198,8 +6222,11 @@
                 verify.push(guestDocumentInput(prefix, "passportIssueDate"));
             }
 
-            const missing = [nameInput, ...Object.keys(GUEST_DOCUMENT_INPUTS).map(key => guestDocumentInput(prefix, key))]
-                .filter(input => !String(input.value || "").trim());
+            const missing = [
+                nameInput,
+                ...ESSENTIAL_GUEST_KEYS.map(key => guestDocumentInput(prefix, key)),
+                document.getElementById(`${prefix}Phone`)
+            ].filter(input => input && !String(input.value || "").trim());
             const toVerify = verify.filter(input => String(input.value || "").trim());
 
             toVerify.forEach(input => markField(input, "verify"));
