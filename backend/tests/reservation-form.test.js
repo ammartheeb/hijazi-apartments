@@ -116,7 +116,7 @@ test("every printed field has a place on the template, and the template and font
     for (const line of Object.values(Form.FIELD_LINES)) {
         assert.ok(line.x0 >= 0 && line.x1 <= 1536 && line.x0 < line.x1 && line.y > 0 && line.y < 1024);
     }
-    assert.ok(fs.statSync(path.join(frontendRoot, "images/reservation-form-template.jpg")).size > 50000);
+    assert.ok(fs.statSync(path.join(frontendRoot, "images/reservation-form-template.webp")).size > 50000);
     assert.ok(fs.statSync(path.join(frontendRoot, "fonts/barlow-semi-condensed-500.woff2")).size > 10000);
     assert.ok(fs.existsSync(path.join(frontendRoot, "fonts/OFL.txt")));
 });

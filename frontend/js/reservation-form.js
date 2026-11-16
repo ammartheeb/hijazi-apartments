@@ -2,14 +2,14 @@
    نموذج حجز شقة / APARTMENT RESERVATION FORM
 
    نرسم بيانات الحجز فوق صورة النموذج الفاضي الذي اعتمده المالك
-   (images/reservation-form-template.jpg) ونطلع صورة PNG
+   (images/reservation-form-template.webp) ونطلع صورة PNG
    للطباعة أو الإرسال للعميل على واتساب.
    fieldsFromBooking دالة بحتة تُختبر في Node.
 ========================================================= */
 (function (root) {
     "use strict";
 
-    const TEMPLATE = Object.freeze({ src: "images/reservation-form-template.jpg", width: 1536, height: 1024 });
+    const TEMPLATE = Object.freeze({ src: "images/reservation-form-template.webp", width: 1536, height: 1024 });
     const FONT_FAMILY = "HijaziReservationForm";
     const FONT_SRC = "fonts/barlow-semi-condensed-500.woff2";
     const FONT_STACK = `"${FONT_FAMILY}", "Segoe UI", Tahoma, Arial, sans-serif`;

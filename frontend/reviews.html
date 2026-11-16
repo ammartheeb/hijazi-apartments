@@ -2,17 +2,13 @@
 <html lang="ar" dir="rtl">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Favicon (Google + Browsers) -->
-
-    <!-- Google (الأهم) -->
+    <!-- Favicon -->
     <link rel="icon" href="favicon.ico">
-
-    <!-- Browsers (PNG) -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
-
-    <!-- Apple (اختياري) -->
     <link rel="apple-touch-icon" href="favicon.png">
 
     <!-- Google tag (gtag.js) -->
@@ -24,16 +20,15 @@
 
         gtag('config', 'G-KG0M4GYNCV');
     </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>آراء العملاء | HIJAZI Apartments</title>
+
+    <title>آراء وتقييمات الضيوف | HIJAZI Apartments</title>
     <meta name="robots" content="index, follow">
     <meta name="description"
-        content="آراء وتقييمات الضيوف الذين أقاموا في Hijazi Apartments في عمان الشميساني. تجربة إقامة مميزة وقريبة من المستشفيات والخدمات.">
+        content="تقييمات حقيقية من ضيوف HIJAZI Apartments على Booking.com: 11 تقييمًا من السعودية والإمارات والعراق وبريطانيا عن شققنا المفروشة في الشميساني، عمّان.">
     <link rel="canonical" href="https://www.hijazi-apartments.com/reviews.html">
-    <meta property="og:title" content="آراء العملاء | HIJAZI Apartments">
+    <meta property="og:title" content="آراء وتقييمات الضيوف | HIJAZI Apartments">
     <meta property="og:description"
-        content="اطّلع على آراء ضيوف HIJAZI Apartments وتجارب إقامتهم في عمان الشميساني.">
+        content="اطّلع على تقييمات ضيوف HIJAZI Apartments على Booking.com وتجارب إقامتهم في الشميساني، عمّان.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.hijazi-apartments.com/reviews.html">
     <meta property="og:image" content="https://www.hijazi-apartments.com/images/apartments/apt-1/living/1.webp">
@@ -42,139 +37,450 @@
     <meta name="google-site-verification" content="CQow9HEGehI7vI8t4xQ3J6aqW_cw58dW8eZ8o8htyf4" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/amenities.css?v=1">
 
     <style>
-        body {
-            background: #f8f8f8;
-            color: #111;
-            overflow-x: hidden;
+        /* صفحة التقييمات – تستخدم هيكل صفحة المميزات (am-) وتضيف بطاقات التقييم (rv-) */
+        .rv-stats {
+            margin: 28px 0 36px;
         }
 
-        .page-content {
-            max-width: 1150px;
-            margin: auto;
-            padding: 40px 16px 50px;
-        }
-
-        .review-grid {
+        .rv-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+            align-items: start;
         }
 
-        .review-card {
+        .rv-card {
             background: #fff;
+            border: 1px solid #eee;
+            border-top: 4px solid #c89116;
             border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, .08);
-            transition: .3s;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+            scroll-margin-top: 110px;
+            text-align: start;
         }
 
-        .review-card:hover {
-            transform: translateY(-4px);
-        }
-
-        .review-card img {
+        .rv-shot {
+            display: block;
             width: 100%;
-            height: 200px;
+            padding: 0;
+            border: 0;
+            background: #1b1b1b;
+            cursor: zoom-in;
+            position: relative;
+        }
+
+        .rv-shot img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1;
             object-fit: cover;
         }
 
-        .review-body {
-            padding: 16px;
+        .rv-shot::after {
+            content: "";
+            position: absolute;
+            inset-inline-end: 12px;
+            bottom: 12px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.62) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m21 21-4.3-4.3M11 8v6M8 11h6'/%3E%3C/svg%3E") center / 20px no-repeat;
         }
 
-        .review-badge {
-            display: inline-block;
-            background: #c89116;
+        .rv-shot:focus-visible {
+            outline: 3px solid #c89116;
+            outline-offset: -3px;
+        }
+
+        .rv-body {
+            padding: 18px 20px 20px;
+        }
+
+        .rv-head {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .rv-score {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 48px;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px 14px 14px 4px;
+            background: linear-gradient(135deg, #d4a017, #8a6508);
             color: #fff;
-            padding: 6px 12px;
-            border-radius: 999px;
-            font-size: 12px;
-            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: 900;
         }
 
-        .review-body h3 {
-            font-size: 18px;
-            margin-bottom: 8px;
+        .rv-head h3 {
+            font-size: 19px;
+            font-weight: 900;
+            color: #111;
+            margin: 0;
+            line-height: 1.5;
         }
 
-        .review-body p {
-            font-size: 14px;
-            color: #555;
+        .rv-from {
+            font-weight: 700;
+            color: #8a6508;
+        }
+
+        .rv-meta {
+            margin: 0;
+            color: #777;
+            font-size: 13.5px;
+            font-weight: 600;
+        }
+
+        .rv-title {
+            margin: 0 0 8px;
+            color: #111;
+            font-size: 16.5px;
+            font-weight: 800;
             line-height: 1.8;
         }
 
-        @media (max-width: 768px) {
-            .page-content {
-                padding: 28px 14px 40px;
-            }
-
-            .review-card img {
-                height: 170px;
-            }
-
-            .review-body h3 {
-                font-size: 16px;
-            }
-
-            .review-body p {
-                font-size: 13px;
-            }
+        .rv-text {
+            margin: 0;
+            color: #444;
+            font-size: 15.5px;
+            line-height: 1.95;
         }
 
-        @media (max-width: 480px) {
-            .review-card img {
-                height: 150px;
+        .rv-nocomment {
+            margin: 0;
+            color: #777;
+            font-size: 14.5px;
+            line-height: 1.8;
+        }
+
+        .rv-chips {
+            margin-top: 14px;
+        }
+
+        .rv-note {
+            margin: 12px 0 0;
+            color: #8a8a8a;
+            font-size: 12.5px;
+            line-height: 1.7;
+        }
+
+        .rv-source {
+            margin-bottom: 28px;
+        }
+
+        /* نافذة تكبير الصورة */
+        .rv-viewer {
+            border: 0;
+            padding: 0;
+            background: transparent;
+            max-width: 100vw;
+            max-height: 100dvh;
+            width: 100vw;
+            height: 100dvh;
+        }
+
+        .rv-viewer::backdrop {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .rv-viewer-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            cursor: zoom-out;
+        }
+
+        .rv-viewer img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+        }
+
+        .rv-viewer-close {
+            position: fixed;
+            top: 14px;
+            inset-inline-end: 14px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 0;
+            background: rgba(255, 255, 255, 0.16);
+            color: #fff;
+            font-size: 26px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        @media (max-width: 860px) {
+            .rv-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .rv-body {
+                padding: 16px;
             }
         }
     </style>
 </head>
 
-<body>
+<body class="am-page">
     <div id="sharedHeader"></div>
 
-    <section class="page-hero">
-        <h1 id="reviewsTitle">ماذا يقول ضيوفنا</h1>
-        <p id="reviewsSubtitle">تجارب ضيوف أقاموا في شققنا المفروشة في الشميساني - عمّان</p>
+    <section class="am-page-hero">
+        <p class="am-page-eyebrow">Guest Reviews</p>
+        <h1 id="reviewsTitle" data-en="What Our Guests Say About HIJAZI Apartments">ماذا يقول ضيوفنا عن HIJAZI Apartments</h1>
+        <p id="reviewsSubtitle" data-en="Real reviews written on Booking.com by guests who stayed in our furnished apartments in Shmeisani, Amman.">تقييمات حقيقية كتبها على Booking.com ضيوف أقاموا في شققنا المفروشة في الشميساني، عمّان.</p>
     </section>
 
-    <section class="page-content fade-in-section">
-        <div class="review-grid">
-
-            <div class="review-card">
-                <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=80"
-                    alt="" loading="lazy">
-                <div class="review-body">
-                    <div class="review-badge" id="badge1">إقامة طويلة</div>
-                    <h3 id="review1Title">تقييم أبو خليل من السعودية</h3>
-                    <p id="review1Text">إقامة لمدة شهرين - شقة مريحة جدًا وموقع ممتاز قريب من المستشفى والخدمات.</p>
-                </div>
-            </div>
-
-            <div class="review-card">
-                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80"
-                    alt="" loading="lazy">
-                <div class="review-body">
-                    <div class="review-badge" id="badge2">إقامة عائلية</div>
-                    <h3 id="review2Title">تقييم أم محمد من الأردن</h3>
-                    <p id="review2Text">إقامة عائلية - نظافة عالية وتعامل راقٍ ومساحة ممتازة للعائلة.</p>
-                </div>
-            </div>
-
-            <div class="review-card">
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80"
-                    alt="" loading="lazy">
-                <div class="review-body">
-                    <div class="review-badge" id="badge3">إقامة طبية</div>
-                    <h3 id="review3Title">تقييم ناصر من الكويت</h3>
-                    <p id="review3Text">إقامة طبية - الموقع قريب جدًا من المستشفيات والمطاعم، وكان مناسبًا جدًا لفترة
-                        العلاج.</p>
-                </div>
-            </div>
-
+    <main class="am-page-content">
+        <div class="am-stats rv-stats">
+            <div class="am-stat"><strong>11</strong><span data-en="reviews on Booking.com">تقييمًا على Booking.com</span></div>
+            <div class="am-stat"><strong dir="ltr">10/10</strong><span data-en="given by 9 of the 11 guests">من 9 ضيوف من أصل 11</span></div>
+            <div class="am-stat"><strong dir="ltr">9/10</strong><span data-en="the lowest score here">أقل تقييم بينها</span></div>
+            <div class="am-stat"><strong>4</strong><span data-en="countries: Saudi Arabia, UAE, Iraq, UK">دول: السعودية، الإمارات، العراق، بريطانيا</span></div>
         </div>
-    </section>
+
+        <div class="am-varies rv-source">
+            <div>
+                <h3 data-en="Where do these reviews come from?">من أين هذه التقييمات؟</h3>
+                <p data-en="Every review here was written by a guest on Booking.com after their stay. The photos are our own shots of the Booking.com reviews page, exactly as it appears; we only covered the reservation number to protect the guest's privacy. Tap any photo to enlarge it.">كل تقييم هنا كتبه الضيف نفسه على Booking.com بعد إقامته. الصور لقطات من صفحة التقييمات في Booking.com كما هي؛ غطّينا رقم الحجز فقط حفاظًا على خصوصية الضيف. اضغط على أي صورة لتكبيرها.</p>
+            </div>
+        </div>
+
+        <section class="am-section" id="reviews-list">
+            <h2 data-en="Guest reviews, newest first">تقييمات الضيوف، الأحدث أولًا</h2>
+            <p class="am-intro" data-en="The guest's first name, country, score and words are shown as they appear on Booking.com.">اسم الضيف الأول وبلده وتقييمه وكلامه كما تظهر في Booking.com.</p>
+            <div class="rv-grid">
+            <article class="rv-card" id="review-ali">
+                <button type="button" class="rv-shot" data-aria-en="Enlarge the review screenshot" aria-label="تكبير صورة التقييم">
+                    <img src="images/reviews/ar/ali.webp" data-src-en="images/reviews/en/ali.webp" alt="لقطة من تقييم علي من العراق لشقق HIJAZI Apartments على Booking.com – 10 من 10" data-alt-en="Screenshot of the Booking.com review of HIJAZI Apartments by Ali from Iraq – 10 out of 10" width="1200" height="1200" loading="eager" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">10</span>
+                        <div>
+                            <h3><span data-en="Ali">علي</span> <span class="rv-from" data-en="from Iraq">من العراق</span></h3>
+                            <p class="rv-meta"><span data-en="Nov 15, 2026">15 نوفمبر 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-title" data-en="The accommodation was very nice, a quiet, clean and family-friendly place, and God willing, it won't be the last time we stay there.">إقامة كلش حلوة، مكان هادي ونظيف وعائلي، وإن شاء الله مو آخر مرة نسكن بيه.</p>
+                    <p class="rv-text" data-en="The place is very nice and tidy, the location is excellent and quiet, and the apartment is clean and comfortable, and you feel at home. The atmosphere is family-friendly and peaceful, and the owner of the place, Ibrahim, is cooperative and respectful. Honestly, the stay was very nice.">المكان كلش حلو ومرتب، والموقع ممتاز وهادي، والشقة نظيفة ومريحة وتحس نفسك ببيتك. والأجواء عائلية وهادية، وصحاب المكان إبراهيم متعاون ومحترم. بصراحة إقامة كلش حلوة.</p>
+                    <p class="rv-note" data-en="Translated from Arabic – the original text is on the Arabic version of this page." hidden></p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-sam">
+                <button type="button" class="rv-shot" data-aria-en="Enlarge the review screenshot" aria-label="تكبير صورة التقييم">
+                    <img src="images/reviews/ar/sam.webp" data-src-en="images/reviews/en/sam.webp" alt="لقطة من تقييم سام لشقق HIJAZI Apartments على Booking.com – 10 من 10" data-alt-en="Screenshot of the Booking.com review of HIJAZI Apartments by Sam – 10 out of 10" width="1200" height="1200" loading="eager" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">10</span>
+                        <div>
+                            <h3><span data-en="Sam">سام</span></h3>
+                            <p class="rv-meta"><span data-en="Sep 19, 2026">19 سبتمبر 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-title" data-en="An excellent stay with exceptional hospitality">إقامة ممتازة مع ضيافة استثنائية</p>
+                    <p class="rv-text" data-en="Ibrahim was incredibly kind, helpful, and always available to assist us with anything we needed, not just regarding the apartment. We truly felt welcomed and cared for throughout our stay.">كان إبراهيم لطيفًا للغاية، ومتعاونًا، ومتاحًا دائمًا لمساعدتنا في أي شيء نحتاجه، ليس فقط فيما يتعلق بالشقة. لقد شعرنا حقًا بالترحيب والرعاية طوال فترة إقامتنا.</p>
+                    <ul class="am-chips rv-chips"><li data-en="Couple">زوجان</li></ul>
+                    <p class="rv-note" data-en="">مترجم من الإنجليزية – النص الأصلي في النسخة الإنجليزية من الصفحة.</p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-oliver">
+                <button type="button" class="rv-shot" data-aria-en="Enlarge the review screenshot" aria-label="تكبير صورة التقييم">
+                    <img src="images/reviews/ar/oliver.webp" data-src-en="images/reviews/en/oliver.webp" alt="لقطة من تقييم أوليفر من بريطانيا لشقق HIJAZI Apartments على Booking.com – 10 من 10" data-alt-en="Screenshot of the Booking.com review of HIJAZI Apartments by Oliver from the United Kingdom – 10 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">10</span>
+                        <div>
+                            <h3><span data-en="Oliver">أوليفر</span> <span class="rv-from" data-en="from the United Kingdom">من بريطانيا</span></h3>
+                            <p class="rv-meta"><span data-en="Sep 13, 2026">13 سبتمبر 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-title" data-en="A five-star experience with the comfort of home. I will definitely stay here again.">تجربة خمس نجوم مع راحة المنزل. سأقيم هنا مرة أخرى بالتأكيد.</p>
+                    <p class="rv-text" data-en="I visit Jordan very often, and finding a truly clean and comfortable apartment has always been a challenge. Finally, I found a place that honestly feels like a five-star hotel. The apartment is spacious, spotless, beautifully maintained, and has everything you could need. Ibrahim was an amazing host, very kind and helpful, and made sure we had everything we needed. This apartment genuinely saved me from staying in a hotel. Highly recommended!">أزور الأردن كثيرًا، ودائمًا ما كان العثور على شقة نظيفة ومريحة حقًا يمثل تحديًا. وأخيرًا، وجدت مكانًا يشعر المرء فيه حقًا وكأنه في فندق خمس نجوم. الشقة واسعة ونظيفة للغاية ومُعتنى بها بشكل جميل، وتحتوي على كل ما قد تحتاجه. كان إبراهيم مضيفًا رائعًا، لطيفًا ومتعاونًا للغاية، وتأكد من حصولنا على كل ما نحتاجه. هذه الشقة أنقذتني حقًا من الإقامة في فندق. موصى به للغاية!</p>
+                    <ul class="am-chips rv-chips"><li data-en="Couple">زوجان</li></ul>
+                    <p class="rv-note" data-en="">مترجم من الإنجليزية – النص الأصلي في النسخة الإنجليزية من الصفحة.</p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-hassan">
+                <button type="button" class="rv-shot" data-aria-en="Enlarge the review screenshot" aria-label="تكبير صورة التقييم">
+                    <img src="images/reviews/en/hassan.webp" data-src-en="images/reviews/en/hassan.webp" alt="لقطة من تقييم حسن من الإمارات لشقق HIJAZI Apartments على Booking.com – 9 من 10" data-alt-en="Screenshot of the Booking.com review of HIJAZI Apartments by Hassan from the United Arab Emirates – 9 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">9</span>
+                        <div>
+                            <h3><span data-en="Hassan">حسن</span> <span class="rv-from" data-en="from the United Arab Emirates">من الإمارات</span></h3>
+                            <p class="rv-meta"><span data-en="Aug 24, 2026">24 أغسطس 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-title" data-en="Wonderful">رائع</p>
+                    <p class="rv-nocomment" data-en="The guest left a score without a written comment.">الضيف وضع التقييم بدون تعليق مكتوب.</p>
+                    <ul class="am-chips rv-chips"><li data-en="16 nights">16 ليلة</li><li data-en="Solo traveler">مسافر منفرد</li></ul>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-seraj">
+                <button type="button" class="rv-shot" data-aria-en="Enlarge the review screenshot" aria-label="تكبير صورة التقييم">
+                    <img src="images/reviews/ar/seraj.webp" data-src-en="images/reviews/en/seraj.webp" alt="لقطة من تقييم سراج من السعودية لشقق HIJAZI Apartments على Booking.com – 10 من 10" data-alt-en="Screenshot of the Booking.com review of HIJAZI Apartments by Seraj from Saudi Arabia – 10 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">10</span>
+                        <div>
+                            <h3><span data-en="Seraj">سراج</span> <span class="rv-from" data-en="from Saudi Arabia">من السعودية</span></h3>
+                            <p class="rv-meta"><span data-en="Aug 10, 2026">10 أغسطس 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-title" data-en="Exceptional">استثنائي</p>
+                    <p class="rv-nocomment" data-en="The guest left a score without a written comment.">الضيف وضع التقييم بدون تعليق مكتوب.</p>
+                    <ul class="am-chips rv-chips"><li data-en="6 nights">6 ليالٍ</li><li data-en="Group">مجموعة</li></ul>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-tala">
+                <button type="button" class="rv-shot" data-aria-en="Enlarge the review screenshot" aria-label="تكبير صورة التقييم">
+                    <img src="images/reviews/en/tala.webp" data-src-en="images/reviews/en/tala.webp" alt="لقطة من تقييم تالا من الإمارات لشقق HIJAZI Apartments على Booking.com – 10 من 10" data-alt-en="Screenshot of the Booking.com review of HIJAZI Apartments by Tala from the United Arab Emirates – 10 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">10</span>
+                        <div>
+                            <h3><span data-en="Tala">تالا</span> <span class="rv-from" data-en="from the United Arab Emirates">من الإمارات</span></h3>
+                            <p class="rv-meta"><span data-en="Aug 5, 2026">5 أغسطس 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-title" data-en="It was amazing! Very easy check in! The location and building is great.">كان الأمر مذهلًا! إجراءات تسجيل الوصول سهلة للغاية! الموقع والمبنى رائعان.</p>
+                    <p class="rv-text" data-en="Its space, cleanliness, and location!!!!">مساحتها ونظافتها وموقعها!</p>
+                    <ul class="am-chips rv-chips"><li data-en="Family with young children">عائلة مع أطفال</li></ul>
+                    <p class="rv-note" data-en="">مترجم من الإنجليزية – النص الأصلي في النسخة الإنجليزية من الصفحة.</p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-helal">
+                <button type="button" class="rv-shot" data-aria-en="Enlarge the review screenshot" aria-label="تكبير صورة التقييم">
+                    <img src="images/reviews/ar/helal.webp" data-src-en="images/reviews/en/helal.webp" alt="لقطة من تقييم هلال من السعودية لشقق HIJAZI Apartments على Booking.com – 10 من 10" data-alt-en="Screenshot of the Booking.com review of HIJAZI Apartments by Helal from Saudi Arabia – 10 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">10</span>
+                        <div>
+                            <h3><span data-en="Helal">هلال</span> <span class="rv-from" data-en="from Saudi Arabia">من السعودية</span></h3>
+                            <p class="rv-meta"><span data-en="Aug 3, 2026">3 أغسطس 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-title" data-en="I will repeat the experience in the same apartment.">سوف اقوم بتكرار التجربه بنفس الشقه</p>
+                    <p class="rv-text" data-en="A lovely stay. I highly recommend this place. The apartment is very clean and spacious, and everything is provided perfectly. I thank Mr. Ibrahim for his excellent service.">اقامه جميله انصح في المكان شقة نظيفه وواسعه جدا متوفر فيها كل شي بإمتياز اشكر الاخ ابراهيم على تعامله الراقي</p>
+                    <ul class="am-chips rv-chips"><li data-en="Family with young children">عائلة مع أطفال</li></ul>
+                    <p class="rv-note" data-en="Translated from Arabic – the original text is on the Arabic version of this page." hidden></p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-khalaf">
+                <button type="button" class="rv-shot" data-aria-en="Enlarge the review screenshot" aria-label="تكبير صورة التقييم">
+                    <img src="images/reviews/ar/khalaf.webp" data-src-en="images/reviews/en/khalaf.webp" alt="لقطة من تقييم خلف من السعودية لشقق HIJAZI Apartments على Booking.com – 10 من 10" data-alt-en="Screenshot of the Booking.com review of HIJAZI Apartments by Khalaf from Saudi Arabia – 10 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">10</span>
+                        <div>
+                            <h3><span data-en="Khalaf">خلف</span> <span class="rv-from" data-en="from Saudi Arabia">من السعودية</span></h3>
+                            <p class="rv-meta"><span data-en="Jul 25, 2026">25 يوليو 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-text" data-en="The service provided by Ibrahim was excellent. He was keen to serve us.">الخدمة من قبل ابراهيم كانت جدا ممتازة وكان حريص على خدمتنا</p>
+                    <ul class="am-chips rv-chips"><li data-en="7 nights">7 ليالٍ</li><li data-en="Family">عائلة</li></ul>
+                    <p class="rv-note" data-en="Translated from Arabic – the original text is on the Arabic version of this page." hidden></p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-futoon">
+                <button type="button" class="rv-shot" data-aria-en="Enlarge the review screenshot" aria-label="تكبير صورة التقييم">
+                    <img src="images/reviews/ar/futoon.webp" data-src-en="images/reviews/en/futoon.webp" alt="لقطة من تقييم فتون من السعودية لشقق HIJAZI Apartments على Booking.com – 10 من 10" data-alt-en="Screenshot of the Booking.com review of HIJAZI Apartments by Futoon from Saudi Arabia – 10 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">10</span>
+                        <div>
+                            <h3><span data-en="Futoon">فتون</span> <span class="rv-from" data-en="from Saudi Arabia">من السعودية</span></h3>
+                            <p class="rv-meta"><span data-en="Jul 18, 2026">18 يوليو 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-text" data-en="Everything is perfect, and the apartment is extremely clean. Even close to everything.">كل شي ماشاءالله بيرفكت والشقه نظيفه مره حتى قريبه لكل شي</p>
+                    <p class="rv-note" data-en="Translated from Arabic – the original text is on the Arabic version of this page." hidden></p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-talal">
+                <button type="button" class="rv-shot" data-aria-en="Enlarge the review screenshot" aria-label="تكبير صورة التقييم">
+                    <img src="images/reviews/ar/talal.webp" data-src-en="images/reviews/en/talal.webp" alt="لقطة من تقييم طلال من السعودية لشقق HIJAZI Apartments على Booking.com – 9 من 10" data-alt-en="Screenshot of the Booking.com review of HIJAZI Apartments by Talal from Saudi Arabia – 9 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">9</span>
+                        <div>
+                            <h3><span data-en="Talal">طلال</span> <span class="rv-from" data-en="from Saudi Arabia">من السعودية</span></h3>
+                            <p class="rv-meta"><span data-en="Jul 11, 2026">11 يوليو 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-text" data-en="The apartment is large and excellent, with 3 rooms and 3 bathrooms. It is clean, well-located, spacious, and the host, Ibrahim, is very kind and courteous.">الشقة كبيرة وممتازة ٣ غرف و٣ حمامات وتمتاز الشقة بالنظافة والموقع ورحابة الشقة والمضيف ابراهيم وأخلاقه العالية</p>
+                    <ul class="am-chips rv-chips"><li data-en="9 nights">9 ليالٍ</li><li data-en="Solo traveler">مسافر منفرد</li></ul>
+                    <p class="rv-note" data-en="Translated from Arabic – the original text is on the Arabic version of this page." hidden></p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-majdoubah">
+                <button type="button" class="rv-shot" data-aria-en="Enlarge the review screenshot" aria-label="تكبير صورة التقييم">
+                    <img src="images/reviews/en/majdoubah.webp" data-src-en="images/reviews/en/majdoubah.webp" alt="لقطة من تقييم المجدوبة من الإمارات لشقق HIJAZI Apartments على Booking.com – 10 من 10" data-alt-en="Screenshot of the Booking.com review of HIJAZI Apartments by Al-Majdoubah from the United Arab Emirates – 10 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">10</span>
+                        <div>
+                            <h3><span data-en="Al-Majdoubah">المجدوبة</span> <span class="rv-from" data-en="from the United Arab Emirates">من الإمارات</span></h3>
+                            <p class="rv-meta"><span data-en="Jun 27, 2026">27 يونيو 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-title" data-en="A perfect stay with an amazing host. Highly recommended!">إقامة مثالية مع مضيف رائع. أنصح به بشدة!</p>
+                    <p class="rv-text" data-en="The property was exceptionally clean, comfortable, and well-maintained. Everything was exactly as described, and I truly felt at home during my stay. The host was friendly, responsive, and made sure everything was perfect.">الشقة كانت نظيفة ومريحة ومُعتنى بها بشكل استثنائي. كل شيء كان مطابقًا للوصف تمامًا، وشعرت فعلًا أنني في بيتي طوال إقامتي. المضيف كان ودودًا وسريع التجاوب وحرص على أن يكون كل شيء على أكمل وجه.</p>
+                    <ul class="am-chips rv-chips"><li data-en="Couple">زوجان</li></ul>
+                    <p class="rv-note" data-en="">مترجم من الإنجليزية – النص الأصلي في النسخة الإنجليزية من الصفحة.</p>
+                </div>
+            </article>
+            </div>
+        </section>
+
+        <div class="am-cta">
+            <h2 data-en="Ready to try it yourself?">جاهز تجرّب الإقامة بنفسك؟</h2>
+            <p data-en="Pick your check-in and check-out dates, see the available apartments, and complete your booking on the website.">اختر تاريخ الدخول والخروج واعرف الشقق المتاحة، ثم أكمل الحجز من الموقع.</p>
+            <a href="apartments.html" class="am-btn" data-en="View available apartments">عرض الشقق المتاحة</a>
+        </div>
+    </main>
+
+    <dialog class="rv-viewer" id="rvViewer" aria-label="صورة التقييم">
+        <div class="rv-viewer-inner"><img id="rvViewerImage" src="" alt=""></div>
+        <button type="button" class="rv-viewer-close" id="rvViewerClose" aria-label="إغلاق">&times;</button>
+    </dialog>
 
     <div id="sharedFooter"><nav class="static-site-links" aria-label="روابط الموقع" style="display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:center;padding:24px 16px;font-size:14px"><a href="/">الرئيسية</a><a href="apartments.html">الشقق</a><a href="booking.html">الحجز</a><a href="amenities.html">المميزات والخدمات</a><a href="apartments-amman.html">شقق مفروشة في الشميساني</a><a href="apartments-abdali.html">شقق قرب العبدلي</a><a href="apartments-jordan-hospital.html">شقق قرب مستشفى الأردن</a><a href="apartments-specialty-hospital.html">شقق قرب المستشفى التخصصي</a><a href="apartments-islamic-hospital.html">شقق قرب المستشفى الإسلامي</a><a href="apartments-medical-amman.html">شقق للإقامة الطبية</a><a href="apartments-monthly-amman.html">شقق مفروشة شهري</a><a href="faq.html">الأسئلة الشائعة</a><a href="reviews.html">آراء الضيوف</a><a href="about.html">من نحن</a><a href="apartments-amman-en.html">English</a></nav></div>
     <div id="sharedWhatsApp"></div>
@@ -185,25 +491,39 @@
         renderSharedFooter();
         renderWhatsAppWidget();
 
-        const lang = getCurrentLang();
+        (function () {
+            // العربي هو النص الثابت في الصفحة؛ الإنجليزي (نصوص وصور) يُبدَّل هنا
+            if (getCurrentLang() === "en") {
+                document.title = "Guest Reviews | HIJAZI Apartments";
+                document.querySelectorAll("main [data-en], .am-page-hero [data-en]").forEach(function (el) {
+                    var en = el.getAttribute("data-en");
+                    if (el.classList.contains("rv-note")) { el.hidden = !en; }
+                    el.textContent = en;
+                });
+                document.querySelectorAll("img[data-src-en]").forEach(function (img) {
+                    img.src = img.getAttribute("data-src-en");
+                    img.alt = img.getAttribute("data-alt-en");
+                });
+                document.querySelectorAll("[data-aria-en]").forEach(function (el) {
+                    el.setAttribute("aria-label", el.getAttribute("data-aria-en"));
+                });
+                document.getElementById("rvViewer").setAttribute("aria-label", "Review screenshot");
+                document.getElementById("rvViewerClose").setAttribute("aria-label", "Close");
+            }
 
-        if (lang === "en") {
-            document.getElementById("reviewsTitle").textContent = "What Our Guests Say";
-            document.getElementById("reviewsSubtitle").textContent = "Experiences from guests who stayed in our furnished apartments in Shmeisani, Amman";
-
-            document.getElementById("review1Title").textContent = "Review by Abu Khalil from Saudi Arabia";
-            document.getElementById("review1Text").textContent = "Two-month stay - very comfortable apartment and excellent location near the hospital and services.";
-
-            document.getElementById("review2Title").textContent = "Review by Umm Mohammad from Jordan";
-            document.getElementById("review2Text").textContent = "Family stay - very clean, professional service, and excellent space for a family.";
-
-            document.getElementById("review3Title").textContent = "Review by Nasser from Kuwait";
-            document.getElementById("review3Text").textContent = "Medical stay - the location is very close to hospitals and restaurants, and it was very suitable during treatment.";
-
-            document.getElementById("badge1").textContent = "Long stay";
-            document.getElementById("badge2").textContent = "Family stay";
-            document.getElementById("badge3").textContent = "Medical stay";
-        }
+            var viewer = document.getElementById("rvViewer");
+            var viewerImage = document.getElementById("rvViewerImage");
+            if (!viewer.showModal) { return; }
+            document.querySelectorAll(".rv-shot").forEach(function (button) {
+                button.addEventListener("click", function () {
+                    var img = button.querySelector("img");
+                    viewerImage.src = img.currentSrc || img.src;
+                    viewerImage.alt = img.alt;
+                    viewer.showModal();
+                });
+            });
+            viewer.addEventListener("click", function () { viewer.close(); });
+        })();
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
