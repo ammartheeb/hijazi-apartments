@@ -88,6 +88,7 @@ Done (2026-11-16, pushed straight to `main`):
 - Apartments details modal: the gallery hint under the photos was Arabic in English mode; now it follows the language (commit 0e78008).
 - Admin booking form: «ناقص» after a passport scan now only marks the essential fields; the other guest fields show «اختياري» (see Conventions).
 - Reviews page rebuilt with 11 real Booking.com reviews and WebP photos in both languages, replacing the placeholder cards and Unsplash images (commit 086eae0). The reservation form template became WebP (191 KB to 141 KB); the owner has not yet confirmed the form in the live admin after this change.
+- Admin booking form: nightly rate, rent, deposit and paid amount are linked both ways, and amounts accept decimals, "," or "٫" and Arabic digits (see Conventions). Tested in headless Chromium; not yet confirmed by the owner on the phone.
 
 Search Console findings (2026-11-12): 10 indexed, 8 not. 4 redirects and 2 alternate-canonical are normal; Soft 404 was the API; `faq.html` "crawled, not indexed" was last crawled 2026-06-16 (old version). Sitemap was last read 2026-11-05 with 11 URLs. On this domain property the sitemap must be submitted as the full URL `https://www.hijazi-apartments.com/sitemap.xml`.
 
