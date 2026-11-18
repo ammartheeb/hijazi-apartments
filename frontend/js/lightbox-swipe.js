@@ -35,6 +35,61 @@
             return s;
         });
 
+        /* محتويات الغرفة: على الموبايل شريط صغير فوق الصور المصغرة بينفتح بضغطة،
+           وعلى اللابتوب لوحة ثابتة على جنب الصورة. البيانات من o.getInfo(index) */
+        let room = null, roomHead = null, roomTitle = null, roomSum = null, roomList = null, roomKey = null;
+        if (typeof o.getInfo === "function") {
+            room = document.createElement("div");
+            room.className = "lb-room";
+            room.hidden = true;
+            roomHead = document.createElement("button");
+            roomHead.type = "button";
+            roomHead.className = "lb-room-head";
+            roomHead.setAttribute("aria-expanded", "false");
+            roomTitle = document.createElement("span");
+            roomTitle.className = "lb-room-title";
+            roomSum = document.createElement("span");
+            roomSum.className = "lb-room-sum";
+            const chev = document.createElement("span");
+            chev.className = "lb-room-chev";
+            chev.setAttribute("aria-hidden", "true");
+            roomHead.append(roomTitle, roomSum, chev);
+            roomList = document.createElement("ul");
+            roomList.className = "lb-room-list";
+            room.append(roomHead, roomList);
+            box.appendChild(room);
+            roomHead.addEventListener("click", function () {
+                const open = !room.classList.contains("open");
+                room.classList.toggle("open", open);
+                roomHead.setAttribute("aria-expanded", String(open));
+            });
+        }
+
+        function updateRoom() {
+            if (!room) return;
+            const info = o.getInfo(index);
+            if (!info || !info.items || !info.items.length) {
+                room.hidden = true;
+                box.classList.remove("lb-has-room");
+                roomKey = null;
+                return;
+            }
+            room.hidden = false;
+            box.classList.add("lb-has-room");
+            if (info.key === roomKey) return;
+            roomKey = info.key;
+            room.dir = rtl() ? "rtl" : "ltr";
+            roomTitle.textContent = info.title || "";
+            roomSum.textContent = info.items.join(" · ");
+            roomList.textContent = "";
+            info.items.forEach(function (text) {
+                const li = document.createElement("li");
+                li.textContent = text;
+                roomList.appendChild(li);
+            });
+            roomList.scrollTop = 0;
+        }
+
         let items = [], index = 0, stripFor = null, animating = false;
         const rtl = () => o.isRTL();
         const sign = () => (rtl() ? -1 : 1);          // وين "التالي": يمين (1) أو يسار (-1)
@@ -113,6 +168,7 @@
                 index = i;
                 o.goTo(i);          // بيحدث العنوان والعداد بالصفحة
                 layout();
+                updateRoom();
                 if (!fromStrip) syncStrip(true);
                 else Array.prototype.forEach.call(strip.children, (c, j) => c.classList.toggle("active", j === index));
             };
@@ -131,8 +187,10 @@
             stripFor = null;
             box.style.removeProperty("--lb-bg");
             viewport.style.transform = "";
+            roomKey = null;
             layout();
             buildStrip();
+            updateRoom();
             requestAnimationFrame(function () { syncStrip(false); });
         }
 
@@ -141,7 +199,7 @@
             new MutationObserver(function () {
                 if (animating || !box.classList.contains("open")) return;
                 const i = o.getIndex();
-                if (i !== index && items.length) { index = i; layout(); syncStrip(true); }
+                if (i !== index && items.length) { index = i; layout(); syncStrip(true); updateRoom(); }
             }).observe(o.counter, { childList: true, characterData: true, subtree: true });
         }
 

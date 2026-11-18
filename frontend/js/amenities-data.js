@@ -135,6 +135,78 @@
     };
 
     /* -----------------------------------------------------
+       محتويات كل غرفة (ألبوم الصور وعارض الصور في صفحتي الشقق والحجز)
+       المفتاح = key الغرفة في APARTMENT_ROOM_PHOTO_PLAN داخل js/main.js.
+
+       قواعد:
+       - فقط ما هو موجود في كل الشقق ومذكور في الأقسام بالأسفل.
+       - لا شيء من نوع some / free / paid / varies، ولا التدخين
+         والحيوانات الأليفة والمحمصة والموقف الإضافي.
+       - السرير والشرفات والتراس والكراج تُؤخذ من مواصفات كل شقة
+         بالأعلى (beds / balconies / terrace / indoorGarage) داخل roomDetails.
+    ----------------------------------------------------- */
+    const roomContents = {
+        living: [
+            { ar: "طقم كنب وجلسات", en: "Sofa set and seating" },
+            { ar: "طاولة وسط وطاولات جانبية", en: "Coffee table and side tables" },
+            { ar: "تلفزيون ذكي وطاولة تلفزيون", en: "Smart TV and TV stand" },
+            { ar: "سجاد وستائر", en: "Carpets and curtains" },
+            { ar: "إضاءة وديكورات داخلية", en: "Lighting and interior décor" }
+        ],
+        guest: [
+            { ar: "جلسات وكنب لاستقبال الضيوف", en: "Sofa seating for receiving guests" },
+            { ar: "طاولة وسط وطاولات جانبية", en: "Coffee table and side tables" },
+            { ar: "تلفزيون ذكي", en: "Smart TV" },
+            { ar: "سجاد وستائر وإضاءة", en: "Carpets, curtains and lighting" }
+        ],
+        bedroom: [
+            { ar: "خزانة ملابس", en: "Wardrobe" },
+            { ar: "طاولات جانبية بجانب السرير", en: "Bedside tables" },
+            { ar: "تسريحة ومرآة", en: "Dresser and mirror" },
+            { ar: "ستائر عازلة للضوء (Blackout)", en: "Blackout curtains" },
+            { ar: "مخدات ولحافات وأغطية إضافية", en: "Extra pillows, duvets and blankets" }
+        ],
+        masterBath: { ar: "حمام ماستر خاص بالغرفة", en: "Its own master bathroom" },
+        kitchen: [
+            { ar: "ثلاجة مع فريزر", en: "Refrigerator with freezer" },
+            { ar: "فرن غاز وشفاط", en: "Gas oven and extractor hood" },
+            { ar: "ميكروويف", en: "Microwave" },
+            { ar: "غلاية مياه وماكينة قهوة", en: "Electric kettle and coffee machine" },
+            { ar: "طاولة طعام وكراسي", en: "Dining table and chairs" },
+            { ar: "صحون وكاسات وأكواب وأدوات مائدة", en: "Plates, glasses, cups and cutlery" },
+            { ar: "طناجر ومقالي وأدوات تحضير الطعام", en: "Pots, pans and food preparation utensils" },
+            { ar: "خزائن مطبخ وعلب لحفظ الطعام", en: "Kitchen cabinets and food storage containers" }
+        ],
+        bathroom: [
+            { ar: "دش ومرآة", en: "Shower and mirror" },
+            { ar: "مناشف استحمام ومناشف لليدين", en: "Bath towels and hand towels" },
+            { ar: "شامبو وبلسم وصابون، تُجدَّد مجانًا", en: "Shampoo, conditioner and soap, replenished free" },
+            { ar: "نعال وسجادة حمام", en: "Bathroom slippers and bath mat" },
+            { ar: "ورق تواليت وسلة مهملات", en: "Toilet paper and waste bin" }
+        ],
+        laundry: [
+            { ar: "غسالة ملابس", en: "Washing machine" },
+            { ar: "منشر غسيل وسلة غسيل", en: "Drying rack and laundry basket" },
+            { ar: "مكواة ملابس", en: "Clothes iron" },
+            { ar: "شماعات ملابس", en: "Clothes hangers" },
+            { ar: "سائل غسيل ومواد تنظيف", en: "Laundry detergent and cleaning supplies" }
+        ],
+        balcony: [
+            { ar: "كراسي وطاولة خارجية", en: "Outdoor chairs and table" }
+        ],
+        others: [
+            { ar: "نظام دخول ذكي لباب الشقة", en: "Smart lock on the apartment door" },
+            { ar: "دخول ذكي لأبواب المبنى، ومصاعد", en: "Smart access at the building doors, and elevators" },
+            { ar: "كاميرات مراقبة في المداخل والممرات والمواقف", en: "CCTV at the entrances, corridors and parking" },
+            { ar: "حارس أمن", en: "Security guard" },
+            { ar: "مداخل مناسبة للكراسي المتحركة", en: "Wheelchair-friendly entrances" },
+            { ar: "خزائن أحذية", en: "Shoe cabinets" }
+        ],
+        parkingShared: { ar: "موقف سيارة مخصص في كراج العمارة، بدخول ذكي", en: "A dedicated space in the building garage, with smart access" },
+        parkingGarage: { ar: "كراج داخلي خاص بالشقة", en: "The apartment's own indoor garage" }
+    };
+
+    /* -----------------------------------------------------
        أهم المميزات (تظهر في أعلى صفحة المميزات وفي الرئيسية)
     ----------------------------------------------------- */
     const highlights = [
@@ -737,6 +809,40 @@
         return lang === "en" ? "Dedicated space in the building garage" : "موقف مخصص في كراج العمارة";
     }
 
+    /* محتويات غرفة معيّنة في شقة معيّنة (قائمة نصوص جاهزة للعرض).
+       roomKey مثل: living, guest, bedroom-1, kitchen, bathroom-2, laundry, others, balcony */
+    function roomDetails(apartmentId, roomKey, lang) {
+        const en = lang === "en";
+        const text = function (pair) { return en ? pair.en : pair.ar; };
+        const facts = getApartment(apartmentId);
+        const key = String(roomKey || "");
+
+        const bedroom = /^bedroom-(\d+)$/.exec(key);
+        if (bedroom) {
+            const bed = facts && facts.beds ? facts.beds[Number(bedroom[1]) - 1] : null;
+            const list = [];
+            if (bed && bedTypes[bed.bed]) list.push(text(bedTypes[bed.bed]));
+            roomContents.bedroom.forEach(function (item) { list.push(text(item)); });
+            if (bed && bed.room === "master") list.push(text(roomContents.masterBath));
+            return list;
+        }
+
+        if (/^bathroom-\d+$/.test(key)) return roomContents.bathroom.map(text);
+
+        if (key === "balcony") {
+            const outdoor = outdoorLabel(facts, lang);
+            return (outdoor ? [outdoor] : []).concat(roomContents.balcony.map(text));
+        }
+
+        if (key === "others") {
+            const parking = facts && facts.indoorGarage ? roomContents.parkingGarage : roomContents.parkingShared;
+            return roomContents.others.map(text).concat(text(parking));
+        }
+
+        const items = roomContents[key];
+        return Array.isArray(items) ? items.map(text) : [];
+    }
+
     /* قائمة المزايا المختصرة لبطاقة الشقة (أول 4 تظهر على البطاقة) */
     function featureList(apartmentId, lang) {
         const facts = getApartment(apartmentId);
@@ -796,7 +902,9 @@
         areaLabel: areaLabel,
         parkingLabel: parkingLabel,
         featureList: featureList,
-        bedroomTypesIn: bedroomTypesIn
+        bedroomTypesIn: bedroomTypesIn,
+        roomContents: roomContents,
+        roomDetails: roomDetails
     };
 
     root.HIJAZI_AMENITIES = api;

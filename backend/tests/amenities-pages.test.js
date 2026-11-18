@@ -73,7 +73,7 @@ test("every amenity has Arabic and English text and a known tag and icon", () =>
 });
 
 test("amenities pages have valid structured data and scripts", () => {
-    for (const file of ["amenities.html", "amenities-en.html", "apartments.html", "index.html", "faq.html"]) {
+    for (const file of ["amenities.html", "amenities-en.html", "apartments.html", "index.html", "faq.html", "about.html", "reviews.html"]) {
         const html = fs.readFileSync(path.join(FRONTEND, file), "utf8");
 
         for (const match of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
@@ -86,6 +86,35 @@ test("amenities pages have valid structured data and scripts", () => {
 
         for (const match of html.matchAll(/<(?:script|link)\b[^>]*(?:src|href)=["']((?:js|css)\/[^"']+)/gi)) {
             assert.equal(fs.existsSync(path.join(FRONTEND, match[1].split(/[?#]/)[0])), true, `${file}: ${match[1]}`);
+        }
+    }
+});
+
+test("every photo-album room has contents, and only facts that hold for that apartment", () => {
+    const main = fs.readFileSync(path.join(FRONTEND, "js/main.js"), "utf8");
+    const plan = main.match(/const APARTMENT_ROOM_PHOTO_PLAN = \[([\s\S]*?)\n\];/)[1];
+    const roomKeys = [...plan.matchAll(/key:\s*"([^"]+)"/g)].map(match => match[1]);
+    const optional = /تدخين|حيوان|محمص|\bsmok|\bpets?\b|\btoaster|موقف إضافي|additional parking|عند الطلب|on request|رسوم|\bcharge/i;
+
+    assert.ok(roomKeys.length >= 10);
+
+    for (const id of Object.keys(data.apartments).map(Number)) {
+        const facts = data.getApartment(id);
+
+        for (const lang of ["ar", "en"]) {
+            for (const key of roomKeys) {
+                const items = data.roomDetails(id, key, lang);
+                assert.ok(items.length > 0, `apartment ${facts.number}: no contents for ${key} (${lang})`);
+                for (const text of items) assert.doesNotMatch(text, optional, `${facts.number} ${key}: ${text}`);
+            }
+
+            facts.beds.forEach((bed, index) => {
+                assert.equal(data.roomDetails(id, `bedroom-${index + 1}`, lang)[0], data.bedTypes[bed.bed][lang]);
+            });
+            assert.equal(data.roomDetails(id, "balcony", lang)[0], data.outdoorLabel(facts, lang));
+            assert.ok(data.roomDetails(id, "others", lang).includes(facts.indoorGarage
+                ? data.roomContents.parkingGarage[lang]
+                : data.roomContents.parkingShared[lang]));
         }
     }
 });

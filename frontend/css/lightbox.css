@@ -238,3 +238,164 @@ html body .image-lightbox .lb-slide img { pointer-events: auto; width: auto !imp
 html body .image-lightbox .image-lightbox-caption { top: -46px !important; bottom: auto !important; }
 .lb-thumb { width: 24px; height: 36px; }
 .lb-thumb.active { width: 48px; margin: 0 5px; }
+
+/* ===== محتويات الغرفة داخل العارض =====
+   الموبايل: شريط صغير فوق الصور المصغرة، بضغطة بيفتح ويعرض كل النقاط.
+   اللابتوب: لوحة ثابتة على جنب الصورة، النقاط ظاهرة دائمًا.
+   بدون backdrop-filter (تكلفة GPU)؛ الخلفية لون شبه معتم. */
+.lb-room {
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    bottom: calc(max(18px, env(safe-area-inset-bottom)) + 56px);
+    width: min(560px, calc(100% - 24px));
+    transform: translateX(-50%);
+    border: 1px solid rgba(201, 164, 92, .35);
+    border-radius: 16px;
+    background: rgba(18, 18, 18, .9);
+    color: #fff;
+    text-align: start;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+}
+.lb-room[hidden] { display: none; }
+.lb-room-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 48px;
+    padding: 8px 14px;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+}
+.lb-room-title {
+    flex: 0 0 auto;
+    color: #d8b25e;
+    font-size: 15px;
+    font-weight: 800;
+}
+.lb-room-sum {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: rgba(255, 255, 255, .78);
+    font-size: 13px;
+}
+.lb-room-chev {
+    flex: 0 0 auto;
+    width: 9px;
+    height: 9px;
+    margin-top: 4px;
+    border-right: 2px solid rgba(255, 255, 255, .7);
+    border-bottom: 2px solid rgba(255, 255, 255, .7);
+    transform: rotate(-135deg);
+    transition: transform .2s ease;
+}
+.lb-room.open .lb-room-chev { margin-top: -4px; transform: rotate(45deg); }
+.lb-room.open .lb-room-sum { visibility: hidden; }
+.lb-room-list {
+    display: none;
+    max-height: 38vh;
+    margin: 0;
+    padding: 0 14px 12px;
+    overflow-y: auto;
+    list-style: none;
+    overscroll-behavior: contain;
+}
+.lb-room.open .lb-room-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 14px; }
+.lb-room-list li {
+    position: relative;
+    padding-inline-start: 14px;
+    color: rgba(255, 255, 255, .92);
+    font-size: 13.5px;
+    line-height: 1.7;
+}
+.lb-room-list li::before,
+.room-contents li::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    top: .72em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #c9a45c;
+}
+@media (max-width: 420px) {
+    .lb-room.open .lb-room-list { grid-template-columns: 1fr; }
+}
+/* الصورة ما تنغطى بالشريط المسكّر */
+html body .image-lightbox.lb-has-room .image-lightbox-stage { inset: 60px 0 148px 0 !important; }
+
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+    .lb-room {
+        top: 72px;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        right: 24px;
+        width: 290px;
+        max-height: calc(100dvh - 72px - 96px);
+        overflow-y: auto;
+        transform: none;
+    }
+    .lb-room-head { cursor: default; padding: 14px 16px 6px; }
+    .lb-room-title { font-size: 18px; }
+    .lb-room-sum, .lb-room-chev { display: none; }
+    .lb-room .lb-room-list,
+    .lb-room.open .lb-room-list {
+        display: block;
+        max-height: none;
+        overflow: visible;
+        padding: 4px 16px 14px;
+    }
+    .lb-room-list li { padding-block: 3px; font-size: 14.5px; }
+    /* العارض داخليًا اتجاهه ltr، فالجهة بتنحدد من html[dir]: عربي = يمين، إنجليزي = يسار */
+    html[dir="ltr"] .lb-room { right: auto; left: 24px; }
+    html body .image-lightbox.lb-has-room .image-lightbox-stage { inset: 60px 330px 92px 0 !important; }
+    html[dir="ltr"] body .image-lightbox.lb-has-room .image-lightbox-stage { inset: 60px 0 92px 330px !important; }
+}
+
+/* ===== محتويات الغرفة في ألبوم الصور (جنب صور كل قسم) ===== */
+.room-contents {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+}
+.room-contents li {
+    position: relative;
+    padding: 5px 0;
+    padding-inline-start: 16px;
+    border-bottom: 1px dashed #ececec;
+    color: #333;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.7;
+}
+.room-contents li:last-child { border-bottom: 0; }
+.room-contents li::before { top: calc(5px + .72em); }
+@media (max-width: 768px) {
+    .room-contents {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 8px;
+    }
+    .room-contents li {
+        padding: 3px 10px;
+        padding-inline-start: 20px;
+        border: 1px solid #f1e2bd;
+        border-radius: 999px;
+        background: #fff8e6;
+        color: #2b2412;
+        font-size: 12.5px;
+        line-height: 1.6;
+    }
+    .room-contents li::before { inset-inline-start: 8px; top: calc(3px + .62em); width: 5px; height: 5px; }
+}
