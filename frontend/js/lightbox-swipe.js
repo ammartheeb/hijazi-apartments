@@ -115,6 +115,7 @@
                 }
             });
             setTrack(0, 0);
+            resetZoom(0);
         }
 
         function buildStrip() {
@@ -212,16 +213,101 @@
 
         window.addEventListener("resize", function () { if (box.classList.contains("open")) { layout(); syncStrip(false); } });
 
+        /* ===== التقريب بإصبعين (الموبايل) =====
+           إصبعين = تكبير وتصغير حول نقطة الأصابع (حتى 4 أضعاف). والصورة مكبّرة:
+           إصبع واحد بيحرّكها، وما في تنقل بالسحب ولا سحب لتحت للإغلاق.
+           بترجع لحجمها بالتصغير بإصبعين، أو لحالها عند الانتقال لصورة ثانية أو الإغلاق. */
+        const MAX_ZOOM = 4;
+        const pts = new Map();
+        let zs = 1, ztx = 0, zty = 0, pinch = null, pan = null, gesture = false;
+
+        function zoomImg() { return slides[1].firstChild; }
+        function applyZoom(ms) {
+            const img = zoomImg();
+            img.style.transition = ms ? `transform ${ms}ms ${EASE}` : "none";
+            img.style.transform = zs > 1 ? `translate3d(${ztx}px,${zty}px,0) scale(${zs})` : "";
+            box.classList.toggle("lb-zoomed", zs > 1);
+        }
+        function clampPan() {
+            const img = zoomImg();
+            const mx = Math.max(0, (img.offsetWidth * zs - viewport.clientWidth) / 2);
+            const my = Math.max(0, (img.offsetHeight * zs - viewport.clientHeight) / 2);
+            ztx = Math.max(-mx, Math.min(mx, ztx));
+            zty = Math.max(-my, Math.min(my, zty));
+        }
+        function resetZoom(ms) { zs = 1; ztx = zty = 0; pinch = pan = null; applyZoom(ms); }
+        function fromCenter(x, y) {
+            const r = viewport.getBoundingClientRect();
+            return { x: x - (r.left + r.width / 2), y: y - (r.top + r.height / 2) };
+        }
+        function fingers() {
+            const v = Array.from(pts.values());
+            const m = fromCenter((v[0].x + v[1].x) / 2, (v[0].y + v[1].y) / 2);
+            return { d: Math.hypot(v[0].x - v[1].x, v[0].y - v[1].y) || 1, mx: m.x, my: m.y };
+        }
+        function startPinch() {
+            const f = fingers();
+            pinch = { d: f.d, mx: f.mx, my: f.my, s: zs, tx: ztx, ty: zty };
+            pan = null;
+        }
+        function startPan(x, y) { pan = { x: x, y: y, tx: ztx, ty: zty }; }
+
         /* ===== السحب ===== */
         let sx = 0, sy = 0, dx = 0, dy = 0, lock = null, down = false, t0 = 0, lastX = 0, lastT = 0, vx = 0;
 
+        function cancelSwipe() {
+            if (!down) return;
+            down = false;
+            if (lock === "x") setTrack(0, 200);
+            if (lock === "y") {
+                viewport.style.transition = `transform 200ms ${EASE}`;
+                viewport.style.transform = "";
+                box.style.removeProperty("--lb-bg");
+            }
+            lock = null;
+        }
+
         viewport.addEventListener("pointerdown", function (e) {
             if (animating || e.button > 0) return;
+            if (e.isPrimary) pts.clear();
+            pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+            if (pts.size === 2) {
+                // إصبع ثاني: نلغي أي سحب بدأ ونبدأ التقريب
+                cancelSwipe();
+                gesture = true;
+                startPinch();
+                try { viewport.setPointerCapture(e.pointerId); } catch (_) {}
+                return;
+            }
+            if (pts.size > 2) return;
+            if (zs > 1) {
+                gesture = true;
+                startPan(e.clientX, e.clientY);
+                try { viewport.setPointerCapture(e.pointerId); } catch (_) {}
+                return;
+            }
+            gesture = false;
             down = true; lock = null; dx = dy = 0;
             sx = lastX = e.clientX; sy = e.clientY; t0 = lastT = performance.now(); vx = 0;
         });
 
         viewport.addEventListener("pointermove", function (e) {
+            if (pts.has(e.pointerId)) pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+            if (pinch && pts.size >= 2) {
+                const f = fingers();
+                zs = Math.max(1, Math.min(MAX_ZOOM, pinch.s * f.d / pinch.d));
+                ztx = f.mx - (pinch.mx - pinch.tx) * zs / pinch.s;
+                zty = f.my - (pinch.my - pinch.ty) * zs / pinch.s;
+                applyZoom(0);
+                return;
+            }
+            if (pan) {
+                ztx = pan.tx + (e.clientX - pan.x);
+                zty = pan.ty + (e.clientY - pan.y);
+                clampPan();
+                applyZoom(0);
+                return;
+            }
             if (!down) return;
             dx = e.clientX - sx; dy = e.clientY - sy;
             if (!lock && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
@@ -266,12 +352,33 @@
             }
             lock = null;
         }
-        viewport.addEventListener("pointerup", end);
-        viewport.addEventListener("pointercancel", end);
 
-        // ضغطة على الخلفية الفاضية حوالين الصورة بتسكر، بس مش بعد سحب
+        function release(e) {
+            pts.delete(e.pointerId);
+            if (pinch) {
+                if (pts.size >= 2) { startPinch(); return; }
+                pinch = null;
+                if (zs <= 1.02) {
+                    resetZoom(200);
+                } else {
+                    clampPan();
+                    applyZoom(200);
+                    if (pts.size === 1) { const p = pts.values().next().value; startPan(p.x, p.y); }
+                }
+                return;
+            }
+            if (pan) {
+                if (!pts.size) pan = null;
+                return;
+            }
+            end();
+        }
+        viewport.addEventListener("pointerup", release);
+        viewport.addEventListener("pointercancel", release);
+
+        // ضغطة على الخلفية الفاضية حوالين الصورة بتسكر، بس مش بعد سحب أو تقريب، ولا والصورة مكبّرة
         viewport.addEventListener("click", function (e) {
-            if (Math.abs(dx) > 5 || Math.abs(dy) > 5) { e.stopPropagation(); return; }
+            if (gesture || zs > 1 || Math.abs(dx) > 5 || Math.abs(dy) > 5) { e.stopPropagation(); gesture = false; return; }
             if (e.target.tagName !== "IMG") closeBtn && closeBtn.click();
         });
     }

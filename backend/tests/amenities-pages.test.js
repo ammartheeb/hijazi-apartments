@@ -112,6 +112,10 @@ test("every photo-album room has contents, and only facts that hold for that apa
                 assert.equal(data.roomDetails(id, `bedroom-${index + 1}`, lang)[0], data.bedTypes[bed.bed][lang]);
             });
             assert.equal(data.roomDetails(id, "balcony", lang)[0], data.outdoorLabel(facts, lang));
+            for (const key of roomKeys) {
+                const hasClimate = data.roomContents.climate.every(item => data.roomDetails(id, key, lang).includes(item[lang]));
+                assert.equal(hasClimate, data.roomContents.climateRooms.includes(key), `${facts.number} ${key}: air conditioner / central heating`);
+            }
             assert.ok(data.roomDetails(id, "others", lang).includes(facts.indoorGarage
                 ? data.roomContents.parkingGarage[lang]
                 : data.roomContents.parkingShared[lang]));

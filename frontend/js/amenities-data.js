@@ -144,8 +144,16 @@
          والحيوانات الأليفة والمحمصة والموقف الإضافي.
        - السرير والشرفات والتراس والكراج تُؤخذ من مواصفات كل شقة
          بالأعلى (beds / balconies / terrace / indoorGarage) داخل roomDetails.
+       - climate (مكيّف + تدفئة مركزية) يُضاف لغرف climateRooms فقط:
+         الـ 5 مكيفات في كل شقة هي في الصالة وغرفة الضيوف وغرف النوم الثلاث
+         (ظاهرة في صور هذه الغرف، ولا تظهر في المطبخ والحمامات).
     ----------------------------------------------------- */
     const roomContents = {
+        climate: [
+            { ar: "مكيّف للتبريد والتدفئة", en: "Air conditioner for cooling and heating" },
+            { ar: "تدفئة مركزية", en: "Central heating" }
+        ],
+        climateRooms: ["living", "guest", "bedroom-1", "bedroom-2", "bedroom-3"],
         living: [
             { ar: "طقم كنب وجلسات", en: "Sofa set and seating" },
             { ar: "طاولة وسط وطاولات جانبية", en: "Coffee table and side tables" },
@@ -812,10 +820,22 @@
     /* محتويات غرفة معيّنة في شقة معيّنة (قائمة نصوص جاهزة للعرض).
        roomKey مثل: living, guest, bedroom-1, kitchen, bathroom-2, laundry, others, balcony */
     function roomDetails(apartmentId, roomKey, lang) {
+        const key = String(roomKey || "");
+        const list = baseRoomDetails(apartmentId, key, lang);
+
+        // المكيّف والتدفئة المركزية بعد أول بند (الكنب أو السرير)
+        if (list.length && roomContents.climateRooms.indexOf(key) !== -1) {
+            const climate = roomContents.climate.map(function (pair) { return lang === "en" ? pair.en : pair.ar; });
+            Array.prototype.splice.apply(list, [1, 0].concat(climate));
+        }
+
+        return list;
+    }
+
+    function baseRoomDetails(apartmentId, key, lang) {
         const en = lang === "en";
         const text = function (pair) { return en ? pair.en : pair.ar; };
         const facts = getApartment(apartmentId);
-        const key = String(roomKey || "");
 
         const bedroom = /^bedroom-(\d+)$/.exec(key);
         if (bedroom) {

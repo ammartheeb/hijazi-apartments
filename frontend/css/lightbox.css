@@ -380,7 +380,13 @@ html body .image-lightbox.lb-has-room .image-lightbox-stage { inset: 60px 0 148p
 }
 .room-contents li:last-child { border-bottom: 0; }
 .room-contents li::before { top: calc(5px + .72em); }
-@media (max-width: 768px) {
+/* الشاشات الكبيرة: القائمة جنب الصور. الموبايل والتابلت (حتى 900px، لما الألبوم
+   يصير عمود واحد): اسم الغرفة، بعدها الصور، بعدها القائمة. القسم هناك flex
+   column-reverse أو grid، فـ order: -1 بيخلي القائمة آخر إشي بالحالتين. */
+.room-contents-after { display: none; }
+@media (max-width: 900px) {
+    html[dir] body .photo-tour-section .room-contents-side { display: none !important; }
+    html[dir] body .photo-tour-section .room-contents-after { display: flex !important; order: -1; }
     .room-contents {
         display: flex;
         flex-wrap: wrap;
@@ -399,3 +405,8 @@ html body .image-lightbox.lb-has-room .image-lightbox-stage { inset: 60px 0 148p
     }
     .room-contents li::before { inset-inline-start: 8px; top: calc(3px + .62em); width: 5px; height: 5px; }
 }
+
+/* والصورة مكبّرة بإصبعين: نخفي شريط محتويات الغرفة حتى تبين الصورة كاملة */
+.lb-room { transition: opacity .2s ease; }
+.image-lightbox.lb-zoomed .lb-room { opacity: 0; pointer-events: none; }
+.lb-slide img { transform-origin: 50% 50%; }

@@ -71,8 +71,8 @@ function getApartmentDisplayName(apartmentId, lang = "ar", fallback = "") {
 const HIJAZI_APARTMENTS = {
     1: {
         id: 1,
-        location: "وسط البلد",
-        mapEmbed: "https://www.google.com/maps?q=%D9%88%D8%B3%D8%B7%20%D8%A7%D9%84%D8%A8%D9%84%D8%AF%20%D8%B9%D9%85%D8%A7%D9%86&z=15&output=embed",
+        location: "الشميساني",
+        mapEmbed: "https://maps.google.com/maps?cid=2903136424075634115&z=17&output=embed",
         nameAr: getApartmentDisplayName(1, "ar"),
         nameEn: getApartmentDisplayName(1, "en"),
         price: APARTMENT_PRICES[1],
@@ -261,7 +261,10 @@ async function loadApartmentPricesFromPms() {
    موقع موحد لجميع الشقق - HIJAZI Apartments
 ========================================================= */
 const HIJAZI_SHARED_LOCATION_AR = "HIJAZI Apartments - شارع يوسف بن تاشفين، الشميساني، عمّان";
-const HIJAZI_SHARED_MAP_EMBED = "https://www.google.com/maps?q=31.97618730798579,35.89911515004555&z=18&output=embed";
+/* المكان الرسمي على خرائط جوجل (أرسله المالك 2026-11-18): 31.9758601, 35.898315
+   الخريطة المضمّنة تعرض بطاقة المكان نفسه (cid) مع زر "افتح في خرائط Google". */
+const HIJAZI_MAP_URL = "https://maps.app.goo.gl/gfww6DooaC2uzFrt8";
+const HIJAZI_SHARED_MAP_EMBED = "https://maps.google.com/maps?cid=2903136424075634115&z=17&output=embed";
 
 Object.values(HIJAZI_APARTMENTS).forEach(apartment => {
     apartment.location = HIJAZI_SHARED_LOCATION_AR;
@@ -668,6 +671,7 @@ const SITE_TRANSLATIONS = {
         copyright: "© 2026 HIJAZI Apartments - جميع الحقوق محفوظة",
         footerDesc: "شقق مفروشة راقية في قلب عمان الشميساني مناسبة للإقامة الطبية والتنفيذية بالقرب من المستشفيات والمطاعم والكافيهات.",
         address: "عمان، الأردن، الشميساني",
+        mapLink: "الموقع على خرائط جوجل",
         phoneLabel: "الهاتف",
         emailLabel: "البريد",
         social: "السوشال ميديا",
@@ -689,6 +693,7 @@ const SITE_TRANSLATIONS = {
         copyright: "© 2026 HIJAZI Apartments - All rights reserved",
         footerDesc: "Elegant furnished apartments in the heart of Amman, Shmeisani, ideal for medical and executive stays near hospitals, restaurants, and cafés.",
         address: "Amman, Jordan, Shmeisani",
+        mapLink: "Location on Google Maps",
         phoneLabel: "Phone",
         emailLabel: "Email",
         social: "Social Media",
@@ -862,7 +867,7 @@ function renderSharedFooter() {
                     <h4>${t.contactUs}</h4>
                     <p>${t.phoneLabel}: <a href="tel:+962789000444">+962789000444</a></p>
                     <p>${t.emailLabel}: <a href="mailto:info@hijazi-apartments.com">info@hijazi-apartments.com</a></p>
-                    <p>${t.address}</p>
+                    <p>${t.address} · <a href="${HIJAZI_MAP_URL}" target="_blank" rel="noopener">${t.mapLink}</a></p>
                 </div>
 
                 <div class="footer-box">

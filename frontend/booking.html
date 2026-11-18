@@ -45,7 +45,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css?v=10">
-    <link rel="stylesheet" href="css/lightbox.css?v=4">
+    <link rel="stylesheet" href="css/lightbox.css?v=5">
     <link rel="stylesheet" href="css/amenities.css?v=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.8/index.global.min.css" />
 
@@ -3213,6 +3213,7 @@
                     <div class="map-box">
                         <h3 id="mapTitle">موقع الشقة على الخريطة</h3>
                         <iframe id="aptMap" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <a class="map-open-link" id="mapOpenLink" href="https://maps.app.goo.gl/gfww6DooaC2uzFrt8" target="_blank" rel="noopener">افتح الموقع على خرائط جوجل</a>
                     </div>
 
                     <div class="summary-box">
@@ -3393,10 +3394,10 @@
     <div id="sharedFooter"><nav class="static-site-links" aria-label="روابط الموقع" style="display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:center;padding:24px 16px;font-size:14px"><a href="/">الرئيسية</a><a href="apartments.html">الشقق</a><a href="booking.html">الحجز</a><a href="amenities.html">المميزات والخدمات</a><a href="apartments-amman.html">شقق مفروشة في الشميساني</a><a href="apartments-abdali.html">شقق قرب العبدلي</a><a href="apartments-jordan-hospital.html">شقق قرب مستشفى الأردن</a><a href="apartments-specialty-hospital.html">شقق قرب المستشفى التخصصي</a><a href="apartments-islamic-hospital.html">شقق قرب المستشفى الإسلامي</a><a href="apartments-medical-amman.html">شقق للإقامة الطبية</a><a href="apartments-monthly-amman.html">شقق مفروشة شهري</a><a href="faq.html">الأسئلة الشائعة</a><a href="reviews.html">آراء الضيوف</a><a href="about.html">من نحن</a><a href="apartments-amman-en.html">English</a></nav></div>
     <div id="sharedWhatsApp"></div>
 
-    <script src="js/amenities-data.js?v=2"></script>
+    <script src="js/amenities-data.js?v=3"></script>
     <script src="js/amenities-ui.js?v=1"></script>
-    <script src="js/lightbox-swipe.js?v=4"></script>
-    <script src="js/main.js?v=12"></script>
+    <script src="js/lightbox-swipe.js?v=5"></script>
+    <script src="js/main.js?v=13"></script>
     <script>
         const API_BASE = "https://api.hijazi-apartments.com";
 
@@ -3526,6 +3527,8 @@
 
                 const mapTitleEl = document.getElementById("mapTitle");
                 if (mapTitleEl) mapTitleEl.textContent = "موقع الشقة على الخريطة";
+                const mapOpenEl = document.getElementById("mapOpenLink");
+                if (mapOpenEl) mapOpenEl.textContent = "افتح الموقع على خرائط جوجل";
 
                 document.querySelector('#aptId option[value=""]').textContent = "-- اختر الشقة --";
                 APARTMENT_DISPLAY_ORDER.forEach(apartmentId => {
@@ -3586,6 +3589,8 @@
 
                 const mapTitleEl = document.getElementById("mapTitle");
                 if (mapTitleEl) mapTitleEl.textContent = "Apartment location on map";
+                const mapOpenEl = document.getElementById("mapOpenLink");
+                if (mapOpenEl) mapOpenEl.textContent = "Open in Google Maps";
 
                 document.querySelector('#aptId option[value=""]').textContent = "-- Select apartment --";
                 APARTMENT_DISPLAY_ORDER.forEach(apartmentId => {
@@ -3881,10 +3886,11 @@
             return String(text).replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
         }
 
-        function renderRoomContents(roomKey) {
+        // where: "side" = جنب الصور (الشاشات الكبيرة)، "after" = تحت الصور (الموبايل والتابلت)
+        function renderRoomContents(roomKey, where = "side") {
             const items = getRoomContents(roomKey);
             if (!items.length) return "";
-            return `<ul class="room-contents">${items.map(text => `<li>${escapeRoomText(text)}</li>`).join("")}</ul>`;
+            return `<ul class="room-contents room-contents-${where}">${items.map(text => `<li>${escapeRoomText(text)}</li>`).join("")}</ul>`;
         }
 
         function getLightboxRoomInfo(index) {
@@ -4074,6 +4080,8 @@
                     return renderTourPhoto(item, item.originalIndex, localIndex === 0);
                 }).join("")}
                         </div>
+
+                        ${renderRoomContents(group.key, "after")}
 
                         <aside class="photo-tour-room-info">
                             <h2>${roomTitle}</h2>
