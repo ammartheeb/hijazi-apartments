@@ -370,8 +370,8 @@ const APARTMENT_ROOM_PHOTO_PLAN = [
         key: "others",
         folder: "others",
         count: 4,
-        titleAr: "أخرى",
-        titleEn: "Others",
+        titleAr: "المدخل والمبنى",
+        titleEn: "Entrance & building",
         noteAr: "صور عامة مثل الباب، المدخل، الممر، الدرج، المصعد، وأي تفاصيل إضافية.",
         noteEn: "General photos such as door, entrance, corridor, stairs, elevator, and extra details."
     },
