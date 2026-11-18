@@ -24,7 +24,7 @@ This file is read automatically at the start of every Claude Code session. Keep 
 - `frontend/admin.html` is the PMS (noindex). Do not touch it for SEO work.
 - Tests: `cd backend && npm ci && npm test` (80 tests; some check frontend files, including that the amenities pages match the data file and that every photo-album room has contents).
 - Workflow: earlier work went branch → PR → Vercel status → squash merge to `main`. On 2026-11-12 the owner chose a direct push to `main` without a PR; ask which they want each time, and never open a PR unless asked. On 2026-11-13, 2026-11-15, 2026-11-16 and 2026-11-18 the owner again asked for direct pushes to `main`.
-- On Windows the checkout has CRLF line endings, so the test "amenities pages are in sync" fails locally until `node scripts/build-amenities.js` is run; that run changes line endings only (empty `git diff`), so restore those three files afterwards and do not commit them.
+- On Windows the checkout has CRLF line endings, so the test "amenities pages are in sync" fails locally until `node scripts/build-amenities.js` is run; that run changes line endings only (empty `git diff`), so restore those three files afterwards and do not commit them. Exception: if you edited one of them yourself (e.g. a version bump), do not `git checkout` it, because that also undoes your edit (this happened on 2026-11-18 with `main.js?v=12` on the amenities pages); just commit it, since the line-ending change does not show in git.
 
 ## Conventions
 - `js/main.js` renders the shared header, footer and WhatsApp widget, and handles language (`localStorage.siteLang`). When `main.js` changes, bump `js/main.js?v=N` on every page (currently `v=12`).
