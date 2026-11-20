@@ -35,6 +35,15 @@
     <meta name="keywords"
         content="حجز شقق مفروشة عمان, شقق مفروشة الشميساني, شقق قريبة من المستشفيات عمان, شقق فندقية عمان">
     <link rel="canonical" href="https://www.hijazi-apartments.com/apartments.html">
+    <link rel="alternate" hreflang="ar" href="https://www.hijazi-apartments.com/apartments.html">
+    <link rel="alternate" hreflang="en" href="https://www.hijazi-apartments.com/apartments-en.html">
+    <link rel="alternate" hreflang="x-default" href="https://www.hijazi-apartments.com/apartments.html">
+    <script>
+        window.HIJAZI_PAGE_LANG = "ar";
+        window.HIJAZI_ALT_PAGES = { ar: "apartments.html", en: "apartments-en.html" };
+        // من اختار الإنجليزي قبل هيك بيروح للنسخة الإنجليزية (محركات البحث ما عندها لغة محفوظة، فبتشوف العربي)
+        try { if (localStorage.getItem("siteLang") === "en") location.replace("apartments-en.html" + location.search + location.hash); else localStorage.setItem("siteLang", "ar"); } catch (e) { }
+    </script>
     <meta property="og:title" content="شققنا المفروشة في عمان | HIJAZI Apartments">
     <meta property="og:description"
         content="استعرض شقق HIJAZI Apartments المفروشة في عمان الشميساني واختر الشقة المناسبة لتواريخ إقامتك.">
@@ -2817,9 +2826,9 @@
     <div id="sharedWhatsApp"></div>
 
     <script src="js/amenities-data.js?v=3"></script>
-    <script src="js/amenities-ui.js?v=1"></script>
+    <script src="js/amenities-ui.js?v=2"></script>
     <script src="js/lightbox-swipe.js?v=5"></script>
-    <script src="js/main.js?v=15"></script>
+    <script src="js/main.js?v=16"></script>
     <script>
         const API_BASE = "https://api.hijazi-apartments.com";
 
@@ -2870,6 +2879,7 @@
                 document.getElementById("mapTitle").textContent = "موقع الشقة على الخريطة";
                 document.getElementById("mapOpenLink").textContent = "افتح الموقع على خرائط جوجل";
             } else {
+                // EN-TEXT:START (scripts/build-en-pages.js copies this English into apartments-en)
                 document.getElementById("pageTitle").textContent = "Furnished Apartments for Rent in Shmeisani, Amman";
                 document.getElementById("pageSubtitle").textContent = "Choose the right apartment based on your check-in and check-out dates";
                 document.getElementById("checkInLabel").textContent = "Check-in";
@@ -2889,6 +2899,7 @@
                 document.getElementById("seoIntroText").textContent = "Fully furnished apartments in Shmeisani, Amman, close to Jordan Hospital, the Islamic Hospital and Abdali. Suitable for medical, family and business stays, short or monthly.";
                 document.getElementById("seoIntroList").innerHTML = "<li>3 bedrooms in every apartment, including one master, and 3 bathrooms, in 220 m² that sleeps 7–8 guests.</li><li>A separate living room, a guest room, a fully equipped kitchen and a laundry room.</li><li>High-speed fiber internet, central heating and 5 air conditioners in every apartment.</li><li>A balcony in every apartment; some have two, and apartment 204 has a balcony, a terrace and an indoor garage.</li><li>A dedicated parking space for each apartment, and free regular housekeeping.</li><li>The minimum stay is 3 nights, with a special discount for stays longer than one month.</li>";
                 document.getElementById("seoIntroLinks").innerHTML = '<a href="amenities-en.html">All amenities &amp; services</a><a href="apartments-amman-en.html">Furnished apartments in Shmeisani</a><a href="apartments-jordan-hospital-en.html">Near Jordan Hospital</a><a href="apartments-islamic-hospital-en.html">Near the Islamic Hospital</a><a href="apartments-medical-amman-en.html">Medical stays</a><a href="apartments-monthly-amman-en.html">Monthly rentals</a><a href="apartments-abdali-en.html">Near Abdali</a><a href="apartments-specialty-hospital-en.html">Near the Specialty Hospital</a><a href="faq-en.html">FAQ</a>';
+                // EN-TEXT:END
             }
         }
 

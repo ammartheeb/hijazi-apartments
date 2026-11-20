@@ -752,7 +752,7 @@ function renderSharedHeader(activePage, showAdminTrigger = false) {
     headerHost.innerHTML = `
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
             <div class="container">
-                <a class="navbar-brand gold ${brandClass}" href="${showAdminTrigger ? "javascript:void(0)" : "/"}">
+                <a class="navbar-brand gold ${brandClass}" href="${showAdminTrigger ? "javascript:void(0)" : (lang === "en" ? "index-en.html" : "/")}">
                     HIJAZI Apartments
                 </a>
 
@@ -763,10 +763,10 @@ function renderSharedHeader(activePage, showAdminTrigger = false) {
                 <div class="collapse navbar-collapse" id="${navId}">
                     <ul class="navbar-nav mx-auto align-items-lg-center">
                         <li class="nav-item">
-                            <a class="nav-link ${activePage === "index" ? "active" : ""}" href="/">${t.home}</a>
+                            <a class="nav-link ${activePage === "index" ? "active" : ""}" href="${lang === "en" ? "index-en.html" : "/"}">${t.home}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link ${activePage === "apartments" ? "active" : ""}" href="apartments.html">${t.apartments}</a>
+                            <a class="nav-link ${activePage === "apartments" ? "active" : ""}" href="${lang === "en" ? "apartments-en.html" : "apartments.html"}">${t.apartments}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link ${activePage === "booking" ? "active" : ""}" href="booking.html">${t.booking}</a>
@@ -920,7 +920,8 @@ function switchLanguage(lang) {
     setCurrentLang(lang);
     const altPages = window.HIJAZI_ALT_PAGES;
     if (altPages && altPages[lang]) {
-        location.href = altPages[lang];
+        // نحافظ على التواريخ (?checkIn=...) لما ننتقل للنسخة الثانية
+        location.href = altPages[lang] + location.search + location.hash;
         return;
     }
     location.reload();

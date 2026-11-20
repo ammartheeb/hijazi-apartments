@@ -6,7 +6,7 @@ const vm = require("node:vm");
 
 const FRONTEND = path.join(__dirname, "../../frontend");
 const SITE = "https://www.hijazi-apartments.com";
-const { build, PAGES } = require("../../scripts/build-en-pages.js");
+const { build, PAGES, TWINS } = require("../../scripts/build-en-pages.js");
 const indexnow = require("../../scripts/indexnow.js");
 
 const read = file => fs.readFileSync(path.join(FRONTEND, file), "utf8");
@@ -22,21 +22,27 @@ test("English and Arabic twins point at each other and declare their language", 
     for (const page of PAGES) {
         const ar = read(page.ar);
         const en = read(page.en);
+        const arUrl = page.arUrl || `${SITE}/${page.ar}`;
+        const arHref = page.arHref || page.ar;
 
         for (const html of [ar, en]) {
-            assert.match(html, new RegExp(`hreflang="ar" href="${SITE}/${page.ar}"`));
-            assert.match(html, new RegExp(`hreflang="en" href="${SITE}/${page.en}"`));
-            assert.match(html, new RegExp(`window\\.HIJAZI_ALT_PAGES = \\{ ar: "${page.ar}", en: "${page.en}" \\}`));
+            assert.ok(html.includes(`hreflang="ar" href="${arUrl}"`), `${page.ar}: hreflang ar`);
+            assert.ok(html.includes(`hreflang="en" href="${SITE}/${page.en}"`), `${page.ar}: hreflang en`);
+            assert.ok(html.includes(`window.HIJAZI_ALT_PAGES = { ar: "${arHref}", en: "${page.en}" }`), `${page.ar}: language switch`);
         }
 
-        assert.match(ar, /<html lang="ar" dir="rtl">/);
-        assert.match(ar, /window\.HIJAZI_PAGE_LANG = "ar"/);
-        assert.match(ar, new RegExp(`<link rel="canonical" href="${SITE}/${page.ar}">`));
+        assert.ok(ar.includes('<html lang="ar" dir="rtl">'), `${page.ar}: lang`);
+        assert.ok(ar.includes('window.HIJAZI_PAGE_LANG = "ar"'), `${page.ar}: page language`);
+        assert.ok(ar.includes(`<link rel="canonical" href="${arUrl}">`), `${page.ar}: canonical`);
 
-        assert.match(en, /<html lang="en" dir="ltr">/);
-        assert.match(en, /window\.HIJAZI_PAGE_LANG = "en"/);
-        assert.match(en, new RegExp(`<link rel="canonical" href="${SITE}/${page.en}">`));
-        assert.doesNotMatch(en, /data-(?:en|src-en|alt-en|aria-en|href-en)=/);
+        assert.ok(en.includes('<html lang="en" dir="ltr">'), `${page.en}: lang`);
+        assert.ok(en.includes('window.HIJAZI_PAGE_LANG = "en"'), `${page.en}: page language`);
+        assert.ok(en.includes(`<link rel="canonical" href="${SITE}/${page.en}">`), `${page.en}: canonical`);
+        assert.doesNotMatch(en, /data-(?:en|src-en|alt-en|aria-en|href-en|en-href)=/);
+
+        // روابط الصفحة الإنجليزية تروح للنسخ الإنجليزية (ما عدا زر "العربية")
+        const arabicLinks = [...en.matchAll(/href="([^"#?]*)/g)].map(m => m[1]).filter(href => TWINS[href] && href !== arHref);
+        assert.deepEqual(arabicLinks, [], `${page.en}: links to Arabic pages`);
 
         assert.ok(sitemap.includes(`<loc>${SITE}/${page.en}</loc>`), `${page.en} missing from sitemap.xml`);
     }
@@ -64,6 +70,11 @@ test("English pages have valid scripts and data and no Arabic text left", () => 
             .replace(/<[^>]+>/g, " ");
         for (const word of allowed) visible = visible.split(word).join(" ");
         assert.doesNotMatch(visible, /[؀-ۿ]/, `${page.en}: Arabic text left in the page`);
+
+        const attributes = html.replace(/<script[\s\S]*?<\/script>/g, " ").match(/\s(?:alt|aria-label|title|placeholder|content)="[^"]*"/g) || [];
+        for (const attr of attributes) {
+            assert.doesNotMatch(attr.replace(/شقق حجازي المفروشة/g, ""), /[؀-ۿ]/, `${page.en}: Arabic in ${attr.slice(0, 60)}`);
+        }
     }
 });
 
@@ -73,4 +84,5 @@ test("IndexNow key file is published and the admin page is never sent", () => {
     assert.equal(indexnow.pageUrl("frontend/index.html"), `${SITE}/`);
     assert.equal(indexnow.pageUrl("frontend/about-en.html"), `${SITE}/about-en.html`);
     assert.ok(indexnow.sitemapUrls().includes(`${SITE}/faq-en.html`));
+    assert.ok(indexnow.sitemapUrls().includes(`${SITE}/index-en.html`));
 });

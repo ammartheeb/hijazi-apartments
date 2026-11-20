@@ -1,22 +1,30 @@
 #!/usr/bin/env node
 /* =========================================================
-   HIJAZI Apartments – توليد النسخ الإنجليزية لصفحات: من نحن، الأسئلة، التقييمات
+   HIJAZI Apartments – توليد النسخ الإنجليزية من الصفحات العربية
    =========================================================
-   المصدر:  about.html و faq.html و reviews.html (العربي هو الأصل).
-            النص الإنجليزي مكتوب داخلها:
-              - about / reviews: في السمات data-en و data-src-en و data-alt-en
-                و data-aria-en و data-href-en
-              - faq: في المصفوفة faqData.en داخل سكربت الصفحة
-   الناتج:  about-en.html و faq-en.html و reviews-en.html
-            (صفحات إنجليزية ثابتة بروابط خاصة، ليقرأها Google و Bing والذكاء
-            الاصطناعي بدون تشغيل JavaScript)
+   الصفحات:  index.html → index-en.html          (الرئيسية)
+             apartments.html → apartments-en.html (الشقق)
+             about.html → about-en.html
+             faq.html → faq-en.html
+             reviews.html → reviews-en.html
+
+   العربي هو الأصل، والنص الإنجليزي مكتوب داخل الصفحة العربية نفسها:
+     - attrs: في السمات data-en و data-src-en و data-alt-en و data-aria-en
+              و data-href-en و data-en-href (about / reviews / أسفل الرئيسية)
+     - ids:   داخل سكربت الصفحة بين التعليقين // EN-TEXT:START و // EN-TEXT:END
+              (أسطر document.getElementById("x").textContent = "..." أو innerHTML)
+              (الرئيسية والشقق)
+     - faq:   في المصفوفة faqData.en داخل سكربت faq.html
+
+   الناتج صفحات إنجليزية ثابتة بروابط خاصة، ليقرأها Google و Bing والذكاء
+   الاصطناعي بدون تشغيل JavaScript.
 
    الاستخدام (من جذر المشروع):
        node scripts/build-en-pages.js          يكتب الصفحات الإنجليزية
        node scripts/build-en-pages.js --check  يفحص فقط (يُستخدم في الاختبارات)
 
-   عند تعديل أي من الصفحات العربية الثلاث: عدّل النص الإنجليزي جنبه (data-en
-   أو faqData.en) ثم شغّل هذا السكربت. لا تعدّل الصفحات الإنجليزية يدويًا.
+   عند تعديل أي صفحة من هذه الصفحات العربية: عدّل النص الإنجليزي جنبه ثم شغّل
+   هذا السكربت. لا تعدّل الصفحات الإنجليزية يدويًا.
 ========================================================= */
 const fs = require("node:fs");
 const path = require("node:path");
@@ -24,8 +32,59 @@ const vm = require("node:vm");
 
 const FRONTEND = path.join(__dirname, "..", "frontend");
 const SITE = "https://www.hijazi-apartments.com";
+const ui = require(path.join(FRONTEND, "js", "amenities-ui.js"));
+
+/* روابط الصفحات العربية ← نسختها الإنجليزية (تُطبَّق على روابط الصفحة الإنجليزية) */
+const TWINS = {
+    "/": "index-en.html",
+    "index.html": "index-en.html",
+    "apartments.html": "apartments-en.html",
+    "amenities.html": "amenities-en.html",
+    "about.html": "about-en.html",
+    "faq.html": "faq-en.html",
+    "reviews.html": "reviews-en.html"
+};
+for (const topic of ["amman", "abdali", "jordan-hospital", "specialty-hospital", "islamic-hospital", "medical-amman", "monthly-amman"]) {
+    TWINS[`apartments-${topic}.html`] = `apartments-${topic}-en.html`;
+}
 
 const PAGES = [
+    {
+        ar: "index.html",
+        arHref: "/",
+        arUrl: `${SITE}/`,
+        en: "index-en.html",
+        mode: "ids",
+        title: "HIJAZI Apartments | Furnished Apartments in Shmeisani, Amman",
+        description: "HIJAZI Apartments: fully furnished 220 m² three-bedroom apartments in Shmeisani, next to Abdali, Amman, for 7–8 guests. Near the Specialty Hospital, Jordan Hospital and the Islamic Hospital, with free housekeeping, dedicated parking and monthly rates. Book online or on WhatsApp.",
+        ogTitle: "HIJAZI Apartments | Furnished Apartments in Shmeisani, Amman",
+        ogDescription: "Furnished 220 m² three-bedroom apartments in Shmeisani, next to Abdali, Amman, for medical, family, business and monthly stays.",
+        keywords: "furnished apartments Amman, furnished apartments Shmeisani, furnished apartments Abdali, apartments for rent in Amman, apartments near hospitals in Amman, monthly furnished apartments Amman",
+        schema: indexSchema,
+        removeHidden: true,
+        replace: [
+            ['<meta property="og:image:alt" content="شقة مفروشة من HIJAZI Apartments في عمان الشميساني">', '<meta property="og:image:alt" content="A furnished apartment by HIJAZI Apartments in Shmeisani, Amman">']
+        ]
+    },
+    {
+        ar: "apartments.html",
+        en: "apartments-en.html",
+        mode: "ids",
+        title: "Our Apartments | HIJAZI Apartments – Furnished Apartments in Shmeisani, Amman",
+        description: "See the furnished apartments of HIJAZI Apartments in Shmeisani, Amman: 220 m², 3 bedrooms, 3 bathrooms, for 7–8 guests, with photos, room contents and live availability for your dates.",
+        ogTitle: "Our Furnished Apartments in Amman | HIJAZI Apartments",
+        ogDescription: "Furnished three-bedroom apartments in Shmeisani, Amman, with photos and live availability.",
+        keywords: "book furnished apartments Amman, furnished apartments Shmeisani, apartments near hospitals Amman, serviced apartments Amman",
+        replace: [
+            ['aria-label="أدلة الإقامة"', 'aria-label="Stay guides"'],
+            ['اضغط على أي صورة لفتح ألبوم الصور الكامل', 'Click any photo to open the full album'],
+            ['id="photoAlbumTitle">جولة بالصور<', 'id="photoAlbumTitle">Photo tour<'],
+            ['id="albumEmpty">الصورة غير مرفوعة بعد<', 'id="albumEmpty">Photo not uploaded yet<']
+        ],
+        replaceAll: [
+            ['content: "الصورة غير مرفوعة بعد";', 'content: "Photo not uploaded yet";']
+        ]
+    },
     {
         ar: "about.html",
         en: "about-en.html",
@@ -62,14 +121,14 @@ const PAGES = [
 ];
 
 /* الروابط الثابتة أسفل الصفحة الإنجليزية (يستبدلها main.js بالفوتر المشترك) */
-function englishFooter(arFile) {
+function englishFooter(arHref) {
     const links = [
-        ["/", "Home"], ["apartments.html", "Apartments"], ["booking.html", "Booking"],
+        ["index-en.html", "Home"], ["apartments-en.html", "Apartments"], ["booking.html", "Booking"],
         ["amenities-en.html", "Amenities &amp; services"], ["apartments-amman-en.html", "Furnished apartments in Shmeisani"],
         ["apartments-abdali-en.html", "Near Abdali"], ["apartments-jordan-hospital-en.html", "Near Jordan Hospital"],
         ["apartments-specialty-hospital-en.html", "Near the Specialty Hospital"], ["apartments-islamic-hospital-en.html", "Near the Islamic Hospital"],
         ["apartments-medical-amman-en.html", "Medical stays"], ["apartments-monthly-amman-en.html", "Monthly rentals"],
-        ["faq-en.html", "FAQ"], ["reviews-en.html", "Reviews"], ["about-en.html", "About us"], [arFile, "العربية"]
+        ["faq-en.html", "FAQ"], ["reviews-en.html", "Reviews"], ["about-en.html", "About us"], [arHref, "العربية"]
     ];
     return '<div id="sharedFooter"><nav class="static-site-links" aria-label="Site links" style="display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:center;padding:24px 16px;font-size:14px">' +
         links.map(([href, text]) => `<a href="${href}">${text}</a>`).join("") + "</nav></div>";
@@ -91,7 +150,7 @@ function convertHead(html, page) {
     html = replaceOnce(html, /<html lang="ar" dir="rtl">/, '<html lang="en" dir="ltr">', "html tag");
     html = replaceOnce(html, /<title>[^<]*<\/title>/, `<title>${escText(page.title)}</title>`, "title");
     html = replaceOnce(html, /<meta name="description"\s+content="[^"]*">/, `<meta name="description" content="${escAttr(page.description)}">`, "description");
-    if (page.keywords) html = replaceOnce(html, /<meta name="keywords" content="[^"]*">/, `<meta name="keywords" content="${escAttr(page.keywords)}">`, "keywords");
+    if (page.keywords) html = replaceOnce(html, /<meta name="keywords"\s+content="[^"]*">/, `<meta name="keywords" content="${escAttr(page.keywords)}">`, "keywords");
     html = replaceOnce(html, /<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${enUrl}">`, "canonical");
     html = replaceOnce(html, /<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${escAttr(page.ogTitle)}">`, "og:title");
     html = replaceOnce(html, /<meta property="og:description"\s+content="[^"]*">/, `<meta property="og:description" content="${escAttr(page.ogDescription)}">`, "og:description");
@@ -107,7 +166,7 @@ function replaceJsonLd(html, transform) {
     });
 }
 
-/* ---------- نص الصفحة (about / reviews) ---------- */
+/* ---------- أدوات العناصر ---------- */
 function findClose(html, tag, from) {
     const re = new RegExp(`<(/?)${tag}\\b[^>]*>`, "gi");
     re.lastIndex = from;
@@ -119,11 +178,21 @@ function findClose(html, tag, from) {
     throw new Error(`no closing </${tag}>`);
 }
 
+function setInner(html, id, inner) {
+    const re = new RegExp(`<([a-zA-Z][a-zA-Z0-9]*)\\b[^<>]*\\sid="${id}"[^<>]*>`);
+    const m = re.exec(html);
+    if (!m) throw new Error(`element #${id} not found`);
+    const start = m.index + m[0].length;
+    const close = findClose(html, m[1], start);
+    return html.slice(0, start) + inner + html.slice(close);
+}
+
+/* ---------- نص الصفحة بالسمات (about / reviews / الرئيسية) ---------- */
 function swapAttributes(html) {
     // src/alt/aria-label/href الإنجليزية داخل نفس الوسم
-    return html.replace(/<[a-zA-Z][^<>]*\sdata-(?:src|alt|aria|href)-en="[^"]*"[^<>]*>/g, tag => {
-        const pairs = { src: "data-src-en", alt: "data-alt-en", "aria-label": "data-aria-en", href: "data-href-en" };
-        for (const [attr, source] of Object.entries(pairs)) {
+    return html.replace(/<[a-zA-Z][^<>]*\sdata-(?:src-en|alt-en|aria-en|href-en|en-href)="[^"]*"[^<>]*>/g, tag => {
+        const pairs = [["src", "data-src-en"], ["alt", "data-alt-en"], ["aria-label", "data-aria-en"], ["href", "data-href-en"], ["href", "data-en-href"]];
+        for (const [attr, source] of pairs) {
             const m = tag.match(new RegExp(`\\s${source}="([^"]*)"`));
             if (!m) continue;
             tag = tag.replace(m[0], "");
@@ -153,6 +222,39 @@ function swapText(html) {
         re.lastIndex = last;
     }
     return out + html.slice(last);
+}
+
+function removeHiddenInEnglish(html) {
+    // عناصر عليها data-hide-en (مثل رابط "النسخة الإنجليزية" داخل الصفحة العربية)
+    const re = /<([a-zA-Z][a-zA-Z0-9]*)\b[^<>]*\sdata-hide-en\b[^<>]*>/g;
+    let m;
+    while ((m = re.exec(html))) {
+        const close = findClose(html, m[1], m.index + m[0].length);
+        html = html.slice(0, m.index) + html.slice(close + `</${m[1]}>`.length);
+        re.lastIndex = m.index;
+    }
+    return html;
+}
+
+/* ---------- النص الإنجليزي داخل السكربت (الرئيسية والشقق) ---------- */
+function englishAssignments(html) {
+    const m = html.match(/\/\/ EN-TEXT:START[^\n]*\n([\s\S]*?)\n\s*\/\/ EN-TEXT:END/);
+    if (!m) throw new Error("EN-TEXT markers not found");
+    const out = [];
+    const re = /document\.getElementById\("([^"]+)"\)\.(textContent|innerHTML)\s*=\s*("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')\s*;/g;
+    let a;
+    while ((a = re.exec(m[1]))) out.push({ id: a[1], prop: a[2], value: vm.runInNewContext(a[3]) });
+    if (/getElementById\("amenitiesHomeHighlights"\)/.test(m[1])) {
+        out.push({ id: "amenitiesHomeHighlights", prop: "innerHTML", value: "\n        " + ui.renderHighlights("en") + "\n        " });
+    }
+    return out;
+}
+
+function convertIds(html) {
+    for (const { id, prop, value } of englishAssignments(html)) {
+        html = setInner(html, id, prop === "textContent" ? escText(value) : value);
+    }
+    return html;
 }
 
 /* ---------- الأسئلة الشائعة ---------- */
@@ -189,7 +291,23 @@ function convertFaq(html) {
     }));
 }
 
-/* ---------- البيانات المنظمة لصفحة من نحن ---------- */
+/* ---------- البيانات المنظمة ---------- */
+const BUSINESS_EN = "Furnished 220 m² three-bedroom apartments in Shmeisani, next to Abdali, Amman, for families, business travellers, medical and monthly stays.";
+
+function englishBusiness(node) {
+    node.description = BUSINESS_EN;
+    node.address = Object.assign({}, node.address, { streetAddress: "Shmeisani", addressLocality: "Amman" });
+}
+
+function indexSchema(json) {
+    const nodes = Array.isArray(json) ? json : (json["@graph"] || [json]);
+    for (const node of nodes) {
+        if (node["@type"] === "LodgingBusiness") englishBusiness(node);
+        if (node["@type"] === "WebSite") node.inLanguage = "en";
+    }
+    return json;
+}
+
 function aboutSchema(json, page) {
     const enUrl = `${SITE}/${page.en}`;
     for (const node of json["@graph"] || []) {
@@ -200,11 +318,10 @@ function aboutSchema(json, page) {
             node.description = page.description;
             node.inLanguage = "en";
         } else if (node["@type"] === "LodgingBusiness") {
-            node.description = "Furnished 220 m² three-bedroom apartments in Shmeisani, next to Abdali, Amman, for families, business travellers, medical and monthly stays.";
-            node.address = Object.assign({}, node.address, { streetAddress: "Shmeisani", addressLocality: "Amman" });
+            englishBusiness(node);
         } else if (node["@type"] === "BreadcrumbList") {
             node.itemListElement = [
-                { "@type": "ListItem", "position": 1, "name": "Home", "item": `${SITE}/` },
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": `${SITE}/index-en.html` },
                 { "@type": "ListItem", "position": 2, "name": "About us", "item": enUrl }
             ];
         }
@@ -212,21 +329,38 @@ function aboutSchema(json, page) {
     return json;
 }
 
+/* ---------- الروابط إلى النسخ الإنجليزية ---------- */
+function englishLinks(html) {
+    return html.replace(/(\shref=")([^"#?]*)([#?][^"]*)?"/g, (m, pre, target, rest) => {
+        const twin = TWINS[target];
+        return twin ? `${pre}${twin}${rest || ""}"` : m;
+    });
+}
+
 /* ---------- الصفحة كاملة ---------- */
 function convert(page, arHtml) {
     let html = arHtml;
     html = convertHead(html, page);
+    if (page.schema) html = replaceJsonLd(html, json => page.schema(json, page));
     if (page.mode === "faq") {
         html = convertFaq(html);
     } else {
-        if (page.schema) html = replaceJsonLd(html, json => page.schema(json, page));
         html = swapAttributes(html);
         html = swapText(html);
+        if (page.mode === "ids") html = convertIds(html);
     }
+    if (page.removeHidden) html = removeHiddenInEnglish(html);
     for (const [from, to] of page.replace || []) html = replaceOnce(html, from, to, from);
-    html = replaceOnce(html, /<div id="sharedFooter">[\s\S]*?<\/nav><\/div>/, englishFooter(page.ar), "footer");
+    for (const [from, to] of page.replaceAll || []) html = html.split(from).join(to);
+
+    // الروابط داخل الصفحة → النسخ الإنجليزية، والبحث بالتواريخ يفتح صفحة الشقق الإنجليزية
+    html = englishLinks(html);
+    html = html.replace(/`apartments\.html\?/g, "`apartments-en.html?");
+
+    const arHref = page.arHref || page.ar;
+    html = replaceOnce(html, /<div id="sharedFooter">[\s\S]*?<\/nav><\/div>/, englishFooter(arHref), "footer");
     html = replaceOnce(html,
-        /window\.HIJAZI_PAGE_LANG = "ar";\n(\s*)window\.HIJAZI_ALT_PAGES = (\{[^}]*\});\n(\s*)try \{ localStorage\.setItem\("siteLang", "ar"\); \} catch \(e\) \{ \}/,
+        /window\.HIJAZI_PAGE_LANG = "ar";\n(\s*)window\.HIJAZI_ALT_PAGES = (\{[^}]*\});\n(?:\s*\/\/[^\n]*\n)?(\s*)try \{[^\n]*\}\s*catch \(e\) \{ \}/,
         (m, i1, alt, i2) => `window.HIJAZI_PAGE_LANG = "en";\n${i1}window.HIJAZI_ALT_PAGES = ${alt};\n${i2}try { localStorage.setItem("siteLang", "en"); } catch (e) { }`,
         "page language");
     return html;
@@ -247,7 +381,7 @@ function build({ check = false } = {}) {
     return stale;
 }
 
-module.exports = { build, PAGES };
+module.exports = { build, PAGES, TWINS };
 
 if (require.main === module) {
     const check = process.argv.includes("--check");

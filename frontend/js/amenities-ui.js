@@ -254,7 +254,7 @@
 
     function renderPage(lang) {
         const t = TEXT[lang];
-        const apartmentsUrl = "apartments.html";
+        const apartmentsUrl = lang === "en" ? "apartments-en.html" : "apartments.html";
 
         const navLinks = [{ id: "highlights", label: t.navHighlights }, { id: "units", label: t.navUnits }]
             .concat(DATA.sections.map(function (section) {

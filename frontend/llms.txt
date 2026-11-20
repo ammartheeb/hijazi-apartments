@@ -32,8 +32,10 @@
 
 ## Main pages
 
-- [Home (Arabic)](https://www.hijazi-apartments.com/): overview of the apartments
-- [Apartments and availability](https://www.hijazi-apartments.com/apartments.html): choose dates and see available apartments
+- [Home (English)](https://www.hijazi-apartments.com/index-en.html): overview of the apartments
+- [الرئيسية (Arabic)](https://www.hijazi-apartments.com/): نفس الصفحة بالعربية
+- [Apartments and availability (English)](https://www.hijazi-apartments.com/apartments-en.html): choose dates and see available apartments, photos and room contents
+- [الشقق والتوافر (Arabic)](https://www.hijazi-apartments.com/apartments.html): نفس الصفحة بالعربية
 - [Booking](https://www.hijazi-apartments.com/booking.html): booking form
 - [Amenities and services (English)](https://www.hijazi-apartments.com/amenities-en.html): full list of amenities, housekeeping, free and paid services, building and parking, and stay policies
 - [المميزات والخدمات (Arabic)](https://www.hijazi-apartments.com/amenities.html): نفس الصفحة بالعربية

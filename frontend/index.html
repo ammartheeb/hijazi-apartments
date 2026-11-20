@@ -28,6 +28,15 @@
         content="شقق مفروشة عمان, شقق مفروشة الشميساني, شقق مفروشة العبدلي, شقق للايجار في عمان, شقق مفروشة قرب مستشفى الاردن, شقق مفروشة قرب المستشفى الاسلامي, Hijazi Apartments">
     <meta name="author" content="Hijazi Apartments">
     <link rel="canonical" href="https://www.hijazi-apartments.com/">
+    <link rel="alternate" hreflang="ar" href="https://www.hijazi-apartments.com/">
+    <link rel="alternate" hreflang="en" href="https://www.hijazi-apartments.com/index-en.html">
+    <link rel="alternate" hreflang="x-default" href="https://www.hijazi-apartments.com/">
+    <script>
+        window.HIJAZI_PAGE_LANG = "ar";
+        window.HIJAZI_ALT_PAGES = { ar: "/", en: "index-en.html" };
+        // من اختار الإنجليزي قبل هيك بيروح للنسخة الإنجليزية (محركات البحث ما عندها لغة محفوظة، فبتشوف العربي)
+        try { if (localStorage.getItem("siteLang") === "en") location.replace("index-en.html" + location.search + location.hash); else localStorage.setItem("siteLang", "ar"); } catch (e) { }
+    </script>
 
     <meta property="og:title" content="Hijazi Apartments | شقق مفروشة في عمان الشميساني">
     <meta property="og:description"
@@ -1102,8 +1111,8 @@
     <div id="sharedWhatsApp"></div>
 
     <script src="js/amenities-data.js?v=3"></script>
-    <script src="js/amenities-ui.js?v=1"></script>
-    <script src="js/main.js?v=15"></script>
+    <script src="js/amenities-ui.js?v=2"></script>
+    <script src="js/main.js?v=16"></script>
     <script>
         const checkInEl = document.getElementById("checkIn");
         const checkOutEl = document.getElementById("checkOut");
@@ -1188,6 +1197,7 @@
                 document.getElementById("stat3Label").textContent = "خدمات ومرافق قريبة";
                 document.getElementById("stat4Label").textContent = "خيار مناسب للإقامة الطويلة";
             } else {
+                // EN-TEXT:START (scripts/build-en-pages.js copies this English into index-en)
                 document.getElementById("heroTitle").textContent = "Furnished Apartments in Amman Shmeisani";
                 document.getElementById("heroText").textContent = "Luxury furnished apartments for rent in Shmeisani, Amman, ideal for medical and executive stays near major hospitals, restaurants, and cafés.";
                 document.getElementById("checkInLabel").textContent = "Check-in";
@@ -1226,6 +1236,7 @@
                 document.getElementById("stat2Label").textContent = "Areas near hospitals";
                 document.getElementById("stat3Label").textContent = "Nearby services and facilities";
                 document.getElementById("stat4Label").textContent = "Ideal for long stays";
+                // EN-TEXT:END
             }
         }
 

@@ -1,0 +1,4003 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+    <!-- Favicon (Google + Browsers) -->
+
+    <!-- Google (الأهم) -->
+    <link rel="icon" href="favicon.ico">
+
+    <!-- Browsers (PNG) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+
+    <!-- Apple (اختياري) -->
+    <link rel="apple-touch-icon" href="favicon.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KG0M4GYNCV"></script>
+    <script>
+        const HIJAZI_LOCATION_EN = "HIJAZI Apartments - Yousef Bin Tashfin Street, Shmeisani, Amman";
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-KG0M4GYNCV');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Apartments | HIJAZI Apartments – Furnished Apartments in Shmeisani, Amman</title>
+    <meta name="google-site-verification" content="CQow9HEGehI7vI8t4xQ3J6aqW_cw58dW8eZ8o8htyf4" />
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="See the furnished apartments of HIJAZI Apartments in Shmeisani, Amman: 220 m², 3 bedrooms, 3 bathrooms, for 7–8 guests, with photos, room contents and live availability for your dates.">
+    <meta name="keywords" content="book furnished apartments Amman, furnished apartments Shmeisani, apartments near hospitals Amman, serviced apartments Amman">
+    <link rel="canonical" href="https://www.hijazi-apartments.com/apartments-en.html">
+    <link rel="alternate" hreflang="ar" href="https://www.hijazi-apartments.com/apartments.html">
+    <link rel="alternate" hreflang="en" href="https://www.hijazi-apartments.com/apartments-en.html">
+    <link rel="alternate" hreflang="x-default" href="https://www.hijazi-apartments.com/apartments.html">
+    <script>
+        window.HIJAZI_PAGE_LANG = "en";
+        window.HIJAZI_ALT_PAGES = { ar: "apartments.html", en: "apartments-en.html" };
+        try { localStorage.setItem("siteLang", "en"); } catch (e) { }
+    </script>
+    <meta property="og:title" content="Our Furnished Apartments in Amman | HIJAZI Apartments">
+    <meta property="og:description" content="Furnished three-bedroom apartments in Shmeisani, Amman, with photos and live availability.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.hijazi-apartments.com/apartments-en.html">
+    <meta property="og:image" content="https://www.hijazi-apartments.com/images/apartments/apt-1/living/1.webp">
+    <meta property="og:site_name" content="HIJAZI Apartments">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="ar_JO">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=10" />
+    <link rel="stylesheet" href="css/lightbox.css?v=5">
+    <link rel="stylesheet" href="css/amenities.css?v=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ar.js"></script>
+    <script src="js/hijazi-datepicker.js?v=1"></script>
+
+    <style>
+        body {
+            margin: 0;
+            color: #111;
+            overflow-x: hidden;
+            min-height: 100vh;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .page-header {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            text-align: center;
+            padding: 130px 16px 40px;
+            color: #fff;
+            background: linear-gradient(120deg, #c89116, #5a3b00, #000000, #9b7108, #000000);
+            background-size: 350% 350%;
+        }
+
+        .page-header h1 {
+            margin: 0 0 10px;
+            font-size: 40px;
+            font-weight: 900;
+        }
+
+        .page-header p {
+            margin: 0;
+            font-size: 18px;
+            opacity: 0.96;
+        }
+
+        .wrap {
+            max-width: 1200px;
+            margin: 18px auto;
+            padding: 0 16px 30px;
+        }
+
+        .box {
+            background: #111;
+            color: #fff;
+            border-radius: 20px;
+            padding: 24px 26px;
+            margin: -18px auto 0;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 16px 34px rgba(0, 0, 0, .18);
+            max-width: 760px;
+        }
+
+        .row-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            align-items: end;
+        }
+
+        .filter-field {
+            display: flex;
+            flex-direction: column;
+            text-align: start;
+        }
+
+        .filter-field label {
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #f2f2f2;
+        }
+
+        .filter-field input[type="date"] {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: none;
+            min-width: unset;
+            min-height: 46px;
+            font-size: 15px;
+            background: #fff;
+            color: #111;
+            outline: none;
+        }
+
+        .filter-actions {
+            margin-top: 18px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            min-width: 220px;
+            height: 50px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #d4a017, #8a6508);
+            color: #fff;
+            font-weight: 800;
+            font-size: 16px;
+            box-shadow: 0 10px 22px rgba(212, 160, 23, 0.24);
+            transition: all 0.25s ease;
+            border: none;
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #e0ad1f, #6f5206);
+            box-shadow: 0 14px 28px rgba(212, 160, 23, 0.32);
+        }
+
+        .filter-meta {
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            text-align: center;
+        }
+
+        .status {
+            margin-top: 0;
+            font-size: 15px;
+            opacity: .95;
+            font-weight: 700;
+            color: #f5f5f5;
+        }
+
+        .grid {
+            margin-top: 22px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 18px;
+        }
+
+        .card {
+            border: 1px solid #eee;
+            border-radius: 22px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, .08);
+            color: #111;
+            transition: transform 0.28s ease, box-shadow 0.28s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 34px rgba(0, 0, 0, .12);
+        }
+
+        .card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .card-image-button {
+            width: 100%;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            display: block;
+            overflow: hidden;
+            cursor: zoom-in;
+        }
+
+        .card-image-button:focus-visible {
+            outline: 3px solid #d4a017;
+            outline-offset: -3px;
+        }
+
+        .card:hover img {
+            transform: scale(1.04);
+        }
+
+        .card-body {
+            padding: 18px;
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+            color: #111;
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .card-top-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: rgba(0, 0, 0, 0.78);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 700;
+            z-index: 2;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .18);
+        }
+
+        .card-price-box {
+            margin-top: 14px;
+            padding: 14px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #fff8e8, #fff);
+            border: 1px solid #f1dfb0;
+        }
+
+        .card-price-main {
+            color: #b67d00;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .card-price-sub {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .location-line {
+            margin-top: 10px;
+            color: #444;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .long-note-inline {
+            margin-top: 10px;
+            color: #c89116;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.7;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            background: #f6f6f6;
+            margin-bottom: 10px;
+        }
+
+        .muted {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .features {
+            margin: 10px 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .features li {
+            background: #f2f2f2;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+        }
+
+        /* أزرار الكروت */
+        .card-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .card-actions button {
+            flex: 1;
+            min-height: 54px;
+            border-radius: 18px;
+            font-weight: 800;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+        }
+
+        .btn-icon {
+            font-size: 18px;
+        }
+
+        .btn-book {
+            background: linear-gradient(135deg, #d4a017, #8a6508);
+            color: #fff;
+            box-shadow: 0 10px 24px rgba(212, 160, 23, 0.25);
+        }
+
+        .btn-book:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 16px 30px rgba(212, 160, 23, 0.35);
+            background: linear-gradient(135deg, #e0ad1f, #6f5206);
+        }
+
+        .btn-details {
+            background: linear-gradient(135deg, #1f1f1f, #000);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .btn-details:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 14px 26px rgba(0, 0, 0, 0.25);
+            background: linear-gradient(135deg, #2c2c2c, #000);
+        }
+
+        /* Ripple */
+        .ripple-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple-btn .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-effect 0.6s linear;
+            background: rgba(255, 255, 255, 0.35);
+            pointer-events: none;
+        }
+
+        @keyframes ripple-effect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .7);
+            z-index: 9999;
+            padding: 24px;
+            overflow: auto;
+        }
+
+        .modal-content {
+            max-width: 1120px;
+            margin: 30px auto;
+            background: #fff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, .25);
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            color: #fff;
+            background: linear-gradient(90deg, #c89116, #000);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        .modal-body {
+            padding: 24px;
+            color: #111;
+        }
+
+        .close-btn {
+            background: transparent;
+            color: #fff;
+            font-size: 26px;
+            border: none;
+            cursor: pointer;
+            width: auto;
+            padding: 0;
+            min-height: auto;
+        }
+
+        .gallery-main {
+            width: 100%;
+            height: 440px;
+            object-fit: cover;
+            border-radius: 18px;
+            display: block;
+            margin-bottom: 14px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, .10);
+        }
+
+        .thumbs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .thumbs img {
+            width: 110px;
+            height: 82px;
+            object-fit: cover;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: .22s ease;
+        }
+
+        .thumbs img:hover {
+            transform: translateY(-2px);
+            border-color: #c89116;
+        }
+
+        .video-box video {
+            width: 100%;
+            max-height: 420px;
+            border-radius: 12px;
+            margin-top: 16px;
+            background: #000;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .detail-features {
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .detail-features li {
+            background: #f7f7f7;
+            padding: 9px 14px;
+            border-radius: 999px;
+            font-size: 13px;
+            border: 1px solid #eee;
+            font-weight: 700;
+        }
+
+        .room-description {
+            margin-top: 14px;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .map-box {
+            margin-top: 18px;
+        }
+
+        .map-box iframe {
+            width: 100%;
+            height: 280px;
+            border: 0;
+            border-radius: 14px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+        }
+
+        .modal-book-btn {
+            margin-top: 16px;
+            width: 100%;
+            min-height: 52px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #d4a017, #8a6508);
+            color: #fff;
+            font-weight: 800;
+            font-size: 16px;
+            box-shadow: 0 10px 24px rgba(212, 160, 23, 0.22);
+            transition: all 0.25s ease;
+        }
+
+        .modal-book-btn:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #e0ad1f, #6f5206);
+            box-shadow: 0 14px 28px rgba(212, 160, 23, 0.3);
+        }
+
+        .skeleton-card {
+            background: #fff;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, .06);
+        }
+
+        .skeleton-image {
+            height: 240px;
+            background: linear-gradient(90deg, #eee 25%, #f7f7f7 37%, #eee 63%);
+            background-size: 400% 100%;
+            animation: shimmer 1.4s infinite;
+        }
+
+        .skeleton-body {
+            padding: 18px;
+        }
+
+        .skeleton-line {
+            height: 14px;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #eee 25%, #f7f7f7 37%, #eee 63%);
+            background-size: 400% 100%;
+            animation: shimmer 1.4s infinite;
+            margin-bottom: 12px;
+        }
+
+        .skeleton-line.short {
+            width: 40%;
+        }
+
+        .skeleton-line.medium {
+            width: 65%;
+        }
+
+        .skeleton-line.long {
+            width: 100%;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 100% 0;
+            }
+
+            100% {
+                background-position: -100% 0;
+            }
+        }
+
+        @media (max-width: 850px) {
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-main {
+                height: 260px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 110px 14px 34px;
+            }
+
+            .page-header h1 {
+                font-size: 30px;
+            }
+
+            .page-header p {
+                font-size: 15px;
+                line-height: 1.8;
+            }
+
+            .wrap {
+                padding: 0 14px 24px;
+            }
+
+            .box {
+                padding: 18px;
+                max-width: 100%;
+                border-radius: 18px;
+            }
+
+            .row-box {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-actions {
+                margin-top: 14px;
+            }
+
+            .filter-btn {
+                width: 100%;
+                min-width: unset;
+                height: 48px;
+                font-size: 15px;
+            }
+
+            .filter-meta {
+                align-items: center;
+                text-align: center;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .card h3 {
+                font-size: 24px;
+            }
+
+            .card img,
+            .skeleton-image {
+                height: 220px;
+            }
+
+            .card-body {
+                padding: 16px;
+            }
+
+            .card-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .card-actions button {
+                min-height: 48px;
+                font-size: 15px;
+                border-radius: 16px;
+            }
+
+            .modal {
+                padding: 12px;
+            }
+
+            .modal-content {
+                margin: 12px auto;
+                border-radius: 18px;
+            }
+
+            .modal-header {
+                padding: 16px;
+            }
+
+            .modal-header h2 {
+                font-size: 20px;
+            }
+
+            .modal-body {
+                padding: 16px;
+            }
+
+            .gallery-main {
+                height: 220px;
+                border-radius: 14px;
+            }
+
+            .thumbs {
+                gap: 8px;
+            }
+
+            .thumbs img {
+                width: 84px;
+                height: 64px;
+            }
+
+            .video-box video {
+                max-height: 260px;
+            }
+
+            .map-box iframe {
+                height: 220px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 26px;
+            }
+
+            .card h3 {
+                font-size: 22px;
+            }
+
+            .card-top-badge {
+                top: 10px;
+                left: 10px;
+                font-size: 12px;
+                padding: 7px 10px;
+            }
+
+            .card-price-main {
+                font-size: 18px;
+            }
+
+            .detail-features li,
+            .features li {
+                font-size: 11px;
+            }
+
+            .thumbs img {
+                width: 72px;
+                height: 58px;
+            }
+        }
+
+        /* ===== APARTMENTS PAGE BOOKING BOX - LIKE INDEX ===== */
+
+        /* الصندوق الرئيسي */
+        .box {
+            width: 100% !important;
+            max-width: 500px !important;
+            margin: 24px auto 0 !important;
+            background: rgba(0, 0, 0, 0.14) !important;
+            border: 1px solid rgba(255, 255, 255, 0.16) !important;
+            border-radius: 16px !important;
+            padding: 14px !important;
+            color: #fff !important;
+            box-shadow: 0 18px 38px rgba(0, 0, 0, 0.18) !important;
+            backdrop-filter: blur(10px) saturate(130%) !important;
+            -webkit-backdrop-filter: blur(10px) saturate(130%) !important;
+        }
+
+        /* صف التواريخ على الكمبيوتر */
+        .row-box {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 10px !important;
+            align-items: end !important;
+        }
+
+        /* حاوية كل حقل */
+        .filter-field {
+            position: relative !important;
+            display: block !important;
+            text-align: start !important;
+        }
+
+        /* عنوان تاريخ الدخول والخروج داخل الحقل */
+        .filter-field label {
+            position: absolute !important;
+            top: 7px !important;
+            right: 12px !important;
+            margin: 0 !important;
+            font-size: 10px !important;
+            font-weight: 700 !important;
+            color: rgba(255, 255, 255, 0.82) !important;
+            z-index: 2 !important;
+            pointer-events: none !important;
+            line-height: 1 !important;
+        }
+
+        /* حقول التاريخ */
+        .filter-field input[type="date"] {
+            width: 100% !important;
+            min-width: unset !important;
+            min-height: unset !important;
+            height: auto !important;
+            padding: 22px 12px 8px !important;
+            border-radius: 11px !important;
+            border: 1px solid rgba(255, 255, 255, 0.28) !important;
+            background: rgba(255, 255, 255, 0.16) !important;
+            color: #fff !important;
+            font-size: 14px !important;
+            outline: none !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+            color-scheme: dark;
+            direction: ltr !important;
+            text-align: right !important;
+            unicode-bidi: plaintext !important;
+            font-family: Arial, sans-serif !important;
+        }
+
+        /* عند الضغط على التاريخ */
+        .filter-field input[type="date"]:focus {
+            background: rgba(255, 255, 255, 0.22) !important;
+            border-color: rgba(212, 160, 23, 0.8) !important;
+            box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.18) !important;
+        }
+
+        /* إصلاح شكل التاريخ داخل كروم / أندرويد */
+        .filter-field input[type="date"]::-webkit-datetime-edit {
+            direction: ltr !important;
+            text-align: right !important;
+        }
+
+        .filter-field input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+            direction: ltr !important;
+        }
+
+        .filter-field input[type="date"]::-webkit-datetime-edit-text,
+        .filter-field input[type="date"]::-webkit-datetime-edit-day-field,
+        .filter-field input[type="date"]::-webkit-datetime-edit-month-field,
+        .filter-field input[type="date"]::-webkit-datetime-edit-year-field {
+            color: #fff !important;
+        }
+
+        /* أيقونة التقويم */
+        .filter-field input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            opacity: 0.85;
+        }
+
+        /* زر عرض المتاح */
+        .filter-actions {
+            margin-top: 12px !important;
+            display: flex !important;
+            justify-content: center !important;
+        }
+
+        .filter-btn {
+            background: linear-gradient(135deg, #d4a017, #8a6508) !important;
+            color: #fff !important;
+            border: none !important;
+            width: 190px !important;
+            min-width: unset !important;
+            height: 44px !important;
+            min-height: unset !important;
+            border-radius: 12px !important;
+            font-weight: 800 !important;
+            font-size: 14px !important;
+            box-shadow: 0 10px 24px rgba(212, 160, 23, 0.28) !important;
+            transition: all 0.25s ease !important;
+            cursor: pointer !important;
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 14px 28px rgba(212, 160, 23, 0.35) !important;
+            background: linear-gradient(135deg, #e0ad1f, #6f5206) !important;
+        }
+
+        /* المنطقة أسفل الزر: الخصم + الحالة */
+        .filter-meta {
+            margin-top: 14px !important;
+            padding-top: 12px !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 8px !important;
+            text-align: center !important;
+        }
+
+        .status {
+            margin-top: 0 !important;
+            font-size: 14px !important;
+            color: #f5f5f5 !important;
+        }
+
+        /* ===== MOBILE LOOK ===== */
+        @media (max-width: 768px) {
+            .box {
+                max-width: 100% !important;
+                margin: 18px auto 0 !important;
+                background: rgba(0, 0, 0, 0.18) !important;
+                border: 1px solid rgba(255, 255, 255, 0.16) !important;
+                border-radius: 20px !important;
+                padding: 14px !important;
+                box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18) !important;
+                backdrop-filter: blur(10px) saturate(130%) !important;
+                -webkit-backdrop-filter: blur(10px) saturate(130%) !important;
+            }
+
+            .row-box {
+                grid-template-columns: 1fr !important;
+                gap: 10px !important;
+            }
+
+            .filter-field input[type="date"] {
+                padding: 22px 12px 8px !important;
+                border-radius: 12px !important;
+                font-size: 15px !important;
+            }
+
+            .filter-btn {
+                width: 100% !important;
+                height: 46px !important;
+                border-radius: 14px !important;
+                font-size: 15px !important;
+            }
+
+            .filter-meta {
+                margin-top: 10px !important;
+                padding-top: 10px !important;
+            }
+
+            .filter-meta .status,
+            .filter-meta .long-stay-note,
+            .filter-meta .long-stay-box {
+                font-size: 13px !important;
+            }
+        }
+
+        /* ===== APARTMENTS ANIMATED HEADER BACKGROUND ===== */
+
+        /* خلفية الهيدر المتحركة: canvas يرسمه js/cosmic-bg.js ويتحرك بـ transform */
+        .page-header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -3;
+            width: 350%;
+            height: 100%;
+            animation: luxuryHeaderMove 14s ease-in-out infinite;
+        }
+
+        .page-header::before {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            z-index: -2;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(255, 214, 118, 0.45), transparent 28%),
+                radial-gradient(circle at 80% 55%, rgba(255, 255, 255, 0.16), transparent 26%),
+                radial-gradient(circle at 50% 90%, rgba(200, 145, 22, 0.32), transparent 32%);
+            animation: floatingLuxuryLights 8s ease-in-out infinite alternate;
+        }
+
+        .page-header::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background:
+                linear-gradient(110deg,
+                    transparent 0%,
+                    rgba(255, 255, 255, 0.08) 40%,
+                    rgba(255, 255, 255, 0.18) 50%,
+                    rgba(255, 255, 255, 0.08) 60%,
+                    transparent 100%);
+            transform: translateX(-120%);
+            animation: luxuryShine 5s ease-in-out infinite;
+        }
+
+        .page-header h1,
+        .page-header p {
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes luxuryHeaderMove {
+            0% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(-71.4286%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes floatingLuxuryLights {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.65;
+            }
+
+            100% {
+                transform: translate(90px, -55px) scale(1.18);
+                opacity: 1;
+            }
+        }
+
+        @keyframes luxuryShine {
+            0% {
+                transform: translateX(-120%);
+                opacity: 0;
+            }
+
+            35% {
+                opacity: 0.75;
+            }
+
+            70% {
+                transform: translateX(120%);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(120%);
+                opacity: 0;
+            }
+        }
+
+        /* ===== STRONG TRI-COLOR COSMIC DUST BACKGROUND - APARTMENTS PAGE ===== */
+
+        .apartments-page-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+            background: #ffffff;
+        }
+
+        /* طبقات الخلفية كلها <canvas> يرسمها js/cosmic-bg.js؛ هنا الحجم والموضع والحركة فقط */
+        .cosmic-base {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 230%;
+            height: 100%;
+            animation: cosmicBaseMove 16s ease-in-out infinite;
+        }
+
+        /* الغيمات الكبيرة */
+        .gold-orb {
+            position: absolute;
+            display: block;
+            border-radius: 50%;
+            animation: cosmicOrbFloat 10s ease-in-out infinite alternate;
+        }
+
+        .orb-1 {
+            width: 460px;
+            height: 460px;
+            top: 235px;
+            right: -150px;
+            opacity: 0.52;
+        }
+
+        .orb-2 {
+            width: 350px;
+            height: 350px;
+            top: 620px;
+            left: -125px;
+            opacity: 0.42;
+            animation-delay: 2s;
+        }
+
+        .orb-3 {
+            width: 280px;
+            height: 280px;
+            bottom: 100px;
+            right: 34%;
+            opacity: 0.34;
+            animation-delay: 4s;
+        }
+
+        /* لمعة بيضاء/ذهبية تمر فوق الخلفية */
+        .luxury-shine {
+            position: absolute;
+            width: 48%;
+            height: 170%;
+            top: -35%;
+            left: -65%;
+            transform: rotate(18deg);
+            animation: cosmicShineMove 9s ease-in-out infinite;
+        }
+
+        /* طبقة الغبار الذهبية والبيضاء */
+        .gold-dust {
+            position: absolute;
+            display: block;
+        }
+
+        .dust-1 {
+            top: -160px;
+            left: -230px;
+            opacity: 0.72;
+            animation: cosmicDustMoveOne 22s linear infinite;
+            width: calc(100% + 230px);
+            height: calc(100% + 160px);
+        }
+
+        /* طبقة الغبار الأسود الناعم */
+        /* طبقة غبار أسود واضحة */
+        .dust-2 {
+            top: -110px;
+            left: 0;
+            opacity: 0.72;
+            animation: cosmicDustMoveTwo 30s linear infinite reverse;
+            width: calc(100% + 310px);
+            height: calc(100% + 110px);
+        }
+
+        /* دخان كوني أسود واضح لكن ناعم */
+        .cosmic-smoke {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            opacity: 1;
+            animation: blackCosmicSmoke 16s ease-in-out infinite alternate;
+        }
+
+        /* نجوم أوف وايت + ذهبية + نقاط سوداء */
+        .cosmic-twinkle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            opacity: 0.55;
+            animation: cosmicTwinkle 4.5s ease-in-out infinite alternate;
+        }
+
+        /* المحتوى فوق الخلفية */
+        .page-header,
+        .wrap,
+        #sharedFooter {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* الناف بار فوق كل شيء */
+        #sharedHeader {
+            position: relative;
+            z-index: 99999 !important;
+        }
+
+        .custom-navbar,
+        .navbar,
+        .navbar.fixed-top {
+            z-index: 99999 !important;
+        }
+
+        /* واتساب فوق الخلفية */
+        #sharedWhatsApp {
+            position: relative;
+            z-index: 99998 !important;
+        }
+
+        /* المودال فوق الكل */
+        #detailsModal {
+            z-index: 999999 !important;
+        }
+
+        @keyframes cosmicBaseMove {
+            0% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(-56.5217%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes cosmicOrbFloat {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(-90px, 60px) scale(1.20);
+            }
+        }
+
+        @keyframes cosmicShineMove {
+            0% {
+                transform: translateX(0) rotate(18deg);
+                opacity: 0;
+            }
+
+            30% {
+                opacity: 0.9;
+            }
+
+            65% {
+                transform: translateX(190vw) rotate(18deg);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(190vw) rotate(18deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes cosmicDustMoveOne {
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(225px, 155px);
+            }
+        }
+
+        @keyframes cosmicDustMoveTwo {
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(-240px, 100px);
+            }
+        }
+
+        @keyframes cosmicTwinkle {
+            from {
+                opacity: 0.32;
+                transform: scale(1);
+            }
+
+            to {
+                opacity: 0.62;
+                transform: scale(1.018);
+            }
+        }
+
+        @keyframes blackCosmicSmoke {
+            from {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.82;
+            }
+
+            to {
+                transform: translate(-35px, 28px) scale(1.08);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .orb-1 {
+                width: 320px;
+                height: 320px;
+                top: 355px;
+                right: -135px;
+                opacity: 0.48;
+            }
+
+            .orb-2 {
+                width: 260px;
+                height: 260px;
+                top: 760px;
+                left: -130px;
+                opacity: 0.38;
+            }
+
+            .orb-3 {
+                width: 210px;
+                height: 210px;
+                right: 18%;
+                opacity: 0.28;
+            }
+
+            .luxury-shine {
+                width: 62%;
+                animation-duration: 11s;
+            }
+
+            .dust-1 {
+                opacity: 0.62;
+            }
+
+            .dust-2 {
+                opacity: 0.58;
+            }
+
+            .cosmic-twinkle {
+                opacity: 0.45;
+            }
+        }
+
+        /* ===== AIRBNB STYLE GALLERY ===== */
+
+        .airbnb-gallery-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            grid-template-rows: 180px 180px;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .airbnb-gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 18px;
+            background: #f3f3f3;
+            cursor: pointer;
+            min-height: 150px;
+        }
+
+        .airbnb-gallery-item.main {
+            grid-row: span 2;
+        }
+
+        .airbnb-gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .airbnb-gallery-item:hover img {
+            transform: scale(1.04);
+        }
+
+        .airbnb-gallery-label {
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+            background: rgba(0, 0, 0, 0.68);
+            color: #fff;
+            padding: 7px 11px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .airbnb-show-all {
+            position: absolute;
+            left: 12px;
+            bottom: 12px;
+            background: rgba(255, 255, 255, 0.92);
+            color: #111;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        .airbnb-gallery-item.image-missing::after {
+            content: "Photo not uploaded yet";
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-weight: 800;
+            font-size: 13px;
+            padding: 14px;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f5f5, #fff);
+        }
+
+        .room-summary-grid {
+            display: flex !important;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .room-summary-pill {
+            border: 1px solid #eee;
+            background: #fff;
+            border-radius: 999px;
+            padding: 8px 12px;
+            font-size: 13px;
+            font-weight: 800;
+            color: #222;
+        }
+
+        .room-summary-pill span {
+            color: #c89116;
+            margin-inline-start: 5px;
+        }
+
+        .photo-album-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            background: #fff;
+            color: #111;
+            overflow: auto;
+        }
+
+        .photo-album-header {
+            position: sticky;
+            top: 0;
+            z-index: 3;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 22px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .photo-album-title {
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        .album-close-btn {
+            border: none;
+            background: #111;
+            color: #fff;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .photo-album-body {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 18px 40px;
+        }
+
+        .photo-album-stage {
+            position: relative;
+            background: #f6f6f6;
+            border-radius: 24px;
+            overflow: hidden;
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-album-stage img {
+            width: 100%;
+            max-height: 74vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .album-empty {
+            position: absolute;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: #777;
+        }
+
+        .album-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(0, 0, 0, 0.74);
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .album-prev {
+            left: 18px;
+        }
+
+        .album-next {
+            right: 18px;
+        }
+
+        .photo-album-caption {
+            margin-top: 14px;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            font-weight: 800;
+            color: #333;
+        }
+
+        .album-thumbs {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 16px 2px 4px;
+        }
+
+        .album-thumbs img {
+            width: 96px;
+            height: 68px;
+            object-fit: cover;
+            border-radius: 12px;
+            cursor: pointer;
+            opacity: 0.58;
+            border: 2px solid transparent;
+        }
+
+        .album-thumbs img.active {
+            opacity: 1;
+            border-color: #c89116;
+        }
+
+        .gallery-hint {
+            color: #777;
+            font-size: 13px;
+            font-weight: 700;
+            margin: 10px 0 14px;
+        }
+
+        @media (max-width: 768px) {
+            .airbnb-gallery-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 190px 120px 120px;
+                gap: 8px;
+            }
+
+            .airbnb-gallery-item.main {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .airbnb-gallery-label {
+                font-size: 11px;
+                padding: 6px 9px;
+            }
+
+            .photo-album-header {
+                height: 58px;
+                padding: 0 14px;
+            }
+
+            .photo-album-title {
+                font-size: 15px;
+            }
+
+            .photo-album-body {
+                padding: 16px 12px 30px;
+            }
+
+            .photo-album-stage {
+                min-height: 360px;
+                border-radius: 18px;
+            }
+
+            .album-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .album-prev {
+                left: 10px;
+            }
+
+            .album-next {
+                right: 10px;
+            }
+
+            .album-thumbs img {
+                width: 78px;
+                height: 56px;
+            }
+
+            .photo-album-caption {
+                font-size: 13px;
+                flex-direction: column;
+            }
+        }
+
+        /* ===== VERTICAL PHOTO TOUR ALBUM - AIRBNB STYLE ===== */
+
+        .photo-album-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            background: #fff;
+            color: #111;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .photo-album-header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            display: grid;
+            grid-template-columns: 70px 1fr 90px;
+            align-items: center;
+            padding: 0 22px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .album-close-btn {
+            border: none;
+            background: transparent;
+            color: #111;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            font-size: 32px;
+            line-height: 1;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .album-close-btn:hover {
+            background: #f2f2f2;
+        }
+
+        .photo-album-title {
+            text-align: center;
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        #photoAlbumCounter {
+            text-align: end;
+            font-size: 14px;
+            font-weight: 800;
+            color: #555;
+        }
+
+        .photo-album-body {
+            max-width: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* الشريط العلوي المصغر */
+        .photo-tour-top-strip {
+            position: sticky;
+            top: 70px;
+            z-index: 15;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .photo-tour-strip-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 16px 22px;
+            display: flex;
+            gap: 14px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+
+        .photo-tour-thumb-btn {
+            flex: 0 0 auto;
+            width: 138px;
+            border: none;
+            background: transparent;
+            padding: 0;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .photo-tour-thumb-img {
+            width: 138px;
+            height: 96px;
+            border-radius: 18px;
+            overflow: hidden;
+            background: #f1f1f1;
+            border: 3px solid transparent;
+            transition: 0.22s ease;
+            position: relative;
+        }
+
+        .photo-tour-thumb-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .photo-tour-thumb-btn.active .photo-tour-thumb-img {
+            border-color: #c89116;
+            box-shadow: 0 10px 24px rgba(200, 145, 22, 0.25);
+        }
+
+        .photo-tour-thumb-label {
+            display: block;
+            margin-top: 8px;
+            font-size: 12px;
+            font-weight: 800;
+            color: #777;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* جسم الألبوم العمودي */
+        .photo-tour-sections {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 42px 24px 70px;
+        }
+
+        .photo-tour-section {
+            display: grid;
+            grid-template-columns: minmax(0, 1.45fr) 340px;
+            gap: 70px;
+            align-items: start;
+            margin-bottom: 86px;
+            scroll-margin-top: 170px;
+        }
+
+        .photo-tour-photos {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .photo-tour-photo {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 265px;
+            border: none;
+            padding: 0;
+            background: #f3f3f3;
+            border-radius: 18px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        /* Skeleton يبقى ظاهرًا حتى يكتمل تحميل الصورة فعليًا */
+        .photo-tour-photo::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: linear-gradient(100deg,
+                    #ececec 20%,
+                    #fafafa 40%,
+                    #ececec 60%);
+            background-size: 220% 100%;
+            animation: album-skeleton-shimmer 1.35s ease-in-out infinite;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
+        }
+
+        .photo-tour-photo.is-loaded::before,
+        .photo-tour-photo.image-missing::before {
+            opacity: 0;
+            animation: none;
+        }
+
+        .photo-tour-photo.wide {
+            grid-column: span 2;
+            height: 360px;
+        }
+
+        .photo-tour-photo img {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 0;
+            transition: opacity 0.28s ease, transform 0.35s ease;
+        }
+
+        .photo-tour-photo.is-loaded img {
+            opacity: 1;
+        }
+
+        .photo-tour-photo:hover img {
+            transform: scale(1.035);
+        }
+
+        .photo-tour-photo-title {
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+            z-index: 3;
+            background: rgba(0, 0, 0, 0.62);
+            color: #fff;
+            padding: 7px 11px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .photo-tour-photo.image-missing::after,
+        .photo-tour-thumb-img.image-missing::after {
+            content: "Photo not uploaded yet";
+            position: absolute;
+            inset: 0;
+            z-index: 4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f6f6f6, #fff);
+            color: #777;
+            font-size: 12px;
+            font-weight: 900;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .photo-tour-room-info {
+            position: sticky;
+            top: 175px;
+            text-align: right;
+            padding-top: 10px;
+        }
+
+        .photo-tour-room-info h2 {
+            margin: 0 0 12px;
+            font-size: 42px;
+            font-weight: 950;
+            color: #222;
+            line-height: 1.2;
+        }
+
+        .photo-tour-room-info p {
+            margin: 0;
+            color: #777;
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .photo-tour-room-info .photo-tour-room-note {
+            margin-top: 18px;
+            font-size: 14px;
+            line-height: 1.9;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .photo-tour-empty {
+            min-height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-weight: 900;
+            background: #f7f7f7;
+            border-radius: 24px;
+        }
+
+        /* Skeleton يظهر فور فتح الألبوم لمنع الشاشة البيضاء */
+        .photo-album-loading {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 42px 24px 70px;
+        }
+
+        .photo-album-loading-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 30px;
+            margin-bottom: 24px;
+            color: #555;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .photo-album-loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid #e4e4e4;
+            border-top-color: #c89116;
+            border-radius: 50%;
+            animation: album-loader-spin 0.8s linear infinite;
+        }
+
+        .photo-album-loading-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .photo-album-loading-card {
+            height: 265px;
+            border-radius: 18px;
+            background: linear-gradient(100deg,
+                    #ececec 20%,
+                    #fafafa 40%,
+                    #ececec 60%);
+            background-size: 220% 100%;
+            animation: album-skeleton-shimmer 1.35s ease-in-out infinite;
+        }
+
+        .photo-album-loading-card.wide {
+            grid-column: span 2;
+            height: 360px;
+        }
+
+        @keyframes album-skeleton-shimmer {
+            0% {
+                background-position: 100% 0;
+            }
+
+            100% {
+                background-position: -100% 0;
+            }
+        }
+
+        @keyframes album-loader-spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .photo-tour-photo::before,
+            .photo-album-loading-card,
+            .photo-album-loading-spinner {
+                animation: none;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .photo-album-header {
+                height: 60px;
+                grid-template-columns: 52px 1fr 70px;
+                padding: 0 12px;
+            }
+
+            .album-close-btn {
+                width: 42px;
+                height: 42px;
+                font-size: 28px;
+            }
+
+            .photo-album-title {
+                font-size: 15px;
+            }
+
+            #photoAlbumCounter {
+                font-size: 12px;
+            }
+
+            .photo-tour-top-strip {
+                top: 60px;
+            }
+
+            .photo-tour-strip-inner {
+                padding: 12px;
+                gap: 10px;
+            }
+
+            .photo-tour-thumb-btn {
+                width: 104px;
+            }
+
+            .photo-tour-thumb-img {
+                width: 104px;
+                height: 76px;
+                border-radius: 14px;
+            }
+
+            .photo-tour-thumb-label {
+                font-size: 11px;
+            }
+
+            .photo-tour-sections {
+                padding: 28px 14px 50px;
+            }
+
+            .photo-tour-section {
+                display: flex;
+                flex-direction: column-reverse;
+                gap: 18px;
+                margin-bottom: 58px;
+                scroll-margin-top: 145px;
+            }
+
+            .photo-tour-room-info {
+                position: static;
+                text-align: right;
+                padding-top: 0;
+            }
+
+            .photo-tour-room-info h2 {
+                font-size: 32px;
+            }
+
+            .photo-tour-room-info p {
+                font-size: 14px;
+            }
+
+            .photo-tour-photos,
+            .photo-album-loading-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .photo-album-loading {
+                padding: 28px 14px 50px;
+            }
+
+            .photo-album-loading-card,
+            .photo-album-loading-card.wide {
+                grid-column: span 1;
+                height: 260px;
+                border-radius: 16px;
+            }
+
+            .photo-tour-photo,
+            .photo-tour-photo.wide {
+                grid-column: span 1;
+                height: 260px;
+                border-radius: 16px;
+            }
+
+            .photo-tour-photo-title {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .photo-tour-photo,
+            .photo-tour-photo.wide,
+            .photo-album-loading-card,
+            .photo-album-loading-card.wide {
+                height: 230px;
+            }
+
+            .photo-tour-room-info h2 {
+                font-size: 28px;
+            }
+        }
+
+        .card-image-missing {
+            width: 100%;
+            height: 240px;
+            background: linear-gradient(135deg, #f4f4f4, #ffffff);
+            color: #777;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .card-image-missing {
+                height: 220px;
+            }
+        }
+
+        /* ===== APARTMENTS PAGE GLASS CARDS ===== */
+
+        .grid .card {
+            background: rgba(0, 0, 0, 0.22) !important;
+            border: 1px solid rgba(255, 255, 255, 0.16) !important;
+            border-radius: 26px !important;
+            box-shadow:
+                0 24px 55px rgba(0, 0, 0, 0.16),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+            backdrop-filter: blur(16px) saturate(145%) !important;
+            -webkit-backdrop-filter: blur(16px) saturate(145%) !important;
+            color: #fff !important;
+            overflow: hidden !important;
+        }
+
+        .grid .card:hover {
+            transform: translateY(-7px) !important;
+            box-shadow:
+                0 30px 65px rgba(0, 0, 0, 0.22),
+                0 0 0 1px rgba(212, 160, 23, 0.22) !important;
+        }
+
+        .grid .card img {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+        }
+
+        .grid .card-body {
+            color: #fff !important;
+        }
+
+        .grid .card h3 {
+            color: #fff !important;
+            font-weight: 950 !important;
+        }
+
+        .grid .muted {
+            color: rgba(255, 255, 255, 0.74) !important;
+        }
+
+        .grid .pill {
+            background: rgba(255, 255, 255, 0.12) !important;
+            color: #fff !important;
+            border: 1px solid rgba(255, 255, 255, 0.14) !important;
+            font-weight: 900 !important;
+        }
+
+        .grid .location-line {
+            color: rgba(255, 255, 255, 0.86) !important;
+        }
+
+        .grid .features li {
+            background: rgba(255, 255, 255, 0.11) !important;
+            color: #fff !important;
+            border: 1px solid rgba(255, 255, 255, 0.13) !important;
+            font-weight: 800 !important;
+        }
+
+        .grid .card-price-box {
+            background: rgba(255, 255, 255, 0.10) !important;
+            border: 1px solid rgba(212, 160, 23, 0.22) !important;
+            border-radius: 18px !important;
+            backdrop-filter: blur(10px) saturate(140%) !important;
+            -webkit-backdrop-filter: blur(10px) saturate(140%) !important;
+        }
+
+        .grid .card-price-main {
+            color: #ffd36a !important;
+            font-weight: 950 !important;
+        }
+
+        .grid .card-price-sub {
+            color: rgba(255, 255, 255, 0.76) !important;
+            font-weight: 800 !important;
+        }
+
+        .grid .card-top-badge {
+            background: rgba(0, 0, 0, 0.62) !important;
+            color: #fff !important;
+            border: 1px solid rgba(212, 160, 23, 0.22) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+        }
+
+        .card-image-missing {
+            background: rgba(255, 255, 255, 0.10) !important;
+            color: rgba(255, 255, 255, 0.76) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+        }
+
+        /* ===== APARTMENTS DETAILS MODAL GLASS LOOK ===== */
+
+        #detailsModal {
+            background: rgba(0, 0, 0, 0.72) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+        }
+
+        #detailsModal .modal-content {
+            background: rgba(0, 0, 0, 0.28) !important;
+            border: 1px solid rgba(255, 255, 255, 0.16) !important;
+            border-radius: 28px !important;
+            color: #fff !important;
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.42),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+            backdrop-filter: blur(18px) saturate(145%) !important;
+            -webkit-backdrop-filter: blur(18px) saturate(145%) !important;
+        }
+
+        #detailsModal .modal-header {
+            background: rgba(0, 0, 0, 0.36) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+            color: #fff !important;
+        }
+
+        #detailsModal .modal-header h2 {
+            color: #fff !important;
+            font-weight: 950 !important;
+        }
+
+        #detailsModal .modal-body {
+            color: #fff !important;
+        }
+
+        #detailsModal h3,
+        #detailsModal h4,
+        #detailName,
+        #roomsTitle,
+        #mapTitle {
+            color: #fff !important;
+            font-weight: 950 !important;
+        }
+
+        #detailsModal .muted,
+        #detailDesc,
+        #roomDescription {
+            color: rgba(255, 255, 255, 0.76) !important;
+        }
+
+        #detailsModal p,
+        #detailsModal strong,
+        #detailLocation,
+        #detailNightPrice,
+        #detailNights,
+        #detailTotal,
+        #detailDates {
+            color: rgba(255, 255, 255, 0.90) !important;
+            font-weight: 800 !important;
+        }
+
+        #detailNightPrice,
+        #detailTotal {
+            color: #ffd36a !important;
+            font-weight: 950 !important;
+        }
+
+        #detailsModal .detail-features li {
+            background: rgba(255, 255, 255, 0.11) !important;
+            color: #fff !important;
+            border: 1px solid rgba(255, 255, 255, 0.14) !important;
+        }
+
+        #detailsModal .room-summary-pill {
+            background: rgba(255, 255, 255, 0.11) !important;
+            color: #fff !important;
+            border: 1px solid rgba(255, 255, 255, 0.14) !important;
+        }
+
+        #detailsModal .room-summary-pill span {
+            color: #ffd36a !important;
+        }
+
+        #detailsModal .airbnb-gallery-grid {
+            background: rgba(255, 255, 255, 0.08) !important;
+            padding: 10px !important;
+            border-radius: 24px !important;
+            border: 1px solid rgba(255, 255, 255, 0.13) !important;
+            backdrop-filter: blur(12px) saturate(140%) !important;
+            -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+        }
+
+        #detailsModal .airbnb-gallery-item {
+            background: rgba(255, 255, 255, 0.10) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        }
+
+        #detailsModal .gallery-hint {
+            color: rgba(255, 255, 255, 0.72) !important;
+            font-weight: 800 !important;
+        }
+
+        #detailsModal .video-box {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.14) !important;
+            border-radius: 20px !important;
+            padding: 12px !important;
+            backdrop-filter: blur(12px) saturate(140%) !important;
+            -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+        }
+
+        #detailsModal .video-box video {
+            border-radius: 16px !important;
+        }
+
+        #detailsModal .map-box {
+            background: rgba(255, 255, 255, 0.07) !important;
+            border: 1px solid rgba(255, 255, 255, 0.13) !important;
+            border-radius: 20px !important;
+            padding: 12px !important;
+            backdrop-filter: blur(12px) saturate(140%) !important;
+            -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+        }
+
+        #detailsModal .map-box iframe {
+            border-radius: 16px !important;
+        }
+
+        #detailsModal .modal-book-btn {
+            border-radius: 16px !important;
+            font-weight: 950 !important;
+            box-shadow: 0 12px 28px rgba(212, 160, 23, 0.30) !important;
+        }
+
+        /* ===== FINAL FIX - APARTMENTS FILTER SAME INDEX LOOK ===== */
+
+        .wrap .box {
+            width: 100% !important;
+            max-width: 500px !important;
+            margin: 24px auto 0 !important;
+            padding: 14px !important;
+            border-radius: 16px !important;
+            background: rgba(0, 0, 0, 0.46) !important;
+            border: 1px solid rgba(255, 255, 255, 0.16) !important;
+            box-shadow: 0 18px 38px rgba(0, 0, 0, 0.18) !important;
+            backdrop-filter: blur(10px) saturate(130%) !important;
+            -webkit-backdrop-filter: blur(10px) saturate(130%) !important;
+            color: #fff !important;
+        }
+
+        .wrap .box .row-box {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 10px !important;
+            align-items: end !important;
+        }
+
+        .wrap .box .filter-field {
+            position: relative !important;
+            display: block !important;
+            text-align: start !important;
+        }
+
+        .wrap .box .filter-field label {
+            position: absolute !important;
+            top: 7px !important;
+            right: 12px !important;
+            margin: 0 !important;
+            font-size: 10px !important;
+            font-weight: 800 !important;
+            color: rgba(255, 255, 255, 0.82) !important;
+            z-index: 5 !important;
+            pointer-events: none !important;
+            line-height: 1 !important;
+        }
+
+        /* مهم: يمسك التاريخ سواء بقي date أو صار flatpickr text */
+        .wrap .box .filter-field input,
+        .wrap .box .filter-field input[type="date"],
+        .wrap .box .filter-field input[type="text"],
+        .wrap .box .filter-field input.glass-date-input,
+        .wrap .box .filter-field .flatpickr-input {
+            width: 100% !important;
+            min-width: unset !important;
+            height: 42px !important;
+            min-height: 42px !important;
+            padding: 20px 42px 6px 12px !important;
+            border-radius: 11px !important;
+            border: 1px solid rgba(255, 255, 255, 0.28) !important;
+            background-color: rgba(255, 255, 255, 0.16) !important;
+            color: #fff !important;
+            font-size: 14px !important;
+            font-weight: 800 !important;
+            outline: none !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+            direction: ltr !important;
+            text-align: right !important;
+            unicode-bidi: plaintext !important;
+        }
+
+        .wrap .box .filter-field input:focus,
+        .wrap .box .filter-field input.glass-date-input:focus,
+        .wrap .box .filter-field .flatpickr-input:focus {
+            background-color: rgba(255, 255, 255, 0.22) !important;
+            border-color: rgba(212, 160, 23, 0.85) !important;
+            box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.18) !important;
+        }
+
+        .wrap .box .filter-actions {
+            margin-top: 12px !important;
+            display: flex !important;
+            justify-content: center !important;
+        }
+
+        .wrap .box .filter-btn {
+            width: 190px !important;
+            min-width: unset !important;
+            height: 44px !important;
+            min-height: unset !important;
+            border-radius: 12px !important;
+            border: none !important;
+            background: linear-gradient(135deg, #d4a017, #8a6508) !important;
+            color: #fff !important;
+            font-size: 14px !important;
+            font-weight: 900 !important;
+            box-shadow: 0 10px 24px rgba(212, 160, 23, 0.28) !important;
+        }
+
+        .wrap .box .filter-btn:hover {
+            transform: translateY(-2px) !important;
+            background: linear-gradient(135deg, #e0ad1f, #6f5206) !important;
+        }
+
+        .wrap .box .filter-meta {
+            margin-top: 14px !important;
+            padding-top: 12px !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 8px !important;
+            text-align: center !important;
+        }
+
+        .wrap .box .filter-meta,
+        .wrap .box .filter-meta .status,
+        .wrap .box .filter-meta .long-stay-note,
+        .wrap .box .filter-meta .long-stay-box {
+            color: rgba(255, 255, 255, 0.92) !important;
+            font-weight: 850 !important;
+        }
+
+        .wrap .box .long-stay-note,
+        .wrap .box .long-stay-box strong {
+            color: #ffe08a !important;
+        }
+
+        @media (max-width: 768px) {
+            .wrap .box {
+                max-width: 100% !important;
+                margin: 18px auto 0 !important;
+                padding: 14px !important;
+                border-radius: 20px !important;
+                background: rgba(0, 0, 0, 0.44) !important;
+            }
+
+            .wrap .box .row-box {
+                grid-template-columns: 1fr !important;
+                gap: 10px !important;
+            }
+
+            .wrap .box .filter-btn {
+                width: 100% !important;
+                height: 46px !important;
+                border-radius: 14px !important;
+                font-size: 15px !important;
+            }
+
+            .wrap .box .filter-field input,
+            .wrap .box .filter-field input.glass-date-input,
+            .wrap .box .filter-field .flatpickr-input {
+                height: 42px !important;
+                min-height: 42px !important;
+                font-size: 15px !important;
+            }
+        }
+        /* مقدمة الصفحة أسفل الشقق: بطاقة هادئة بميزات على شكل مربعات وروابط كأزرار صغيرة */
+        .seo-intro {
+            position: relative;
+            background: #fff;
+            color: #1b1b1b;
+            border-radius: 22px;
+            padding: 34px 34px 28px;
+            border: 1px solid #efe6d2;
+            box-shadow: 0 14px 40px rgba(60, 45, 10, .08);
+            margin: 32px 0 12px;
+            line-height: 1.8;
+            overflow: hidden;
+        }
+
+        .seo-intro::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 4px;
+            background: linear-gradient(90deg, #b8860b, #e6c36a, #b8860b);
+        }
+
+        .seo-intro h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin: 0 0 8px;
+            color: #111;
+        }
+
+        .seo-intro > p {
+            color: #5a5a5a;
+            font-size: 15.5px;
+            margin: 0 0 22px;
+            max-width: 900px;
+        }
+
+        .seo-intro ul {
+            list-style: none;
+            margin: 0 0 24px;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .seo-intro li {
+            position: relative;
+            padding: 13px 16px;
+            padding-inline-start: 48px;
+            background: #fbf8f1;
+            border: 1px solid #f1e7cf;
+            border-radius: 14px;
+            font-size: 14.5px;
+            color: #333;
+        }
+
+        .seo-intro li::before {
+            content: "✓";
+            position: absolute;
+            inset-inline-start: 14px;
+            top: 13px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #c9a24a, #a57a12);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 800;
+            line-height: 22px;
+            text-align: center;
+        }
+
+        .seo-intro .seo-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding-top: 18px;
+            border-top: 1px solid #f0ead9;
+        }
+
+        .seo-intro .seo-links a {
+            display: inline-block;
+            padding: 7px 15px;
+            border-radius: 999px;
+            border: 1px solid #e6d6ae;
+            background: #fff;
+            color: #8a6110;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background .2s, color .2s, border-color .2s;
+        }
+
+        .seo-intro .seo-links a:hover,
+        .seo-intro .seo-links a:focus-visible {
+            background: #b8860b;
+            border-color: #b8860b;
+            color: #fff;
+        }
+
+        @media (max-width: 700px) {
+            .seo-intro { padding: 26px 18px 22px; border-radius: 18px; }
+            .seo-intro h2 { font-size: 20px; }
+            .seo-intro ul { grid-template-columns: 1fr; gap: 10px; }
+            .seo-intro .seo-links a { font-size: 13px; padding: 6px 12px; }
+        }
+
+        /* PERF: صندوق السعر وشارة الحالة داخل كرت زجاجي أصلاً. تمويه ثانٍ داخله كان يكلّف
+           كرت الشاشة طبقة وتمويهاً لكل عنصر (16 في الصفحة) وأثره الوحيد تغميق اللون،
+           فعُوِّض التغميق في لون الخلفية نفسه. :not(#_) لرفع الأولوية فقط. */
+        .grid .card-price-box:not(#_),
+        .grid .card-top-badge:not(#_) {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+
+        .grid .card-price-box:not(#_) {
+            background: rgba(86, 86, 86, 0.298) !important;
+        }
+
+        .grid .card-top-badge:not(#_) {
+            background: rgba(0, 0, 0, 0.704) !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="apartments-page-bg" aria-hidden="true">
+        <canvas class="cosmic-base" data-fx="base" data-page="apartments"></canvas>
+        <canvas class="cosmic-smoke" data-fx="smoke"></canvas>
+        <canvas class="gold-orb orb-1" data-fx="orb"></canvas>
+        <canvas class="gold-orb orb-2" data-fx="orb"></canvas>
+        <canvas class="gold-orb orb-3" data-fx="orb"></canvas>
+        <canvas class="luxury-shine" data-fx="shine"></canvas>
+        <canvas class="gold-dust dust-1" data-fx="dust1" data-page="apartments"></canvas>
+        <canvas class="gold-dust dust-2" data-fx="dust2"></canvas>
+        <canvas class="cosmic-twinkle" data-fx="twinkle"></canvas>
+    </div>
+    <div id="sharedHeader"></div>
+
+    <section class="page-header">
+        <canvas class="page-header-bg" data-fx="header" aria-hidden="true"></canvas>
+        <h1 id="pageTitle">Furnished Apartments for Rent in Shmeisani, Amman</h1>
+        <p id="pageSubtitle">Choose the right apartment based on your check-in and check-out dates</p>
+    </section>
+    <script src="js/cosmic-bg.js?v=1"></script>
+
+    <div class="wrap">
+
+        <div class="box">
+            <div class="row-box">
+                <div class="filter-field">
+                    <label id="checkInLabel" for="checkIn">Check-in</label>
+                    <input type="date" id="checkIn" dir="ltr" lang="en">
+                </div>
+
+                <div class="filter-field">
+                    <label id="checkOutLabel" for="checkOut">Check-out morning</label>
+                    <input type="date" id="checkOut" dir="ltr" lang="en">
+                </div>
+            </div>
+
+            <div class="filter-actions">
+                <button id="refreshBtn" class="filter-btn">Show available</button>
+            </div>
+
+            <div class="filter-meta">
+                <div id="longStayNotice"></div>
+                <div class="status" id="status"></div>
+            </div>
+        </div>
+
+        <!-- Placeholder cards in the HTML so the page layout does not jump before the apartments load -->
+        <!-- فلتر نوع الشقة: يظهر تلقائيًا فقط عند وجود أكثر من نوع (غرفة / غرفتان / 3 غرف) -->
+        <div class="am-type-filter" id="typeFilter" hidden></div>
+
+        <div class="grid" id="grid">
+            <div class="skeleton-card" aria-hidden="true">
+                <div class="skeleton-image"></div>
+                <div class="skeleton-body">
+                    <div class="skeleton-line short"></div>
+                    <div class="skeleton-line medium"></div>
+                    <div class="skeleton-line long"></div>
+                    <div class="skeleton-line medium"></div>
+                </div>
+            </div>
+            <div class="skeleton-card" aria-hidden="true">
+                <div class="skeleton-image"></div>
+                <div class="skeleton-body">
+                    <div class="skeleton-line short"></div>
+                    <div class="skeleton-line medium"></div>
+                    <div class="skeleton-line long"></div>
+                    <div class="skeleton-line medium"></div>
+                </div>
+            </div>
+            <div class="skeleton-card" aria-hidden="true">
+                <div class="skeleton-image"></div>
+                <div class="skeleton-body">
+                    <div class="skeleton-line short"></div>
+                    <div class="skeleton-line medium"></div>
+                    <div class="skeleton-line long"></div>
+                    <div class="skeleton-line medium"></div>
+                </div>
+            </div>
+        </div>
+
+        <section class="seo-intro" id="seoIntro" aria-labelledby="seoIntroTitle">
+            <h2 id="seoIntroTitle">HIJAZI Apartments in Shmeisani</h2>
+            <p id="seoIntroText">Fully furnished apartments in Shmeisani, Amman, close to Jordan Hospital, the Islamic Hospital and Abdali. Suitable for medical, family and business stays, short or monthly.</p>
+            <ul id="seoIntroList"><li>3 bedrooms in every apartment, including one master, and 3 bathrooms, in 220 m² that sleeps 7–8 guests.</li><li>A separate living room, a guest room, a fully equipped kitchen and a laundry room.</li><li>High-speed fiber internet, central heating and 5 air conditioners in every apartment.</li><li>A balcony in every apartment; some have two, and apartment 204 has a balcony, a terrace and an indoor garage.</li><li>A dedicated parking space for each apartment, and free regular housekeeping.</li><li>The minimum stay is 3 nights, with a special discount for stays longer than one month.</li></ul>
+            <nav class="seo-links" aria-label="Stay guides" id="seoIntroLinks"><a href="amenities-en.html">All amenities &amp; services</a><a href="apartments-amman-en.html">Furnished apartments in Shmeisani</a><a href="apartments-jordan-hospital-en.html">Near Jordan Hospital</a><a href="apartments-islamic-hospital-en.html">Near the Islamic Hospital</a><a href="apartments-medical-amman-en.html">Medical stays</a><a href="apartments-monthly-amman-en.html">Monthly rentals</a><a href="apartments-abdali-en.html">Near Abdali</a><a href="apartments-specialty-hospital-en.html">Near the Specialty Hospital</a><a href="faq-en.html">FAQ</a></nav>
+        </section>
+    </div>
+
+    <div class="modal" id="detailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Apartment details</h2>
+                <button class="close-btn" id="closeModal" aria-label="Close">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="detail-grid">
+                    <div>
+                        <div class="airbnb-gallery-grid" id="detailsGallery"></div>
+
+                        <div class="gallery-hint" id="detailsGalleryHint">
+                            Click any photo to open the full album
+                        </div>
+
+                        <div class="video-box" id="modalVideoBox" style="display:none;">
+                            <video id="modalVideo" controls>
+                                <source id="modalVideoSource" src="" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 id="detailName"></h3>
+                        <p id="detailDesc" class="muted"></p>
+                        <p><strong id="locationStrong">Location:</strong> <span id="detailLocation"></span></p>
+                        <p><strong id="nightStrong">Price per night:</strong> <span id="detailNightPrice"></span></p>
+                        <p><strong id="nightsStrong">Nights:</strong> <span id="detailNights"></span></p>
+                        <p><strong id="totalStrong">Estimated total:</strong> <span id="detailTotal"></span></p>
+                        <p><strong id="datesStrong">Dates:</strong> <span id="detailDates"></span></p>
+
+                        <ul class="detail-features" id="detailFeatures"></ul>
+                        <div id="detailAmenities"></div>
+
+                        <div style="margin-top:22px;">
+                            <h4 id="roomsTitle">Rooms &amp; facilities</h4>
+                            <div class="room-cards-grid room-summary-grid" id="roomCards"></div>
+                            <div class="room-description" id="roomDescription"></div>
+                            <div class="room-gallery-grid" id="roomGallery" style="display:none;"></div>
+                        </div>
+
+                        <div class="map-box">
+                            <h4 id="mapTitle">Apartment location on map</h4>
+                            <iframe id="detailMap" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <a class="map-open-link" id="mapOpenLink" href="https://maps.app.goo.gl/gfww6DooaC2uzFrt8" target="_blank" rel="noopener">Open in Google Maps</a>
+                        </div>
+
+                        <button id="bookNowBtn" class="modal-book-btn" type="button">Book now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="photo-album-modal" id="photoAlbumModal" role="dialog" aria-modal="true"
+        aria-labelledby="photoAlbumTitle" aria-busy="false">
+        <div class="photo-album-header">
+            <button class="album-close-btn" id="closePhotoAlbum" type="button">×</button>
+            <div class="photo-album-title" id="photoAlbumTitle">Photo tour</div>
+            <div id="photoAlbumCounter">1 / 1</div>
+        </div>
+
+        <div class="photo-album-body">
+            <div class="photo-album-stage">
+                <button class="album-nav album-prev" id="albumPrevBtn" type="button">‹</button>
+                <img id="albumMainImage" src="" alt="Apartment photo">
+                <div class="album-empty" id="albumEmpty">Photo not uploaded yet</div>
+                <button class="album-nav album-next" id="albumNextBtn" type="button">›</button>
+            </div>
+
+            <div class="photo-album-caption">
+                <div id="albumCaption">—</div>
+                <div id="albumRoomName">—</div>
+            </div>
+
+            <div class="album-thumbs" id="albumThumbs"></div>
+        </div>
+    </div>
+    <div class="image-lightbox" id="imageLightbox" role="dialog" aria-modal="true" aria-hidden="true"
+        aria-label="Image viewer">
+        <button type="button" class="image-lightbox-close" id="imageLightboxClose" aria-label="Close image">
+            &times;
+        </button>
+
+        <button type="button" class="image-lightbox-nav image-lightbox-prev" id="imageLightboxPrev"
+            aria-label="Previous image">
+            ‹
+        </button>
+
+        <figure class="image-lightbox-stage">
+            <img id="imageLightboxImage" src="" alt="">
+
+            <figcaption class="image-lightbox-caption">
+                <span id="imageLightboxTitle"></span>
+                <span id="imageLightboxCounter"></span>
+            </figcaption>
+        </figure>
+
+        <button type="button" class="image-lightbox-nav image-lightbox-next" id="imageLightboxNext"
+            aria-label="Next image">
+            ›
+        </button>
+
+        <div class="image-lightbox-progress" aria-hidden="true"><span></span></div>
+    </div>
+    <div id="sharedFooter"><nav class="static-site-links" aria-label="Site links" style="display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:center;padding:24px 16px;font-size:14px"><a href="index-en.html">Home</a><a href="apartments-en.html">Apartments</a><a href="booking.html">Booking</a><a href="amenities-en.html">Amenities &amp; services</a><a href="apartments-amman-en.html">Furnished apartments in Shmeisani</a><a href="apartments-abdali-en.html">Near Abdali</a><a href="apartments-jordan-hospital-en.html">Near Jordan Hospital</a><a href="apartments-specialty-hospital-en.html">Near the Specialty Hospital</a><a href="apartments-islamic-hospital-en.html">Near the Islamic Hospital</a><a href="apartments-medical-amman-en.html">Medical stays</a><a href="apartments-monthly-amman-en.html">Monthly rentals</a><a href="faq-en.html">FAQ</a><a href="reviews-en.html">Reviews</a><a href="about-en.html">About us</a><a href="apartments.html">العربية</a></nav></div>
+    <div id="sharedWhatsApp"></div>
+
+    <script src="js/amenities-data.js?v=3"></script>
+    <script src="js/amenities-ui.js?v=2"></script>
+    <script src="js/lightbox-swipe.js?v=5"></script>
+    <script src="js/main.js?v=16"></script>
+    <script>
+        const API_BASE = "https://api.hijazi-apartments.com";
+
+        const checkInEl = document.getElementById("checkIn");
+        const checkOutEl = document.getElementById("checkOut");
+        const statusEl = document.getElementById("status");
+        const gridEl = document.getElementById("grid");
+        const refreshBtn = document.getElementById("refreshBtn");
+
+        const modal = document.getElementById("detailsModal");
+        const closeModal = document.getElementById("closeModal");
+
+        const url = new URLSearchParams(window.location.search);
+        const qIn = url.get("checkIn");
+        const qOut = url.get("checkOut");
+
+        function todayISO() {
+            const d = new Date();
+            const yyyy = d.getFullYear();
+            const mm = String(d.getMonth() + 1).padStart(2, "0");
+            const dd = String(d.getDate()).padStart(2, "0");
+            return `${yyyy}-${mm}-${dd}`;
+        }
+
+        checkInEl.min = todayISO();
+        checkOutEl.min = todayISO();
+
+        if (qIn) checkInEl.value = qIn;
+        if (qOut) checkOutEl.value = qOut;
+
+        function applyApartmentsTranslations() {
+            const lang = getCurrentLang();
+
+            if (lang === "ar") {
+                document.getElementById("pageTitle").textContent = "شقق مفروشة للإيجار في الشميساني - عمّان";
+                document.getElementById("pageSubtitle").textContent = "اختر الشقة المناسبة حسب تاريخ الدخول والخروج";
+                document.getElementById("checkInLabel").textContent = "تاريخ الدخول";
+                document.getElementById("checkOutLabel").textContent = "تاريخ المغادرة صباحًا";
+                document.getElementById("refreshBtn").textContent = "عرض المتاح";
+                document.getElementById("modalTitle").textContent = "تفاصيل الشقة";
+                document.getElementById("locationStrong").textContent = "الموقع:";
+                document.getElementById("nightStrong").textContent = "السعر لليلة:";
+                document.getElementById("nightsStrong").textContent = "عدد الليالي:";
+                document.getElementById("totalStrong").textContent = "السعر الكلي التقريبي:";
+                document.getElementById("datesStrong").textContent = "الفترة:";
+                document.getElementById("roomsTitle").textContent = "تفاصيل الغرف والمرافق";
+                document.getElementById("bookNowBtn").textContent = "احجز الآن";
+                document.getElementById("mapTitle").textContent = "موقع الشقة على الخريطة";
+                document.getElementById("mapOpenLink").textContent = "افتح الموقع على خرائط جوجل";
+            } else {
+                // EN-TEXT:START (scripts/build-en-pages.js copies this English into apartments-en)
+                document.getElementById("pageTitle").textContent = "Furnished Apartments for Rent in Shmeisani, Amman";
+                document.getElementById("pageSubtitle").textContent = "Choose the right apartment based on your check-in and check-out dates";
+                document.getElementById("checkInLabel").textContent = "Check-in";
+                document.getElementById("checkOutLabel").textContent = "Check-out morning";
+                document.getElementById("refreshBtn").textContent = "Show available";
+                document.getElementById("modalTitle").textContent = "Apartment details";
+                document.getElementById("locationStrong").textContent = "Location:";
+                document.getElementById("nightStrong").textContent = "Price per night:";
+                document.getElementById("nightsStrong").textContent = "Nights:";
+                document.getElementById("totalStrong").textContent = "Estimated total:";
+                document.getElementById("datesStrong").textContent = "Dates:";
+                document.getElementById("roomsTitle").textContent = "Rooms & facilities";
+                document.getElementById("bookNowBtn").textContent = "Book now";
+                document.getElementById("mapTitle").textContent = "Apartment location on map";
+                document.getElementById("mapOpenLink").textContent = "Open in Google Maps";
+                document.getElementById("seoIntroTitle").textContent = "HIJAZI Apartments in Shmeisani";
+                document.getElementById("seoIntroText").textContent = "Fully furnished apartments in Shmeisani, Amman, close to Jordan Hospital, the Islamic Hospital and Abdali. Suitable for medical, family and business stays, short or monthly.";
+                document.getElementById("seoIntroList").innerHTML = "<li>3 bedrooms in every apartment, including one master, and 3 bathrooms, in 220 m² that sleeps 7–8 guests.</li><li>A separate living room, a guest room, a fully equipped kitchen and a laundry room.</li><li>High-speed fiber internet, central heating and 5 air conditioners in every apartment.</li><li>A balcony in every apartment; some have two, and apartment 204 has a balcony, a terrace and an indoor garage.</li><li>A dedicated parking space for each apartment, and free regular housekeeping.</li><li>The minimum stay is 3 nights, with a special discount for stays longer than one month.</li>";
+                document.getElementById("seoIntroLinks").innerHTML = '<a href="amenities-en.html">All amenities &amp; services</a><a href="apartments-amman-en.html">Furnished apartments in Shmeisani</a><a href="apartments-jordan-hospital-en.html">Near Jordan Hospital</a><a href="apartments-islamic-hospital-en.html">Near the Islamic Hospital</a><a href="apartments-medical-amman-en.html">Medical stays</a><a href="apartments-monthly-amman-en.html">Monthly rentals</a><a href="apartments-abdali-en.html">Near Abdali</a><a href="apartments-specialty-hospital-en.html">Near the Specialty Hospital</a><a href="faq-en.html">FAQ</a>';
+                // EN-TEXT:END
+            }
+        }
+
+        function validateDates(allowEmpty = true) {
+            const lang = getCurrentLang();
+            const checkIn = checkInEl.value;
+            const checkOut = checkOutEl.value;
+
+            if (!checkIn || !checkOut) {
+                return allowEmpty ? null : (lang === "ar" ? "❌ اختر تاريخ الدخول والخروج" : "❌ Please select check-in and check-out");
+            }
+
+            if (checkOut <= checkIn) {
+                return lang === "ar" ? "❌ تاريخ الخروج لازم يكون بعد تاريخ الدخول" : "❌ Check-out must be after check-in";
+            }
+
+            return null;
+        }
+
+        function formatDisplayDate(dateValue) {
+            if (!dateValue) return "";
+
+            const dateText = String(dateValue).slice(0, 10);
+            const [year, month, day] = dateText.split("-");
+
+            if (!year || !month || !day) return dateText;
+
+            return `${day}/${month}/${year}`;
+        }
+
+        function renderBookingRangesHtml(ranges = [], options = {}) {
+            const lang = getCurrentLang();
+            const isSelectedConflict = Boolean(options.isSelectedConflict);
+
+            if (!ranges.length && !isSelectedConflict) return "";
+
+            const title = isSelectedConflict
+                ? (lang === "ar" ? "هذه الشقة محجوزة خلال الفترة المختارة:" : "This apartment is booked during your selected dates:")
+                : (lang === "ar" ? "حجوزات قادمة لهذه الشقة:" : "Upcoming bookings for this apartment:");
+
+            if (!ranges.length) {
+                return `
+            <div class="booking-conflict-box ${isSelectedConflict ? "selected-conflict" : ""}">
+                <strong>${title}</strong>
+                <div class="booking-period-line">
+                    ${lang === "ar" ? "يوجد تعارض مع حجز سابق." : "There is a conflict with an existing booking."}
+                </div>
+            </div>
+        `;
+            }
+
+            const visibleRanges = ranges.slice(0, 3);
+            const moreCount = ranges.length - visibleRanges.length;
+            const fromText = lang === "ar" ? "من" : "From";
+            const toText = lang === "ar" ? "إلى" : "to";
+            const moreText = lang === "ar"
+                ? `و ${moreCount} حجز آخر`
+                : `and ${moreCount} more booking${moreCount > 1 ? "s" : ""}`;
+
+            return `
+        <div class="booking-conflict-box ${isSelectedConflict ? "selected-conflict" : ""}">
+            <strong>${title}</strong>
+            <div class="booking-periods-list">
+                ${visibleRanges.map(range => `
+                    <div class="booking-period-line">
+                        ${fromText} <span>${formatDisplayDate(range.checkIn)}</span> ${toText} <span>${formatDisplayDate(range.checkOut)}</span>
+                    </div>
+                `).join("")}
+                ${moreCount > 0 ? `<div class="booking-period-more">${moreText}</div>` : ""}
+            </div>
+        </div>
+    `;
+        }
+
+        function buildConflictMap(data) {
+            const map = new Map();
+
+            const ranges = Array.isArray(data.bookedRanges) ? data.bookedRanges : [];
+
+            ranges.forEach(range => {
+                const aptId = Number(range.apartmentId);
+                if (!aptId) return;
+
+                if (!map.has(aptId)) {
+                    map.set(aptId, []);
+                }
+
+                map.get(aptId).push(range);
+            });
+
+            return map;
+        }
+
+        async function fetchBookingsByApartment() {
+            const map = new Map();
+
+            try {
+                const res = await fetch(`${API_BASE}/bookings`);
+                const data = await res.json();
+
+                if (!res.ok || !data.success || !Array.isArray(data.bookings)) {
+                    return map;
+                }
+
+                const today = todayISO();
+
+                data.bookings
+                    .filter(booking => String(booking.checkOut).slice(0, 10) >= today)
+                    .forEach(booking => {
+                        const aptId = Number(booking.apartmentId);
+                        if (!aptId) return;
+
+                        if (!map.has(aptId)) {
+                            map.set(aptId, []);
+                        }
+
+                        map.get(aptId).push({
+                            apartmentId: aptId,
+                            checkIn: String(booking.checkIn).slice(0, 10),
+                            checkOut: String(booking.checkOut).slice(0, 10),
+                        });
+                    });
+
+                return map;
+            } catch (error) {
+                console.error("BOOKINGS LIST ERROR:", error);
+                return map;
+            }
+        }
+
+        function cardHtml(id, checkIn = "", checkOut = "", availabilityInfo = {}) {
+            const lang = getCurrentLang();
+            const apt = HIJAZI_APARTMENTS[id];
+            const nights = checkIn && checkOut ? calcNights(checkIn, checkOut) : 0;
+            const total = nights ? apt.price * nights : 0;
+
+            const aptName = lang === "ar" ? apt.nameAr : apt.nameEn;
+            const desc = lang === "ar" ? apt.descAr : apt.descEn;
+            const features = lang === "ar" ? apt.featuresAr : apt.featuresEn;
+
+            const locationLabel = lang === "ar" ? "الموقع" : "Location";
+            const availableLabel = lang === "ar" ? "متاحة ✅" : "Available ✅";
+            const bookedLabel = lang === "ar" ? "محجوزة ❌" : "Booked ❌";
+            const hasBookingsLabel = lang === "ar" ? "لديها حجوزات" : "Has bookings";
+            const nightLabel = lang === "ar" ? "السعر لليلة" : "Price per night";
+            const nightsLabel = lang === "ar" ? "عدد الليالي" : "Nights";
+            const totalLabel = lang === "ar" ? "السعر الكلي التقريبي" : "Estimated total";
+            const detailsBtn = lang === "ar" ? "عرض التفاصيل والصور" : "View details & photos";
+            const openPhotosLabel = lang === "ar"
+                ? `فتح ألبوم صور ${aptName}`
+                : `Open ${aptName} photo album`;
+            const bookBtn = lang === "ar" ? "احجز الآن" : "Book now";
+            const changeDatesBtn = lang === "ar" ? "اختر تاريخًا آخر" : "Choose other dates";
+            const jodText = lang === "ar" ? "دينار" : "JOD";
+            const apartmentWord = lang === "ar" ? "شقة راقية" : "Premium apartment";
+
+            const ranges = Array.isArray(availabilityInfo.ranges) ? availabilityInfo.ranges : [];
+            const isBookedForSelectedDates = Boolean(availabilityInfo.isBookedForSelectedDates);
+            const hasUpcomingBookings = ranges.length > 0 && !isBookedForSelectedDates;
+            const cardClass = isBookedForSelectedDates ? "booked-card" : (hasUpcomingBookings ? "has-bookings-card" : "");
+            const badgeLabel = isBookedForSelectedDates ? bookedLabel : (hasUpcomingBookings ? hasBookingsLabel : availableLabel);
+            const bookingRangesHtml = renderBookingRangesHtml(ranges, { isSelectedConflict: isBookedForSelectedDates });
+
+            return `
+        <div class="card ${cardClass}">
+            <div class="card-top-badge">${badgeLabel}</div>
+
+            ${apt.images && apt.images[0]
+                    ? `<button class="card-image-button" type="button" onclick="openApartmentAlbum(${apt.id})" aria-label="${openPhotosLabel}" title="${openPhotosLabel}">
+                            <img src="${apt.images[0]}" alt="${aptName}" loading="lazy" decoding="async" fetchpriority="low">
+                       </button>`
+                    : `<div class="card-image-missing">${lang === "ar" ? "الصورة غير مرفوعة بعد" : "Photo not uploaded yet"}</div>`
+                }
+
+            <div class="card-body">
+                <div class="pill">${apartmentWord}</div>
+                <h3>${aptName}</h3>
+                <div class="muted">${desc}</div>
+
+                <div class="location-line">📍 ${locationLabel}: ${lang === "ar" ? apt.location : HIJAZI_LOCATION_EN}</div>
+
+                <ul class="features">
+                    ${features.slice(0, 4).map(f => `<li>${f}</li>`).join("")}
+                </ul>
+
+                ${bookingRangesHtml}
+
+                <div class="card-price-box">
+                    <div class="card-price-main">${nightLabel}: ${apt.price} ${jodText}</div>
+                    ${nights ? `<div class="card-price-sub">${nightsLabel}: ${nights}</div>` : ""}
+                    ${nights ? `<div class="card-price-sub">${totalLabel}: ${total} ${jodText}</div>` : ""}
+                </div>
+
+                ${nights >= 30 ? `<div class="long-note-inline">${SITE_TRANSLATIONS[lang].longStayAlert}</div>` : ""}
+
+                <div class="card-actions">
+                    ${isBookedForSelectedDates
+                    ? `<button class="btn-book btn-book-disabled" type="button" disabled>
+                            <span>${changeDatesBtn}</span>
+                       </button>`
+                    : `<button class="btn-book ripple-btn" onclick="goBook(${apt.id})" type="button">
+                            <span class="btn-icon"></span>
+                            <span>${bookBtn}</span>
+                       </button>`
+                }
+
+                    <button class="btn-details ripple-btn" onclick="openDetails(${apt.id})" type="button">
+                        <span class="btn-icon"></span>
+                        <span>${detailsBtn}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+        }
+
+        window.goBook = function (id) {
+            const checkIn = checkInEl.value;
+            const checkOut = checkOutEl.value;
+
+            window.location.href =
+                `booking.html?apt=${encodeURIComponent(id)}&checkIn=${encodeURIComponent(checkIn)}&checkOut=${encodeURIComponent(checkOut)}`;
+        };
+
+        let currentAlbumItems = [];
+        let currentAlbumIndex = 0;
+        let albumRenderToken = 0;
+        let currentGalleryApartmentId = null;
+
+        function getGalleryItemsForApartment(apt) {
+            if (typeof getApartmentGalleryImages === "function") {
+                return getApartmentGalleryImages(apt);
+            }
+
+            return (apt.images || []).map((src, index) => ({
+                src,
+                roomTitleAr: "صور الشقة",
+                roomTitleEn: "Apartment Photos",
+                titleAr: `صورة ${index + 1}`,
+                titleEn: `Photo ${index + 1}`,
+                label: `صورة ${index + 1}`
+            }));
+        }
+
+        function safeImageTag(src, alt) {
+            return `
+        <img
+            src="${src}"
+            alt="${alt}"
+            loading="lazy"
+            onerror="this.closest('.airbnb-gallery-item').classList.add('image-missing'); this.remove();"
+        >
+    `;
+        }
+
+        function renderAirbnbDetailsGallery(apt) {
+            const lang = getCurrentLang();
+            const galleryEl = document.getElementById("detailsGallery");
+            const items = getGalleryItemsForApartment(apt);
+            const hintEl = document.getElementById("detailsGalleryHint");
+
+            if (hintEl) {
+                hintEl.textContent = lang === "ar"
+                    ? "اضغط على أي صورة لفتح ألبوم الصور الكامل"
+                    : "Click any photo to open the full album";
+            }
+
+            if (!galleryEl) return;
+
+            if (!items.length) {
+                galleryEl.innerHTML = `
+            <div class="airbnb-gallery-item main image-missing"></div>
+        `;
+                return;
+            }
+
+            const visibleItems = items.slice(0, 5);
+            const showAllText = lang === "ar" ? "عرض كل الصور" : "Show all photos";
+
+            galleryEl.innerHTML = visibleItems.map((item, index) => {
+                const title = lang === "ar" ? item.titleAr : item.titleEn;
+                const roomTitle = lang === "ar" ? item.roomTitleAr : item.roomTitleEn;
+                const isLastVisible = index === visibleItems.length - 1 && items.length > visibleItems.length;
+
+                return `
+            <div class="airbnb-gallery-item ${index === 0 ? "main" : ""}" onclick="openPhotoAlbum(${index})">
+                ${safeImageTag(item.src, title)}
+                <div class="airbnb-gallery-label">${roomTitle}</div>
+                ${isLastVisible ? `<button class="airbnb-show-all" type="button">${showAllText}</button>` : ""}
+            </div>
+        `;
+            }).join("");
+        }
+
+        function renderRoomCards(apt) {
+            const lang = getCurrentLang();
+            const roomCards = document.getElementById("roomCards");
+            const roomDescription = document.getElementById("roomDescription");
+            const roomGallery = document.getElementById("roomGallery");
+
+            if (!roomCards || !roomDescription || !roomGallery) return;
+
+            roomCards.innerHTML = apt.rooms.map(room => {
+                const title = lang === "ar" ? room.titleAr : room.titleEn;
+
+                return `
+            <div class="room-summary-pill">
+                ${title}
+            </div>
+        `;
+            }).join("");
+
+            roomDescription.textContent = lang === "ar"
+                ? "الصور مرتبة حسب الغرف. اضغط على أي صورة في المعرض لفتح الألبوم الكامل."
+                : "Photos are organized by room. Click any photo to open the full album.";
+
+            roomGallery.innerHTML = "";
+        }
+
+        function getCurrentGalleryApartment() {
+            if (currentGalleryApartmentId) {
+                const currentApartment = HIJAZI_APARTMENTS[currentGalleryApartmentId];
+                if (currentApartment) return currentApartment;
+            }
+
+            if (typeof getSelectedApartment === "function") {
+                const selectedApartment = getSelectedApartment();
+                if (selectedApartment) return selectedApartment;
+            }
+
+            const bookBtn = document.getElementById("bookNowBtn");
+            const aptId = bookBtn ? Number(bookBtn.dataset.aptId) : null;
+
+            return aptId ? HIJAZI_APARTMENTS[aptId] : null;
+        }
+
+        // محتويات الغرفة من js/amenities-data.js (ألبوم الصور وعارض الصور)
+        function getRoomContents(roomKey) {
+            const apt = getCurrentGalleryApartment();
+            const data = window.HIJAZI_AMENITIES;
+            if (!apt || !data || typeof data.roomDetails !== "function") return [];
+            return data.roomDetails(apt.id, roomKey, getCurrentLang());
+        }
+
+        function escapeRoomText(text) {
+            return String(text).replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+        }
+
+        // where: "side" = جنب الصور (الشاشات الكبيرة)، "after" = تحت الصور (الموبايل والتابلت)
+        function renderRoomContents(roomKey, where = "side") {
+            const items = getRoomContents(roomKey);
+            if (!items.length) return "";
+            return `<ul class="room-contents room-contents-${where}">${items.map(text => `<li>${escapeRoomText(text)}</li>`).join("")}</ul>`;
+        }
+
+        function getLightboxRoomInfo(index) {
+            const item = currentAlbumItems[index];
+            if (!item) return null;
+            const apt = getCurrentGalleryApartment();
+            return {
+                key: `${apt ? apt.id : ""}:${item.roomKey}:${getCurrentLang()}`,
+                title: getAlbumItemRoomTitle(item),
+                items: getRoomContents(item.roomKey)
+            };
+        }
+
+        function getAlbumItemRoomTitle(item) {
+            const lang = getCurrentLang();
+            return lang === "ar"
+                ? (item.roomTitleAr || "صور الشقة")
+                : (item.roomTitleEn || "Apartment Photos");
+        }
+
+        function getAlbumItemTitle(item, index) {
+            const lang = getCurrentLang();
+            return lang === "ar"
+                ? (item.titleAr || `صورة ${index + 1}`)
+                : (item.titleEn || `Photo ${index + 1}`);
+        }
+
+        function groupAlbumItemsByRoom(items) {
+            const map = new Map();
+
+            items.forEach((item, index) => {
+                const key = item.roomKey || "apartment-photos";
+
+                if (!map.has(key)) {
+                    map.set(key, {
+                        key,
+                        roomTitleAr: item.roomTitleAr || "صور الشقة",
+                        roomTitleEn: item.roomTitleEn || "Apartment Photos",
+                        items: []
+                    });
+                }
+
+                map.get(key).items.push({
+                    ...item,
+                    originalIndex: index
+                });
+            });
+
+            return Array.from(map.values());
+        }
+
+        function setPhotoAlbumBusy(isBusy) {
+            const modal = document.getElementById("photoAlbumModal");
+
+            if (modal) {
+                modal.setAttribute("aria-busy", isBusy ? "true" : "false");
+            }
+        }
+
+        function renderPhotoAlbumSkeleton() {
+            const lang = getCurrentLang();
+            const modalBody = document.querySelector("#photoAlbumModal .photo-album-body");
+            const albumTitle = document.getElementById("photoAlbumTitle");
+            const albumCounter = document.getElementById("photoAlbumCounter");
+
+            if (!modalBody) return;
+
+            if (albumTitle) {
+                albumTitle.textContent =
+                    lang === "ar" ? "جولة بالصور" : "Photo tour";
+            }
+
+            if (albumCounter) {
+                albumCounter.textContent =
+                    lang === "ar" ? "جاري التحميل..." : "Loading...";
+            }
+
+            setPhotoAlbumBusy(true);
+
+            modalBody.innerHTML = `
+                <div class="photo-album-loading" role="status" aria-live="polite">
+                    <div class="photo-album-loading-status">
+                        <span class="photo-album-loading-spinner" aria-hidden="true"></span>
+
+                        <span>
+                            ${lang === "ar"
+                    ? "جاري تجهيز ألبوم الصور..."
+                    : "Preparing the photo album..."}
+                        </span>
+                    </div>
+
+                    <div class="photo-album-loading-grid" aria-hidden="true">
+                        <div class="photo-album-loading-card wide"></div>
+                        <div class="photo-album-loading-card"></div>
+                        <div class="photo-album-loading-card"></div>
+                        <div class="photo-album-loading-card wide"></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderTourPhoto(item, index, isWide = false) {
+            const title = getAlbumItemTitle(item, index);
+            const isPriorityPhoto = index === currentAlbumIndex;
+
+            return `
+        <button
+            class="photo-tour-photo ${isWide ? "wide" : ""}"
+            id="photo-tour-photo-${index}"
+            type="button"
+            onclick="openImageLightbox(${index})"
+            aria-label="${title}"
+        >
+            <img
+                src="${item.src}"
+                alt="${title}"
+                loading="${isPriorityPhoto ? "eager" : "lazy"}"
+                decoding="async"
+                fetchpriority="${isPriorityPhoto ? "high" : "low"}"
+                onload="this.parentElement.classList.add('is-loaded');"
+                onerror="this.parentElement.classList.remove('is-loaded'); this.parentElement.classList.add('image-missing'); this.remove();"
+            >
+        </button>
+    `;
+        }
+
+        function renderPhotoAlbumTour() {
+            const lang = getCurrentLang();
+            const modalBody = document.querySelector("#photoAlbumModal .photo-album-body");
+            const albumTitle = document.getElementById("photoAlbumTitle");
+            const albumCounter = document.getElementById("photoAlbumCounter");
+
+            if (!modalBody) return;
+
+            if (!currentAlbumItems.length) {
+                modalBody.innerHTML = `
+            <div class="photo-tour-sections">
+                <div class="photo-tour-empty">
+                    ${lang === "ar" ? "لا توجد صور مرفوعة لهذه الشقة بعد" : "No photos uploaded for this apartment yet"}
+                </div>
+            </div>
+        `;
+
+                setPhotoAlbumBusy(false);
+                return;
+            }
+
+            const groupedRooms = groupAlbumItemsByRoom(currentAlbumItems);
+
+            if (albumTitle) {
+                albumTitle.textContent = lang === "ar" ? "جولة بالصور" : "Photo tour";
+            }
+
+            if (albumCounter) {
+                albumCounter.textContent = lang === "ar"
+                    ? `${currentAlbumItems.length} صورة`
+                    : `${currentAlbumItems.length} photos`;
+            }
+
+            modalBody.innerHTML = `
+        <div class="photo-tour-sections photo-tour-sections-lite">
+            ${groupedRooms.map(group => {
+                const roomTitle = lang === "ar" ? group.roomTitleAr : group.roomTitleEn;
+                const photosCountText = lang === "ar"
+                    ? `${group.items.length} صور`
+                    : `${group.items.length} photos`;
+
+                return `
+                    <section class="photo-tour-section" id="photo-tour-room-${group.key}">
+                        <div class="photo-tour-photos">
+                            ${group.items.map((item, localIndex) => {
+                    return renderTourPhoto(item, item.originalIndex, localIndex === 0);
+                }).join("")}
+                        </div>
+
+                        ${renderRoomContents(group.key, "after")}
+
+                        <aside class="photo-tour-room-info">
+                            <h2>${roomTitle}</h2>
+                            <p>${photosCountText}</p>
+                            ${renderRoomContents(group.key)}
+                        </aside>
+                    </section>
+                `;
+            }).join("")}
+        </div>
+    `;
+
+            setPhotoAlbumBusy(false);
+        }
+
+        function setActiveAlbumPhoto(index) {
+            if (!currentAlbumItems.length) return;
+
+            currentAlbumIndex = Math.max(0, Math.min(index, currentAlbumItems.length - 1));
+
+            document.querySelectorAll("[data-album-thumb]").forEach(btn => {
+                btn.classList.toggle("active", Number(btn.dataset.albumThumb) === currentAlbumIndex);
+            });
+
+            const counter = document.getElementById("photoAlbumCounter");
+            if (counter) {
+                const lang = getCurrentLang();
+                counter.textContent = lang === "ar"
+                    ? `${currentAlbumIndex + 1} / ${currentAlbumItems.length}`
+                    : `${currentAlbumIndex + 1} / ${currentAlbumItems.length}`;
+            }
+        }
+
+        function goToAlbumPhoto(index) {
+            setActiveAlbumPhoto(index);
+
+            const target = document.getElementById(`photo-tour-photo-${currentAlbumIndex}`);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+            }
+        }
+
+
+        function updateImageLightbox() {
+            const item = currentAlbumItems[currentAlbumIndex];
+            if (!item) return;
+
+            const lang = getCurrentLang();
+            const lightboxImage = document.getElementById("imageLightboxImage");
+            const lightboxTitle = document.getElementById("imageLightboxTitle");
+            const lightboxCounter = document.getElementById("imageLightboxCounter");
+            const previousButton = document.getElementById("imageLightboxPrev");
+            const nextButton = document.getElementById("imageLightboxNext");
+
+            const itemTitle = getAlbumItemTitle(item, currentAlbumIndex);
+
+            if (lightboxImage) {
+                lightboxImage.src = item.src;
+                lightboxImage.alt = itemTitle;
+            }
+
+            if (lightboxTitle) {
+                lightboxTitle.textContent = itemTitle;
+            }
+
+            if (lightboxCounter) {
+                lightboxCounter.textContent =
+                    `${currentAlbumIndex + 1} / ${currentAlbumItems.length}`;
+            }
+
+            if (previousButton) {
+                previousButton.textContent = lang === "ar" ? "›" : "‹";
+            }
+
+            if (nextButton) {
+                nextButton.textContent = lang === "ar" ? "‹" : "›";
+            }
+        }
+
+        function openImageLightbox(index) {
+            if (!currentAlbumItems.length) return;
+
+            setActiveAlbumPhoto(index);
+            updateImageLightbox();
+
+            const lightbox = document.getElementById("imageLightbox");
+            if (!lightbox) return;
+
+            lightbox.classList.add("open");
+            lightbox.setAttribute("aria-hidden", "false");
+
+            document.getElementById("imageLightboxClose")?.focus();
+        }
+
+        function closeImageLightbox() {
+            const lightbox = document.getElementById("imageLightbox");
+            const lightboxImage = document.getElementById("imageLightboxImage");
+
+            if (!lightbox) return;
+
+            lightbox.classList.remove("open");
+            lightbox.setAttribute("aria-hidden", "true");
+
+            if (lightboxImage) {
+                lightboxImage.removeAttribute("src");
+            }
+        }
+
+        function showNextLightboxImage() {
+            if (!currentAlbumItems.length) return;
+
+            setActiveAlbumPhoto(
+                (currentAlbumIndex + 1) % currentAlbumItems.length
+            );
+
+            updateImageLightbox();
+        }
+
+        function showPreviousLightboxImage() {
+            if (!currentAlbumItems.length) return;
+
+            setActiveAlbumPhoto(
+                (currentAlbumIndex - 1 + currentAlbumItems.length) %
+                currentAlbumItems.length
+            );
+
+            updateImageLightbox();
+        }
+
+        window.openImageLightbox = openImageLightbox;
+
+        const imageLightboxElement = document.getElementById("imageLightbox");
+
+        document
+            .getElementById("imageLightboxClose")
+            ?.addEventListener("click", closeImageLightbox);
+
+        document
+            .getElementById("imageLightboxPrev")
+            ?.addEventListener("click", showPreviousLightboxImage);
+
+        document
+            .getElementById("imageLightboxNext")
+            ?.addEventListener("click", showNextLightboxImage);
+
+        imageLightboxElement?.addEventListener("click", function (event) {
+            if (event.target === imageLightboxElement || event.target.classList.contains("image-lightbox-stage")) {
+                closeImageLightbox();
+            }
+        });
+
+        HijaziLightboxSwipe.attach({
+            box: imageLightboxElement,
+            img: document.getElementById("imageLightboxImage"),
+            counter: document.getElementById("imageLightboxCounter"),
+            prevBtn: document.getElementById("imageLightboxPrev"),
+            nextBtn: document.getElementById("imageLightboxNext"),
+            next: showNextLightboxImage,
+            prev: showPreviousLightboxImage,
+            isRTL: () => getCurrentLang() === "ar",
+            getItems: () => currentAlbumItems,
+            getIndex: () => currentAlbumIndex,
+            getInfo: getLightboxRoomInfo,
+            goTo: (i) => { setActiveAlbumPhoto(i); updateImageLightbox(); }
+        });
+
+        function openPhotoAlbum(index = 0) {
+            const apt = getCurrentGalleryApartment();
+
+            if (!apt) return;
+
+            currentAlbumItems = getGalleryItemsForApartment(apt);
+
+            currentAlbumIndex = Math.max(
+                0,
+                Math.min(index, currentAlbumItems.length - 1)
+            );
+
+            const modal = document.getElementById("photoAlbumModal");
+
+            if (!modal) return;
+
+            const renderToken = ++albumRenderToken;
+
+            modal.style.display = "block";
+            modal.scrollTop = 0;
+            document.body.style.overflow = "hidden";
+
+            renderPhotoAlbumSkeleton();
+
+            /*
+              نستخدم إطارين حتى يعرض المتصفح الـSkeleton
+              قبل بناء ألبوم الصور الكامل.
+            */
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    if (
+                        renderToken !== albumRenderToken ||
+                        modal.style.display !== "block"
+                    ) {
+                        return;
+                    }
+
+                    renderPhotoAlbumTour();
+
+                    requestAnimationFrame(() => {
+                        if (renderToken === albumRenderToken) {
+                            goToAlbumPhoto(currentAlbumIndex);
+                        }
+                    });
+                });
+            });
+        }
+
+        window.openApartmentAlbum = async function (id, index = 0) {
+            const apartmentId = Number(id);
+            const apt = HIJAZI_APARTMENTS[apartmentId];
+
+            if (!apt) return;
+
+            currentGalleryApartmentId = apartmentId;
+            await loadApartmentGallery(apartmentId);
+            openPhotoAlbum(index);
+        };
+
+        function closePhotoAlbum() {
+            const modal = document.getElementById("photoAlbumModal");
+
+            if (!modal) return;
+
+            albumRenderToken += 1;
+            modal.style.display = "none";
+
+            setPhotoAlbumBusy(false);
+
+            const detailsModal = document.getElementById("detailsModal");
+
+            const detailsStillOpen =
+                detailsModal &&
+                detailsModal.style.display === "block";
+
+            document.body.style.overflow =
+                detailsStillOpen ? "hidden" : "";
+        }
+
+        function nextAlbumPhoto() {
+            if (!currentAlbumItems.length) return;
+            goToAlbumPhoto((currentAlbumIndex + 1) % currentAlbumItems.length);
+        }
+
+        function prevAlbumPhoto() {
+            if (!currentAlbumItems.length) return;
+            goToAlbumPhoto((currentAlbumIndex - 1 + currentAlbumItems.length) % currentAlbumItems.length);
+        }
+
+        window.openPhotoAlbum = openPhotoAlbum;
+        window.goToAlbumPhoto = goToAlbumPhoto;
+
+        const closeAlbumButton = document.getElementById("closePhotoAlbum");
+        if (closeAlbumButton) {
+            closeAlbumButton.addEventListener("click", closePhotoAlbum);
+        }
+
+        const albumModalElement = document.getElementById("photoAlbumModal");
+        if (albumModalElement) {
+            albumModalElement.addEventListener("click", function (e) {
+                if (e.target === this) closePhotoAlbum();
+            });
+        }
+
+        document.addEventListener("keydown", function (e) {
+            const lightbox = document.getElementById("imageLightbox");
+            const isLightboxOpen = lightbox?.classList.contains("open");
+
+            if (isLightboxOpen) {
+                const isRTL = getCurrentLang() === "ar";
+
+                if (e.key === "Escape") {
+                    closeImageLightbox();
+                    return;
+                }
+
+                if (e.key === "ArrowRight") {
+                    if (isRTL) {
+                        showPreviousLightboxImage();
+                    } else {
+                        showNextLightboxImage();
+                    }
+
+                    return;
+                }
+
+                if (e.key === "ArrowLeft") {
+                    if (isRTL) {
+                        showNextLightboxImage();
+                    } else {
+                        showPreviousLightboxImage();
+                    }
+
+                    return;
+                }
+
+                return;
+            }
+
+            const modal = document.getElementById("photoAlbumModal");
+            if (!modal || modal.style.display !== "block") return;
+
+            if (e.key === "Escape") {
+                closePhotoAlbum();
+            }
+
+            if (e.key === "ArrowRight") {
+                nextAlbumPhoto();
+            }
+
+            if (e.key === "ArrowLeft") {
+                prevAlbumPhoto();
+            }
+        });
+        window.openDetails = async function (id) {
+            const lang = getCurrentLang();
+            const apt = HIJAZI_APARTMENTS[id];
+            currentGalleryApartmentId = Number(id);
+            await loadApartmentGallery(id);
+            const checkIn = checkInEl.value;
+            const checkOut = checkOutEl.value;
+            const nights = checkIn && checkOut ? calcNights(checkIn, checkOut) : 0;
+            const total = nights ? apt.price * nights : 0;
+
+            document.getElementById("modalTitle").textContent = lang === "ar" ? `تفاصيل ${apt.nameAr}` : `${apt.nameEn} details`;
+            document.getElementById("detailName").textContent = lang === "ar" ? apt.nameAr : apt.nameEn;
+            document.getElementById("detailDesc").textContent = lang === "ar" ? apt.descAr : apt.descEn;
+            document.getElementById("detailLocation").textContent = getCurrentLang() === "ar" ? apt.location : HIJAZI_LOCATION_EN;
+            document.getElementById("detailNightPrice").textContent = `${apt.price} ${lang === "ar" ? "دينار" : "JOD"}`;
+            document.getElementById("detailNights").textContent = nights || (lang === "ar" ? "غير محدد" : "Not selected");
+            document.getElementById("detailTotal").textContent = nights ? `${total} ${lang === "ar" ? "دينار" : "JOD"}` : (lang === "ar" ? "اختر التاريخ" : "Select dates");
+            document.getElementById("detailDates").textContent = checkIn && checkOut ? `${checkIn} → ${checkOut}` : (lang === "ar" ? "لم يتم اختيار التواريخ" : "Dates not selected");
+
+            const featureList = document.getElementById("detailFeatures");
+            const videoBox = document.getElementById("modalVideoBox");
+            const video = document.getElementById("modalVideo");
+            const videoSource = document.getElementById("modalVideoSource");
+            const detailMap = document.getElementById("detailMap");
+            const bookNowBtn = document.getElementById("bookNowBtn");
+
+            renderAirbnbDetailsGallery(apt);
+
+            const features = lang === "ar" ? apt.featuresAr : apt.featuresEn;
+            featureList.innerHTML = features.map(f => `<li>${f}</li>`).join("");
+
+            const amenitiesHost = document.getElementById("detailAmenities");
+            if (amenitiesHost) {
+                amenitiesHost.innerHTML = window.HijaziAmenitiesUI
+                    ? HijaziAmenitiesUI.renderApartmentPanel(id, lang, { specs: false })
+                    : "";
+            }
+
+            if (apt.video) {
+                videoBox.style.display = "block";
+                videoSource.src = apt.video;
+                video.load();
+            } else {
+                videoBox.style.display = "none";
+                videoSource.src = "";
+                video.load();
+            }
+
+            detailMap.src = apt.mapEmbed;
+
+            bookNowBtn.dataset.aptId = id;
+            bookNowBtn.onclick = () => goBook(id);
+
+            renderRoomCards(apt);
+
+            modal.style.display = "block";
+            document.body.style.overflow = "hidden";
+        };
+
+        function closeDetailsModal() {
+            modal.style.display = "none";
+            document.body.style.overflow = "";
+        }
+
+        closeModal.addEventListener("click", closeDetailsModal);
+
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) closeDetailsModal();
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && modal.style.display === "block") {
+                closeDetailsModal();
+            }
+        });
+
+        function renderSkeletonCards(count = 3) {
+            gridEl.innerHTML = Array.from({ length: count }).map(() => `
+                <div class="skeleton-card">
+                    <div class="skeleton-image"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line short"></div>
+                        <div class="skeleton-line medium"></div>
+                        <div class="skeleton-line long"></div>
+                        <div class="skeleton-line medium"></div>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        function initRippleButtons() {
+            document.querySelectorAll(".ripple-btn").forEach(button => {
+                button.addEventListener("click", function (e) {
+                    const oldRipple = this.querySelector(".ripple");
+                    if (oldRipple) oldRipple.remove();
+
+                    const ripple = document.createElement("span");
+                    ripple.classList.add("ripple");
+
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+
+                    ripple.style.width = ripple.style.height = `${size}px`;
+                    ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+                    ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+
+                    this.appendChild(ripple);
+
+                    ripple.addEventListener("animationend", () => {
+                        ripple.remove();
+                    });
+                });
+            });
+        }
+
+        /* =========================================================
+           فلتر نوع الشقة (عدد غرف النوم)
+           كل الشقق الحالية 3 غرف نوم، فلا يظهر الفلتر.
+           عند إضافة شقق بغرفة أو غرفتين في js/amenities-data.js يظهر تلقائيًا.
+        ========================================================= */
+        let selectedBedroomType = 0;
+
+        function getDisplayedApartmentIds() {
+            const ids = APARTMENT_DISPLAY_ORDER.filter(id => HIJAZI_APARTMENTS[id]);
+
+            if (!selectedBedroomType) return ids;
+
+            return ids.filter(id => Number(HIJAZI_APARTMENTS[id].bedrooms) === selectedBedroomType);
+        }
+
+        function renderTypeFilter() {
+            const host = document.getElementById("typeFilter");
+            if (!host || typeof HIJAZI_AMENITIES === "undefined") return;
+
+            const lang = getCurrentLang();
+            const types = HIJAZI_AMENITIES.bedroomTypesIn(APARTMENT_DISPLAY_ORDER);
+
+            if (types.length < 2) {
+                host.hidden = true;
+                host.innerHTML = "";
+                selectedBedroomType = 0;
+                return;
+            }
+
+            const options = [{ value: 0, label: lang === "ar" ? "كل الشقق" : "All apartments" }].concat(
+                types.map(type => ({
+                    value: type,
+                    label: lang === "ar"
+                        ? HIJAZI_AMENITIES.unitTypes[type].labelAr
+                        : HIJAZI_AMENITIES.unitTypes[type].labelEn
+                }))
+            );
+
+            host.hidden = false;
+            host.innerHTML = options.map(option => `
+                <button type="button" data-type="${option.value}" class="${option.value === selectedBedroomType ? "active" : ""}" aria-pressed="${option.value === selectedBedroomType}">${option.label}</button>
+            `).join("");
+
+            host.querySelectorAll("button").forEach(button => {
+                button.addEventListener("click", () => {
+                    selectedBedroomType = Number(button.dataset.type);
+                    renderTypeFilter();
+                    loadAvailability();
+                });
+            });
+        }
+
+        async function loadAvailability() {
+            const lang = getCurrentLang();
+            const checkIn = checkInEl.value;
+            const checkOut = checkOutEl.value;
+
+            renderLongStayNotice("longStayNotice", checkIn, checkOut);
+
+            const err = validateDates(true);
+            const allApartmentIds = getDisplayedApartmentIds();
+
+            if (!checkIn || !checkOut) {
+                statusEl.textContent = lang === "ar"
+                    ? "تم عرض جميع الشقق مع توضيح أي حجوزات قادمة. يمكنك اختيار التواريخ لاحقًا."
+                    : "All apartments are displayed with upcoming booked periods. You can choose dates later.";
+
+                renderSkeletonCards(3);
+
+                const bookingsByApartment = await fetchBookingsByApartment();
+                await loadAllApartmentCoverImages(allApartmentIds);
+
+                gridEl.innerHTML = allApartmentIds.map(id => {
+                    const ranges = bookingsByApartment.get(Number(id)) || [];
+                    return cardHtml(Number(id), "", "", { ranges });
+                }).join("");
+
+                initRippleButtons();
+                return;
+            }
+
+            if (err) {
+                statusEl.textContent = err;
+                gridEl.innerHTML = "";
+                return;
+            }
+
+            statusEl.textContent = lang === "ar" ? "جاري فحص الشقق المتاحة..." : "Checking available apartments...";
+            renderSkeletonCards(3);
+
+            try {
+                const res = await fetch(`${API_BASE}/availability?checkIn=${encodeURIComponent(checkIn)}&checkOut=${encodeURIComponent(checkOut)}`);
+                const data = await res.json();
+
+                if (!res.ok) {
+                    statusEl.textContent = data.message || (lang === "ar" ? "صار خطأ أثناء الفحص" : "An error happened while checking");
+                    gridEl.innerHTML = "";
+                    return;
+                }
+
+                const available = data.availableApartments || [];
+                const conflictMap = buildConflictMap(data);
+                const bookedCount = conflictMap.size;
+
+                statusEl.textContent = lang === "ar"
+                    ? `✅ المتاحة: ${available.length} | ❌ المحجوزة في هذه الفترة: ${bookedCount}`
+                    : `✅ Available: ${available.length} | ❌ Booked in this period: ${bookedCount}`;
+
+                await loadAllApartmentCoverImages(allApartmentIds);
+
+                gridEl.innerHTML = allApartmentIds.map(id => {
+                    const ranges = conflictMap.get(Number(id)) || [];
+                    return cardHtml(Number(id), checkIn, checkOut, {
+                        isBookedForSelectedDates: conflictMap.has(Number(id)),
+                        ranges
+                    });
+                }).join("");
+
+                initRippleButtons();
+            } catch (e) {
+                console.error(e);
+                statusEl.textContent = lang === "ar"
+                    ? "تعذر الاتصال بخادم الحجوزات. حاول مرة أخرى بعد قليل."
+                    : "Unable to connect to the booking server. Please try again later.";
+                gridEl.innerHTML = "";
+            }
+        }
+
+        refreshBtn.addEventListener("click", loadAvailability);
+
+        checkInEl.addEventListener("change", () => {
+            checkOutEl.min = checkInEl.value || todayISO();
+            renderLongStayNotice("longStayNotice", checkInEl.value, checkOutEl.value);
+        });
+
+        checkOutEl.addEventListener("change", () => {
+            renderLongStayNotice("longStayNotice", checkInEl.value, checkOutEl.value);
+        });
+
+        renderSharedHeader("apartments", false);
+        renderSharedFooter();
+        renderWhatsAppWidget();
+        applyApartmentsTranslations();
+        renderTypeFilter();
+        renderLongStayNotice("longStayNotice", checkInEl.value, checkOutEl.value);
+        loadApartmentPricesFromPms().then(loadAvailability);
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+
+</html>
