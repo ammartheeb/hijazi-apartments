@@ -1,0 +1,53 @@
+name: IndexNow
+
+# بعد كل push على main فيه تغيير بصفحات الموقع: نستنى Vercel ينشر،
+# وبعدين نبلّغ Bing ومحركات IndexNow بالصفحات اللي تغيّرت (scripts/indexnow.js).
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "frontend/**.html"
+  workflow_dispatch:
+    inputs:
+      all:
+        description: "Send every page in the sitemap"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: false
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+
+      - name: Wait for Vercel to publish
+        run: sleep 120
+
+      - name: Send pages to IndexNow
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+          ALL: ${{ inputs.all }}
+        run: |
+          if [ "$ALL" = "true" ] || [ -z "$BEFORE" ]; then
+            node scripts/indexnow.js --all
+          else
+            node scripts/indexnow.js --changed "$BEFORE" "$AFTER"
+          fi

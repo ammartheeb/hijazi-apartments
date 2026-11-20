@@ -33,9 +33,12 @@
 - [Booking](https://www.hijazi-apartments.com/booking.html): booking form
 - [Amenities and services (English)](https://www.hijazi-apartments.com/amenities-en.html): full list of amenities, housekeeping, free and paid services, building and parking, and stay policies
 - [المميزات والخدمات (Arabic)](https://www.hijazi-apartments.com/amenities.html): نفس الصفحة بالعربية
-- [FAQ](https://www.hijazi-apartments.com/faq.html): common questions about stays, discounts and facilities
-- [About us](https://www.hijazi-apartments.com/about.html): who we are, location, the 8 apartments, services, policies and guest trust (Arabic and English)
-- [Guest reviews](https://www.hijazi-apartments.com/reviews.html): real guest reviews from Booking.com and Airbnb (Arabic and English)
+- [FAQ (English)](https://www.hijazi-apartments.com/faq-en.html): common questions about stays, discounts and facilities
+- [الأسئلة الشائعة (Arabic)](https://www.hijazi-apartments.com/faq.html): نفس الصفحة بالعربية
+- [About us (English)](https://www.hijazi-apartments.com/about-en.html): who we are, location, the 8 apartments, services, policies and guest trust
+- [من نحن (Arabic)](https://www.hijazi-apartments.com/about.html): نفس الصفحة بالعربية
+- [Guest reviews (English)](https://www.hijazi-apartments.com/reviews-en.html): real guest reviews from Booking.com and Airbnb, and our 9.9 rating on Booking.com
+- [آراء الضيوف (Arabic)](https://www.hijazi-apartments.com/reviews.html): نفس الصفحة بالعربية
 
 ## Guides (English)
 

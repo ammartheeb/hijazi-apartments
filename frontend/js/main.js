@@ -775,13 +775,13 @@ function renderSharedHeader(activePage, showAdminTrigger = false) {
                             <a class="nav-link ${activePage === "amenities" ? "active" : ""}" href="${lang === "en" ? "amenities-en.html" : "amenities.html"}">${t.amenities}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link ${activePage === "about" ? "active" : ""}" href="about.html">${t.about}</a>
+                            <a class="nav-link ${activePage === "about" ? "active" : ""}" href="${lang === "en" ? "about-en.html" : "about.html"}">${t.about}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link ${activePage === "faq" ? "active" : ""}" href="faq.html">${t.faq}</a>
+                            <a class="nav-link ${activePage === "faq" ? "active" : ""}" href="${lang === "en" ? "faq-en.html" : "faq.html"}">${t.faq}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link ${activePage === "reviews" ? "active" : ""}" href="reviews.html">${t.reviews}</a>
+                            <a class="nav-link ${activePage === "reviews" ? "active" : ""}" href="${lang === "en" ? "reviews-en.html" : "reviews.html"}">${t.reviews}</a>
                         </li>
                     </ul>
 

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KG0M4GYNCV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-KG0M4GYNCV');
+    </script>
+
+    <title>Guest Reviews | HIJAZI Apartments</title>
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Real guest reviews of HIJAZI Apartments on Booking.com and Airbnb, from Saudi Arabia, the UAE, Iraq, the UK, Germany and the United States, and our 9.9 “Exceptional” rating on Booking.com, for our furnished apartments in Shmeisani, Amman.">
+    <link rel="canonical" href="https://www.hijazi-apartments.com/reviews-en.html">
+    <link rel="alternate" hreflang="ar" href="https://www.hijazi-apartments.com/reviews.html">
+    <link rel="alternate" hreflang="en" href="https://www.hijazi-apartments.com/reviews-en.html">
+    <link rel="alternate" hreflang="x-default" href="https://www.hijazi-apartments.com/reviews.html">
+    <meta property="og:title" content="Guest Reviews | HIJAZI Apartments">
+    <meta property="og:description" content="Read what guests wrote about HIJAZI Apartments on Booking.com and Airbnb, and their stays in Shmeisani, Amman.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.hijazi-apartments.com/reviews-en.html">
+    <meta property="og:image" content="https://www.hijazi-apartments.com/images/apartments/apt-1/living/1.webp">
+    <meta property="og:site_name" content="HIJAZI Apartments">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="ar_JO">
+    <meta name="google-site-verification" content="CQow9HEGehI7vI8t4xQ3J6aqW_cw58dW8eZ8o8htyf4" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/amenities.css?v=1">
+
+    <style>
+        /* صفحة التقييمات – تستخدم هيكل صفحة المميزات (am-) وتضيف بطاقات التقييم (rv-) */
+        .rv-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            align-items: start;
+        }
+
+        .rv-card {
+            background: #fff;
+            border: 1px solid #eee;
+            border-top: 4px solid #c89116;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+            scroll-margin-top: 110px;
+            text-align: start;
+        }
+
+        .rv-shot {
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            background: #1b1b1b;
+            cursor: zoom-in;
+            position: relative;
+        }
+
+        .rv-shot img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+        }
+
+        .rv-shot::after {
+            content: "";
+            position: absolute;
+            inset-inline-end: 12px;
+            bottom: 12px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.62) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m21 21-4.3-4.3M11 8v6M8 11h6'/%3E%3C/svg%3E") center / 20px no-repeat;
+        }
+
+        .rv-shot:focus-visible {
+            outline: 3px solid #c89116;
+            outline-offset: -3px;
+        }
+
+        .rv-body {
+            padding: 18px 20px 20px;
+        }
+
+        .rv-head {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .rv-score {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 48px;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px 14px 14px 4px;
+            background: linear-gradient(135deg, #d4a017, #8a6508);
+            color: #fff;
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .rv-head h3 {
+            font-size: 19px;
+            font-weight: 900;
+            color: #111;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .rv-from {
+            font-weight: 700;
+            color: #8a6508;
+        }
+
+        .rv-meta {
+            margin: 0;
+            color: #777;
+            font-size: 13.5px;
+            font-weight: 600;
+        }
+
+        .rv-title {
+            margin: 0 0 8px;
+            color: #111;
+            font-size: 16.5px;
+            font-weight: 800;
+            line-height: 1.8;
+        }
+
+        .rv-text {
+            margin: 0;
+            color: #444;
+            font-size: 15.5px;
+            line-height: 1.95;
+        }
+
+        .rv-proof-title {
+            margin: 0 0 8px;
+            color: #111;
+            font-size: 18px;
+            font-weight: 900;
+            line-height: 1.6;
+        }
+
+        .rv-nocomment {
+            margin: 0;
+            color: #777;
+            font-size: 14.5px;
+            line-height: 1.8;
+        }
+
+        .rv-chips {
+            margin-top: 14px;
+        }
+
+        .rv-note {
+            margin: 12px 0 0;
+            color: #8a8a8a;
+            font-size: 12.5px;
+            line-height: 1.7;
+        }
+
+        .rv-source {
+            margin-top: 28px;
+            margin-bottom: 28px;
+        }
+
+        /* نافذة تكبير الصورة */
+        .rv-viewer {
+            border: 0;
+            padding: 0;
+            background: transparent;
+            max-width: 100vw;
+            max-height: 100dvh;
+            width: 100vw;
+            height: 100dvh;
+        }
+
+        .rv-viewer::backdrop {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .rv-viewer-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            cursor: zoom-out;
+        }
+
+        .rv-viewer img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+        }
+
+        .rv-viewer-close {
+            position: fixed;
+            top: 14px;
+            inset-inline-end: 14px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 0;
+            background: rgba(255, 255, 255, 0.16);
+            color: #fff;
+            font-size: 26px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        @media (max-width: 1100px) {
+            .rv-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .rv-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .rv-body {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body class="am-page">
+    <div id="sharedHeader"></div>
+
+    <section class="am-page-hero">
+        <p class="am-page-eyebrow">Guest Reviews</p>
+        <h1 id="reviewsTitle">What Our Guests Say About HIJAZI Apartments</h1>
+        <p id="reviewsSubtitle">Real reviews written on Booking.com and Airbnb by guests who stayed in our furnished apartments in Shmeisani, Amman.</p>
+    </section>
+
+    <main class="am-page-content">
+        <div class="am-varies rv-source">
+            <div>
+                <h3>Where do these reviews come from?</h3>
+                <p>Every review here was written by the guest on Booking.com or Airbnb after their stay. The photos are our own shots of the review pages on both platforms; we covered the reservation number to protect the guest's privacy. Tap any photo to enlarge it.</p>
+            </div>
+        </div>
+
+        <section class="am-section" id="booking-score">
+            <h2>Our rating on Booking.com</h2>
+            <p class="am-intro">Screenshots from Booking.com showing how our guests rate our apartments.</p>
+            <div class="rv-grid">
+            <article class="rv-card" id="proof-score">
+                <button type="button" class="rv-shot" aria-label="Enlarge the screenshot">
+                    <img src="images/reviews/en/booking-score.webp" alt="Screenshot of the Booking.com guest reviews page: HIJAZI Apartments rated 9.9 Exceptional, with the score for each category" width="1200" height="1200" loading="eager" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <h3 class="rv-proof-title">9.9 “Exceptional” on Booking.com</h3>
+                    <p class="rv-text">Our guest rating on Booking.com, broken down into cleanliness, comfort, facilities, location, staff and value for money. The green arrows mean “High score for Amman”.</p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="proof-search">
+                <button type="button" class="rv-shot" aria-label="Enlarge the screenshot">
+                    <img src="images/reviews/en/booking-search.webp" alt="Screenshot of Booking.com search results: HIJAZI Apartments rated 9.9 Exceptional and sold out" width="1200" height="1200" loading="eager" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <h3 class="rv-proof-title">9.9 in the search results</h3>
+                    <p class="rv-text">This is how our apartments appear when you search for them on Booking.com – and for these dates they were fully booked (“Sold out!”).</p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="proof-partner">
+                <button type="button" class="rv-shot" aria-label="Enlarge the photo">
+                    <img src="images/reviews/ar/booking-partner.webp" alt="Photo of the Booking.com property dashboard on an iPad: Congratulations, you are now one of our preferred partners" width="1200" height="1200" loading="eager" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <h3 class="rv-proof-title">A Booking.com Preferred Partner</h3>
+                    <p class="rv-text">We joined the Booking.com Preferred Partner Programme. This is the message in our property dashboard: “Congratulations, you are now one of our preferred partners.”</p>
+                </div>
+            </article>
+            </div>
+        </section>
+
+        <section class="am-section" id="reviews-list">
+            <h2>Guest reviews on Booking.com, newest first</h2>
+            <p class="am-intro">The guest's first name, country, score and words are shown as they appear on Booking.com.</p>
+            <div class="rv-grid">
+            <article class="rv-card" id="review-ali">
+                <button type="button" class="rv-shot" aria-label="Enlarge the review screenshot">
+                    <img src="images/reviews/en/ali.webp" alt="Screenshot of the Booking.com review of HIJAZI Apartments by Ali from Iraq – 10 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">10</span>
+                        <div>
+                            <h3><span>Ali</span> <span class="rv-from">from Iraq</span></h3>
+                            <p class="rv-meta"><span>Nov 15, 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-title">The accommodation was very nice, a quiet, clean and family-friendly place, and God willing, it won't be the last time we stay there.</p>
+                    <p class="rv-text">The place is very nice and tidy, the location is excellent and quiet, and the apartment is clean and comfortable, and you feel at home. The atmosphere is family-friendly and peaceful, and the owner of the place, Ibrahim, is cooperative and respectful. Honestly, the stay was very nice.</p>
+                    <p class="rv-note">Translated from Arabic – the original text is on the Arabic version of this page.</p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-sam">
+                <button type="button" class="rv-shot" aria-label="Enlarge the review screenshot">
+                    <img src="images/reviews/en/sam.webp" alt="Screenshot of the Booking.com review of HIJAZI Apartments by Sam from Germany – 10 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">10</span>
+                        <div>
+                            <h3><span>Sam</span> <span class="rv-from">from Germany</span></h3>
+                            <p class="rv-meta"><span>Sep 19, 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-title">An excellent stay with exceptional hospitality</p>
+                    <p class="rv-text">Ibrahim was incredibly kind, helpful, and always available to assist us with anything we needed, not just regarding the apartment. We truly felt welcomed and cared for throughout our stay.</p>
+                    <ul class="am-chips rv-chips"><li>Couple</li></ul>
+                    <p class="rv-note" hidden></p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-oliver">
+                <button type="button" class="rv-shot" aria-label="Enlarge the review screenshot">
+                    <img src="images/reviews/en/oliver.webp" alt="Screenshot of the Booking.com review of HIJAZI Apartments by Oliver from the United Kingdom – 10 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">10</span>
+                        <div>
+                            <h3><span>Oliver</span> <span class="rv-from">from the United Kingdom</span></h3>
+                            <p class="rv-meta"><span>Sep 13, 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-title">A five-star experience with the comfort of home. I will definitely stay here again.</p>
+                    <p class="rv-text">I visit Jordan very often, and finding a truly clean and comfortable apartment has always been a challenge. Finally, I found a place that honestly feels like a five-star hotel. The apartment is spacious, spotless, beautifully maintained, and has everything you could need. Ibrahim was an amazing host, very kind and helpful, and made sure we had everything we needed. This apartment genuinely saved me from staying in a hotel. Highly recommended!</p>
+                    <ul class="am-chips rv-chips"><li>Couple</li></ul>
+                    <p class="rv-note" hidden></p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-hassan">
+                <button type="button" class="rv-shot" aria-label="Enlarge the review screenshot">
+                    <img src="images/reviews/en/hassan.webp" alt="Screenshot of the Booking.com review of HIJAZI Apartments by Hassan from the United Arab Emirates – 9 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">9</span>
+                        <div>
+                            <h3><span>Hassan</span> <span class="rv-from">from the United Arab Emirates</span></h3>
+                            <p class="rv-meta"><span>Aug 24, 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-title">Wonderful</p>
+                    <p class="rv-nocomment">The guest left a score without a written comment.</p>
+                    <ul class="am-chips rv-chips"><li>16 nights</li><li>Solo traveler</li></ul>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-seraj">
+                <button type="button" class="rv-shot" aria-label="Enlarge the review screenshot">
+                    <img src="images/reviews/en/seraj.webp" alt="Screenshot of the Booking.com review of HIJAZI Apartments by Seraj from Saudi Arabia – 10 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">10</span>
+                        <div>
+                            <h3><span>Seraj</span> <span class="rv-from">from Saudi Arabia</span></h3>
+                            <p class="rv-meta"><span>Aug 10, 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-title">Exceptional</p>
+                    <p class="rv-nocomment">The guest left a score without a written comment.</p>
+                    <ul class="am-chips rv-chips"><li>6 nights</li><li>Group</li></ul>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-tala">
+                <button type="button" class="rv-shot" aria-label="Enlarge the review screenshot">
+                    <img src="images/reviews/en/tala.webp" alt="Screenshot of the Booking.com review of HIJAZI Apartments by Tala from the United Arab Emirates – 10 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">10</span>
+                        <div>
+                            <h3><span>Tala</span> <span class="rv-from">from the United Arab Emirates</span></h3>
+                            <p class="rv-meta"><span>Aug 5, 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-title">It was amazing! Very easy check in! The location and building is great.</p>
+                    <p class="rv-text">Its space, cleanliness, and location!!!!</p>
+                    <ul class="am-chips rv-chips"><li>Family with young children</li></ul>
+                    <p class="rv-note" hidden></p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-helal">
+                <button type="button" class="rv-shot" aria-label="Enlarge the review screenshot">
+                    <img src="images/reviews/en/helal.webp" alt="Screenshot of the Booking.com review of HIJAZI Apartments by Helal from Saudi Arabia – 10 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">10</span>
+                        <div>
+                            <h3><span>Helal</span> <span class="rv-from">from Saudi Arabia</span></h3>
+                            <p class="rv-meta"><span>Aug 3, 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-title">I will repeat the experience in the same apartment.</p>
+                    <p class="rv-text">A lovely stay. I highly recommend this place. The apartment is very clean and spacious, and everything is provided perfectly. I thank Mr. Ibrahim for his excellent service.</p>
+                    <ul class="am-chips rv-chips"><li>Family with young children</li></ul>
+                    <p class="rv-note">Translated from Arabic – the original text is on the Arabic version of this page.</p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-khalaf">
+                <button type="button" class="rv-shot" aria-label="Enlarge the review screenshot">
+                    <img src="images/reviews/en/khalaf.webp" alt="Screenshot of the Booking.com review of HIJAZI Apartments by Khalaf from Saudi Arabia – 10 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">10</span>
+                        <div>
+                            <h3><span>Khalaf</span> <span class="rv-from">from Saudi Arabia</span></h3>
+                            <p class="rv-meta"><span>Jul 25, 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-text">The service provided by Ibrahim was excellent. He was keen to serve us.</p>
+                    <ul class="am-chips rv-chips"><li>7 nights</li><li>Family</li></ul>
+                    <p class="rv-note">Translated from Arabic – the original text is on the Arabic version of this page.</p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-futoon">
+                <button type="button" class="rv-shot" aria-label="Enlarge the review screenshot">
+                    <img src="images/reviews/en/futoon.webp" alt="Screenshot of the Booking.com review of HIJAZI Apartments by Futoon from Saudi Arabia – 10 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">10</span>
+                        <div>
+                            <h3><span>Futoon</span> <span class="rv-from">from Saudi Arabia</span></h3>
+                            <p class="rv-meta"><span>Jul 18, 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-text">Everything is perfect, and the apartment is extremely clean. Even close to everything.</p>
+                    <p class="rv-note">Translated from Arabic – the original text is on the Arabic version of this page.</p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-talal">
+                <button type="button" class="rv-shot" aria-label="Enlarge the review screenshot">
+                    <img src="images/reviews/en/talal.webp" alt="Screenshot of the Booking.com review of HIJAZI Apartments by Talal from Saudi Arabia – 9 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">9</span>
+                        <div>
+                            <h3><span>Talal</span> <span class="rv-from">from Saudi Arabia</span></h3>
+                            <p class="rv-meta"><span>Jul 11, 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-text">The apartment is large and excellent, with 3 rooms and 3 bathrooms. It is clean, well-located, spacious, and the host, Ibrahim, is very kind and courteous.</p>
+                    <ul class="am-chips rv-chips"><li>9 nights</li><li>Solo traveler</li></ul>
+                    <p class="rv-note">Translated from Arabic – the original text is on the Arabic version of this page.</p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-majdoubah">
+                <button type="button" class="rv-shot" aria-label="Enlarge the review screenshot">
+                    <img src="images/reviews/en/majdoubah.webp" alt="Screenshot of the Booking.com review of HIJAZI Apartments by Al-Majdoubah from the United Arab Emirates – 10 out of 10" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" title="Booking.com">10</span>
+                        <div>
+                            <h3><span>Al-Majdoubah</span> <span class="rv-from">from the United Arab Emirates</span></h3>
+                            <p class="rv-meta"><span>Jun 27, 2026</span> · Booking.com</p>
+                        </div>
+                    </div>
+                    <p class="rv-title">A perfect stay with an amazing host. Highly recommended!</p>
+                    <p class="rv-text">The property was exceptionally clean, comfortable, and well-maintained. Everything was exactly as described, and I truly felt at home during my stay. The host was friendly, responsive, and made sure everything was perfect.</p>
+                    <ul class="am-chips rv-chips"><li>Couple</li></ul>
+                    <p class="rv-note" hidden></p>
+                </div>
+            </article>
+            </div>
+        </section>
+
+        <section class="am-section" id="airbnb-reviews">
+            <h2>Guest reviews on Airbnb, newest first</h2>
+            <p class="am-intro">The guest's first name, country (where shown), stars out of 5 and words are shown as they appear on Airbnb, which shows only the month and year of each review.</p>
+            <div class="rv-grid">
+            <article class="rv-card" id="review-diane">
+                <button type="button" class="rv-shot" aria-label="Enlarge the review screenshot">
+                    <img src="images/reviews/en/airbnb-diane.webp" alt="Screenshot of the Airbnb review of HIJAZI Apartments by Diane from the United States – 5 out of 5" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" dir="ltr" title="Airbnb">5★</span>
+                        <div>
+                            <h3><span>Diane</span> <span class="rv-from">from the United States</span></h3>
+                            <p class="rv-meta"><span>August 2026</span> · Airbnb</p>
+                        </div>
+                    </div>
+                    <p class="rv-text">We had a great stay! The location was great and very convenient, and the apartment was spacious, and great for our stay. Ibrahim was an excellent host very responsive, accommodating, and always helpful whenever we needed anything. He made sure we had everything we needed and was quick to assist with any questions or requests. We really appreciated his hospitality and would definitely recommend staying here!</p>
+                    <ul class="am-chips rv-chips"><li>14 nights</li></ul>
+                    <p class="rv-note" hidden></p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-fouad">
+                <button type="button" class="rv-shot" aria-label="Enlarge the review screenshot">
+                    <img src="images/reviews/en/airbnb-fouad.webp" alt="Screenshot of the Airbnb review of HIJAZI Apartments by Fouad from the United Arab Emirates – 5 out of 5" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" dir="ltr" title="Airbnb">5★</span>
+                        <div>
+                            <h3><span>Fouad</span> <span class="rv-from">from the United Arab Emirates</span></h3>
+                            <p class="rv-meta"><span>July 2026</span> · Airbnb</p>
+                        </div>
+                    </div>
+                    <p class="rv-text">Amazing host! The place was exactly as described it was clean, comfortable, and well-maintained. The location was excellent, with everything we needed close by, making it the perfect place for our stay. Communication was easy throughout, and the whole experience was seamless. I would definitely stay here again and highly recommend it to anyone visiting the area.</p>
+                    <p class="rv-note" hidden></p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-hussein">
+                <button type="button" class="rv-shot" aria-label="Enlarge the review screenshot">
+                    <img src="images/reviews/en/airbnb-hussein.webp" alt="Screenshot of the Airbnb review of HIJAZI Apartments by Hussein – 5 out of 5" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" dir="ltr" title="Airbnb">5★</span>
+                        <div>
+                            <h3><span>Hussein</span></h3>
+                            <p class="rv-meta"><span>August 2025</span> · Airbnb</p>
+                        </div>
+                    </div>
+                    <p class="rv-text">I thank brother Ibrahim for his refined manner and good character. The apartment's Egyptian guard was also very pleasant to deal with.</p>
+                    <p class="rv-note">Translated from Arabic – the original text is on the Arabic version of this page.</p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-mohammad">
+                <button type="button" class="rv-shot" aria-label="Enlarge the review screenshot">
+                    <img src="images/reviews/en/airbnb-mohammad.webp" alt="Screenshot of the Airbnb review of HIJAZI Apartments by Mohammad – 5 out of 5" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" dir="ltr" title="Airbnb">5★</span>
+                        <div>
+                            <h3><span>Mohammad</span></h3>
+                            <p class="rv-meta"><span>July 2025</span> · Airbnb</p>
+                        </div>
+                    </div>
+                    <p class="rv-text">Suitable, quiet and clean.</p>
+                    <p class="rv-note">Translated from Arabic – the original text is on the Arabic version of this page.</p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-muhanad">
+                <button type="button" class="rv-shot" aria-label="Enlarge the review screenshot">
+                    <img src="images/reviews/en/airbnb-muhanad.webp" alt="Screenshot of the Airbnb review of HIJAZI Apartments by Muhanad from Germany – 5 out of 5" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" dir="ltr" title="Airbnb">5★</span>
+                        <div>
+                            <h3><span>Muhanad</span> <span class="rv-from">from Germany</span></h3>
+                            <p class="rv-meta"><span>June 2025</span> · Airbnb</p>
+                        </div>
+                    </div>
+                    <p class="rv-text">Very friendly. (Original in German: “sehr freundlich”)</p>
+                </div>
+            </article>
+
+            <article class="rv-card" id="review-ahmed">
+                <button type="button" class="rv-shot" aria-label="Enlarge the review screenshot">
+                    <img src="images/reviews/en/airbnb-ahmed.webp" alt="Screenshot of the Airbnb review of HIJAZI Apartments by Ahmed from Saudi Arabia – 5 out of 5" width="1200" height="1200" loading="lazy" decoding="async">
+                </button>
+                <div class="rv-body">
+                    <div class="rv-head">
+                        <span class="rv-score" dir="ltr" title="Airbnb">5★</span>
+                        <div>
+                            <h3><span>Ahmed</span> <span class="rv-from">from Saudi Arabia</span></h3>
+                            <p class="rv-meta"><span>April 2025</span> · Airbnb</p>
+                        </div>
+                    </div>
+                    <p class="rv-text">An outstanding host. The apartment is very beautiful and wonderful.</p>
+                    <p class="rv-note">Translated from Arabic – the original text is on the Arabic version of this page.</p>
+                </div>
+            </article>
+            </div>
+        </section>
+
+        <div class="am-cta">
+            <h2>Ready to try it yourself?</h2>
+            <p>Pick your check-in and check-out dates, see the available apartments, and complete your booking on the website.</p>
+            <a href="apartments.html" class="am-btn">View available apartments</a>
+        </div>
+    </main>
+
+    <dialog class="rv-viewer" id="rvViewer" aria-label="Review screenshot">
+        <div class="rv-viewer-inner"><img id="rvViewerImage" src="" alt=""></div>
+        <button type="button" class="rv-viewer-close" id="rvViewerClose" aria-label="Close">&times;</button>
+    </dialog>
+
+    <div id="sharedFooter"><nav class="static-site-links" aria-label="Site links" style="display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:center;padding:24px 16px;font-size:14px"><a href="/">Home</a><a href="apartments.html">Apartments</a><a href="booking.html">Booking</a><a href="amenities-en.html">Amenities &amp; services</a><a href="apartments-amman-en.html">Furnished apartments in Shmeisani</a><a href="apartments-abdali-en.html">Near Abdali</a><a href="apartments-jordan-hospital-en.html">Near Jordan Hospital</a><a href="apartments-specialty-hospital-en.html">Near the Specialty Hospital</a><a href="apartments-islamic-hospital-en.html">Near the Islamic Hospital</a><a href="apartments-medical-amman-en.html">Medical stays</a><a href="apartments-monthly-amman-en.html">Monthly rentals</a><a href="faq-en.html">FAQ</a><a href="reviews-en.html">Reviews</a><a href="about-en.html">About us</a><a href="reviews.html">العربية</a></nav></div>
+    <div id="sharedWhatsApp"></div>
+
+    <script>
+        window.HIJAZI_PAGE_LANG = "en";
+        window.HIJAZI_ALT_PAGES = { ar: "reviews.html", en: "reviews-en.html" };
+        try { localStorage.setItem("siteLang", "en"); } catch (e) { }
+    </script>
+    <script src="js/main.js?v=14"></script>
+    <script>
+        renderSharedHeader("reviews", false);
+        renderSharedFooter();
+        renderWhatsAppWidget();
+
+        (function () {
+            // العربي هو النص الثابت في الصفحة؛ الإنجليزي (نصوص وصور) يُبدَّل هنا
+            if (getCurrentLang() === "en") {
+                document.title = "Guest Reviews | HIJAZI Apartments";
+                document.querySelectorAll("main [data-en], .am-page-hero [data-en]").forEach(function (el) {
+                    var en = el.getAttribute("data-en");
+                    if (el.classList.contains("rv-note")) { el.hidden = !en; }
+                    el.textContent = en;
+                });
+                document.querySelectorAll("img[data-src-en]").forEach(function (img) {
+                    img.src = img.getAttribute("data-src-en");
+                    img.alt = img.getAttribute("data-alt-en");
+                });
+                document.querySelectorAll("[data-aria-en]").forEach(function (el) {
+                    el.setAttribute("aria-label", el.getAttribute("data-aria-en"));
+                });
+                document.getElementById("rvViewer").setAttribute("aria-label", "Review screenshot");
+                document.getElementById("rvViewerClose").setAttribute("aria-label", "Close");
+            }
+
+            var viewer = document.getElementById("rvViewer");
+            var viewerImage = document.getElementById("rvViewerImage");
+            if (!viewer.showModal) { return; }
+            document.querySelectorAll(".rv-shot").forEach(function (button) {
+                button.addEventListener("click", function () {
+                    var img = button.querySelector("img");
+                    viewerImage.src = img.currentSrc || img.src;
+                    viewerImage.alt = img.alt;
+                    viewer.showModal();
+                });
+            });
+            viewer.addEventListener("click", function () { viewer.close(); });
+        })();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
