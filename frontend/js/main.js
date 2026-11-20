@@ -873,9 +873,10 @@ function renderSharedFooter() {
                 <div class="footer-box">
                     <h4>${t.social}</h4>
                     <div class="social-links">
-                        <a href="https://www.instagram.com/j_ibrahim_j/" target="_blank" rel="noopener noreferrer">Instagram</a>
-                        <a href="https://web.facebook.com/abrahem.hjaze.71?locale=ar_AR" target="_blank" rel="noopener noreferrer">Facebook</a>
-                        <a href="#" target="_blank" rel="noopener noreferrer">Snapchat</a>
+                        <a href="https://www.instagram.com/hijazi.apartments/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                        <a href="https://www.facebook.com/people/Hijazi-Apartments/61596304963608/" target="_blank" rel="noopener noreferrer">Facebook</a>
+                        <a href="https://www.booking.com/hotel/jo/hijazi-apartments.html" target="_blank" rel="noopener noreferrer">Booking.com</a>
+                        <a href="https://www.airbnb.com/users/show/554726817" target="_blank" rel="noopener noreferrer">Airbnb</a>
                     </div>
                 </div>
             </div>

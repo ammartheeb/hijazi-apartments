@@ -121,6 +121,12 @@ function buildSchema(lang) {
                 },
                 geo: { "@type": "GeoCoordinates", latitude: 31.9758601, longitude: 35.898315 },
                 hasMap: "https://maps.google.com/?cid=2903136424075634115",
+                sameAs: [
+                    "https://www.booking.com/hotel/jo/hijazi-apartments.html",
+                    "https://www.airbnb.com/users/show/554726817",
+                    "https://www.instagram.com/hijazi.apartments/",
+                    "https://www.facebook.com/people/Hijazi-Apartments/61596304963608/"
+                ],
                 areaServed: ["Shmeisani", "Abdali", "Amman"],
                 checkoutTime: "12:00",
                 amenityFeature: features,
