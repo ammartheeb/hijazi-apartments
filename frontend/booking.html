@@ -424,11 +424,13 @@
             border: 1px solid #abefc6;
         }
 
+        /* نافذة «تم استلام طلب حجزك»: زجاج بنفس وصفة كرت النموذج.
+           تمويه (backdrop-filter) واحد فقط على الكرت؛ الخلفية المعتمة بدون تمويه حتى لا تثقل الجهاز. */
         .success-modal {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(8, 8, 8, .72);
+            background: rgba(8, 8, 8, .5);
             z-index: 9999;
             padding: 20px 16px;
             overflow: auto;
@@ -436,29 +438,22 @@
 
         .success-content {
             position: relative;
-            max-width: 460px;
+            max-width: 440px;
             margin: 7vh auto;
-            padding: 34px 26px 24px;
-            border-radius: 24px;
-            background: linear-gradient(165deg, #1d1a14 0%, #0d0d0d 70%);
-            border: 1px solid rgba(212, 160, 23, .38);
-            box-shadow: 0 30px 70px rgba(0, 0, 0, .5), inset 0 1px 0 rgba(255, 255, 255, .06);
-            color: #f3ede0;
+            padding: 30px 24px 22px;
+            border-radius: 26px;
+            background: linear-gradient(160deg, rgba(255, 255, 255, .16), rgba(255, 255, 255, .05) 55%, rgba(0, 0, 0, .12));
+            border: 1px solid rgba(255, 255, 255, .24);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, .42), inset 0 1px 0 rgba(255, 255, 255, .28);
+            backdrop-filter: blur(22px) saturate(150%);
+            -webkit-backdrop-filter: blur(22px) saturate(150%);
+            color: #fff;
             text-align: center;
-            animation: successIn .35s ease-out both;
-        }
-
-        .success-content::before {
-            content: "";
-            position: absolute;
-            inset: 0 24px auto;
-            height: 3px;
-            border-radius: 0 0 6px 6px;
-            background: linear-gradient(90deg, transparent, #d4a017, transparent);
+            animation: successIn .3s ease-out both;
         }
 
         @keyframes successIn {
-            from { opacity: 0; transform: translateY(14px) scale(.98); }
+            from { opacity: 0; transform: translateY(12px) scale(.98); }
             to { opacity: 1; transform: none; }
         }
 
@@ -467,39 +462,42 @@
         }
 
         .success-icon {
-            width: 66px;
-            height: 66px;
-            margin: 0 auto 16px;
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 14px;
             border-radius: 50%;
             display: grid;
             place-items: center;
-            font-size: 32px;
+            font-size: 26px;
             font-weight: 900;
-            color: #111;
-            background: linear-gradient(135deg, #f1c75b, #c89116);
-            box-shadow: 0 0 0 8px rgba(212, 160, 23, .14);
+            color: #f1c75b;
+            background: rgba(212, 160, 23, .16);
+            border: 1px solid rgba(241, 199, 91, .55);
+            box-shadow: 0 0 26px rgba(212, 160, 23, .28), inset 0 1px 0 rgba(255, 255, 255, .2);
         }
 
         .success-content h2 {
-            margin: 0 0 10px;
-            font-size: 22px;
-            font-weight: 800;
+            margin: 0 0 8px;
+            font-size: 21px;
+            font-weight: 900;
             color: #fff;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, .25);
         }
 
         #successText {
-            margin: 0 0 18px;
-            color: #cfc6b3;
-            font-size: 15px;
+            margin: 0 0 16px;
+            color: rgba(255, 255, 255, .8);
+            font-size: 14.5px;
             line-height: 1.8;
         }
 
         .success-summary {
-            margin: 0 0 14px;
-            padding: 6px 16px;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, .05);
-            border: 1px solid rgba(212, 160, 23, .2);
+            margin: 0 0 12px;
+            padding: 4px 16px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, .07);
+            border: 1px solid rgba(255, 255, 255, .15);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
             text-align: start;
         }
 
@@ -511,8 +509,8 @@
             display: flex;
             justify-content: space-between;
             gap: 12px;
-            padding: 9px 0;
-            border-top: 1px solid rgba(255, 255, 255, .07);
+            padding: 8px 0;
+            border-top: 1px solid rgba(255, 255, 255, .09);
         }
 
         .success-summary div:first-child {
@@ -520,9 +518,9 @@
         }
 
         .success-summary dt {
-            color: #a99f8b;
-            font-size: 14px;
-            font-weight: 600;
+            color: rgba(255, 255, 255, .62);
+            font-size: 13.5px;
+            font-weight: 700;
         }
 
         .success-summary dd {
@@ -534,13 +532,14 @@
         }
 
         .success-summary div:last-child dd {
-            color: #e9b949;
+            color: #f1c75b;
             font-size: 16px;
+            font-weight: 900;
         }
 
         .success-note {
-            margin: 0 0 18px;
-            color: #8f877a;
+            margin: 0 0 16px;
+            color: rgba(255, 255, 255, .58);
             font-size: 12.5px;
             line-height: 1.6;
         }
@@ -552,38 +551,51 @@
 
         .success-whatsapp,
         .success-btn {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             width: 100%;
-            min-height: 48px;
-            padding: 13px 16px;
-            border-radius: 999px;
+            min-height: 50px;
+            padding: 12px 16px;
+            border-radius: 15px;
             font-size: 15px;
-            font-weight: 800;
-            text-align: center;
+            font-weight: 900;
             text-decoration: none;
             cursor: pointer;
-            transition: transform .15s ease, background .15s ease;
+            transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
         }
 
         .success-whatsapp {
-            background: #25d366;
+            background: linear-gradient(135deg, #d4a017, #8a6508);
             color: #fff !important;
             border: 0;
+            box-shadow: 0 12px 28px rgba(212, 160, 23, .3);
+        }
+
+        .success-whatsapp svg {
+            width: 19px;
+            height: 19px;
+            flex: none;
         }
 
         .success-btn {
-            background: transparent;
-            color: #e9b949;
-            border: 1px solid rgba(212, 160, 23, .55);
+            background: rgba(255, 255, 255, .08);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, .22);
         }
 
         .success-whatsapp:hover,
         .success-btn:hover {
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+        }
+
+        .success-whatsapp:hover {
+            background: linear-gradient(135deg, #000, #2a2a2a);
         }
 
         .success-btn:hover {
-            background: rgba(212, 160, 23, .12);
+            background: rgba(255, 255, 255, .14);
         }
 
         .success-btn:focus-visible,
@@ -600,19 +612,20 @@
         .action-msg {
             margin: 10px 0 0;
             padding: 11px 14px;
-            border-radius: 14px;
+            border-radius: 15px;
             font-size: 14px !important;
-            font-weight: 700;
+            font-weight: 800;
             line-height: 1.7;
+            color: #fff !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14);
+            opacity: 1 !important;
             animation: actionMsgIn .25s ease-out both;
         }
 
         .action-msg-error {
-            background: #fff1f1 !important;
-            border: 1px solid #f3a3a3 !important;
-            color: #a8190f !important;
-            opacity: 1 !important;
-            box-shadow: 0 6px 18px rgba(168, 25, 15, .14);
+            background: rgba(220, 38, 38, .3) !important;
+            border: 1px solid rgba(255, 150, 150, .6) !important;
         }
 
         .action-msg-error::before {
@@ -620,42 +633,44 @@
         }
 
         .action-msg-info {
-            background: #fff8e6 !important;
-            border: 1px solid #e9c46a !important;
-            color: #6b4f00 !important;
-            opacity: 1 !important;
+            background: rgba(212, 160, 23, .28) !important;
+            border: 1px solid rgba(241, 199, 91, .6) !important;
         }
 
         .action-msg-success {
-            background: #ecfdf3 !important;
-            border: 1px solid #abefc6 !important;
-            color: #027a48 !important;
-            opacity: 1 !important;
+            background: rgba(22, 163, 74, .28) !important;
+            border: 1px solid rgba(134, 239, 172, .55) !important;
         }
 
-        /* أخطاء الحقول: مقروءة فوق الزجاج الفاتح والغامق */
+        /* أخطاء الحقول: نفس الزجاج الملوّن، مقروءة فوق كرت النموذج */
         #bookingForm .field-error {
             margin-top: 6px !important;
-            padding: 6px 10px !important;
-            border-radius: 10px !important;
-            background: #fff1f1 !important;
-            border: 1px solid #f3a3a3 !important;
-            color: #a8190f !important;
+            padding: 6px 11px !important;
+            border-radius: 12px !important;
+            background: rgba(220, 38, 38, .3) !important;
+            border: 1px solid rgba(255, 150, 150, .55) !important;
+            color: #fff !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, .3);
             font-size: 13px !important;
-            font-weight: 700 !important;
+            font-weight: 800 !important;
             opacity: 1 !important;
         }
 
         @media (max-width: 600px) {
-            .success-icon { width: 54px; height: 54px; font-size: 26px; margin-bottom: 12px; }
-            .success-content h2 { font-size: 20px; }
-            #successText { font-size: 14px; margin-bottom: 14px; }
+            .success-icon { width: 50px; height: 50px; font-size: 22px; margin-bottom: 10px; }
+            .success-content { margin: 4vh auto; padding: 24px 16px 18px; }
+            .success-content h2 { font-size: 19px; }
+            #successText { font-size: 14px; margin-bottom: 12px; }
             .success-summary div { padding: 7px 0; }
         }
 
+        /* رسالة التقويم خارج كرت النموذج، فلها تمويه خاص بها (مش متداخل) */
         #calendarMessage {
             max-width: 1100px;
             margin: 0 auto 12px;
+            background: rgba(120, 20, 20, .42) !important;
+            backdrop-filter: blur(14px) saturate(140%);
+            -webkit-backdrop-filter: blur(14px) saturate(140%);
         }
 
         @keyframes actionMsgIn {
@@ -852,10 +867,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .success-content {
-                margin: 4vh auto;
-                padding: 30px 18px 20px;
-            }
         }
 
         /* ===== COSMIC DUST BACKGROUND - BOOKING PAGE ===== */
@@ -3567,7 +3578,7 @@
             <dl class="success-summary" id="successSummary"></dl>
             <p class="success-note" id="successNote">لم تصلك الرسالة؟ تفقّد مجلد الرسائل غير المرغوب فيها أو تبويب الإشعارات.</p>
             <div class="success-actions">
-                <a class="success-whatsapp" id="successWhatsApp" href="https://wa.me/962789000444" target="_blank" rel="noopener">تأكيد أسرع عبر واتساب</a>
+                <a class="success-whatsapp" href="https://wa.me/962789000444" target="_blank" rel="noopener" id="successWhatsAppLink"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-.7-.3-1.4-.7-2-1.3-.5-.5-1-1.1-1.3-1.7-.1-.2 0-.4.1-.5l.4-.5.3-.5v-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.6.6-.9 1.4-.9 2.2.1 1 .5 2 1.1 2.8 1.2 1.8 2.8 3.2 4.7 4 .5.2 1 .4 1.5.5.6.2 1.2.1 1.7-.2.4-.3.8-.7.9-1.2.1-.3.1-.7 0-1-.1-.1-.3-.2-.5-.3Z"/></svg><span id="successWhatsApp">تأكيد أسرع عبر واتساب</span></a>
                 <button class="success-btn" id="closeSuccessModal" type="button">إغلاق</button>
             </div>
         </div>
@@ -5262,7 +5273,7 @@
             const text = isAr
                 ? `مرحبًا، أرسلت طلب حجز من الموقع.\nالاسم: ${data.fullName}\n${data.apartmentLabel}\nمن ${data.checkIn} إلى ${data.checkOut}`
                 : `Hello, I sent a booking request on the website.\nName: ${data.fullName}\n${data.apartmentLabel}\nFrom ${data.checkIn} to ${data.checkOut}`;
-            document.getElementById("successWhatsApp").href = `https://wa.me/962789000444?text=${encodeURIComponent(text)}`;
+            document.getElementById("successWhatsAppLink").href = `https://wa.me/962789000444?text=${encodeURIComponent(text)}`;
         }
 
         document.addEventListener("keydown", (e) => {
