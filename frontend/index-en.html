@@ -1287,7 +1287,7 @@
                     if (statusEl) {
                         statusEl.classList.add("status-error");
                         statusEl.textContent = lang === "ar"
-                            ? "❌ تاريخ الخروج لازم يكون بعد تاريخ الدخول"
+                            ? "❌ يجب أن يكون تاريخ الخروج بعد تاريخ الدخول"
                             : "❌ Check-out must be after check-in";
                     }
                     return;
@@ -1347,7 +1347,7 @@
 
                 if (checkOut <= checkIn) {
                     const msg = lang === "ar"
-                        ? "❌ تاريخ الخروج لازم يكون بعد تاريخ الدخول"
+                        ? "❌ يجب أن يكون تاريخ الخروج بعد تاريخ الدخول"
                         : "❌ Check-out must be after check-in";
 
                     if (mobileStatusEl) {

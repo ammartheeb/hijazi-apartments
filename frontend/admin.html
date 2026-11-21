@@ -5045,7 +5045,7 @@
     <script src="js/export-security.js"></script>
     <script src="js/admin-booking-groups.js?v=1"></script>
     <script src="js/passport-mrz.js?v=1"></script>
-    <script src="js/passport-scan.js?v=1"></script>
+    <script src="js/passport-scan.js?v=2"></script>
     <script src="js/reservation-form.js?v=2"></script>
 </head>
 
@@ -5106,7 +5106,7 @@
                     <div class="stat-value" id="revenueCount">0 JOD</div>
                 </div>
                 <div class="card stat-card">
-                    <div class="stat-label">إشغال الـ30 يوم القادمة</div>
+                    <div class="stat-label">إشغال الأيام الـ30 القادمة</div>
                     <div class="stat-value" id="occupancyRate">0%</div>
                 </div>
             </div>
@@ -5126,8 +5126,8 @@
                 <div class="section-head">
                     <div>
                         <h2>إضافة حجز</h2>
-                        <p>ارفع صورة جواز النزيل أو هويته فتتعبّى بياناته لحالها، كمّل الشقة والتواريخ والسعر، وبعد
-                            الحفظ يطلع نموذج الحجز جاهز للطباعة أو الإرسال. يصلح أيضًا للحجز الهاتفي ولتسجيل حجز Airbnb
+                        <p>ارفع صورة جواز النزيل أو هويته لتُعبَّأ بياناته تلقائيًا، ثم أكمل الشقة والتواريخ والسعر. بعد
+                            الحفظ يظهر نموذج الحجز جاهزًا للطباعة أو الإرسال. ويصلح أيضًا للحجز الهاتفي ولتسجيل حجز Airbnb
                             أو Booking يدويًا، حتى لو كان تاريخ الإقامة قد مضى.</p>
                     </div>
                 </div>
@@ -5138,9 +5138,9 @@
                                     aria-hidden="true">📷</span> صورة الجواز أو الهوية</label>
                             <input class="passport-scan-input" id="manualPassportFile" type="file" accept="image/*">
                             <div class="passport-scan-text">
-                                <strong data-scan-status>اختياري: بتعبّي بيانات النزيل لحالها من السطرين اللي تحت
+                                <strong data-scan-status>اختياري: تُعبّئ بيانات النزيل تلقائيًا من السطرين الموجودين أسفل
                                     الجواز (&lt;&lt;&lt;).</strong>
-                                <span>الصورة بتنقرا جوّا جهازك، ما بتنرفع على أي سيرفر وما بتنحفظ.</span>
+                                <span>تُقرأ الصورة داخل جهازك فقط، ولا تُرفع إلى أي خادم ولا تُحفظ.</span>
                             </div>
                         </div>
                         <div class="passport-scan-progress" hidden><span></span></div>
@@ -5240,7 +5240,7 @@
                     </fieldset>
 
                     <div class="form-actions quick-booking-actions">
-                        <p>بعد الحفظ يطلعلك نموذج الحجز جاهز للطباعة أو الإرسال للعميل.</p>
+                        <p>بعد الحفظ يظهر نموذج الحجز جاهزًا للطباعة أو الإرسال للعميل.</p>
                         <button class="btn btn-primary" id="addBookingBtn" type="submit">إضافة الحجز وإغلاق
                             التواريخ</button>
                     </div>
@@ -5655,8 +5655,8 @@
                                 aria-hidden="true">📷</span> صورة الجواز أو الهوية</label>
                         <input class="passport-scan-input" id="editPassportFile" type="file" accept="image/*">
                         <div class="passport-scan-text">
-                            <strong data-scan-status>تعبّي بيانات الجواز تحت لحالها.</strong>
-                            <span>الصورة بتنقرا جوّا جهازك، ما بتنرفع على أي سيرفر وما بتنحفظ.</span>
+                            <strong data-scan-status>تُعبّئ بيانات الجواز أدناه تلقائيًا.</strong>
+                            <span>تُقرأ الصورة داخل جهازك فقط، ولا تُرفع إلى أي خادم ولا تُحفظ.</span>
                         </div>
                     </div>
                     <div class="passport-scan-progress" hidden><span></span></div>
@@ -6215,7 +6215,7 @@
             const value = parseMoney(input.value);
             if (Number.isNaN(value)) {
                 input.focus();
-                throw new Error("في مبلغ مكتوب بشكل غير صحيح. استخدم أرقام فقط، مثل 120 أو 99.5");
+                throw new Error("يوجد مبلغ مكتوب بشكل غير صحيح. استخدم الأرقام فقط، مثل 120 أو 99.5");
             }
             return value;
         }
@@ -6441,7 +6441,7 @@
                 if (!file) return;
 
                 if (!window.HijaziPassportScan) {
-                    setStatus("أداة قراءة الجواز ما تحمّلت. حدّث الصفحة وجرّب مرة ثانية.", "error");
+                    setStatus("لم تُحمَّل أداة قراءة الجواز. حدّث الصفحة وحاول مرة أخرى.", "error");
                     return;
                 }
 
@@ -6461,7 +6461,7 @@
                         onProgress: ({ stage, progress: value }) => {
                             bar.style.width = `${Math.round(Math.max(0, Math.min(1, value)) * 100)}%`;
                             setStatus(stage === "loading"
-                                ? "جاري تحميل أداة القراءة (أول مرة بس، بعدها أسرع)..."
+                                ? "جاري تحميل أداة القراءة (في المرة الأولى فقط، ثم تصبح أسرع)..."
                                 : "جاري قراءة الجواز...");
                         }
                     });
@@ -6469,8 +6469,8 @@
                     const result = applyPassportScan(prefix, nameInputId, guest);
                     const notes = ["✓ تمت القراءة."];
                     if (result.verify) notes.push("قارن الخانات المعلّمة «تحقق» مع الجواز.");
-                    if (result.missing.length) notes.push("عبّي الخانات المعلّمة «ناقص».");
-                    if (guest.nameMaybeTruncated) notes.push("الاسم ممكن يكون مقطوع، كمّله من الجواز.");
+                    if (result.missing.length) notes.push("املأ الخانات المعلّمة «ناقص».");
+                    if (guest.nameMaybeTruncated) notes.push("قد يكون الاسم مقطوعًا، أكمله من الجواز.");
                     setStatus(notes.join(" "), result.verify || guest.nameMaybeTruncated ? "warn" : "ok");
 
                     if (typeof afterScan === "function") afterScan(result);
@@ -6529,7 +6529,7 @@
             if (!dialog.open) dialog.showModal();
 
             try {
-                if (!window.HijaziReservationForm) throw new Error("ملف نموذج الحجز ما تحمّل. حدّث الصفحة.");
+                if (!window.HijaziReservationForm) throw new Error("لم يُحمَّل ملف نموذج الحجز. حدّث الصفحة.");
 
                 const booking = source && typeof source === "object" && source.guestDocument !== undefined
                     ? source
@@ -7220,7 +7220,7 @@
                 refreshHijaziSelects(group);
             } catch (error) {
                 if (editingBookingId !== bookingId) return;
-                note.textContent = "تعذر تحميل بيانات الجواز؛ ما رح تتغير عند الحفظ. سكّر النافذة وافتحها مرة ثانية.";
+                note.textContent = "تعذر تحميل بيانات الجواز؛ لن تتغير عند الحفظ. أغلق النافذة وافتحها مرة أخرى.";
             }
         }
 
@@ -9284,7 +9284,7 @@ ${connections}
             window.HijaziReservationForm.share(form)
                 .then(result => {
                     if (result === "downloaded") {
-                        setReservationStatusNote("نزلت الصورة على الجهاز؛ أرسلها للعميل من واتساب.");
+                        setReservationStatusNote("نُزّلت الصورة على الجهاز؛ أرسلها إلى العميل عبر واتساب.");
                     }
                 })
                 .catch(() => setReservationStatusNote("تعذر فتح المشاركة؛ استعمل «تنزيل الصورة»."));

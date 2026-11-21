@@ -1223,7 +1223,7 @@ async function sendSyncFailureEmail({
                 badge: "فشل المزامنة",
                 badgeTone: "red",
                 title: `${sourceTitle} — ${apartmentLabel}`,
-                intro: "ما قدر النظام يقرأ تقويم المنصة. الحجوزات الجديدة من هالمنصة ما رح تنضاف لحد ما تنحل المشكلة.",
+                intro: "تعذّر على النظام قراءة تقويم المنصة. لن تُضاف الحجوزات الجديدة من هذه المنصة حتى تُحل المشكلة.",
                 rows: [
                     ["الشقة", apartmentLabel],
                     ["المنصة", sourceTitle],
@@ -3016,22 +3016,22 @@ async function sendOutreachSummaryEmail({ sent, errors }) {
     const to = process.env.ADMIN_EMAIL;
     if (!resend || !from || !to) return;
     const lines = [
-        `انبعت اليوم ${sent.length} إيميل للجهات:`,
+        `أُرسلت اليوم ${sent.length} رسالة إلى الجهات:`,
         ...sent.map(item => `- ${item.contact.org}${item.kind === "followup" ? " (متابعة)" : ""}`),
         ...(errors.length ? ["", "أخطاء:", ...errors.map(error => `- ${error.org}: ${error.message}`)] : []),
         "",
-        "الردود بتوصل على info@hijazi-apartments.com."
+        "تصل الردود إلى info@hijazi-apartments.com."
     ];
     const { error } = await resend.emails.send({
         from,
         to,
-        subject: `مراسلة الجهات: ${sent.length} اليوم${errors.length ? ` و${errors.length} خطأ` : ""}`,
+        subject: `مراسلة الجهات: ${sent.length} رسالة اليوم${errors.length ? ` و${errors.length} خطأ` : ""}`,
         text: lines.join("\n"),
         html: ownerEmailHtml({
             badge: "مراسلة الجهات",
             badgeTone: errors.length ? "red" : "green",
-            title: `انبعت اليوم ${sent.length} إيميل`,
-            intro: "هاي الجهات اللي وصلتها رسالة اليوم. الردود بتوصل على info@hijazi-apartments.com.",
+            title: `أُرسلت اليوم ${sent.length} رسالة`,
+            intro: "هذه هي الجهات التي وصلتها رسالة اليوم. تصل الردود إلى info@hijazi-apartments.com.",
             rows: sent.map(item => [item.kind === "followup" ? "متابعة" : "رسالة أولى", item.contact.org]),
             blocks: [
                 ...(errors.length ? [{ tone: "red", title: "أخطاء", text: errors.map(error => `${error.org}: ${error.message}`).join("\n") }] : []),

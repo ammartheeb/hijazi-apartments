@@ -2893,7 +2893,7 @@
             }
 
             if (checkOut <= checkIn) {
-                return lang === "ar" ? "❌ تاريخ الخروج لازم يكون بعد تاريخ الدخول" : "❌ Check-out must be after check-in";
+                return lang === "ar" ? "❌ يجب أن يكون تاريخ الخروج بعد تاريخ الدخول" : "❌ Check-out must be after check-in";
             }
 
             return null;
@@ -3942,7 +3942,7 @@
                 const data = await res.json();
 
                 if (!res.ok) {
-                    statusEl.textContent = data.message || (lang === "ar" ? "صار خطأ أثناء الفحص" : "An error happened while checking");
+                    statusEl.textContent = data.message || (lang === "ar" ? "حدث خطأ أثناء الفحص" : "An error happened while checking");
                     gridEl.innerHTML = "";
                     return;
                 }

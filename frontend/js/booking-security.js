@@ -62,7 +62,7 @@
                 language: document.documentElement.lang === "en" ? "en" : "ar",
                 "response-field": false,
                 callback(value) { token = value; setStatus(""); },
-                "expired-callback"() { token = ""; setStatus(message("انتهت صلاحية التحقق. ضع علامة ✓ مرة ثانية قبل الإرسال.", "The check expired. Tick it again before submitting.")); },
+                "expired-callback"() { token = ""; setStatus(message("انتهت صلاحية التحقق. ضع علامة ✓ مرة أخرى قبل الإرسال.", "The check expired. Tick it again before submitting.")); },
                 "timeout-callback"() { token = ""; },
                 "error-callback"() {
                     token = "";

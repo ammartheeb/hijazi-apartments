@@ -44,7 +44,7 @@
                 script.onerror = () => {
                     libraryPromise = null;
                     script.remove();
-                    reject(new Error("تعذر تحميل أداة قراءة الجواز. تأكد من الإنترنت وجرّب مرة ثانية."));
+                    reject(new Error("تعذر تحميل أداة قراءة الجواز. تأكد من الاتصال بالإنترنت وحاول مرة أخرى."));
                 };
                 document.head.appendChild(script);
             });
@@ -293,7 +293,7 @@
     async function read(file, options = {}) {
         if (!file) throw new Error("اختر صورة الجواز أولًا.");
         if (!root.HijaziMrz) throw new Error("ملف قراءة الجواز غير محمّل.");
-        if (scanning) throw new Error("في قراءة شغالة حاليًا، استنى لحظة.");
+        if (scanning) throw new Error("توجد قراءة قيد التنفيذ، انتظر لحظة.");
 
         scanning = true;
         const onProgress = typeof options.onProgress === "function" ? options.onProgress : () => { };
@@ -346,7 +346,7 @@
             }
 
             if (mrzLines.length < 2) {
-                throw new Error("ما قدرت ألاقي السطور اللي فيها <<< تحت صفحة الجواز. صوّر صفحة البيانات كاملة وبوضوح وبدون انعكاس ضوء.");
+                throw new Error("لم أجد السطور التي تحتوي على <<< أسفل صفحة الجواز. صوّر صفحة البيانات كاملة بوضوح ودون انعكاس للضوء.");
             }
 
             const geometry = mrzGeometry(mrzLines);
@@ -383,7 +383,7 @@
             const guest = root.HijaziMrz.toGuestDocument(combined);
 
             if (!guest || (!guest.passportNumber && !guest.dateOfBirth && !guest.fullName)) {
-                throw new Error("قرأت الصورة بس البيانات مش واضحة. جرّب صورة أوضح أو قرّب على صفحة البيانات.");
+                throw new Error("قُرئت الصورة لكن البيانات غير واضحة. جرّب صورة أوضح أو قرّب الكاميرا من صفحة البيانات.");
             }
 
             return guest;
