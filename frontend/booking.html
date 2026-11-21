@@ -44,7 +44,7 @@
     <meta name="google-site-verification" content="CQow9HEGehI7vI8t4xQ3J6aqW_cw58dW8eZ8o8htyf4" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=12">
+    <link rel="stylesheet" href="css/style.css?v=13">
     <link rel="stylesheet" href="css/lightbox.css?v=6">
     <link rel="stylesheet" href="css/amenities.css?v=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.8/index.global.min.css" />
@@ -3326,7 +3326,7 @@
             }
         }
     </style>
-    <script src="js/booking-security.js?v=3" defer></script>
+    <script src="js/booking-security.js?v=4" defer></script>
     <style>
         /* ===== تحسينات الهاتف (2026-11-21) – آخر ما في الصفحة حتى يغلب ما قبله =====
            - حقول أوضح: عناوين 14px، خلفية أغمق وحدود أوضح بدل الزجاج الفاتح.
@@ -3439,6 +3439,96 @@
             font-size: 12px !important;
         }
 
+        /* شريط التقويم: السهمان على طرفي اسم الشهر، و«اليوم» زر صغير تحته */
+        html body .fc .fc-header-toolbar {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 10px !important;
+        }
+
+        html body .fc .fc-header-toolbar .fc-toolbar-chunk {
+            display: flex !important;
+            flex: 0 0 auto !important;
+            margin: 0 !important;
+        }
+
+        html body .fc .fc-header-toolbar .fc-toolbar-chunk:nth-child(2) {
+            flex: 1 1 auto !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 6px !important;
+        }
+
+        html body .fc .fc-toolbar-title {
+            text-align: center !important;
+        }
+
+        html body .fc .fc-prev-button,
+        html body .fc .fc-next-button {
+            width: 44px !important;
+            height: 44px !important;
+            padding: 0 !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+
+        html body .fc .fc-today-button {
+            margin: 0 !important;
+            padding: 3px 14px !important;
+            border-radius: 999px !important;
+            font-size: 12px !important;
+            background: transparent !important;
+            border: 1px solid rgba(138, 101, 8, 0.55) !important;
+            color: #6b4e05 !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+
+        html body .fc .fc-today-button:disabled {
+            opacity: 0.45 !important;
+        }
+
+        html body .fc .fc-today-button:not(:disabled):hover {
+            background: linear-gradient(135deg, #d4a017, #8a6508) !important;
+            color: #fff !important;
+        }
+
+        /* نصوص كانت 11px وأهداف لمس صغيرة (مراجعة الهاتف 2026-11-21) */
+        html body .airbnb-gallery-label {
+            font-size: 12.5px !important;
+        }
+
+        html body .airbnb-show-all {
+            font-size: 13px !important;
+            min-height: 36px !important;
+        }
+
+        html body .fc .fc-col-header-cell-cushion {
+            font-size: 12px !important;
+        }
+
+        html body #notesToggle {
+            min-height: 44px !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            cursor: pointer !important;
+        }
+
+        html body .fc-event .fc-event-title,
+        html body .fc-event .fc-event-main {
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
         @media (max-width: 768px) {
             /* الشريط العلوي (الرجوع + العملة) في سطر واحد بدل ثلاثة،
                فيظهر نموذج الحجز من الشاشة الأولى */
@@ -3490,6 +3580,46 @@
             .fc-event,
             .fc-event .fc-event-title {
                 font-size: 11px !important;
+            }
+
+            /* «صور وتفاصيل الشقة» على الهاتف: زر واضح بسهم بدل شريط رمادي يشبه زرًا معطّلًا */
+            html body #mobilePreviewSummary {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 10px !important;
+                min-height: 56px !important;
+                padding: 14px 18px !important;
+                border-radius: 18px !important;
+                background: rgba(14, 12, 9, 0.66) !important;
+                border: 1px solid rgba(212, 160, 23, 0.45) !important;
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+                color: #fff !important;
+                font-size: 16px !important;
+                font-weight: 800 !important;
+                list-style: none !important;
+                cursor: pointer !important;
+            }
+
+            html body #mobilePreviewSummary::-webkit-details-marker {
+                display: none !important;
+            }
+
+            html body #mobilePreviewSummary::after {
+                content: "" !important;
+                flex: 0 0 auto !important;
+                width: 9px !important;
+                height: 9px !important;
+                margin-top: -4px !important;
+                border-right: 2px solid #d4a017 !important;
+                border-bottom: 2px solid #d4a017 !important;
+                transform: rotate(45deg) !important;
+                transition: transform 0.2s ease !important;
+            }
+
+            html body details[open] > #mobilePreviewSummary::after {
+                margin-top: 4px !important;
+                transform: rotate(225deg) !important;
             }
         }
     </style>
@@ -3668,7 +3798,7 @@
                         <p><span id="finalPriceLabel">السعر النهائي:</span> <span class="price" id="totalPrice">—</span>
                         </p>
 
-                        <div id="bookingSecurity" hidden style="margin:16px 0;max-width:100%;overflow:hidden">
+                        <div id="bookingSecurity" hidden style="margin:8px 0;max-width:100%;overflow:hidden">
                             <div id="bookingTurnstile"></div>
                         </div>
                         <p id="bookingSecurityStatus" role="status" aria-live="polite" hidden></p>
@@ -3756,7 +3886,7 @@
     <script src="js/amenities-data.js?v=3"></script>
     <script src="js/amenities-ui.js?v=2"></script>
     <script src="js/lightbox-swipe.js?v=6"></script>
-    <script src="js/main.js?v=18"></script>
+    <script src="js/main.js?v=19"></script>
     <script src="js/scroll-reveal.js?v=1" defer></script>
     <script>
         const API_BASE = "https://api.hijazi-apartments.com";
@@ -5170,6 +5300,7 @@
                 locale: lang === "ar" ? "ar" : "en",
                 direction: lang === "ar" ? "rtl" : "ltr",
                 buttonText: { today: lang === "ar" ? "اليوم" : "Today" },
+                headerToolbar: { start: "prev", center: "title today", end: "next" },
 
                 dayHeaderContent: (arg) => {
                     const isMobile = window.innerWidth <= 768;
@@ -5197,10 +5328,12 @@
                                 r.apartmentLabel
                             );
 
+                            // على الهاتف الخلية ضيقة: اسم الشقة فقط (العنوان «تقويم الشقة» واللون يوضحان أنها محجوزة)
+                            const compact = window.innerWidth <= 768;
                             return {
-                                title: lang === "ar"
-                                    ? `${label} محجوزة`
-                                    : `${label} booked`,
+                                title: compact
+                                    ? label
+                                    : (lang === "ar" ? `${label} محجوزة` : `${label} booked`),
                                 start: r.start,
                                 end: r.end,
                                 allDay: true,

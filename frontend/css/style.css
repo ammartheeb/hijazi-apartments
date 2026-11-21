@@ -636,9 +636,9 @@ html[dir="rtl"] .footer-box .footer-action-value[dir="ltr"] {
 .whatsapp-label {
     background: rgba(0, 0, 0, 0.78);
     color: #fff;
-    padding: 8px 12px;
+    padding: 5px 10px;
     border-radius: 999px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
     white-space: nowrap;
@@ -650,12 +650,6 @@ html[dir="rtl"] .footer-box .footer-action-value[dir="ltr"] {
     color: #fff;
 }
 
-/* تخفت بعد 3.5 ثوانٍ بلا لمس، وتضيء عند اللمس (main.js) */
-.whatsapp-label.is-dim {
-    opacity: 0.22;
-    pointer-events: none;
-}
-
 /* في صفحة الحجز: مخفية ما دام زر تأكيد الحجز ظاهرًا */
 .whatsapp-label.is-quiet {
     opacity: 0;
@@ -664,8 +658,8 @@ html[dir="rtl"] .footer-box .footer-action-value[dir="ltr"] {
 
 .whatsapp-float {
     position: relative;
-    width: 64px;
-    height: 64px;
+    width: 54px;
+    height: 54px;
     background: #25D366;
     border-radius: 50%;
     display: flex;
@@ -1131,21 +1125,26 @@ body.ltr-mode .seo-card {
     }
 
     .whatsapp-float {
-        width: 56px;
-        height: 56px;
+        width: 46px;
+        height: 46px;
+    }
+
+    .whatsapp-float svg {
+        width: 24px;
+        height: 24px;
     }
 
     .whatsapp-label {
-        font-size: 12px;
-        padding: 7px 10px;
+        font-size: 11px;
+        padding: 4px 9px;
     }
 
     .scroll-top-btn {
-        left: 14px;
-        bottom: 18px;
-        width: 48px;
-        height: 48px;
-        font-size: 20px;
+        left: 16px;
+        bottom: 20px;
+        width: 42px;
+        height: 42px;
+        font-size: 17px;
     }
 
     .long-stay-note,

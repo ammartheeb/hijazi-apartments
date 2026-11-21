@@ -933,44 +933,15 @@ function renderWhatsAppWidget() {
     initWhatsAppLabelDimming(host);
 }
 
-/* جملة واتساب تخفت إذا لم يلمس الزائر الشاشة 3.5 ثوانٍ (غالبًا يقرأ)،
-   وتضيء من جديد عند أي لمسة على الصفحة. الأيقونة الخضراء تبقى كما هي.
-   اللمس داخل حقول الكتابة لا يضيئها، حتى لا تزعج من يملأ نموذجًا.
-   وفي صفحة الحجز تختفي الجملة كليًا ما دام زر تأكيد الحجز ظاهرًا. */
+/* في صفحة الحجز تختفي جملة واتساب ما دام زر «تأكيد الحجز» ظاهرًا، حتى لا تغطيه. */
 function initWhatsAppLabelDimming(host) {
-    const state = window.__hijaziWaDim || (window.__hijaziWaDim = { timer: 0, ready: false });
-    const IDLE_MS = 3500;
-    const getLabel = () => host.querySelector(".whatsapp-label");
-
-    function wake() {
-        const label = getLabel();
-        if (!label) return;
-        label.classList.remove("is-dim");
-        clearTimeout(state.timer);
-        state.timer = setTimeout(() => {
-            const current = getLabel();
-            if (current) current.classList.add("is-dim");
-        }, IDLE_MS);
-    }
-    state.wake = wake;
-    wake();
-
-    if (state.ready) return; // المستمعات تُضاف مرة واحدة حتى لو أُعيد رسم الزر
-    state.ready = true;
-
-    document.addEventListener("pointerdown", (event) => {
-        const target = event.target;
-        if (target.closest && target.closest("input, textarea, select, [contenteditable='true']")) return;
-        state.wake();
-    }, { passive: true });
-
     const submit = document.querySelector("#bookingForm [type='submit']");
-    if (submit && "IntersectionObserver" in window) {
-        new IntersectionObserver((entries) => {
-            const label = getLabel();
-            if (label) label.classList.toggle("is-quiet", entries[0].isIntersecting);
-        }).observe(submit);
-    }
+    if (!submit || !("IntersectionObserver" in window) || window.__hijaziWaQuiet) return;
+    window.__hijaziWaQuiet = true;
+    new IntersectionObserver((entries) => {
+        const label = host.querySelector(".whatsapp-label");
+        if (label) label.classList.toggle("is-quiet", entries[0].isIntersecting);
+    }).observe(submit);
 }
 
 /* =========================

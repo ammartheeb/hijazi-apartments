@@ -6,6 +6,22 @@
     let config;
     let widgetId;
     let token = "";
+    let needsInteraction = false;
+    let tokenWaiters = [];
+
+    /* التحقق يجري في الخلفية (appearance: interaction-only): لا يظهر المربع إلا إذا
+       طلبت Cloudflare تفاعلًا من الزائر. عند الإرسال ننتظر الرمز بضع ثوانٍ إن لم يصل بعد. */
+    function resolveWaiters() {
+        tokenWaiters.forEach(fn => fn());
+        tokenWaiters = [];
+    }
+    function waitForToken(ms) {
+        if (token) return Promise.resolve();
+        return new Promise(resolve => {
+            const timer = setTimeout(resolve, ms);
+            tokenWaiters.push(() => { clearTimeout(timer); resolve(); });
+        });
+    }
 
     function message(ar, en) {
         return document.documentElement.lang === "en" ? en : ar;
@@ -59,9 +75,11 @@
             await loadScript();
             widgetId = window.turnstile.render("#bookingTurnstile", {
                 sitekey: config.siteKey, action: config.action, theme: "auto", size: "flexible",
+                appearance: "interaction-only",
+                "before-interactive-callback"() { needsInteraction = true; },
                 language: document.documentElement.lang === "en" ? "en" : "ar",
                 "response-field": false,
-                callback(value) { token = value; setStatus(""); },
+                callback(value) { token = value; needsInteraction = false; setStatus(""); resolveWaiters(); },
                 "expired-callback"() { token = ""; setStatus(message("انتهت صلاحية التحقق. ضع علامة ✓ مرة أخرى قبل الإرسال.", "The check expired. Tick it again before submitting.")); },
                 "timeout-callback"() { token = ""; },
                 "error-callback"() {
@@ -77,7 +95,9 @@
             try { await initialize(); }
             catch { throw new Error(message("تعذر تحميل التحقق الأمني. أعد المحاولة أو تواصل معنا.", "Security verification could not load. Retry or contact us.")); }
             if (!config.enabled) return "";
-            if (!token) throw new Error(message("ضع علامة ✓ على «التحقق من أنك إنسان» هنا، ثم اضغط «تأكيد الحجز».", "Tick “Verify you are human” here, then press “Confirm booking”."));
+            if (!token && !needsInteraction) await waitForToken(8000);
+            if (!token && needsInteraction) throw new Error(message("ضع علامة ✓ على «التحقق من أنك إنسان» هنا، ثم اضغط «تأكيد الحجز».", "Tick “Verify you are human” here, then press “Confirm booking”."));
+            if (!token) throw new Error(message("لم يكتمل التحقق الأمني بعد. انتظر لحظة ثم اضغط «تأكيد الحجز» مرة أخرى.", "The security check is not finished yet. Wait a moment, then press “Confirm booking” again."));
             return token;
         },
         reset() {
