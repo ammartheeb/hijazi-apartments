@@ -117,3 +117,29 @@ test("iCal sync notifies only when an external booking is first inserted", async
         Booking.updateMany = originalUpdateMany;
     }
 });
+
+test("guest booking email follows the booking language and escapes guest input", () => {
+    const { guestBookingEmail } = require("../server");
+    const base = {
+        fullName: "<script>x</script>",
+        apartmentId: 1,
+        checkIn: new Date("2026-12-10T00:00:00Z"),
+        checkOut: new Date("2026-12-14T00:00:00Z"),
+        adults: 2,
+        children: 0,
+        totalPriceText: "480.00 دينار",
+        notes: "<img src=x>"
+    };
+    const ar = guestBookingEmail({ ...base, apartmentLabel: "شقة 104" });
+    assert.match(ar.subject, /تم استلام طلب حجزك/);
+    assert.match(ar.html, /dir="rtl"/);
+    assert.ok(!ar.html.includes("<script>") && !ar.html.includes("<img src=x>"));
+    assert.ok(ar.html.includes("https://wa.me/962789000444"));
+    assert.ok(ar.text.includes("480.00 دينار"));
+
+    const en = guestBookingEmail({ ...base, apartmentLabel: "Apartment 104", checkOut: new Date("2027-01-20T00:00:00Z") });
+    assert.match(en.subject, /We received your booking request/);
+    assert.match(en.html, /dir="ltr"/);
+    assert.match(en.text, /long-stay/);
+    assert.match(en.text, /Nights: 41/);
+});

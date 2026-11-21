@@ -945,6 +945,192 @@ function bookingHtml(booking, forCustomer = false) {
 }
 
 /* =========================================================
+   إيميل الضيف بعد طلب الحجز (تصميم 2026-11-21)
+   جداول وستايل داخلي عشان يظهر صح بجيميل وآوتلوك والموبايل.
+   اللغة من اسم الشقة اللي بعتته صفحة الحجز (عربي أو إنجليزي).
+========================================================= */
+const GUEST_EMAIL_CONTACT = Object.freeze({
+    phone: "+962 78 900 0444",
+    whatsapp: "https://wa.me/962789000444",
+    tel: "tel:+962789000444",
+    map: "https://maps.app.goo.gl/gfww6DooaC2uzFrt8",
+    site: "https://www.hijazi-apartments.com",
+    email: "info@hijazi-apartments.com"
+});
+
+function guestEmailLang(booking) {
+    return /[؀-ۿ]/.test(String(booking.apartmentLabel || "")) ? "ar" : "en";
+}
+
+function prettyEmailDate(value, lang) {
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "";
+    return new Intl.DateTimeFormat(lang === "ar" ? "ar-JO-u-nu-latn" : "en-GB", {
+        weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC"
+    }).format(date);
+}
+
+const GUEST_EMAIL_COPY = {
+    ar: {
+        dir: "rtl", align: "right",
+        subject: "تم استلام طلب حجزك ✅ - شقق حجازي المفروشة",
+        badge: "تم استلام الطلب",
+        hello: name => `أهلًا ${name}،`,
+        intro: "شكرًا لاختيارك شقق حجازي المفروشة. وصلنا طلب حجزك، وسنتواصل معك قريبًا عبر الهاتف أو واتساب لتأكيد الحجز وترتيب الوصول.",
+        summary: "ملخص الطلب",
+        apartment: "الشقة", checkIn: "الدخول", checkOut: "الخروج", nights: "عدد الليالي",
+        guests: "الضيوف", adults: n => `بالغين: ${n}`, children: n => `أطفال: ${n}`, total: "السعر الإجمالي",
+        checkoutTime: "الخروج الساعة 12:00 ظهرًا",
+        notes: "ملاحظاتك",
+        longStay: "إقامتك أطول من شهر، لذلك سنتواصل معك بخصوص سعر الإقامة الطويلة.",
+        next: "الخطوة التالية",
+        nextText: "هذا الطلب ليس تأكيدًا نهائيًا بعد. سيتواصل معك فريقنا لتأكيد التوفر والتفاصيل. إذا أردت تسريع التأكيد، راسلنا على واتساب.",
+        whatsapp: "راسلنا على واتساب", call: "اتصل بنا", map: "الموقع على خرائط جوجل",
+        address: "شارع يوسف بن تاشفين، الشميساني، عمّان، بجانب العبدلي",
+        footer: "وصلتك هذه الرسالة لأنك أرسلت طلب حجز على موقعنا. للرد، أجب على هذا الإيميل مباشرة."
+    },
+    en: {
+        dir: "ltr", align: "left",
+        subject: "We received your booking request ✅ - HIJAZI Apartments",
+        badge: "Request received",
+        hello: name => `Hello ${name},`,
+        intro: "Thank you for choosing HIJAZI Apartments. We have received your booking request and will contact you shortly by phone or WhatsApp to confirm it and arrange your arrival.",
+        summary: "Request summary",
+        apartment: "Apartment", checkIn: "Check-in", checkOut: "Check-out", nights: "Nights",
+        guests: "Guests", adults: n => `${n} adult${n === 1 ? "" : "s"}`, children: n => `${n} child${n === 1 ? "" : "ren"}`, total: "Total price",
+        checkoutTime: "Check-out at 12:00 noon",
+        notes: "Your notes",
+        longStay: "Your stay is longer than one month, so we will contact you about our long-stay rate.",
+        next: "What happens next",
+        nextText: "This request is not a final confirmation yet. Our team will contact you to confirm availability and details. For a faster confirmation, message us on WhatsApp.",
+        whatsapp: "Message us on WhatsApp", call: "Call us", map: "Location on Google Maps",
+        address: "Youssef Ben Tashfin St., Shmeisani, Amman, next to Abdali",
+        footer: "You received this email because you sent a booking request on our website. To reply, simply answer this email."
+    }
+};
+
+function guestBookingEmail(booking) {
+    const lang = guestEmailLang(booking);
+    const t = GUEST_EMAIL_COPY[lang];
+    const nights = calculateNights(booking.checkIn, booking.checkOut);
+    const adults = Number(booking.adults) || 0;
+    const children = Number(booking.children) || 0;
+    const guests = [t.adults(adults), children ? t.children(children) : ""].filter(Boolean).join(lang === "ar" ? "، " : " + ");
+    const price = String(booking.totalPriceText || booking.totalPrice || "");
+    const c = GUEST_EMAIL_CONTACT;
+    const esc = escapeHtml;
+    const gold = "#c89116";
+    const font = "font-family:Tahoma,Arial,Helvetica,sans-serif";
+
+    const rows = [
+        [t.apartment, booking.apartmentLabel],
+        [t.checkIn, prettyEmailDate(booking.checkIn, lang)],
+        [t.checkOut, `${prettyEmailDate(booking.checkOut, lang)}<br/><span style="color:#8a7a55;font-size:12px">${esc(t.checkoutTime)}</span>`, true],
+        [t.nights, String(nights)],
+        [t.guests, guests]
+    ].map(([label, value, raw], index) => `
+                <tr>
+                    <td style="${font};padding:12px 0;border-top:${index ? "1px solid #f0e6cf" : "0"};color:#7a7a7a;font-size:14px;width:38%;text-align:${t.align}">${esc(label)}</td>
+                    <td style="${font};padding:12px 0;border-top:${index ? "1px solid #f0e6cf" : "0"};color:#1c1c1c;font-size:15px;font-weight:bold;text-align:${t.align}">${raw ? value : esc(value)}</td>
+                </tr>`).join("");
+
+    const notes = booking.notes ? `
+            <tr><td style="padding:0 28px 8px">
+                <div style="${font};background:#faf7f0;border-radius:10px;padding:14px 16px;color:#444;font-size:14px;line-height:1.7;text-align:${t.align}">
+                    <b style="color:#1c1c1c">${esc(t.notes)}:</b><br/>
+                    <span style="white-space:pre-line">${esc(booking.notes)}</span>
+                </div>
+            </td></tr>` : "";
+
+    const longStay = nights >= 30 ? `
+            <tr><td style="padding:0 28px 8px">
+                <div style="${font};background:#fff7e3;border:1px solid #e9c46a;border-radius:10px;padding:12px 16px;color:#6b4f00;font-size:14px;text-align:${t.align}">⭐ ${esc(t.longStay)}</div>
+            </td></tr>` : "";
+
+    const button = (href, label, bg, color) =>
+        `<a href="${href}" style="${font};display:inline-block;margin:4px;padding:12px 20px;border-radius:999px;background:${bg};color:${color};font-size:14px;font-weight:bold;text-decoration:none">${esc(label)}</a>`;
+
+    const html = `<!doctype html>
+<html lang="${lang}" dir="${t.dir}">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(t.subject)}</title></head>
+<body style="margin:0;padding:0;background:#f3efe6">
+<div style="display:none;max-height:0;overflow:hidden">${esc(t.intro)}</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3efe6;padding:24px 12px">
+<tr><td align="center">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" dir="${t.dir}" style="max-width:600px;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #eadfc6">
+        <tr><td style="background:#111111;padding:26px 28px;text-align:center;border-bottom:4px solid ${gold}">
+            <div style="${font};color:${gold};font-size:24px;font-weight:bold;letter-spacing:1px">HIJAZI Apartments</div>
+            <div style="${font};color:#d9d2c0;font-size:14px;margin-top:4px">شقق حجازي المفروشة</div>
+        </td></tr>
+        <tr><td style="padding:26px 28px 8px;text-align:${t.align}">
+            <span style="${font};display:inline-block;background:#eaf7ee;color:#1e7a3c;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:bold">✓ ${esc(t.badge)}</span>
+            <h1 style="${font};margin:16px 0 8px;font-size:22px;color:#1c1c1c">${esc(t.hello(booking.fullName))}</h1>
+            <p style="${font};margin:0;color:#4a4a4a;font-size:15px;line-height:1.8">${esc(t.intro)}</p>
+        </td></tr>
+        <tr><td style="padding:18px 28px 8px">
+            <div style="${font};font-size:13px;font-weight:bold;color:${gold};text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;text-align:${t.align}">${esc(t.summary)}</div>
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #f0e6cf;border-radius:12px;padding:4px 16px">${rows}
+            </table>
+        </td></tr>
+        <tr><td style="padding:8px 28px 16px">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#111111;border-radius:12px">
+                <tr>
+                    <td style="${font};padding:16px 18px;color:#d9d2c0;font-size:14px;text-align:${t.align}">${esc(t.total)}</td>
+                    <td style="${font};padding:16px 18px;color:${gold};font-size:22px;font-weight:bold;text-align:${lang === "ar" ? "left" : "right"}" dir="auto">${esc(price)}</td>
+                </tr>
+            </table>
+        </td></tr>${notes}${longStay}
+        <tr><td style="padding:12px 28px 6px;text-align:${t.align}">
+            <div style="${font};font-size:16px;font-weight:bold;color:#1c1c1c;margin-bottom:6px">${esc(t.next)}</div>
+            <p style="${font};margin:0;color:#4a4a4a;font-size:14px;line-height:1.8">${esc(t.nextText)}</p>
+        </td></tr>
+        <tr><td style="padding:14px 24px 22px;text-align:center">
+            ${button(c.whatsapp, t.whatsapp, "#25d366", "#ffffff")}
+            ${button(c.tel, t.call, gold, "#111111")}
+            ${button(c.map, t.map, "#f3efe6", "#111111")}
+        </td></tr>
+        <tr><td style="background:#faf7f0;padding:20px 28px;text-align:center;border-top:1px solid #eadfc6">
+            <div style="${font};color:#1c1c1c;font-size:14px;font-weight:bold">HIJAZI Apartments</div>
+            <div style="${font};color:#6a6a6a;font-size:13px;line-height:1.8;margin-top:4px">${esc(t.address)}<br/>
+                <a href="${c.tel}" style="color:#6a6a6a;text-decoration:none" dir="ltr">${c.phone}</a> · <a href="mailto:${c.email}" style="color:#6a6a6a;text-decoration:none">${c.email}</a><br/>
+                <a href="${c.site}" style="color:${gold};text-decoration:none">www.hijazi-apartments.com</a></div>
+            <div style="${font};color:#9a9a9a;font-size:12px;line-height:1.6;margin-top:12px">${esc(t.footer)}</div>
+        </td></tr>
+    </table>
+</td></tr>
+</table>
+</body>
+</html>`;
+
+    const text = [
+        t.hello(booking.fullName),
+        "",
+        t.intro,
+        "",
+        `${t.summary}:`,
+        `${t.apartment}: ${booking.apartmentLabel}`,
+        `${t.checkIn}: ${prettyEmailDate(booking.checkIn, lang)}`,
+        `${t.checkOut}: ${prettyEmailDate(booking.checkOut, lang)} (${t.checkoutTime})`,
+        `${t.nights}: ${nights}`,
+        `${t.guests}: ${guests}`,
+        `${t.total}: ${price}`,
+        ...(booking.notes ? ["", `${t.notes}: ${booking.notes}`] : []),
+        ...(nights >= 30 ? ["", t.longStay] : []),
+        "",
+        `${t.next}: ${t.nextText}`,
+        `WhatsApp: ${c.whatsapp}`,
+        `${t.map}: ${c.map}`,
+        "",
+        "HIJAZI Apartments",
+        t.address,
+        `${c.phone} · ${c.email}`,
+        c.site
+    ].join("\n");
+
+    return { subject: t.subject, html, text };
+}
+
+/* =========================================================
    إرسال الإيميلات بعد الحجز
 ========================================================= */
 async function sendBookingEmails(booking) {
@@ -986,12 +1172,14 @@ async function sendBookingEmails(booking) {
         booking.email
     ) {
         try {
+            const guestEmail = guestBookingEmail(booking);
             const customerResult = await resend.emails.send({
                 from,
                 to: booking.email,
-                subject: "تم استلام طلب حجزك ✅ - HIJAZI Apartments",
-                text: `مرحباً ${booking.fullName}\n\nتم استلام طلب حجزك بنجاح.\n${bookingText(booking)}\n\nشكراً لك.`,
-                html: bookingHtml(booking, true),
+                replyTo: GUEST_EMAIL_CONTACT.email,
+                subject: guestEmail.subject,
+                text: guestEmail.text,
+                html: guestEmail.html,
             });
 
             console.log("Customer email result:", customerResult);
@@ -3008,6 +3196,7 @@ module.exports = {
     app,
     bookingText,
     bookingHtml,
+    guestBookingEmail,
     bookingSourceLabel,
     syncApartmentCalendar
 };
