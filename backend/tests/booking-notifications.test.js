@@ -41,7 +41,8 @@ test("booking notification starts with حجز جديد and identifies its source
     assert.match(text, /^حجز جديد - HIJAZI Apartments/);
     assert.match(text, /المصدر: Booking\.com/);
     assert.match(html, /وصل حجز جديد من Booking\.com/);
-    assert.match(html, /<b>المصدر:<\/b>\s*Booking\.com/);
+    assert.match(html, />المصدر<\/td>\s*<td[^>]*>Booking\.com</);
+    assert.match(html, /حجز جديد · Booking\.com/);
     assert.equal(bookingSourceLabel("airbnb"), "Airbnb");
     assert.equal(bookingSourceLabel("website"), "الموقع");
 });
@@ -142,4 +143,29 @@ test("guest booking email follows the booking language and escapes guest input",
     assert.match(en.html, /dir="ltr"/);
     assert.match(en.text, /long-stay/);
     assert.match(en.text, /Nights: 41/);
+});
+
+test("owner email for a website booking has guest contact buttons and escapes input", () => {
+    const html = bookingHtml({
+        ...externalBooking("website"),
+        fullName: "<b>Ali</b> Test",
+        phone: "0791234567",
+        email: "ali@example.com",
+        adults: 2,
+        totalPriceText: "480.00 دينار",
+        notes: "<script>x</script>"
+    }, false);
+    assert.ok(html.includes("https://wa.me/962791234567?text="));
+    assert.ok(html.includes("tel:0791234567"));
+    assert.ok(html.includes("mailto:ali@example.com"));
+    assert.ok(html.includes("بانتظار تأكيدك"));
+    assert.ok(!html.includes("<b>Ali</b>") && !html.includes("<script>x"));
+});
+
+test("whatsapp numbers are normalized for Jordanian and international formats", () => {
+    const { whatsappNumber } = require("../services/email-layout");
+    assert.equal(whatsappNumber("0791234567"), "962791234567");
+    assert.equal(whatsappNumber("+962 79 123 4567"), "962791234567");
+    assert.equal(whatsappNumber("00966501234567"), "966501234567");
+    assert.equal(whatsappNumber("123"), "");
 });

@@ -179,6 +179,68 @@
             border: 1px solid #fecdca;
         }
 
+        /* رسالة بجانب الزر اللي انضغط */
+        .pms-toast {
+            z-index: 2147483000 !important;
+            max-width: min(420px, calc(100vw - 24px)) !important;
+            padding: 11px 16px !important;
+            border-radius: 12px !important;
+            font-weight: 700 !important;
+            font-size: 14px !important;
+            line-height: 1.7 !important;
+            box-shadow: 0 12px 30px rgba(16, 24, 40, .18) !important;
+            cursor: pointer;
+            animation: pmsToastIn .2s ease-out both;
+            text-align: start;
+        }
+
+        .pms-toast.floating {
+            position: fixed !important;
+        }
+
+        .pms-toast.bottom {
+            position: fixed !important;
+            bottom: 20px !important;
+            left: 50% !important;
+            transform: translateX(-50%);
+            animation: none;
+        }
+
+        .pms-toast.inline {
+            position: static !important;
+            display: block !important;
+            max-width: none !important;
+            margin: 10px 0 !important;
+            box-shadow: none !important;
+        }
+
+        .pms-toast.success {
+            background: #ecfdf3 !important;
+            color: #067647 !important;
+            border: 1px solid #abefc6 !important;
+        }
+
+        .pms-toast.error {
+            background: #fef3f2 !important;
+            color: #b42318 !important;
+            border: 1px solid #fecdca !important;
+        }
+
+        .pms-toast.info {
+            background: #eff8ff !important;
+            color: #175cd3 !important;
+            border: 1px solid #b2ddff !important;
+        }
+
+        @keyframes pmsToastIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .pms-toast { animation: none !important; }
+        }
+
         .notice.info {
             background: #eff8ff;
             color: var(--blue);
@@ -5812,7 +5874,64 @@
         function basicToken(value) { const bytes = new TextEncoder().encode(value); let binary = ""; bytes.forEach(byte => { binary += String.fromCharCode(byte) }); return btoa(binary); }
         function authHeaders() { return { Authorization: `Basic ${basicToken(`${adminUser}:${adminPass}`)}`, "Content-Type": "application/json" }; }
         async function api(path, options = {}) { const response = await fetch(`${API_BASE}${path}`, { ...options, headers: { ...authHeaders(), ...(options.headers || {}) } }); if (response.status === 401) { loginOverlay.classList.remove("hidden"); throw new Error("بيانات الدخول غير صحيحة.") } const data = await response.json().catch(() => ({})); if (!response.ok) throw new Error(data.message || "حدث خطأ في الاتصال بالسيرفر."); return data; }
-        function showNotice(message, type = "success") { notice.textContent = message; notice.className = `notice show ${type}`; window.scrollTo({ top: 0, behavior: "smooth" }); clearTimeout(showNotice.timer); showNotice.timer = setTimeout(() => notice.classList.remove("show"), 6500); }
+        /* =========================================================
+           رسائل النجاح والخطأ بجانب الزر اللي انضغط، مش أعلى الصفحة (طلب المالك 2026-11-21).
+           داخل النوافذ (dialog) الرسالة بتنحط تحت صف الأزرار نفسه؛ بالصفحة بتطلع عائمة جنب الزر.
+           إذا الزر اختفى (مثلًا النافذة انسكرت بعد الحفظ) بتطلع أسفل الشاشة بالنص.
+        ========================================================= */
+        let noticeAnchor = null, noticeAnchorAt = 0;
+        const NOTICE_CONTROL = "button, a, [role='button'], input[type='submit'], input[type='button'], input[type='checkbox'], select, summary, label";
+        document.addEventListener("click", event => { const control = event.target.closest && event.target.closest(NOTICE_CONTROL); if (control) { noticeAnchor = control; noticeAnchorAt = Date.now(); } }, true);
+        document.addEventListener("change", event => { if (event.target.matches && event.target.matches("select, input")) { noticeAnchor = event.target; noticeAnchorAt = Date.now(); } }, true);
+        document.addEventListener("submit", event => { const control = event.submitter || event.target.querySelector("[type='submit']"); if (control) { noticeAnchor = control; noticeAnchorAt = Date.now(); } }, true);
+        function noticeAnchorUsable(anchor) {
+            if (!anchor || !anchor.isConnected || Date.now() - noticeAnchorAt > 120000 || !anchor.getClientRects().length) return false;
+            const dialog = anchor.closest("dialog");
+            if (dialog && !dialog.open) return false;
+            return !anchor.closest(".hidden, [hidden]");
+        }
+        function placeFloatingNotice(toast, anchor) {
+            const rect = anchor.getBoundingClientRect(), gap = 8, margin = 12;
+            const width = toast.offsetWidth, height = toast.offsetHeight;
+            let top = rect.bottom + gap;
+            if (top + height > window.innerHeight - margin) top = rect.top - height - gap;
+            top = Math.min(Math.max(top, margin), window.innerHeight - height - margin);
+            let left = rect.left + rect.width / 2 - width / 2;
+            left = Math.min(Math.max(left, margin), window.innerWidth - width - margin);
+            toast.style.top = `${Math.round(top)}px`;
+            toast.style.left = `${Math.round(left)}px`;
+        }
+        function showNotice(message, type = "success") {
+            notice.className = "notice";
+            notice.textContent = "";
+            document.querySelectorAll(".pms-toast").forEach(old => old.remove());
+            const toast = document.createElement("div");
+            toast.className = `pms-toast ${type}`;
+            toast.setAttribute("role", type === "error" ? "alert" : "status");
+            toast.textContent = message;
+            toast.addEventListener("click", () => toast.remove());
+            const anchor = noticeAnchorUsable(noticeAnchor) ? noticeAnchor : null;
+            const dialog = anchor && anchor.closest("dialog");
+            if (dialog) {
+                const row = anchor.parentElement && anchor.parentElement !== dialog ? anchor.parentElement : anchor;
+                toast.classList.add("inline");
+                row.insertAdjacentElement("afterend", toast);
+                toast.scrollIntoView({ block: "nearest", behavior: "smooth" });
+            } else if (anchor) {
+                toast.classList.add("floating");
+                document.body.appendChild(toast);
+                placeFloatingNotice(toast, anchor);
+                const follow = () => { if (toast.isConnected && noticeAnchorUsable(anchor)) placeFloatingNotice(toast, anchor); };
+                window.addEventListener("scroll", follow, { passive: true });
+                window.addEventListener("resize", follow);
+                toast.cleanup = () => { window.removeEventListener("scroll", follow); window.removeEventListener("resize", follow); };
+            } else {
+                toast.classList.add("bottom");
+                document.body.appendChild(toast);
+            }
+            clearTimeout(showNotice.timer);
+            showNotice.timer = setTimeout(() => { if (toast.cleanup) toast.cleanup(); toast.remove(); }, type === "error" ? 10000 : 6500);
+        }
         function escapeHtml(value) { return String(value ?? "").replace(/[&<>'"]/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char]); }
         function dateOnly(value) { return value ? String(value).slice(0, 10) : ""; }
         function todayInAmman() { const parts = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Amman", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date()); const map = Object.fromEntries(parts.map(part => [part.type, part.value])); return `${map.year}-${map.month}-${map.day}`; }

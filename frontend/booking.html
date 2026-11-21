@@ -428,58 +428,239 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, .65);
+            background: rgba(8, 8, 8, .72);
             z-index: 9999;
-            padding: 20px;
+            padding: 20px 16px;
             overflow: auto;
         }
 
         .success-content {
-            max-width: 520px;
-            margin: 8% auto;
-            background: #fff;
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+            position: relative;
+            max-width: 460px;
+            margin: 7vh auto;
+            padding: 34px 26px 24px;
+            border-radius: 24px;
+            background: linear-gradient(165deg, #1d1a14 0%, #0d0d0d 70%);
+            border: 1px solid rgba(212, 160, 23, .38);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, .5), inset 0 1px 0 rgba(255, 255, 255, .06);
+            color: #f3ede0;
             text-align: center;
+            animation: successIn .35s ease-out both;
         }
 
-        .success-head {
-            background: linear-gradient(90deg, #c89116, #000);
-            color: #fff;
-            padding: 18px;
+        .success-content::before {
+            content: "";
+            position: absolute;
+            inset: 0 24px auto;
+            height: 3px;
+            border-radius: 0 0 6px 6px;
+            background: linear-gradient(90deg, transparent, #d4a017, transparent);
         }
 
-        .success-body {
-            padding: 24px;
+        @keyframes successIn {
+            from { opacity: 0; transform: translateY(14px) scale(.98); }
+            to { opacity: 1; transform: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .success-content { animation: none; }
+        }
+
+        .success-icon {
+            width: 66px;
+            height: 66px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 32px;
+            font-weight: 900;
             color: #111;
+            background: linear-gradient(135deg, #f1c75b, #c89116);
+            box-shadow: 0 0 0 8px rgba(212, 160, 23, .14);
         }
 
-        .success-body h3 {
-            margin-top: 0;
-            margin-bottom: 12px;
+        .success-content h2 {
+            margin: 0 0 10px;
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
         }
 
-        .success-body p {
-            color: #555;
+        #successText {
+            margin: 0 0 18px;
+            color: #cfc6b3;
+            font-size: 15px;
             line-height: 1.8;
-            margin-bottom: 18px;
+        }
+
+        .success-summary {
+            margin: 0 0 14px;
+            padding: 6px 16px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(212, 160, 23, .2);
+            text-align: start;
+        }
+
+        .success-summary:empty {
+            display: none;
+        }
+
+        .success-summary div {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 9px 0;
+            border-top: 1px solid rgba(255, 255, 255, .07);
+        }
+
+        .success-summary div:first-child {
+            border-top: 0;
+        }
+
+        .success-summary dt {
+            color: #a99f8b;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .success-summary dd {
+            margin: 0;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 800;
+            text-align: end;
+        }
+
+        .success-summary div:last-child dd {
+            color: #e9b949;
+            font-size: 16px;
+        }
+
+        .success-note {
+            margin: 0 0 18px;
+            color: #8f877a;
+            font-size: 12.5px;
+            line-height: 1.6;
+        }
+
+        .success-actions {
+            display: grid;
+            gap: 10px;
+        }
+
+        .success-whatsapp,
+        .success-btn {
+            display: block;
+            width: 100%;
+            min-height: 48px;
+            padding: 13px 16px;
+            border-radius: 999px;
+            font-size: 15px;
+            font-weight: 800;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform .15s ease, background .15s ease;
+        }
+
+        .success-whatsapp {
+            background: #25d366;
+            color: #fff !important;
+            border: 0;
         }
 
         .success-btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            background: #c89116;
-            color: #fff;
-            font-weight: 700;
-            cursor: pointer;
-            min-height: 46px;
+            background: transparent;
+            color: #e9b949;
+            border: 1px solid rgba(212, 160, 23, .55);
+        }
+
+        .success-whatsapp:hover,
+        .success-btn:hover {
+            transform: translateY(-1px);
         }
 
         .success-btn:hover {
-            background: #000;
+            background: rgba(212, 160, 23, .12);
+        }
+
+        .success-btn:focus-visible,
+        .success-whatsapp:focus-visible {
+            outline: 3px solid #f1c75b;
+            outline-offset: 3px;
+        }
+
+        /* رسالة بجانب مكان الحدث (تحت زر الحجز، تحت التحقق الأمني، فوق التقويم) */
+        .action-msg[hidden] {
+            display: none !important;
+        }
+
+        .action-msg {
+            margin: 10px 0 0;
+            padding: 11px 14px;
+            border-radius: 14px;
+            font-size: 14px !important;
+            font-weight: 700;
+            line-height: 1.7;
+            animation: actionMsgIn .25s ease-out both;
+        }
+
+        .action-msg-error {
+            background: #fff1f1 !important;
+            border: 1px solid #f3a3a3 !important;
+            color: #a8190f !important;
+            opacity: 1 !important;
+            box-shadow: 0 6px 18px rgba(168, 25, 15, .14);
+        }
+
+        .action-msg-error::before {
+            content: "⚠ ";
+        }
+
+        .action-msg-info {
+            background: #fff8e6 !important;
+            border: 1px solid #e9c46a !important;
+            color: #6b4f00 !important;
+            opacity: 1 !important;
+        }
+
+        .action-msg-success {
+            background: #ecfdf3 !important;
+            border: 1px solid #abefc6 !important;
+            color: #027a48 !important;
+            opacity: 1 !important;
+        }
+
+        /* أخطاء الحقول: مقروءة فوق الزجاج الفاتح والغامق */
+        #bookingForm .field-error {
+            margin-top: 6px !important;
+            padding: 6px 10px !important;
+            border-radius: 10px !important;
+            background: #fff1f1 !important;
+            border: 1px solid #f3a3a3 !important;
+            color: #a8190f !important;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            opacity: 1 !important;
+        }
+
+        @media (max-width: 600px) {
+            .success-icon { width: 54px; height: 54px; font-size: 26px; margin-bottom: 12px; }
+            .success-content h2 { font-size: 20px; }
+            #successText { font-size: 14px; margin-bottom: 14px; }
+            .success-summary div { padding: 7px 0; }
+        }
+
+        #calendarMessage {
+            max-width: 1100px;
+            margin: 0 auto 12px;
+        }
+
+        @keyframes actionMsgIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: none; }
         }
 
         .placeholder-box {
@@ -672,7 +853,8 @@
             }
 
             .success-content {
-                margin: 18% auto;
+                margin: 4vh auto;
+                padding: 30px 18px 20px;
             }
         }
 
@@ -3133,7 +3315,7 @@
             }
         }
     </style>
-    <script src="js/booking-security.js" defer></script>
+    <script src="js/booking-security.js?v=2" defer></script>
 </head>
 
 <body>
@@ -3312,8 +3494,9 @@
                         <div id="bookingSecurity" hidden style="margin:16px 0;max-width:100%;overflow:hidden">
                             <div id="bookingTurnstile"></div>
                         </div>
-                        <p id="bookingSecurityStatus" role="status" aria-live="polite" style="font-size:14px"></p>
+                        <p id="bookingSecurityStatus" role="status" aria-live="polite" hidden></p>
                         <button id="submitBtn" type="submit">تأكيد الحجز</button>
+                        <div id="submitMessage" class="action-msg" role="alert" aria-live="assertive" hidden></div>
                     </form>
                 </div>
             </div>
@@ -3321,6 +3504,7 @@
         </div>
 
         <div class="calendar-title" id="calendarTitle">تقويم الشقة</div>
+        <div id="calendarMessage" class="action-msg" role="alert" aria-live="assertive" hidden></div>
         <div id="calendar"></div>
 
     </div>
@@ -3375,17 +3559,15 @@
 
         <div class="image-lightbox-progress" aria-hidden="true"><span></span></div>
     </div>
-    <div class="success-modal" id="successModal">
+    <div class="success-modal" id="successModal" role="dialog" aria-modal="true" aria-labelledby="successHead">
         <div class="success-content">
-            <div class="success-head">
-                <h2 style="margin:0;" id="successHead">✅ تم الحجز بنجاح</h2>
-            </div>
-            <div class="success-body">
-                <h3 id="successTitle">شكراً لك</h3>
-                <p id="successText">
-                    تم حفظ الحجز بنجاح، وتم إرسال رسالة تأكيد إلى بريدك الإلكتروني.<br>
-                    سنتواصل معك قريبًا إذا احتجنا أي تفاصيل إضافية.
-                </p>
+            <div class="success-icon" aria-hidden="true">✓</div>
+            <h2 id="successHead">تم استلام طلب حجزك</h2>
+            <p id="successText">شكرًا لك! أرسلنا ملخص الطلب إلى بريدك الإلكتروني، وسنتواصل معك قريبًا عبر الهاتف أو واتساب لتأكيد الحجز.</p>
+            <dl class="success-summary" id="successSummary"></dl>
+            <p class="success-note" id="successNote">لم تصلك الرسالة؟ تفقّد مجلد الرسائل غير المرغوب فيها أو تبويب الإشعارات.</p>
+            <div class="success-actions">
+                <a class="success-whatsapp" id="successWhatsApp" href="https://wa.me/962789000444" target="_blank" rel="noopener">تأكيد أسرع عبر واتساب</a>
                 <button class="success-btn" id="closeSuccessModal" type="button">إغلاق</button>
             </div>
         </div>
@@ -3520,9 +3702,10 @@
                 document.getElementById("finalPriceLabel").textContent = "السعر النهائي:";
                 document.getElementById("submitBtn").textContent = "تأكيد الحجز";
                 document.getElementById("calendarTitle").textContent = "تقويم الشقة";
-                document.getElementById("successHead").textContent = "✅ تم الحجز بنجاح";
-                document.getElementById("successTitle").textContent = "شكراً لك";
-                document.getElementById("successText").innerHTML = "تم حفظ الحجز بنجاح، وتم إرسال رسالة تأكيد إلى بريدك الإلكتروني.<br>سنتواصل معك قريبًا إذا احتجنا أي تفاصيل إضافية.";
+                document.getElementById("successHead").textContent = "تم استلام طلب حجزك";
+                document.getElementById("successText").textContent = "شكرًا لك! أرسلنا ملخص الطلب إلى بريدك الإلكتروني، وسنتواصل معك قريبًا عبر الهاتف أو واتساب لتأكيد الحجز.";
+                document.getElementById("successNote").textContent = "لم تصلك الرسالة؟ تفقّد مجلد الرسائل غير المرغوب فيها أو تبويب الإشعارات.";
+                document.getElementById("successWhatsApp").textContent = "تأكيد أسرع عبر واتساب";
                 document.getElementById("closeSuccessModal").textContent = "إغلاق";
 
                 const mapTitleEl = document.getElementById("mapTitle");
@@ -3582,9 +3765,10 @@
                 document.getElementById("finalPriceLabel").textContent = "Final price:";
                 document.getElementById("submitBtn").textContent = "Confirm booking";
                 document.getElementById("calendarTitle").textContent = "Apartment calendar";
-                document.getElementById("successHead").textContent = "✅ Booking completed successfully";
-                document.getElementById("successTitle").textContent = "Thank you";
-                document.getElementById("successText").innerHTML = "Your booking has been saved successfully, and a confirmation email has been sent to your inbox.<br>We will contact you soon if any extra details are needed.";
+                document.getElementById("successHead").textContent = "We received your booking request";
+                document.getElementById("successText").textContent = "Thank you! We sent a summary of your request to your email, and we will contact you shortly by phone or WhatsApp to confirm your booking.";
+                document.getElementById("successNote").textContent = "No email? Check your spam folder or the Updates tab.";
+                document.getElementById("successWhatsApp").textContent = "Faster confirmation on WhatsApp";
                 document.getElementById("closeSuccessModal").textContent = "Close";
 
                 const mapTitleEl = document.getElementById("mapTitle");
@@ -3611,9 +3795,50 @@
            تستخدم لأخطاء عامة ليست مرتبطة بحقل محدد
         ========================================================= */
         function showMessage(text, type = "error") {
-            formMessage.style.display = "block";
-            formMessage.className = `message-box ${type === "success" ? "message-success" : "message-error"}`;
-            formMessage.textContent = text;
+            showActionMessage(document.getElementById("submitMessage"), text, type);
+        }
+
+        /* =========================================================
+           رسالة بجانب مكان الحدث نفسه (تحت الزر أو الأداة اللي ضغطها الزائر)
+           بدل رسالة عامة أعلى النموذج ما بيشوفها.
+        ========================================================= */
+        function showActionMessage(el, text, type = "error", scroll = true) {
+            if (!el) return;
+            el.hidden = false;
+            el.className = `action-msg action-msg-${type}`;
+            el.textContent = text;
+            if (scroll) revealElement(el);
+        }
+
+        function clearActionMessage(el) {
+            if (!el) return;
+            el.hidden = true;
+            el.textContent = "";
+            el.className = "action-msg";
+        }
+
+        function revealElement(el) {
+            const rect = el.getBoundingClientRect();
+            const header = 90;
+            if (rect.top < header || rect.bottom > window.innerHeight - 140) {
+                const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+            }
+        }
+
+        function focusFirstFieldError() {
+            const first = Object.keys(fieldErrors)
+                .map(key => fieldErrors[key])
+                .find(errorEl => errorEl && errorEl.style.display === "block");
+            if (!first) return;
+            const field = first.previousElementSibling && first.previousElementSibling.matches("input, select, textarea, .booking-form-glass-select, .hijazi-counter")
+                ? first.previousElementSibling
+                : first;
+            revealElement(field);
+            const input = document.getElementById(Object.keys(fieldErrors).find(key => fieldErrors[key] === first));
+            if (input && input.type !== "hidden" && !input.readOnly && input.offsetParent !== null) {
+                input.focus({ preventScroll: true });
+            }
         }
 
         /* =========================================================
@@ -3623,6 +3848,7 @@
             formMessage.style.display = "none";
             formMessage.textContent = "";
             formMessage.className = "message-box";
+            clearActionMessage(document.getElementById("submitMessage"));
         }
 
         /* =========================================================
@@ -4839,14 +5065,18 @@
                 },
                 select: (info) => {
                     if (!getSelectedAptId()) {
-                        showMessage(
-                            lang === "ar"
-                                ? "اختر الشقة أولاً قبل التحديد من التقويم."
-                                : "Select an apartment first before choosing from the calendar.",
+                        const calendarLang = getCurrentLang();
+                        showActionMessage(
+                            document.getElementById("calendarMessage"),
+                            calendarLang === "ar"
+                                ? "اختر الشقة أولاً من «الشقة المختارة» في نموذج الحجز، ثم حدّد التواريخ من التقويم."
+                                : "Choose an apartment first in the booking form, then select your dates on the calendar.",
                             "error"
                         );
+                        showFieldError("aptId", calendarLang === "ar" ? "يرجى اختيار الشقة." : "Please select an apartment.");
                         return;
                     }
+                    clearActionMessage(document.getElementById("calendarMessage"));
 
                     const start = info.start;
                     const endExclusive = info.end;
@@ -4902,7 +5132,10 @@
             const fieldsValid = validateFormFields();
             const datesValid = validateDates();
 
-            if (!fieldsValid || !datesValid) return;
+            if (!fieldsValid || !datesValid) {
+                focusFirstFieldError();
+                return;
+            }
 
             const payload = {
                 apartmentId: id,
@@ -4929,7 +5162,11 @@
                 try {
                     payload.turnstileToken = await window.HijaziBookingSecurity.getToken();
                 } catch (error) {
-                    showMessage(error.message || "تعذر التحقق الأمني.", "error");
+                    const securityStatus = document.getElementById("bookingSecurityStatus");
+                    showActionMessage(securityStatus, error.message || "تعذر التحقق الأمني.", "error", false);
+                    revealElement(document.getElementById("bookingSecurity").hidden
+                        ? securityStatus
+                        : document.getElementById("bookingSecurity"));
                     return;
                 }
 
@@ -4959,7 +5196,9 @@
                     return;
                 }
 
+                fillSuccessSummary(payload, lang);
                 successModal.style.display = "block";
+                closeSuccessModal.focus({ preventScroll: true });
 
                 if (typeof gtag === "function") {
                     gtag('event', 'booking_submit', {
@@ -4993,6 +5232,41 @@
                 submitBtn.disabled = false;
                 submitBtn.textContent = lang === "ar" ? "تأكيد الحجز" : "Confirm booking";
             }
+        });
+
+        function fillSuccessSummary(data, lang) {
+            const isAr = lang === "ar";
+            const nights = Math.round((parseISODateOnly(data.checkOut) - parseISODateOnly(data.checkIn)) / 86400000);
+            const guests = isAr
+                ? `بالغين: ${data.adults}${data.children ? `، أطفال: ${data.children}` : ""}`
+                : `${data.adults} adult${data.adults === 1 ? "" : "s"}${data.children ? ` + ${data.children} child${data.children === 1 ? "" : "ren"}` : ""}`;
+            const rows = [
+                [isAr ? "الشقة" : "Apartment", data.apartmentLabel],
+                [isAr ? "الدخول" : "Check-in", data.checkIn],
+                [isAr ? "الخروج" : "Check-out", data.checkOut],
+                [isAr ? "الليالي" : "Nights", String(nights)],
+                [isAr ? "الضيوف" : "Guests", guests],
+                [isAr ? "السعر" : "Total", data.totalPriceText]
+            ];
+            const summary = document.getElementById("successSummary");
+            summary.replaceChildren(...rows.flatMap(([label, value]) => {
+                const wrap = document.createElement("div");
+                const dt = document.createElement("dt");
+                const dd = document.createElement("dd");
+                dt.textContent = label;
+                dd.textContent = value;
+                if (/^\d{4}-\d{2}-\d{2}$/.test(value)) dd.dir = "ltr";
+                wrap.append(dt, dd);
+                return [wrap];
+            }));
+            const text = isAr
+                ? `مرحبًا، أرسلت طلب حجز من الموقع.\nالاسم: ${data.fullName}\n${data.apartmentLabel}\nمن ${data.checkIn} إلى ${data.checkOut}`
+                : `Hello, I sent a booking request on the website.\nName: ${data.fullName}\n${data.apartmentLabel}\nFrom ${data.checkIn} to ${data.checkOut}`;
+            document.getElementById("successWhatsApp").href = `https://wa.me/962789000444?text=${encodeURIComponent(text)}`;
+        }
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && successModal.style.display === "block") successModal.style.display = "none";
         });
 
         closeSuccessModal.addEventListener("click", () => {

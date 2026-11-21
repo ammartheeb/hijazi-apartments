@@ -7,6 +7,14 @@ const Apartment = require("./models/Apartment");
 const ActivityLog = require("./models/ActivityLog");
 const OutreachRecord = require("./models/OutreachRecord");
 const { createOutreachRunner } = require("./services/outreach-runner");
+const { buildOutreachEmail } = require("./services/outreach");
+const {
+    ADMIN_URL,
+    whatsappNumber,
+    telHref,
+    ownerEmailHtml,
+    prettyArabicDate
+} = require("./services/email-layout");
 const outreachContacts = require("./outreach/contacts.json");
 const basicAuth = require("basic-auth");
 const { Resend } = require("resend");
@@ -795,153 +803,61 @@ function bookingText(booking) {
    قالب HTML للإيميل
 ========================================================= */
 function bookingHtml(booking, forCustomer = false) {
-    const nights = calculateNights(
-        booking.checkIn,
-        booking.checkOut
-    );
+    if (forCustomer) return guestBookingEmail(booking).html;
 
-    const isLong = nights >= 30;
+    const nights = calculateNights(booking.checkIn, booking.checkOut);
+    const source = bookingSourceLabel(booking.source);
+    const isWebsite = booking.source === "website";
+    const apartmentLabel = normalizeSingleLine(booking.apartmentLabel || defaultApartmentLabel(booking.apartmentId), 100);
+    const fullName = normalizeSingleLine(booking.fullName || "", 150);
+    const adults = Number(booking.adults) || 0;
+    const children = Number(booking.children) || 0;
+    const price = String(booking.totalPriceText || (booking.totalPrice ? `${booking.totalPrice} ${booking.currency || ""}` : "")).trim();
+    const phone = normalizeSingleLine(booking.phone || "", 50);
+    const email = normalizeSingleLine(booking.email || "", 200);
+    const tel = telHref(phone);
+    const wa = whatsappNumber(phone);
+    const firstName = fullName.split(/\s+/)[0] || "";
+    const waText = `مرحبًا ${firstName}، معك شقق حجازي المفروشة بخصوص طلب حجزك (${apartmentLabel}) من ${formatDate(booking.checkIn)} إلى ${formatDate(booking.checkOut)}.`;
 
-    /* تنظيف كل بيانات العميل قبل إدخالها في HTML */
-    const safeApartmentLabel =
-        escapeHtml(booking.apartmentLabel);
+    const rows = [
+        ["الشقة", apartmentLabel],
+        ["الدخول", prettyArabicDate(booking.checkIn)],
+        ["الخروج", prettyArabicDate(booking.checkOut)],
+        ["عدد الليالي", String(nights)],
+        ["الضيوف", adults || children ? `بالغين: ${adults}${children ? `، أطفال: ${children}` : ""}` : ""],
+        ["السعر", price],
+        ["الاسم", isWebsite ? fullName : ""],
+        ["الهاتف", tel ? `<a href="${escapeHtml(tel)}" style="color:#1c1c1c;text-decoration:none" dir="ltr">${escapeHtml(phone)}</a>` : "", { html: true }],
+        ["البريد", email ? `<a href="mailto:${escapeHtml(email)}" style="color:#1c1c1c">${escapeHtml(email)}</a>` : "", { html: true }],
+        ["المصدر", source]
+    ];
 
-    const safeApartmentId =
-        escapeHtml(booking.apartmentId);
-
-    const safeSourceLabel =
-        escapeHtml(bookingSourceLabel(booking.source));
-
-    const safeFullName =
-        escapeHtml(booking.fullName);
-
-    const safePhone =
-        escapeHtml(booking.phone);
-
-    const safeEmail =
-        escapeHtml(booking.email);
-
-    const safeAdults =
-        escapeHtml(booking.adults);
-
-    const safeChildren =
-        escapeHtml(booking.children);
-
-    const safeCurrency =
-        escapeHtml(booking.currency);
-
-    const safeTotalPrice = escapeHtml(
-        booking.totalPriceText ||
-        booking.totalPrice
-    );
-
-    const title = forCustomer
-        ? "تم استلام طلب الحجز ✅"
-        : "حجز جديد ✅";
-
-    const msg = forCustomer
-        ? "شكراً لك! تم استلام طلب الحجز بنجاح، وسنتواصل معك قريباً لتأكيد التفاصيل."
-        : `وصل حجز جديد من ${safeSourceLabel}.`;
-
-    const longStayBox = isLong
-        ? `
-            <div style="margin-top:14px;padding:12px;border-radius:10px;background:#fff7e7;border:1px solid #e9c46a;color:#6b4f00">
-                <strong>خصم ذهبي للإقامة أكثر من شهر</strong><br/>
-                سوف يتم التواصل مع العميل للحصول على خصم خاص.
-            </div>
-        `
-        : "";
-
-    const notesBox = booking.notes
-        ? `
-        <p>
-            <b>ملاحظات العميل:</b><br/>
-            <span style="white-space:pre-line">${escapeHtml(booking.notes)}</span>
-        </p>
-        `
-        : `
-        <p>
-            <b>ملاحظات العميل:</b>
-            لا توجد ملاحظات
-        </p>
-        `;
-
-    return `
-    <div style="font-family:Arial,sans-serif;line-height:1.8">
-        <div style="padding:14px 16px;color:#fff;background:linear-gradient(90deg,#c89116,#000);border-radius:10px">
-            <h2 style="margin:0">
-                ${title} - HIJAZI Apartments
-            </h2>
-        </div>
-
-        <p style="margin-top:12px">
-            ${msg}
-        </p>
-
-        <div style="border:1px solid #eee;border-radius:10px;padding:14px">
-            <p>
-                <b>المصدر:</b>
-                ${safeSourceLabel}
-            </p>
-
-            <p>
-                <b>الشقة:</b>
-                ${safeApartmentLabel}
-                (ID: ${safeApartmentId})
-            </p>
-
-            <p>
-                <b>الاسم:</b>
-                ${safeFullName}
-            </p>
-
-            <p>
-                <b>الهاتف:</b>
-                ${safePhone}
-            </p>
-
-            <p>
-                <b>البريد:</b>
-                ${safeEmail}
-            </p>
-
-            <p>
-                <b>الدخول:</b>
-                ${formatDate(booking.checkIn)}
-            </p>
-
-            <p>
-                <b>الخروج:</b>
-                ${formatDate(booking.checkOut)}
-            </p>
-
-            <p>
-                <b>عدد الليالي:</b>
-                ${nights}
-            </p>
-
-            <p>
-                <b>الضيوف:</b>
-                بالغين ${safeAdults}
-                + أطفال ${safeChildren}
-            </p>
-
-            <p>
-                <b>السعر:</b>
-                ${safeTotalPrice}
-                (${safeCurrency})
-            </p>
-
-            ${notesBox}
-            ${longStayBox}
-        </div>
-
-        <p style="color:#666;font-size:13px;margin-top:10px">
-            الشميساني - عمّان، الأردن<br/>
-            HIJAZI Apartments
-        </p>
-    </div>
-    `;
+    return ownerEmailHtml({
+        badge: `حجز جديد · ${source}`,
+        badgeTone: { website: "green", airbnb: "rose", booking: "blue" }[booking.source] || "gold",
+        title: isWebsite && fullName ? `${fullName} — ${apartmentLabel}` : apartmentLabel,
+        intro: `وصل حجز جديد من ${source}.`,
+        rows,
+        blocks: [
+            isWebsite ? {
+                tone: "gold",
+                title: "بانتظار تأكيدك",
+                text: "الحجز محفوظ بحالة «قيد الانتظار». تواصل مع الضيف لتأكيده، ثم غيّر حالته من لوحة الإدارة."
+            } : null,
+            booking.notes ? { tone: "note", title: "ملاحظات", text: String(booking.notes).slice(0, 1000) } : null,
+            nights >= 30 ? {
+                tone: "gold",
+                title: "إقامة أطول من شهر",
+                text: "تواصل مع الضيف بخصوص سعر الإقامة الطويلة."
+            } : null
+        ],
+        buttons: [
+            { href: wa ? `https://wa.me/${wa}?text=${encodeURIComponent(waText)}` : "", label: "واتساب الضيف", tone: "whatsapp" },
+            { href: tel, label: "اتصال", tone: "gold" },
+            { href: ADMIN_URL, label: "افتح لوحة الإدارة", tone: "dark" }
+        ]
+    });
 }
 
 /* =========================================================
@@ -1218,17 +1134,25 @@ async function sendBookingReminderEmail(booking, reminder) {
         to: adminTo,
         subject: `تذكير ${action}: ${normalizeSingleLine(apartmentLabel, 100)} - ${reminder.label}`,
         text,
-        html: `<div dir="rtl" style="font-family:Arial,sans-serif;line-height:1.9;color:#111">
-            <h2>تذكير ${action} — HIJAZI Apartments</h2>
-            <p><strong>${escapeHtml(reminder.label)}</strong> (${escapeHtml(reminder.targetDate)})</p>
-            <p>الشقة: <strong>${escapeHtml(apartmentLabel)}</strong><br>
-            العميل: ${escapeHtml(fullName)}<br>
-            الهاتف: ${escapeHtml(phone)}<br>
-            المصدر: ${escapeHtml(source)}<br>
-            الدخول: ${escapeHtml(formatDate(booking.checkIn))}<br>
-            الخروج: ${escapeHtml(formatDate(booking.checkOut))}</p>
-            <a href="https://www.hijazi-apartments.com/admin.html">افتح لوحة الإدارة</a>
-        </div>`
+        html: ownerEmailHtml({
+            badge: `تذكير ${action} · ${reminder.label}`,
+            badgeTone: reminder.kind === "checkin" ? "green" : "gold",
+            title: `${apartmentLabel} — ${fullName}`,
+            intro: `${reminder.label}: ${prettyArabicDate(reminder.targetDate)}.`,
+            rows: [
+                ["الشقة", apartmentLabel],
+                ["العميل", fullName],
+                ["الهاتف", telHref(booking.phone) ? `<a href="${escapeHtml(telHref(booking.phone))}" style="color:#1c1c1c;text-decoration:none" dir="ltr">${escapeHtml(phone)}</a>` : phone, { html: Boolean(telHref(booking.phone)) }],
+                ["المصدر", source],
+                ["الدخول", prettyArabicDate(booking.checkIn)],
+                ["الخروج", `${prettyArabicDate(booking.checkOut)} (الساعة 12:00 ظهرًا)`]
+            ],
+            buttons: [
+                { href: whatsappNumber(booking.phone) ? `https://wa.me/${whatsappNumber(booking.phone)}` : "", label: "واتساب العميل", tone: "whatsapp" },
+                { href: telHref(booking.phone), label: "اتصال", tone: "gold" },
+                { href: ADMIN_URL, label: "افتح لوحة الإدارة", tone: "dark" }
+            ]
+        })
     }, {
         idempotencyKey: `hijazi-reminder:${booking._id}:${reminder.key}`
     });
@@ -1294,7 +1218,20 @@ async function sendSyncFailureEmail({
                     "ar-JO",
                     { timeZone: "Asia/Amman" }
                 )}\n\n` +
-                `افتح لوحة الإدارة وافحص رابط التقويم.`
+                `افتح لوحة الإدارة وافحص رابط التقويم.`,
+            html: ownerEmailHtml({
+                badge: "فشل المزامنة",
+                badgeTone: "red",
+                title: `${sourceTitle} — ${apartmentLabel}`,
+                intro: "ما قدر النظام يقرأ تقويم المنصة. الحجوزات الجديدة من هالمنصة ما رح تنضاف لحد ما تنحل المشكلة.",
+                rows: [
+                    ["الشقة", apartmentLabel],
+                    ["المنصة", sourceTitle],
+                    ["الوقت", new Date().toLocaleString("ar-JO-u-nu-latn", { timeZone: "Asia/Amman" })]
+                ],
+                blocks: [{ tone: "red", title: "الخطأ", text: String(message || "خطأ غير معروف").slice(0, 500) }],
+                buttons: [{ href: ADMIN_URL, label: "افتح لوحة الإدارة وافحص رابط التقويم", tone: "dark" }]
+            })
         });
 
         syncFailureAlertTimes.set(
@@ -3054,6 +2991,25 @@ const reminderTimer = setInterval(
 );
 reminderTimer.unref();
 
+/* نص كل نسخة انبعتت اليوم (نوع الجهة + اللغة + أولى أو متابعة) مرة وحدة، عشان المالك يشوف شو وصلهم.
+   رابط إلغاء الاشتراك مستبدل بنص، عشان المالك ما يلغي اشتراك جهة بالغلط. */
+function outreachSamples(sent) {
+    const typeNames = { embassy: "السفارات", un: "الأمم المتحدة", ngo: "المنظمات", rights: "المنظمات الحقوقية" };
+    const seen = new Map();
+    for (const item of sent) {
+        const key = `${item.contact.type}|${item.contact.lang}|${item.kind}`;
+        if (!seen.has(key)) seen.set(key, item);
+    }
+    return [...seen.values()].map(item => {
+        const message = buildOutreachEmail(item.contact, item.kind, "[رابط إلغاء الاشتراك الخاص بالجهة]");
+        return {
+            tone: "note",
+            title: `نص الرسالة: ${typeNames[item.contact.type] || ""}${item.kind === "followup" ? " (متابعة)" : ""} — ${message.subject}`,
+            text: message.text
+        };
+    });
+}
+
 /* ملخص يومي للمالك بكل اللي انبعت (عن طريق Resend، لأنه إيميل داخلي للمالك فقط). */
 async function sendOutreachSummaryEmail({ sent, errors }) {
     const from = process.env.RESEND_FROM;
@@ -3071,7 +3027,17 @@ async function sendOutreachSummaryEmail({ sent, errors }) {
         to,
         subject: `مراسلة الجهات: ${sent.length} اليوم${errors.length ? ` و${errors.length} خطأ` : ""}`,
         text: lines.join("\n"),
-        html: `<div dir="rtl">${lines.map(line => escapeHtml(line)).join("<br>")}</div>`
+        html: ownerEmailHtml({
+            badge: "مراسلة الجهات",
+            badgeTone: errors.length ? "red" : "green",
+            title: `انبعت اليوم ${sent.length} إيميل`,
+            intro: "هاي الجهات اللي وصلتها رسالة اليوم. الردود بتوصل على info@hijazi-apartments.com.",
+            rows: sent.map(item => [item.kind === "followup" ? "متابعة" : "رسالة أولى", item.contact.org]),
+            blocks: [
+                ...(errors.length ? [{ tone: "red", title: "أخطاء", text: errors.map(error => `${error.org}: ${error.message}`).join("\n") }] : []),
+                ...outreachSamples(sent)
+            ]
+        })
     });
     if (error) throw new Error(error.message || "Resend error");
 }

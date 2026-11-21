@@ -10,9 +10,13 @@
     function message(ar, en) {
         return document.documentElement.lang === "en" ? en : ar;
     }
-    function setStatus(text) {
+    /* الرسالة تظهر تحت مربع التحقق مباشرة، مش أعلى النموذج. */
+    function setStatus(text, type = "info") {
         const el = document.getElementById("bookingSecurityStatus");
-        if (el) el.textContent = text;
+        if (!el) return;
+        el.textContent = text;
+        el.hidden = !text;
+        el.className = text ? `action-msg action-msg-${type}` : "";
     }
     function loadScript() {
         if (window.turnstile) return Promise.resolve();
@@ -58,11 +62,11 @@
                 language: document.documentElement.lang === "en" ? "en" : "ar",
                 "response-field": false,
                 callback(value) { token = value; setStatus(""); },
-                "expired-callback"() { token = ""; setStatus(message("أعد التحقق الأمني قبل الإرسال.", "Please verify again before submitting.")); },
+                "expired-callback"() { token = ""; setStatus(message("انتهت صلاحية التحقق. ضع علامة ✓ مرة ثانية قبل الإرسال.", "The check expired. Tick it again before submitting.")); },
                 "timeout-callback"() { token = ""; },
                 "error-callback"() {
                     token = "";
-                    setStatus(message("تعذر التحقق. تأكد من اتصالك وأعد المحاولة.", "Verification failed. Check your connection and retry."));
+                    setStatus(message("تعذر التحقق. تأكد من اتصالك وأعد المحاولة.", "Verification failed. Check your connection and retry."), "error");
                 }
             });
         })().catch(error => { initialization = null; throw error; });
@@ -73,7 +77,7 @@
             try { await initialize(); }
             catch { throw new Error(message("تعذر تحميل التحقق الأمني. أعد المحاولة أو تواصل معنا.", "Security verification could not load. Retry or contact us.")); }
             if (!config.enabled) return "";
-            if (!token) throw new Error(message("أكمل التحقق الأمني أسفل النموذج ثم اضغط تأكيد الحجز.", "Complete the security check below the form, then confirm your booking."));
+            if (!token) throw new Error(message("ضع علامة ✓ على «التحقق من أنك إنسان» هنا، ثم اضغط «تأكيد الحجز».", "Tick “Verify you are human” here, then press “Confirm booking”."));
             return token;
         },
         reset() {
@@ -82,6 +86,6 @@
         }
     };
     document.addEventListener("DOMContentLoaded", () => {
-        initialize().catch(() => setStatus(message("تعذر تحميل التحقق الأمني. ستتم إعادة المحاولة عند الإرسال.", "Verification could not load. We will retry when you submit.")));
+        initialize().catch(() => setStatus(message("تعذر تحميل التحقق الأمني. ستتم إعادة المحاولة عند الإرسال.", "Verification could not load. We will retry when you submit."), "error"));
     });
 })();
