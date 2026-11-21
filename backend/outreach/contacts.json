@@ -1,0 +1,218 @@
+[
+  {
+    "org": "Delegation of the European Union to Jordan",
+    "email": "Delegation-jordan@eeas.europa.eu",
+    "type": "embassy",
+    "lang": "en",
+    "source": "https://www.eeas.europa.eu/delegations/jordan_en",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "IOM Jordan",
+    "email": "iomamman@iom.int",
+    "type": "un",
+    "lang": "en",
+    "source": "https://jordan.iom.int/contact-us",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "Embassy of Canada in Amman",
+    "email": "amman@international.gc.ca",
+    "type": "embassy",
+    "lang": "en",
+    "source": "https://www.international.gc.ca/country-pays/jordan-jordanie/amman.aspx?lang=eng",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "Mercy Corps Jordan",
+    "email": "jo-info@mercycorps.org",
+    "type": "ngo",
+    "lang": "en",
+    "source": "https://jordan.mercycorps.org/contact-us",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "Embassy of Sweden in Amman",
+    "email": "ambassaden.amman@gov.se",
+    "type": "embassy",
+    "lang": "en",
+    "source": "https://www.swedenabroad.se/en/embassies/jordan-amman/",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "UNOPS Jordan",
+    "email": "MR.AMM@unops.org",
+    "type": "un",
+    "lang": "en",
+    "source": "https://www.unops.org/jordan",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "Embassy of Germany in Amman",
+    "email": "info@amman.diplo.de",
+    "type": "embassy",
+    "lang": "en",
+    "source": "https://international.visitjordan.com/page/18/embassies/",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "UNDP Jordan",
+    "email": "registry.jo@undp.org",
+    "type": "un",
+    "lang": "en",
+    "source": "https://jordan.un.org/en/contact-us",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "Embassy of the United Arab Emirates in Amman",
+    "email": "ammanemb@mofa.gov.ae",
+    "type": "embassy",
+    "lang": "ar",
+    "source": "https://www.mofa.gov.ae/en/Missions/UAE-Missions-Abroad?region=JOR",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "ARDD",
+    "email": "Communication@ardd-jo.org",
+    "type": "rights",
+    "lang": "en",
+    "source": "https://www.ardd-jo.org/contact-us",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "Embassy of Belgium in Amman",
+    "email": "amman@diplobel.fed.be",
+    "type": "embassy",
+    "lang": "en",
+    "source": "https://jordan.diplomatie.belgium.be/en/embassy-amman/contact-our-embassy-amman",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "UN Women Jordan",
+    "email": "jordan.co@unwomen.org",
+    "type": "un",
+    "lang": "en",
+    "source": "https://jordan.un.org/en/contact-us",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "Embassy of Austria in Amman",
+    "email": "amman-ob@bmeia.gv.at",
+    "type": "embassy",
+    "lang": "en",
+    "source": "https://www.bmeia.gv.at/en/austrian-embassy-amman",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "Plan International Jordan",
+    "email": "info.jordan@plan-international.org",
+    "type": "ngo",
+    "lang": "en",
+    "source": "https://plan-international.org/jordan",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "Embassy of Italy in Amman",
+    "email": "info.amman@esteri.it",
+    "type": "embassy",
+    "lang": "en",
+    "source": "https://international.visitjordan.com/page/18/embassies/",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "FAO Jordan",
+    "email": "FAO-JO@fao.org",
+    "type": "un",
+    "lang": "en",
+    "source": "https://jordan.un.org/en/contact-us",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "Embassy of Spain in Amman",
+    "email": "emb.amman@maec.es",
+    "type": "embassy",
+    "lang": "en",
+    "source": "https://international.visitjordan.com/page/18/embassies/",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "UN-Habitat Jordan",
+    "email": "unhabitat-jordan@un.org",
+    "type": "un",
+    "lang": "en",
+    "source": "https://jordan.un.org/en/contact-us",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "Embassy of the Czech Republic in Amman",
+    "email": "amman@mzv.gov.cz",
+    "type": "embassy",
+    "lang": "en",
+    "source": "https://mzv.gov.cz/amman/en/kontakty.html",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "UNESCO Amman Office",
+    "email": "amman@unesco.org",
+    "type": "un",
+    "lang": "en",
+    "source": "https://jordan.un.org/en/contact-us",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "Embassy of Japan in Amman",
+    "email": "amb.see@am.mofa.go.jp",
+    "type": "embassy",
+    "lang": "en",
+    "source": "https://international.visitjordan.com/page/18/embassies/",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "UNRWA",
+    "email": "JorPio@UNRWA.org",
+    "type": "un",
+    "lang": "en",
+    "source": "https://jordan.un.org/en/contact-us",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "Embassy of India in Amman",
+    "email": "admin.amman@mea.gov.in",
+    "type": "embassy",
+    "lang": "en",
+    "source": "https://international.visitjordan.com/page/18/embassies/",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "Office of the UN Resident Coordinator in Jordan",
+    "email": "rchc.jo@one.un.org",
+    "type": "un",
+    "lang": "en",
+    "source": "https://jordan.un.org/en/contact-us",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "Embassy of Indonesia in Amman",
+    "email": "amman.kbri@kemlu.go.id",
+    "type": "embassy",
+    "lang": "en",
+    "source": "https://international.visitjordan.com/page/18/embassies/",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "Embassy of Ukraine in Amman",
+    "email": "emb_jo@mfa.gov.ua",
+    "type": "embassy",
+    "lang": "en",
+    "source": "https://international.visitjordan.com/page/18/embassies/",
+    "checked": "2026-11-21"
+  },
+  {
+    "org": "Embassy of Azerbaijan in Amman",
+    "email": "amman@mission.mfa.gov.az",
+    "type": "embassy",
+    "lang": "en",
+    "source": "https://international.visitjordan.com/page/18/embassies/",
+    "checked": "2026-11-21"
+  }
+]

@@ -5,6 +5,9 @@ const cors = require("cors");
 const Booking = require("./models/Booking");
 const Apartment = require("./models/Apartment");
 const ActivityLog = require("./models/ActivityLog");
+const OutreachRecord = require("./models/OutreachRecord");
+const { createOutreachRunner } = require("./services/outreach-runner");
+const outreachContacts = require("./outreach/contacts.json");
 const basicAuth = require("basic-auth");
 const { Resend } = require("resend");
 const { buildIcalFeed, fetchCalendarEvents, validateCalendarUrl } = require("./services/ical");
@@ -136,6 +139,26 @@ app.use(cors({
 /* تطبيق الحد العام للطلبات */
 app.use(globalApiLimiter);
 
+/* =========================================================
+   مراسلة الجهات (Brevo): إلغاء الاشتراك
+   قبل فحص JSON لأن زر الإلغاء بالجيميل بيبعث POST بصيغة form.
+========================================================= */
+const outreachRunner = createOutreachRunner({
+    Record: OutreachRecord,
+    contacts: outreachContacts,
+    isDbReady: () => mongoose.connection.readyState === 1,
+    notifyOwner: sendOutreachSummaryEmail
+});
+
+async function handleOutreachUnsubscribe(req, res) {
+    const ok = await outreachRunner.unsubscribe(req.query.e, req.query.t).catch(() => false);
+    res.status(ok ? 200 : 400).type("text/plain; charset=utf-8").send(ok
+        ? "You have been unsubscribed. We will not email you again.\nتم إلغاء الاشتراك، ولن نراسلكم مجددًا.\n\nHIJAZI Apartments"
+        : "This link is not valid. Reply to our email and we will remove you.\nالرابط غير صالح. ردّوا على رسالتنا وسنحذفكم من القائمة.");
+}
+app.get("/outreach/unsubscribe", handleOutreachUnsubscribe);
+app.post("/outreach/unsubscribe", handleOutreachUnsubscribe);
+
 /* قبول JSON فقط في طلبات الكتابة */
 app.use(requireJsonContentType);
 
@@ -172,6 +195,9 @@ if (require.main === module) mongoose
         });
         runScheduledBookingReminders().catch((error) => {
             console.log("INITIAL BOOKING REMINDER ERROR:", error.message);
+        });
+        outreachRunner.run().catch((error) => {
+            console.log("INITIAL OUTREACH ERROR:", error.message);
         });
     })
     .catch((err) => console.log("MongoDB Connection Error:", err.name || "Error"));
@@ -2840,6 +2866,34 @@ const reminderTimer = setInterval(
 );
 reminderTimer.unref();
 
+/* ملخص يومي للمالك بكل اللي انبعت (عن طريق Resend، لأنه إيميل داخلي للمالك فقط). */
+async function sendOutreachSummaryEmail({ sent, errors }) {
+    const from = process.env.RESEND_FROM;
+    const to = process.env.ADMIN_EMAIL;
+    if (!resend || !from || !to) return;
+    const lines = [
+        `انبعت اليوم ${sent.length} إيميل للجهات:`,
+        ...sent.map(item => `- ${item.contact.org}${item.kind === "followup" ? " (متابعة)" : ""}`),
+        ...(errors.length ? ["", "أخطاء:", ...errors.map(error => `- ${error.org}: ${error.message}`)] : []),
+        "",
+        "الردود بتوصل على info@hijazi-apartments.com."
+    ];
+    const { error } = await resend.emails.send({
+        from,
+        to,
+        subject: `مراسلة الجهات: ${sent.length} اليوم${errors.length ? ` و${errors.length} خطأ` : ""}`,
+        text: lines.join("\n"),
+        html: `<div dir="rtl">${lines.map(line => escapeHtml(line)).join("<br>")}</div>`
+    });
+    if (error) throw new Error(error.message || "Resend error");
+}
+
+const outreachTimer = setInterval(
+    () => outreachRunner.run().catch(error => console.log("OUTREACH RUN ERROR:", error.message)),
+    15 * 60 * 1000
+);
+outreachTimer.unref();
+
 /* =========================================================
    مزامنة دورية للتقاويم المفعّلة أثناء عمل خدمة Render
 ========================================================= */
@@ -2872,6 +2926,8 @@ async function runScheduledCalendarSync() {
             }
         }
         queueBookingReminderCheck();
+        setImmediate(() => outreachRunner.run().catch(error =>
+            console.log("OUTREACH RUN ERROR:", error.message)));
     } finally {
         calendarSyncRunning = false;
     }
