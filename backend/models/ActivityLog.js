@@ -26,6 +26,14 @@ const activityLogSchema = new mongoose.Schema(
 );
 
 activityLogSchema.index({ createdAt: -1 });
+
+/* حذف تلقائي (TTL): MongoDB نفسه يحذف أي سجل عمره أكثر من 12 شهر، حتى يبقى حجم السجل ثابتًا
+   على خطة Atlas المجانية (512 ميغابايت). لا يمس الحجوزات أبدًا. طلب المالك 2026-11-21. */
+const ACTIVITY_LOG_RETENTION_DAYS = 365;
+activityLogSchema.index(
+    { createdAt: 1 },
+    { expireAfterSeconds: ACTIVITY_LOG_RETENTION_DAYS * 24 * 60 * 60, name: "activity_log_ttl_12_months" }
+);
 activityLogSchema.index({ category: 1, createdAt: -1 });
 
 module.exports = mongoose.model("ActivityLog", activityLogSchema);

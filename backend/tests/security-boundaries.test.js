@@ -82,3 +82,13 @@ test("Turnstile can be disabled only by server configuration for staged deployme
     await createTurnstileProtection({ TURNSTILE_ENABLED: "false" }).verify({ body: {} }, res, () => { next = true; });
     assert.equal(next, true);
 });
+
+test("activity log entries expire after 12 months and bookings never expire", () => {
+    const ActivityLog = require("../models/ActivityLog");
+    const Booking = require("../models/Booking");
+    const ttl = ActivityLog.schema.indexes().find(([, options]) => options && options.expireAfterSeconds);
+    assert.ok(ttl, "activity log has a TTL index");
+    assert.deepEqual(ttl[0], { createdAt: 1 });
+    assert.equal(ttl[1].expireAfterSeconds, 365 * 24 * 60 * 60);
+    assert.equal(Booking.schema.indexes().some(([, options]) => options && options.expireAfterSeconds), false);
+});
