@@ -211,6 +211,11 @@
         }
 
         input.type = "text";
+        if (!input.getAttribute("placeholder")) {
+            const isEnglish = (document.documentElement.lang || "").toLowerCase().startsWith("en")
+                || (document.body && document.body.classList.contains("ltr-mode"));
+            input.setAttribute("placeholder", isEnglish ? "Select date" : "اختر التاريخ");
+        }
         input.classList.add("glass-date-input");
         input.setAttribute("autocomplete", "off");
         input.setAttribute("readonly", "readonly");

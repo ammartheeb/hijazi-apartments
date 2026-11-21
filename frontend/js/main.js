@@ -674,6 +674,8 @@ const SITE_TRANSLATIONS = {
         mapLink: "الموقع على خرائط جوجل",
         phoneLabel: "الهاتف",
         emailLabel: "البريد",
+        whatsappLabel: "واتساب",
+        footerContact: "تواصل معنا",
         social: "السوشال ميديا",
         longStayNote: "خصم ذهبي للإقامة أكثر من شهر",
         longStayAlert: "سوف يتم التواصل معك للحصول على خصم خاص",
@@ -696,6 +698,8 @@ const SITE_TRANSLATIONS = {
         mapLink: "Location on Google Maps",
         phoneLabel: "Phone",
         emailLabel: "Email",
+        whatsappLabel: "WhatsApp",
+        footerContact: "Contact us",
         social: "Social Media",
         longStayNote: "Golden discount for stays longer than one month",
         longStayAlert: "We will contact you to offer a special discount",
@@ -864,10 +868,13 @@ function renderSharedFooter() {
                 </div>
 
                 <div class="footer-box">
-                    <h4>${t.contactUs}</h4>
-                    <p>${t.phoneLabel}: <a href="tel:+962789000444">+962789000444</a></p>
-                    <p>${t.emailLabel}: <a href="mailto:info@hijazi-apartments.com">info@hijazi-apartments.com</a></p>
-                    <p>${t.address} · <a href="${HIJAZI_MAP_URL}" target="_blank" rel="noopener">${t.mapLink}</a></p>
+                    <h4>${t.footerContact}</h4>
+                    <div class="footer-actions">
+                        <a class="footer-action" href="tel:+962789000444"><span class="footer-action-label">${t.phoneLabel}</span><span dir="ltr">+962 78 900 0444</span></a>
+                        <a class="footer-action" href="https://wa.me/962789000444" target="_blank" rel="noopener noreferrer"><span class="footer-action-label">${t.whatsappLabel}</span><span dir="ltr">+962 78 900 0444</span></a>
+                        <a class="footer-action" href="mailto:info@hijazi-apartments.com"><span class="footer-action-label">${t.emailLabel}</span><span dir="ltr">info@hijazi-apartments.com</span></a>
+                        <a class="footer-action" href="${HIJAZI_MAP_URL}" target="_blank" rel="noopener"><span class="footer-action-label">${t.address}</span><span>${t.mapLink}</span></a>
+                    </div>
                 </div>
 
                 <div class="footer-box">
@@ -897,7 +904,7 @@ function renderWhatsAppWidget() {
 
     host.innerHTML = `
         <div class="whatsapp-widget">
-            <div class="whatsapp-label">${t.contactUs}</div>
+            <a class="whatsapp-label" href="https://wa.me/962789000444?text=Hello%20HIJAZI%20Apartments" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">${t.contactUs}</a>
             <a href="https://wa.me/962789000444?text=Hello%20HIJAZI%20Apartments"
                class="whatsapp-float"
                target="_blank"
@@ -911,6 +918,47 @@ function renderWhatsAppWidget() {
             </a>
         </div>
     `;
+    initWhatsAppLabelDimming(host);
+}
+
+/* جملة واتساب تخفت إذا لم يلمس الزائر الشاشة 3.5 ثوانٍ (غالبًا يقرأ)،
+   وتضيء من جديد عند أي لمسة على الصفحة. الأيقونة الخضراء تبقى كما هي.
+   اللمس داخل حقول الكتابة لا يضيئها، حتى لا تزعج من يملأ نموذجًا.
+   وفي صفحة الحجز تختفي الجملة كليًا ما دام زر تأكيد الحجز ظاهرًا. */
+function initWhatsAppLabelDimming(host) {
+    const state = window.__hijaziWaDim || (window.__hijaziWaDim = { timer: 0, ready: false });
+    const IDLE_MS = 3500;
+    const getLabel = () => host.querySelector(".whatsapp-label");
+
+    function wake() {
+        const label = getLabel();
+        if (!label) return;
+        label.classList.remove("is-dim");
+        clearTimeout(state.timer);
+        state.timer = setTimeout(() => {
+            const current = getLabel();
+            if (current) current.classList.add("is-dim");
+        }, IDLE_MS);
+    }
+    state.wake = wake;
+    wake();
+
+    if (state.ready) return; // المستمعات تُضاف مرة واحدة حتى لو أُعيد رسم الزر
+    state.ready = true;
+
+    document.addEventListener("pointerdown", (event) => {
+        const target = event.target;
+        if (target.closest && target.closest("input, textarea, select, [contenteditable='true']")) return;
+        state.wake();
+    }, { passive: true });
+
+    const submit = document.querySelector("#bookingForm [type='submit']");
+    if (submit && "IntersectionObserver" in window) {
+        new IntersectionObserver((entries) => {
+            const label = getLabel();
+            if (label) label.classList.toggle("is-quiet", entries[0].isIntersecting);
+        }).observe(submit);
+    }
 }
 
 /* =========================

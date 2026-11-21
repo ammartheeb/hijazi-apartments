@@ -503,6 +503,63 @@ section {
     gap: 8px;
 }
 
+/* أزرار التواصل في التذييل: مساحة لمس 44px على الأقل للهاتف */
+.footer-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-box a.footer-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 48px;
+    padding: 8px 14px;
+    border: 1px solid rgba(212, 160, 23, 0.35);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.footer-action-label {
+    color: #d4a017;
+    font-weight: 700;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.footer-box a.footer-action:hover,
+.footer-box a.footer-action:active {
+    border-color: #d4a017;
+    background: rgba(212, 160, 23, 0.1);
+}
+
+@media (max-width: 768px) {
+    /* حتى لا يغطي زر واتساب وزر الصعود سطر الحقوق في آخر الصفحة */
+    .site-footer {
+        padding-bottom: 92px;
+    }
+
+    .social-links {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.04);
+    }
+}
+
 .footer-bottom {
     text-align: center;
     padding: 16px;
@@ -535,6 +592,24 @@ section {
     font-weight: 700;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
     white-space: nowrap;
+    text-decoration: none;
+    transition: opacity 0.6s ease;
+}
+
+.whatsapp-label:hover {
+    color: #fff;
+}
+
+/* تخفت بعد 3.5 ثوانٍ بلا لمس، وتضيء عند اللمس (main.js) */
+.whatsapp-label.is-dim {
+    opacity: 0.22;
+    pointer-events: none;
+}
+
+/* في صفحة الحجز: مخفية ما دام زر تأكيد الحجز ظاهرًا */
+.whatsapp-label.is-quiet {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .whatsapp-float {

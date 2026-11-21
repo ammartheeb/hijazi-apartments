@@ -50,13 +50,13 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="ar_JO">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=10" />
+    <link rel="stylesheet" href="css/style.css?v=11" />
     <link rel="stylesheet" href="css/lightbox.css?v=5">
     <link rel="stylesheet" href="css/amenities.css?v=1" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ar.js"></script>
-    <script src="js/hijazi-datepicker.js?v=1"></script>
+    <script src="js/hijazi-datepicker.js?v=3"></script>
 
     <style>
         body {
@@ -2617,6 +2617,33 @@
             background: rgba(0, 0, 0, 0.704) !important;
         }
     </style>
+    <style>
+        /* ===== تحسينات القراءة (2026-11-21) =====
+           البطاقة كانت زجاجًا أسود بشفافية 22% فوق خلفية فاتحة، فيظهر النص الأبيض
+           باهتًا على رمادي فاتح. خلفية أغمق، وخط المميزات 13px بدل 11px،
+           والسعر قبل قائمة الحجوزات القادمة. */
+        .grid .card {
+            background: rgba(16, 14, 10, 0.68) !important;
+        }
+
+        .grid .card .muted {
+            color: rgba(255, 255, 255, 0.86) !important;
+            font-size: 14px !important;
+        }
+
+        .grid .card .features li {
+            font-size: 13px !important;
+        }
+
+        .grid .card .card-price-box {
+            background: rgba(0, 0, 0, 0.38) !important;
+            border-color: rgba(212, 160, 23, 0.45) !important;
+        }
+
+        .grid .card .card-price-main {
+            font-size: 20px !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -2819,7 +2846,7 @@
     <script src="js/amenities-data.js?v=3"></script>
     <script src="js/amenities-ui.js?v=2"></script>
     <script src="js/lightbox-swipe.js?v=5"></script>
-    <script src="js/main.js?v=16"></script>
+    <script src="js/main.js?v=17"></script>
     <script src="js/scroll-reveal.js?v=1" defer></script>
     <script>
         const API_BASE = "https://api.hijazi-apartments.com";
@@ -3077,8 +3104,6 @@
                     ${features.slice(0, 4).map(f => `<li>${f}</li>`).join("")}
                 </ul>
 
-                ${bookingRangesHtml}
-
                 <div class="card-price-box">
                     <div class="card-price-main">${nightLabel}: ${apt.price} ${jodText}</div>
                     ${nights ? `<div class="card-price-sub">${nightsLabel}: ${nights}</div>` : ""}
@@ -3086,6 +3111,8 @@
                 </div>
 
                 ${nights >= 30 ? `<div class="long-note-inline">${SITE_TRANSLATIONS[lang].longStayAlert}</div>` : ""}
+
+                ${bookingRangesHtml}
 
                 <div class="card-actions">
                     ${isBookedForSelectedDates
