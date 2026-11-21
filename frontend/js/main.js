@@ -870,10 +870,22 @@ function renderSharedFooter() {
                 <div class="footer-box">
                     <h4>${t.footerContact}</h4>
                     <div class="footer-actions">
-                        <a class="footer-action" href="tel:+962789000444"><span class="footer-action-label">${t.phoneLabel}</span><span dir="ltr">+962 78 900 0444</span></a>
-                        <a class="footer-action" href="https://wa.me/962789000444" target="_blank" rel="noopener noreferrer"><span class="footer-action-label">${t.whatsappLabel}</span><span dir="ltr">+962 78 900 0444</span></a>
-                        <a class="footer-action" href="mailto:info@hijazi-apartments.com"><span class="footer-action-label">${t.emailLabel}</span><span dir="ltr">info@hijazi-apartments.com</span></a>
-                        <a class="footer-action" href="${HIJAZI_MAP_URL}" target="_blank" rel="noopener"><span class="footer-action-label">${t.address}</span><span>${t.mapLink}</span></a>
+                        <a class="footer-action" href="tel:+962789000444">
+                            <span class="footer-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+                            <span class="footer-action-text"><span class="footer-action-label">${t.phoneLabel}</span><span class="footer-action-value" dir="ltr">+962 78 900 0444</span></span>
+                        </a>
+                        <a class="footer-action" href="https://wa.me/962789000444" target="_blank" rel="noopener noreferrer">
+                            <span class="footer-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65-4.95A8.5 8.5 0 1 1 7.9 19.4z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1.2-1.2-1.7-1-1 .7a4 4 0 0 1-2.5-2.5l.7-1-1-1.7z"/></svg></span>
+                            <span class="footer-action-text"><span class="footer-action-label">${t.whatsappLabel}</span><span class="footer-action-value" dir="ltr">+962 78 900 0444</span></span>
+                        </a>
+                        <a class="footer-action" href="mailto:info@hijazi-apartments.com">
+                            <span class="footer-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
+                            <span class="footer-action-text"><span class="footer-action-label">${t.emailLabel}</span><span class="footer-action-value" dir="ltr">info@hijazi-apartments.com</span></span>
+                        </a>
+                        <a class="footer-action" href="${HIJAZI_MAP_URL}" target="_blank" rel="noopener">
+                            <span class="footer-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                            <span class="footer-action-text"><span class="footer-action-label">${t.address}</span><span class="footer-action-value">${t.mapLink}</span></span>
+                        </a>
                     </div>
                 </div>
 

@@ -212,6 +212,10 @@
         }).observe(box, { attributes: true, attributeFilter: ["class"] });
 
         window.addEventListener("resize", function () { if (box.classList.contains("open")) { layout(); syncStrip(false); } });
+        // عرض الشريط يتغير عند ظهور لوحة محتويات الغرفة على الديسكتوب: نعيد توسيط الصورة الحالية.
+        if ("ResizeObserver" in window) {
+            new ResizeObserver(function () { if (box.classList.contains("open")) syncStrip(false); }).observe(strip);
+        }
 
         /* ===== التقريب بإصبعين (الموبايل) =====
            إصبعين = تكبير وتصغير حول نقطة الأصابع (حتى 4 أضعاف). والصورة مكبّرة:

@@ -410,3 +410,23 @@ html body .image-lightbox.lb-has-room .image-lightbox-stage { inset: 60px 0 148p
 .lb-room { transition: opacity .2s ease; }
 .image-lightbox.lb-zoomed .lb-room { opacity: 0; pointer-events: none; }
 .lb-slide img { transform-origin: 50% 50%; }
+
+/* ===== الديسكتوب مع لوحة محتويات الغرفة (2026-11-21) =====
+   تلميح السحب وشريط الصور المصغرة يتوسّطان مساحة الصورة لا عرض الشاشة كلها،
+   وخلفية التلميح زجاج داكن واضح (كانت سوداء شفافة فلا تظهر إلا فوق الصورة فتبدو مقصوصة). */
+.image-lightbox-hint {
+    background: rgba(18, 18, 18, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 12px 30px rgba(0, 0, 0, 0.45);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    padding: 18px 28px;
+}
+
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+    html body .image-lightbox.lb-has-room .image-lightbox-hint { left: calc((100% - 330px) / 2); }
+    html[dir="ltr"] body .image-lightbox.lb-has-room .image-lightbox-hint { left: calc(330px + (100% - 330px) / 2); }
+    /* padding بالنسبة المئوية يُحسب من عرض العارض كله، فنطرح نصف عرض اللوحة */
+    html body .image-lightbox.lb-has-room .lb-strip { left: 0; right: 330px; padding: 0 calc(50% - 165px); }
+    html[dir="ltr"] body .image-lightbox.lb-has-room .lb-strip { left: 330px; right: 0; }
+}
