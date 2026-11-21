@@ -933,32 +933,16 @@ function renderWhatsAppWidget() {
     initWhatsAppLabelDimming(host);
 }
 
-/* جملة واتساب تظهر في أول شاشة فقط؛ بعد النزول تبقى الأيقونة وحدها (طلب المالك 2026-11-21)،
-   وتعود عند الرجوع إلى أعلى الصفحة. وفي صفحة الحجز تختفي أيضًا ما دام زر «تأكيد الحجز» ظاهرًا.
-   مستمع scroll خفيف (passive، مرة واحدة لكل إطار، يغيّر class فقط). */
+/* جملة واتساب ظاهرة دائمًا (اختيار المالك 2026-11-21)، وتختفي فقط في صفحة الحجز
+   ما دام زر «تأكيد الحجز» ظاهرًا حتى لا تغطيه. */
 function initWhatsAppLabelDimming(host) {
-    if (window.__hijaziWaLabel) return;
-    window.__hijaziWaLabel = true;
-    const getLabel = () => host.querySelector(".whatsapp-label");
-
-    let ticking = false;
-    const update = () => {
-        ticking = false;
-        const label = getLabel();
-        if (label) label.classList.toggle("is-away", window.scrollY > window.innerHeight * 0.5);
-    };
-    window.addEventListener("scroll", () => {
-        if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    }, { passive: true });
-    update();
-
     const submit = document.querySelector("#bookingForm [type='submit']");
-    if (submit && "IntersectionObserver" in window) {
-        new IntersectionObserver((entries) => {
-            const label = getLabel();
-            if (label) label.classList.toggle("is-quiet", entries[0].isIntersecting);
-        }).observe(submit);
-    }
+    if (!submit || !("IntersectionObserver" in window) || window.__hijaziWaQuiet) return;
+    window.__hijaziWaQuiet = true;
+    new IntersectionObserver((entries) => {
+        const label = host.querySelector(".whatsapp-label");
+        if (label) label.classList.toggle("is-quiet", entries[0].isIntersecting);
+    }).observe(submit);
 }
 
 /* =========================

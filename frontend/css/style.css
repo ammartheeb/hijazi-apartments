@@ -651,7 +651,6 @@ html[dir="rtl"] .footer-box .footer-action-value[dir="ltr"] {
 }
 
 /* في صفحة الحجز: مخفية ما دام زر تأكيد الحجز ظاهرًا */
-.whatsapp-label.is-away,
 .whatsapp-label.is-quiet {
     opacity: 0;
     pointer-events: none;
