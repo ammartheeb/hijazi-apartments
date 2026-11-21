@@ -1728,7 +1728,7 @@ async function syncApartmentCalendar(
                 },
                 {
                     upsert: true,
-                    new: true,
+                    returnDocument: "after",
                     setDefaultsOnInsert: true,
                     includeResultMetadata: true
                 }
@@ -1993,7 +1993,7 @@ app.post("/admin/apartments/:id/rotate-calendar-token", requireAdmin, async (req
     try {
         const apartment = await Apartment.findByIdAndUpdate(req.params.id, {
             $set: { calendarToken: crypto.randomBytes(24).toString("hex") }
-        }, { new: true, runValidators: true });
+        }, { returnDocument: "after", runValidators: true });
         if (!apartment) return res.status(404).json({ success: false, message: "الشقة غير موجودة." });
         await recordAdminActivity(req, {
             category: "apartment", action: "apartment.calendar_token_rotated", targetType: "apartment",
