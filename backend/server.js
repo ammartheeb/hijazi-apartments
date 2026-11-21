@@ -13,7 +13,9 @@ const {
     whatsappNumber,
     telHref,
     ownerEmailHtml,
-    prettyArabicDate
+    prettyArabicDate,
+    GLASS: EMAIL_GLASS,
+    button: emailButton
 } = require("./services/email-layout");
 const outreachContacts = require("./outreach/contacts.json");
 const basicAuth = require("basic-auth");
@@ -828,8 +830,8 @@ function bookingHtml(booking, forCustomer = false) {
         ["الضيوف", adults || children ? `بالغين: ${adults}${children ? `، أطفال: ${children}` : ""}` : ""],
         ["السعر", price],
         ["الاسم", isWebsite ? fullName : ""],
-        ["الهاتف", tel ? `<a href="${escapeHtml(tel)}" style="color:#1c1c1c;text-decoration:none" dir="ltr">${escapeHtml(phone)}</a>` : "", { html: true }],
-        ["البريد", email ? `<a href="mailto:${escapeHtml(email)}" style="color:#1c1c1c">${escapeHtml(email)}</a>` : "", { html: true }],
+        ["الهاتف", tel ? `<a href="${escapeHtml(tel)}" style="color:#ffffff;text-decoration:none" dir="ltr">${escapeHtml(phone)}</a>` : "", { html: true }],
+        ["البريد", email ? `<a href="mailto:${escapeHtml(email)}" style="color:#ffffff">${escapeHtml(email)}</a>` : "", { html: true }],
         ["المصدر", source]
     ];
 
@@ -854,7 +856,7 @@ function bookingHtml(booking, forCustomer = false) {
         ],
         buttons: [
             { href: wa ? `https://wa.me/${wa}?text=${encodeURIComponent(waText)}` : "", label: "واتساب الضيف", tone: "whatsapp" },
-            { href: tel, label: "اتصال", tone: "gold" },
+            { href: tel, label: "اتصال", tone: "glass" },
             { href: ADMIN_URL, label: "افتح لوحة الإدارة", tone: "dark" }
         ]
     });
@@ -937,80 +939,78 @@ function guestBookingEmail(booking) {
     const esc = escapeHtml;
     const gold = "#c89116";
     const font = "font-family:Tahoma,Arial,Helvetica,sans-serif";
+    const g = EMAIL_GLASS;
 
     const rows = [
         [t.apartment, booking.apartmentLabel],
         [t.checkIn, prettyEmailDate(booking.checkIn, lang)],
-        [t.checkOut, `${prettyEmailDate(booking.checkOut, lang)}<br/><span style="color:#8a7a55;font-size:12px">${esc(t.checkoutTime)}</span>`, true],
+        [t.checkOut, `${prettyEmailDate(booking.checkOut, lang)}<br/><span style="color:#d9b968;font-size:12px">${esc(t.checkoutTime)}</span>`, true],
         [t.nights, String(nights)],
         [t.guests, guests]
     ].map(([label, value, raw], index) => `
                 <tr>
-                    <td style="${font};padding:12px 0;border-top:${index ? "1px solid #f0e6cf" : "0"};color:#7a7a7a;font-size:14px;width:38%;text-align:${t.align}">${esc(label)}</td>
-                    <td style="${font};padding:12px 0;border-top:${index ? "1px solid #f0e6cf" : "0"};color:#1c1c1c;font-size:15px;font-weight:bold;text-align:${t.align}">${raw ? value : esc(value)}</td>
+                    <td style="${font};padding:12px 0;border-top:${index ? `1px solid ${g.rowLine}` : "0"};color:${g.muted};font-size:14px;width:38%;text-align:${t.align}">${esc(label)}</td>
+                    <td style="${font};padding:12px 0;border-top:${index ? `1px solid ${g.rowLine}` : "0"};color:${g.text};font-size:15px;font-weight:bold;text-align:${t.align}">${raw ? value : esc(value)}</td>
                 </tr>`).join("");
 
     const notes = booking.notes ? `
-            <tr><td style="padding:0 28px 8px">
-                <div style="${font};background:#faf7f0;border-radius:10px;padding:14px 16px;color:#444;font-size:14px;line-height:1.7;text-align:${t.align}">
-                    <b style="color:#1c1c1c">${esc(t.notes)}:</b><br/>
+            <tr><td style="padding:0 28px 10px">
+                <div style="${font};background-color:${g.panel};border:1px solid ${g.line};border-radius:14px;padding:14px 16px;color:${g.soft};font-size:14px;line-height:1.7;text-align:${t.align}">
+                    <b style="color:#ffffff">${esc(t.notes)}:</b><br/>
                     <span style="white-space:pre-line">${esc(booking.notes)}</span>
                 </div>
             </td></tr>` : "";
 
     const longStay = nights >= 30 ? `
-            <tr><td style="padding:0 28px 8px">
-                <div style="${font};background:#fff7e3;border:1px solid #e9c46a;border-radius:10px;padding:12px 16px;color:#6b4f00;font-size:14px;text-align:${t.align}">⭐ ${esc(t.longStay)}</div>
+            <tr><td style="padding:0 28px 10px">
+                <div style="${font};background-color:#2e2614;border:1px solid #6b5520;border-radius:14px;padding:12px 16px;color:#f3dfa6;font-size:14px;text-align:${t.align}">⭐ ${esc(t.longStay)}</div>
             </td></tr>` : "";
-
-    const button = (href, label, bg, color) =>
-        `<a href="${href}" style="${font};display:inline-block;margin:4px;padding:12px 20px;border-radius:999px;background:${bg};color:${color};font-size:14px;font-weight:bold;text-decoration:none">${esc(label)}</a>`;
 
     const html = `<!doctype html>
 <html lang="${lang}" dir="${t.dir}">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(t.subject)}</title></head>
-<body style="margin:0;padding:0;background:#f3efe6">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><meta name="supported-color-schemes" content="dark"><title>${esc(t.subject)}</title></head>
+<body style="margin:0;padding:0;background-color:${g.page}">
 <div style="display:none;max-height:0;overflow:hidden">${esc(t.intro)}</div>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3efe6;padding:24px 12px">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:${g.page};padding:24px 12px">
 <tr><td align="center">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" dir="${t.dir}" style="max-width:600px;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #eadfc6">
-        <tr><td style="background:#111111;padding:26px 28px;text-align:center;border-bottom:4px solid ${gold}">
-            <div style="${font};color:${gold};font-size:24px;font-weight:bold;letter-spacing:1px">HIJAZI Apartments</div>
-            <div style="${font};color:#d9d2c0;font-size:14px;margin-top:4px">شقق حجازي المفروشة</div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" dir="${t.dir}" style="max-width:600px;background-color:${g.card};border-radius:24px;overflow:hidden;border:1px solid ${g.line}">
+        <tr><td style="padding:26px 28px 22px;text-align:center;border-bottom:2px solid ${gold}">
+            <div style="${font};color:#f1c75b;font-size:24px;font-weight:bold;letter-spacing:1px">HIJAZI Apartments</div>
+            <div style="${font};color:${g.muted};font-size:14px;margin-top:4px">شقق حجازي المفروشة</div>
         </td></tr>
         <tr><td style="padding:26px 28px 8px;text-align:${t.align}">
-            <span style="${font};display:inline-block;background:#eaf7ee;color:#1e7a3c;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:bold">✓ ${esc(t.badge)}</span>
-            <h1 style="${font};margin:16px 0 8px;font-size:22px;color:#1c1c1c">${esc(t.hello(booking.fullName))}</h1>
-            <p style="${font};margin:0;color:#4a4a4a;font-size:15px;line-height:1.8">${esc(t.intro)}</p>
+            <span style="${font};display:inline-block;background-color:#33291a;color:#f1c75b;border:1px solid #6b5520;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:bold">✓ ${esc(t.badge)}</span>
+            <h1 style="${font};margin:16px 0 8px;font-size:22px;color:${g.text}">${esc(t.hello(booking.fullName))}</h1>
+            <p style="${font};margin:0;color:${g.soft};font-size:15px;line-height:1.8">${esc(t.intro)}</p>
         </td></tr>
         <tr><td style="padding:18px 28px 8px">
-            <div style="${font};font-size:13px;font-weight:bold;color:${gold};text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;text-align:${t.align}">${esc(t.summary)}</div>
-            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #f0e6cf;border-radius:12px;padding:4px 16px">${rows}
+            <div style="${font};font-size:13px;font-weight:bold;color:#f1c75b;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;text-align:${t.align}">${esc(t.summary)}</div>
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:${g.panel};border:1px solid ${g.line};border-radius:16px;padding:4px 16px">${rows}
             </table>
         </td></tr>
         <tr><td style="padding:8px 28px 16px">
-            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#111111;border-radius:12px">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#2a2418;border:1px solid #6b5520;border-radius:16px">
                 <tr>
-                    <td style="${font};padding:16px 18px;color:#d9d2c0;font-size:14px;text-align:${t.align}">${esc(t.total)}</td>
-                    <td style="${font};padding:16px 18px;color:${gold};font-size:22px;font-weight:bold;text-align:${lang === "ar" ? "left" : "right"}" dir="auto">${esc(price)}</td>
+                    <td style="${font};padding:16px 18px;color:${g.soft};font-size:14px;text-align:${t.align}">${esc(t.total)}</td>
+                    <td style="${font};padding:16px 18px;color:#f1c75b;font-size:22px;font-weight:bold;text-align:${lang === "ar" ? "left" : "right"}" dir="auto">${esc(price)}</td>
                 </tr>
             </table>
         </td></tr>${notes}${longStay}
         <tr><td style="padding:12px 28px 6px;text-align:${t.align}">
-            <div style="${font};font-size:16px;font-weight:bold;color:#1c1c1c;margin-bottom:6px">${esc(t.next)}</div>
-            <p style="${font};margin:0;color:#4a4a4a;font-size:14px;line-height:1.8">${esc(t.nextText)}</p>
+            <div style="${font};font-size:16px;font-weight:bold;color:${g.text};margin-bottom:6px">${esc(t.next)}</div>
+            <p style="${font};margin:0;color:${g.soft};font-size:14px;line-height:1.8">${esc(t.nextText)}</p>
         </td></tr>
         <tr><td style="padding:14px 24px 22px;text-align:center">
-            ${button(c.whatsapp, t.whatsapp, "#25d366", "#ffffff")}
-            ${button(c.tel, t.call, gold, "#111111")}
-            ${button(c.map, t.map, "#f3efe6", "#111111")}
+            ${emailButton({ href: c.whatsapp, label: t.whatsapp, tone: "gold" })}
+            ${emailButton({ href: c.tel, label: t.call, tone: "glass" })}
+            ${emailButton({ href: c.map, label: t.map, tone: "glass" })}
         </td></tr>
-        <tr><td style="background:#faf7f0;padding:20px 28px;text-align:center;border-top:1px solid #eadfc6">
-            <div style="${font};color:#1c1c1c;font-size:14px;font-weight:bold">HIJAZI Apartments</div>
-            <div style="${font};color:#6a6a6a;font-size:13px;line-height:1.8;margin-top:4px">${esc(t.address)}<br/>
-                <a href="${c.tel}" style="color:#6a6a6a;text-decoration:none" dir="ltr">${c.phone}</a> · <a href="mailto:${c.email}" style="color:#6a6a6a;text-decoration:none">${c.email}</a><br/>
-                <a href="${c.site}" style="color:${gold};text-decoration:none">www.hijazi-apartments.com</a></div>
-            <div style="${font};color:#9a9a9a;font-size:12px;line-height:1.6;margin-top:12px">${esc(t.footer)}</div>
+        <tr><td style="background-color:#171512;padding:20px 28px;text-align:center;border-top:1px solid ${g.line}">
+            <div style="${font};color:#ffffff;font-size:14px;font-weight:bold">HIJAZI Apartments</div>
+            <div style="${font};color:${g.muted};font-size:13px;line-height:1.8;margin-top:4px">${esc(t.address)}<br/>
+                <a href="${c.tel}" style="color:${g.muted};text-decoration:none" dir="ltr">${c.phone}</a> · <a href="mailto:${c.email}" style="color:${g.muted};text-decoration:none">${c.email}</a><br/>
+                <a href="${c.site}" style="color:#f1c75b;text-decoration:none">www.hijazi-apartments.com</a></div>
+            <div style="${font};color:#8a8275;font-size:12px;line-height:1.6;margin-top:12px">${esc(t.footer)}</div>
         </td></tr>
     </table>
 </td></tr>
@@ -1142,14 +1142,14 @@ async function sendBookingReminderEmail(booking, reminder) {
             rows: [
                 ["الشقة", apartmentLabel],
                 ["العميل", fullName],
-                ["الهاتف", telHref(booking.phone) ? `<a href="${escapeHtml(telHref(booking.phone))}" style="color:#1c1c1c;text-decoration:none" dir="ltr">${escapeHtml(phone)}</a>` : phone, { html: Boolean(telHref(booking.phone)) }],
+                ["الهاتف", telHref(booking.phone) ? `<a href="${escapeHtml(telHref(booking.phone))}" style="color:#ffffff;text-decoration:none" dir="ltr">${escapeHtml(phone)}</a>` : phone, { html: Boolean(telHref(booking.phone)) }],
                 ["المصدر", source],
                 ["الدخول", prettyArabicDate(booking.checkIn)],
                 ["الخروج", `${prettyArabicDate(booking.checkOut)} (الساعة 12:00 ظهرًا)`]
             ],
             buttons: [
                 { href: whatsappNumber(booking.phone) ? `https://wa.me/${whatsappNumber(booking.phone)}` : "", label: "واتساب العميل", tone: "whatsapp" },
-                { href: telHref(booking.phone), label: "اتصال", tone: "gold" },
+                { href: telHref(booking.phone), label: "اتصال", tone: "glass" },
                 { href: ADMIN_URL, label: "افتح لوحة الإدارة", tone: "dark" }
             ]
         })
