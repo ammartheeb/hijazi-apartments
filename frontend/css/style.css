@@ -643,7 +643,7 @@ html[dir="rtl"] .footer-box .footer-action-value[dir="ltr"] {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
     white-space: nowrap;
     text-decoration: none;
-    transition: opacity 0.6s ease;
+    transition: opacity 0.3s ease;
 }
 
 .whatsapp-label:hover {
@@ -651,6 +651,7 @@ html[dir="rtl"] .footer-box .footer-action-value[dir="ltr"] {
 }
 
 /* في صفحة الحجز: مخفية ما دام زر تأكيد الحجز ظاهرًا */
+.whatsapp-label.is-away,
 .whatsapp-label.is-quiet {
     opacity: 0;
     pointer-events: none;
