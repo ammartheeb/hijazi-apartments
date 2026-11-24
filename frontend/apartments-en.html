@@ -54,6 +54,9 @@
     <link rel="stylesheet" href="css/lightbox.css?v=6">
     <link rel="stylesheet" href="css/amenities.css?v=1" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <!-- صورة أول بطاقة (شقة 104) تبدأ بالتحميل فورًا بالتوازي مع طلبات السيرفر -->
+    <link rel="preload" as="image" href="images/apartments/apt-1/living/1-card.webp" fetchpriority="high">
+    <link rel="preconnect" href="https://api.hijazi-apartments.com" crossorigin>
     <!-- تنسيق التقويم يُحمّل دون أن يوقف عرض الصفحة؛ يلزم فقط عند فتح التقويم -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css"></noscript>
