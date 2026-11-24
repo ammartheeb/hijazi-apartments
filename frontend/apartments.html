@@ -56,9 +56,12 @@
     <link rel="stylesheet" href="css/style.css?v=15" />
     <link rel="stylesheet" href="css/lightbox.css?v=6">
     <link rel="stylesheet" href="css/amenities.css?v=1" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ar.js"></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <!-- تنسيق التقويم يُحمّل دون أن يوقف عرض الصفحة؛ يلزم فقط عند فتح التقويم -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css"></noscript>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ar.js"></script>
     <script src="js/hijazi-datepicker.js?v=3"></script>
 
     <style>
@@ -3078,8 +3081,15 @@
             }
         }
 
+        /* صورة البطاقة: نسخة مصغرة 800px (‎1-card.webp‎) بدل الصورة الكاملة 1536px؛
+           إن لم توجد يعود المتصفح تلقائيًا إلى الصورة الكاملة (onerror). */
+        function cardImageSrc(src) {
+            return String(src || "").replace(/\/1\.webp$/, "/1-card.webp");
+        }
+
         function cardHtml(id, checkIn = "", checkOut = "", availabilityInfo = {}) {
             const lang = getCurrentLang();
+            const cardIndex = Number.isInteger(availabilityInfo.index) ? availabilityInfo.index : 1;
             const apt = HIJAZI_APARTMENTS[id];
             const nights = checkIn && checkOut ? calcNights(checkIn, checkOut) : 0;
             const total = nights ? apt.price * nights : 0;
@@ -3116,7 +3126,7 @@
 
             ${apt.images && apt.images[0]
                     ? `<button class="card-image-button" type="button" onclick="openApartmentAlbum(${apt.id})" aria-label="${openPhotosLabel}" title="${openPhotosLabel}">
-                            <img src="${apt.images[0]}" alt="${aptName}" loading="lazy" decoding="async" fetchpriority="low">
+                            <img src="${cardImageSrc(apt.images[0])}" alt="${aptName}" ${cardIndex === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy" fetchpriority="low"'} decoding="async" onerror="if(!this.dataset.full){this.dataset.full=1;this.src='${apt.images[0]}';}">
                        </button>`
                     : `<div class="card-image-missing">${lang === "ar" ? "الصورة غير مرفوعة بعد" : "Photo not uploaded yet"}</div>`
                 }
@@ -3986,9 +3996,9 @@
                 const bookingsByApartment = await fetchBookingsByApartment();
                 await loadAllApartmentCoverImages(allApartmentIds);
 
-                gridEl.innerHTML = allApartmentIds.map(id => {
+                gridEl.innerHTML = allApartmentIds.map((id, index) => {
                     const ranges = bookingsByApartment.get(Number(id)) || [];
-                    return cardHtml(Number(id), "", "", { ranges });
+                    return cardHtml(Number(id), "", "", { ranges, index });
                 }).join("");
 
                 initRippleButtons();
@@ -4024,10 +4034,11 @@
 
                 await loadAllApartmentCoverImages(allApartmentIds);
 
-                gridEl.innerHTML = allApartmentIds.map(id => {
+                gridEl.innerHTML = allApartmentIds.map((id, index) => {
                     const ranges = conflictMap.get(Number(id)) || [];
                     return cardHtml(Number(id), checkIn, checkOut, {
                         isBookedForSelectedDates: conflictMap.has(Number(id)),
+                        index,
                         ranges
                     });
                 }).join("");

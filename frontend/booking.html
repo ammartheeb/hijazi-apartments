@@ -49,9 +49,12 @@
     <link rel="stylesheet" href="css/amenities.css?v=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.8/index.global.min.css" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ar.js"></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <!-- تنسيق التقويم يُحمّل دون أن يوقف عرض الصفحة؛ يلزم فقط عند فتح التقويم -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css"></noscript>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ar.js"></script>
     <script src="js/hijazi-datepicker.js?v=3"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.8/index.global.min.js"></script>
 
@@ -3326,7 +3329,7 @@
             }
         }
     </style>
-    <script src="js/booking-security.js?v=4" defer></script>
+    <script src="js/booking-security.js?v=5" defer></script>
     <style>
         /* ===== تحسينات الهاتف (2026-11-21) – آخر ما في الصفحة حتى يغلب ما قبله =====
            - حقول أوضح: عناوين 14px، خلفية أغمق وحدود أوضح بدل الزجاج الفاتح.

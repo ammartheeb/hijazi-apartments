@@ -105,7 +105,17 @@
             if (widgetId !== undefined && window.turnstile) window.turnstile.reset(widgetId);
         }
     };
-    document.addEventListener("DOMContentLoaded", () => {
+    /* التحقق (نحو 1.7 MB من Cloudflare) لا يُحمّل مع فتح الصفحة ولا أثناء التمرير، بل عند أول
+       لمسة أو كتابة داخل النموذج (قبل الإرسال بوقت كافٍ). وعند الإرسال يُحمّل على أي حال (getToken). */
+    function startOnce() {
+        if (startOnce.done) return;
+        startOnce.done = true;
         initialize().catch(() => setStatus(message("تعذر تحميل التحقق الأمني. ستتم إعادة المحاولة عند الإرسال.", "Verification could not load. We will retry when you submit."), "error"));
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("bookingForm");
+        if (!form) { startOnce(); return; }
+        form.addEventListener("focusin", startOnce, { once: true });
+        form.addEventListener("pointerdown", startOnce, { once: true });
     });
 })();
