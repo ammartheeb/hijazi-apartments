@@ -127,7 +127,7 @@ function createOutreachRunner({
                 if (!(await claim(item.contact, item.kind))) continue;
                 try {
                     const messageId = await sendOne(item.contact, item.kind);
-                    await complete(item.contact, item.kind, messageId, new Date());
+                    await complete(item.contact, item.kind, messageId, now);
                     sent.push(item);
                 } catch (error) {
                     await release(item.contact, item.kind);
