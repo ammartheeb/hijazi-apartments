@@ -577,7 +577,19 @@
             animation: shimmer 1.4s infinite;
         }
 
-        /* صورة الشقة الحقيقية تظهر في البطاقة المؤقتة أثناء انتظار السيرفر */
+        /* صورة الشقة الحقيقية تظهر في البطاقة المؤقتة أثناء انتظار السيرفر.
+           أطول ببكسلين من صورة البطاقة الحقيقية، حتى لا يعدّ المتصفح البطاقة الحقيقية
+           «أكبر عنصر» جديدًا (LCP) بعد رد السيرفر. */
+        html body .grid .skeleton-image {
+            height: 242px !important;
+        }
+
+        @media (max-width: 768px) {
+            html body .grid .skeleton-image {
+                height: 222px !important;
+            }
+        }
+
         .skeleton-image img {
             width: 100%;
             height: 100%;
