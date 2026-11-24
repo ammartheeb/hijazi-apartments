@@ -3909,6 +3909,9 @@
         });
 
         function renderSkeletonCards(count = 3) {
+            // عند فتح الصفحة البطاقات المؤقتة الثابتة موجودة أصلًا بصورها؛ إعادة رسمها تنشئ صورًا جديدة
+            // يعدّها المتصفح «أكبر عنصر» متأخرًا (LCP)، فنبقيها كما هي.
+            if (gridEl.querySelector(".skeleton-card .skeleton-image img") && !gridEl.querySelector(".card")) return;
             gridEl.innerHTML = Array.from({ length: count }).map((_, i) => `
                 <div class="skeleton-card">
                     <div class="skeleton-image">${[1, 2, 3, 4, 5, 6].includes(APARTMENT_DISPLAY_ORDER[i]) ? `<img src="images/apartments/apt-${APARTMENT_DISPLAY_ORDER[i]}/living/1-card.webp" alt="" decoding="async">` : ""}</div>
