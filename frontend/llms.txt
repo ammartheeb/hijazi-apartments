@@ -14,6 +14,9 @@
 
 - Monthly prices (whole apartment): 3,250 JOD for one month; 2,500 JOD a month when booking 6 months; 2,000 JOD a month when booking a full year
 - Time to hospitals (Google Maps, November 2026; driving depends on traffic): the Specialty Hospital 8 min walk (650 m) or 3 min drive; the Islamic Hospital 6 min drive (2.3 km) or 23 min walk; Jordan Hospital 7 min drive (3.4 km) or 29 min walk; Abdali Hospital 7 min drive (3.1 km) or 29 min walk
+- Other Amman hospitals (OpenStreetMap, November 2026; driving without traffic): Istishari Hospital 30 min walk (2.2 km) or about 4 min drive (2.4 km); Arab Medical Center (Fifth Circle) about 6 min drive (3.7 km); Al Khalidi Hospital (Jabal Amman) about 6 min drive (3.8 km); King Hussein Cancer Center about 6 min drive (4.9 km); Shmeisani Hospital 13 min walk (1 km); Palestine Hospital 20 min walk (1.5 km)
+- Guests from abroad: patients, companions and families from Yemen, Iraq, Saudi Arabia, the Gulf and elsewhere; airport pick-up can be arranged for a fee
+- Payment: no payment before arrival; pay on arrival in cash, by bank transfer or CliQ, in any currency; a 200 JOD security deposit is refunded at check-out after the apartment is checked; bookings can be cancelled or changed free of charge (please tell us early on WhatsApp)
 - Within a short walk (Google Maps): Jawharat Al Shmeisani Pharmacy (4 min) and Taif Pharmacy (5 min); Dunya Haya grocery (5 min); Ashour Al Shmisani Supermarket (6 min); The Nub, Vinaigrette and Trattoria (Al Qasr Metropole Hotel), Peking Restaurant (4–5 min); The Qyard and GEMINI Terrace cafés (5 min)
 - Apartment type currently listed: 3 bedrooms, 220 m², 3 bathrooms, sleeps 7–8 guests
 - Rooms: master bedroom plus two more bedrooms, separate living room, guest room, fully equipped kitchen, separate laundry room
@@ -53,6 +56,10 @@
 - [Near Jordan Hospital](https://www.hijazi-apartments.com/apartments-jordan-hospital-en.html)
 - [Near the Specialty Hospital](https://www.hijazi-apartments.com/apartments-specialty-hospital-en.html)
 - [Near the Islamic Hospital](https://www.hijazi-apartments.com/apartments-islamic-hospital-en.html)
+- [Near King Hussein Cancer Center](https://www.hijazi-apartments.com/apartments-king-hussein-cancer-center-en.html)
+- [Near Istishari Hospital](https://www.hijazi-apartments.com/apartments-istishari-hospital-en.html)
+- [Near the Arab Medical Center](https://www.hijazi-apartments.com/apartments-arab-medical-center-en.html)
+- [Near Al Khalidi Hospital](https://www.hijazi-apartments.com/apartments-khalidi-hospital-en.html)
 - [Medical stays in Amman](https://www.hijazi-apartments.com/apartments-medical-amman-en.html)
 - [Monthly furnished rentals in Amman](https://www.hijazi-apartments.com/apartments-monthly-amman-en.html)
 
@@ -63,5 +70,9 @@
 - [شقق مفروشة قرب مستشفى الأردن](https://www.hijazi-apartments.com/apartments-jordan-hospital.html)
 - [شقق مفروشة قرب المستشفى التخصصي](https://www.hijazi-apartments.com/apartments-specialty-hospital.html)
 - [شقق مفروشة قرب المستشفى الإسلامي](https://www.hijazi-apartments.com/apartments-islamic-hospital.html)
+- [شقق مفروشة قرب مركز الحسين للسرطان](https://www.hijazi-apartments.com/apartments-king-hussein-cancer-center.html)
+- [شقق مفروشة قرب المستشفى الاستشاري](https://www.hijazi-apartments.com/apartments-istishari-hospital.html)
+- [شقق مفروشة قرب المركز العربي الطبي](https://www.hijazi-apartments.com/apartments-arab-medical-center.html)
+- [شقق مفروشة قرب مستشفى الخالدي](https://www.hijazi-apartments.com/apartments-khalidi-hospital.html)
 - [شقق مفروشة للإقامة الطبية في عمّان](https://www.hijazi-apartments.com/apartments-medical-amman.html)
 - [شقق مفروشة للإيجار الشهري في عمّان](https://www.hijazi-apartments.com/apartments-monthly-amman.html)

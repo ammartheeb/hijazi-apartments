@@ -44,7 +44,7 @@ const TWINS = {
     "faq.html": "faq-en.html",
     "reviews.html": "reviews-en.html"
 };
-for (const topic of ["amman", "abdali", "jordan-hospital", "specialty-hospital", "islamic-hospital", "medical-amman", "monthly-amman"]) {
+for (const topic of ["amman", "abdali", "jordan-hospital", "specialty-hospital", "islamic-hospital", "king-hussein-cancer-center", "istishari-hospital", "arab-medical-center", "khalidi-hospital", "medical-amman", "monthly-amman"]) {
     TWINS[`apartments-${topic}.html`] = `apartments-${topic}-en.html`;
 }
 
@@ -127,6 +127,8 @@ function englishFooter(arHref) {
         ["amenities-en.html", "Amenities &amp; services"], ["apartments-amman-en.html", "Furnished apartments in Shmeisani"],
         ["apartments-abdali-en.html", "Near Abdali"], ["apartments-jordan-hospital-en.html", "Near Jordan Hospital"],
         ["apartments-specialty-hospital-en.html", "Near the Specialty Hospital"], ["apartments-islamic-hospital-en.html", "Near the Islamic Hospital"],
+        ["apartments-king-hussein-cancer-center-en.html", "Near King Hussein Cancer Center"], ["apartments-istishari-hospital-en.html", "Near Istishari Hospital"],
+        ["apartments-arab-medical-center-en.html", "Near the Arab Medical Center"], ["apartments-khalidi-hospital-en.html", "Near Al Khalidi Hospital"],
         ["apartments-medical-amman-en.html", "Medical stays"], ["apartments-monthly-amman-en.html", "Monthly rentals"],
         ["faq-en.html", "FAQ"], ["reviews-en.html", "Reviews"], ["about-en.html", "About us"], [arHref, "العربية"]
     ];
