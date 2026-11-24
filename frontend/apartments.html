@@ -577,6 +577,14 @@
             animation: shimmer 1.4s infinite;
         }
 
+        /* صورة الشقة الحقيقية تظهر في البطاقة المؤقتة أثناء انتظار السيرفر */
+        .skeleton-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
         .skeleton-body {
             padding: 18px;
         }
@@ -2717,7 +2725,7 @@
 
         <div class="grid" id="grid">
             <div class="skeleton-card" aria-hidden="true">
-                <div class="skeleton-image"></div>
+                <div class="skeleton-image"><img src="images/apartments/apt-1/living/1-card.webp" alt="" loading="eager" fetchpriority="high" decoding="async"></div>
                 <div class="skeleton-body">
                     <div class="skeleton-line short"></div>
                     <div class="skeleton-line medium"></div>
@@ -2726,7 +2734,7 @@
                 </div>
             </div>
             <div class="skeleton-card" aria-hidden="true">
-                <div class="skeleton-image"></div>
+                <div class="skeleton-image"><img src="images/apartments/apt-2/living/1-card.webp" alt="" loading="lazy" decoding="async"></div>
                 <div class="skeleton-body">
                     <div class="skeleton-line short"></div>
                     <div class="skeleton-line medium"></div>
@@ -2735,7 +2743,7 @@
                 </div>
             </div>
             <div class="skeleton-card" aria-hidden="true">
-                <div class="skeleton-image"></div>
+                <div class="skeleton-image"><img src="images/apartments/apt-6/living/1-card.webp" alt="" loading="lazy" decoding="async"></div>
                 <div class="skeleton-body">
                     <div class="skeleton-line short"></div>
                     <div class="skeleton-line medium"></div>
@@ -3889,9 +3897,9 @@
         });
 
         function renderSkeletonCards(count = 3) {
-            gridEl.innerHTML = Array.from({ length: count }).map(() => `
+            gridEl.innerHTML = Array.from({ length: count }).map((_, i) => `
                 <div class="skeleton-card">
-                    <div class="skeleton-image"></div>
+                    <div class="skeleton-image">${[1, 2, 3, 4, 5, 6].includes(APARTMENT_DISPLAY_ORDER[i]) ? `<img src="images/apartments/apt-${APARTMENT_DISPLAY_ORDER[i]}/living/1-card.webp" alt="" decoding="async">` : ""}</div>
                     <div class="skeleton-body">
                         <div class="skeleton-line short"></div>
                         <div class="skeleton-line medium"></div>
