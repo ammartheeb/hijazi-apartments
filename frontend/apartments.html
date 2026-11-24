@@ -578,15 +578,15 @@
         }
 
         /* صورة الشقة الحقيقية تظهر في البطاقة المؤقتة أثناء انتظار السيرفر.
-           أطول ببكسلين من صورة البطاقة الحقيقية، حتى لا يعدّ المتصفح البطاقة الحقيقية
+           أطول ببضع بكسلات من صورة البطاقة الحقيقية، حتى لا يعدّ المتصفح البطاقة الحقيقية
            «أكبر عنصر» جديدًا (LCP) بعد رد السيرفر. */
         html body .grid .skeleton-image {
-            height: 242px !important;
+            height: 248px !important;
         }
 
         @media (max-width: 768px) {
             html body .grid .skeleton-image {
-                height: 222px !important;
+                height: 228px !important;
             }
         }
 
