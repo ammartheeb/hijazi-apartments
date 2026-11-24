@@ -744,16 +744,13 @@ function applyDocumentDirection() {
    إنشاء الهيدر المشترك
    showAdminTrigger = true فقط في الصفحة الرئيسية
 ========================= */
-function renderSharedHeader(activePage, showAdminTrigger = false) {
-    const lang = getCurrentLang();
+/* كود الناف بار نفسه يُكتب ثابتًا داخل كل صفحة (scripts/build-static-header.js) حتى يظهر مع أول
+   عرض للصفحة، ويُستعمل هنا أيضًا عند الحاجة لإعادة الرسم (مثل صفحة الحجز للزائر الإنجليزي). */
+function buildSharedHeaderHtml(lang, activePage, showAdminTrigger = false) {
     const t = SITE_TRANSLATIONS[lang];
-    const headerHost = document.getElementById("sharedHeader");
-    if (!headerHost) return;
-
     const brandClass = showAdminTrigger ? "admin-trigger" : "";
     const navId = "mainNavbarCollapse";
-
-    headerHost.innerHTML = `
+    return `
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
             <div class="container">
                 <a class="navbar-brand gold ${brandClass}" href="${showAdminTrigger ? "javascript:void(0)" : (lang === "en" ? "index-en.html" : "/")}">
@@ -803,6 +800,21 @@ function renderSharedHeader(activePage, showAdminTrigger = false) {
             </div>
         </nav>
     `;
+}
+
+function renderSharedHeader(activePage, showAdminTrigger = false) {
+    const lang = getCurrentLang();
+    const headerHost = document.getElementById("sharedHeader");
+    if (!headerHost) return;
+    const navId = "mainNavbarCollapse";
+
+    // الناف بار الثابت جاهز بنفس اللغة والصفحة: لا نعيد رسمه، نربط الأزرار فقط.
+    const staticReady = headerHost.dataset.staticLang === lang
+        && headerHost.dataset.staticActive === activePage
+        && headerHost.querySelector(".custom-navbar");
+    if (!staticReady) {
+        headerHost.innerHTML = buildSharedHeaderHtml(lang, activePage, showAdminTrigger);
+    }
 
     if (showAdminTrigger) {
         initAdminTrigger();

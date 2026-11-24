@@ -334,7 +334,56 @@
 </head>
 
 <body>
-    <div id="sharedHeader"></div>
+    <div id="sharedHeader" data-static-lang="ar" data-static-active="apartments"><!-- HEADER:START -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
+            <div class="container">
+                <a class="navbar-brand gold " href="/">
+                    HIJAZI Apartments
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbarCollapse" aria-controls="mainNavbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbarCollapse">
+                    <ul class="navbar-nav mx-auto align-items-lg-center">
+                        <li class="nav-item">
+                            <a class="nav-link " href="/">الرئيسية</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="apartments.html">الشقق</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="booking.html">الحجز</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="amenities.html">المميزات</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="about.html">من نحن</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="faq.html">الأسئلة الشائعة</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="reviews.html">التقييمات</a>
+                        </li>
+                    </ul>
+
+                    <div class="lang-switcher-wrapper">
+                        <div class="lang-switcher">
+                            <button type="button" class="lang-btn active" onclick="switchLanguage('ar')">
+                                العربية
+                            </button>
+                            <button type="button" class="lang-btn " onclick="switchLanguage('en')">
+                                English
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- HEADER:END --></div>
 
     <section class="page-hero">
         <h1>شقق مفروشة قرب مستشفى الخالدي في عمّان</h1>
@@ -408,8 +457,8 @@
         window.HIJAZI_ALT_PAGES = { ar: "apartments-khalidi-hospital.html", en: "apartments-khalidi-hospital-en.html" };
         try { localStorage.setItem("siteLang", "ar"); } catch (e) { }
     </script>
-    <script src="js/main.js?v=22"></script>
-    <script src="js/scroll-reveal.js?v=1" defer></script>
+    <script src="js/main.js?v=23"></script>
+    <script src="js/scroll-reveal.js?v=2" defer></script>
     <script>
         renderSharedHeader("apartments", false);
         renderSharedFooter();

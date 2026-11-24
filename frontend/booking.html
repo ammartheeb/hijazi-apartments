@@ -56,7 +56,8 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ar.js"></script>
     <script src="js/hijazi-datepicker.js?v=3"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.8/index.global.min.js"></script>
+    <!-- defer: لا يوقف عرض الصفحة؛ التقويم يُبنى بعد ظهور النموذج (createBookingCalendar) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.8/index.global.min.js" defer></script>
 
     <style>
         body {
@@ -3651,7 +3652,56 @@
         <canvas class="booking-dust booking-dust-2" data-fx="dust2"></canvas>
         <canvas class="cosmic-twinkle" data-fx="twinkle"></canvas>
     </div>
-    <div id="sharedHeader"></div>
+    <div id="sharedHeader" data-static-lang="ar" data-static-active="booking"><!-- HEADER:START -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
+            <div class="container">
+                <a class="navbar-brand gold " href="/">
+                    HIJAZI Apartments
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbarCollapse" aria-controls="mainNavbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbarCollapse">
+                    <ul class="navbar-nav mx-auto align-items-lg-center">
+                        <li class="nav-item">
+                            <a class="nav-link " href="/">الرئيسية</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="apartments.html">الشقق</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="booking.html">الحجز</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="amenities.html">المميزات</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="about.html">من نحن</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="faq.html">الأسئلة الشائعة</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="reviews.html">التقييمات</a>
+                        </li>
+                    </ul>
+
+                    <div class="lang-switcher-wrapper">
+                        <div class="lang-switcher">
+                            <button type="button" class="lang-btn active" onclick="switchLanguage('ar')">
+                                العربية
+                            </button>
+                            <button type="button" class="lang-btn " onclick="switchLanguage('en')">
+                                English
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- HEADER:END --></div>
 
     <section class="page-header">
         <h1 id="pageTitle">احجز شقة مفروشة في عمّان</h1>
@@ -3900,8 +3950,8 @@
     <script src="js/amenities-data.js?v=3"></script>
     <script src="js/amenities-ui.js?v=2"></script>
     <script src="js/lightbox-swipe.js?v=6"></script>
-    <script src="js/main.js?v=22"></script>
-    <script src="js/scroll-reveal.js?v=1" defer></script>
+    <script src="js/main.js?v=23"></script>
+    <script src="js/scroll-reveal.js?v=2" defer></script>
     <script>
         const API_BASE = "https://api.hijazi-apartments.com";
 
@@ -5338,7 +5388,10 @@
         const form = document.getElementById("bookingForm");
         const submitBtn = document.getElementById("submitBtn");
 
-        document.addEventListener("DOMContentLoaded", async function () {
+        /* التقويم في آخر الصفحة، فيُبنى بعد أن يجهز الناف بار والنموذج وتفاصيل الشقة، في وقت فراغ
+           المعالج (requestIdleCallback)، لا أثناء التحميل ولا أثناء التمرير. كل استعمالاته محمية بـ if (calendar). */
+        function createBookingCalendar() {
+            if (calendar || typeof FullCalendar === "undefined") return;
             const calendarEl = document.getElementById("calendar");
             const lang = getCurrentLang();
 
@@ -5450,7 +5503,15 @@
             });
 
             calendar.render();
+        }
 
+        function scheduleBookingCalendar() {
+            const run = () => createBookingCalendar();
+            if ("requestIdleCallback" in window) requestIdleCallback(run, { timeout: 2000 });
+            else setTimeout(run, 300);
+        }
+
+        document.addEventListener("DOMContentLoaded", async function () {
             renderSharedHeader("booking", false);
             renderSharedFooter();
             renderWhatsAppWidget();
@@ -5468,6 +5529,7 @@
                 });
             }
 
+            scheduleBookingCalendar();
             await loadApartmentPricesFromPms();
             await renderApartmentDetails();
             await refreshCalendar();

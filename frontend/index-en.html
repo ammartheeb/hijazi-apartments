@@ -892,7 +892,56 @@
 
 <body>
 
-    <div id="sharedHeader"></div>
+    <div id="sharedHeader" data-static-lang="en" data-static-active="index"><!-- HEADER:START -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
+            <div class="container">
+                <a class="navbar-brand gold admin-trigger" href="javascript:void(0)">
+                    HIJAZI Apartments
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbarCollapse" aria-controls="mainNavbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbarCollapse">
+                    <ul class="navbar-nav mx-auto align-items-lg-center">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index-en.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="apartments-en.html">Apartments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="booking.html">Booking</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="amenities-en.html">Amenities</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="about-en.html">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="faq-en.html">FAQ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="reviews-en.html">Reviews</a>
+                        </li>
+                    </ul>
+
+                    <div class="lang-switcher-wrapper">
+                        <div class="lang-switcher">
+                            <button type="button" class="lang-btn " onclick="switchLanguage('ar')">
+                                العربية
+                            </button>
+                            <button type="button" class="lang-btn active" onclick="switchLanguage('en')">
+                                English
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- HEADER:END --></div>
 
     <section class="hero">
         <!-- على الهاتف نسخة أصغر من نفس الفيديو (نحو 1.2 MB بدل 3.8 MB)، وصورة أولى خفيفة تظهر فورًا -->
@@ -1128,8 +1177,8 @@
 
     <script src="js/amenities-data.js?v=3"></script>
     <script src="js/amenities-ui.js?v=2"></script>
-    <script src="js/main.js?v=22"></script>
-    <script src="js/scroll-reveal.js?v=1" defer></script>
+    <script src="js/main.js?v=23"></script>
+    <script src="js/scroll-reveal.js?v=2" defer></script>
     <script>
         const checkInEl = document.getElementById("checkIn");
         const checkOutEl = document.getElementById("checkOut");

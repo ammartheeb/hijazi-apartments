@@ -259,9 +259,23 @@
         requestAnimationFrame(() => { scanQueued = false; scan(); });
     }
 
+    /* نعيد الفحص فقط إذا أُضيف عنصر من القائمة (أو عنصر يحتوي واحدًا). التقويم وغيره يغيّرون الصفحة
+       كثيرًا، وفحص الصفحة كلها مع كل تغيير كان يكلّف صفحة الحجز نحو 0.7 ثانية من عمل المعالج. */
+    function relevant(records) {
+        for (const record of records) {
+            for (const node of record.addedNodes) {
+                if (node.nodeType !== 1) continue;
+                if (node.matches(TARGETS) || node.querySelector(TARGETS)) return true;
+            }
+        }
+        return false;
+    }
+
     function start() {
         scan();
-        new MutationObserver(queueScan).observe(document.body, { childList: true, subtree: true });
+        new MutationObserver((records) => {
+            if (relevant(records)) queueScan();
+        }).observe(document.body, { childList: true, subtree: true });
     }
 
     if (document.readyState === "loading") {

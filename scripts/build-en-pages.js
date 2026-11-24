@@ -29,6 +29,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
+const { applyStaticHeader } = require("./static-header.js");
 
 const FRONTEND = path.join(__dirname, "..", "frontend");
 const SITE = "https://www.hijazi-apartments.com";
@@ -373,7 +374,8 @@ function build({ check = false } = {}) {
     for (const page of PAGES) {
         const raw = fs.readFileSync(path.join(FRONTEND, page.ar), "utf8");
         const crlf = raw.includes("\r\n");
-        const html = convert(page, raw.replace(/\r\n/g, "\n"));
+        // الناف بار الثابت بالإنجليزية (scripts/static-header.js)
+        const html = applyStaticHeader(convert(page, raw.replace(/\r\n/g, "\n")));
         const target = path.join(FRONTEND, page.en);
         const current = fs.existsSync(target) ? fs.readFileSync(target, "utf8").replace(/\r\n/g, "\n") : null;
         if (current === html) continue;

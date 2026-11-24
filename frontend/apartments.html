@@ -2697,7 +2697,56 @@
         <canvas class="gold-dust dust-2" data-fx="dust2"></canvas>
         <canvas class="cosmic-twinkle" data-fx="twinkle"></canvas>
     </div>
-    <div id="sharedHeader"></div>
+    <div id="sharedHeader" data-static-lang="ar" data-static-active="apartments"><!-- HEADER:START -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
+            <div class="container">
+                <a class="navbar-brand gold " href="/">
+                    HIJAZI Apartments
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbarCollapse" aria-controls="mainNavbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbarCollapse">
+                    <ul class="navbar-nav mx-auto align-items-lg-center">
+                        <li class="nav-item">
+                            <a class="nav-link " href="/">الرئيسية</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="apartments.html">الشقق</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="booking.html">الحجز</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="amenities.html">المميزات</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="about.html">من نحن</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="faq.html">الأسئلة الشائعة</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="reviews.html">التقييمات</a>
+                        </li>
+                    </ul>
+
+                    <div class="lang-switcher-wrapper">
+                        <div class="lang-switcher">
+                            <button type="button" class="lang-btn active" onclick="switchLanguage('ar')">
+                                العربية
+                            </button>
+                            <button type="button" class="lang-btn " onclick="switchLanguage('en')">
+                                English
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- HEADER:END --></div>
 
     <section class="page-header">
         <canvas class="page-header-bg" data-fx="header" aria-hidden="true"></canvas>
@@ -2901,8 +2950,8 @@
     <script src="js/amenities-data.js?v=3"></script>
     <script src="js/amenities-ui.js?v=2"></script>
     <script src="js/lightbox-swipe.js?v=6"></script>
-    <script src="js/main.js?v=22"></script>
-    <script src="js/scroll-reveal.js?v=1" defer></script>
+    <script src="js/main.js?v=23"></script>
+    <script src="js/scroll-reveal.js?v=2" defer></script>
     <script>
         const API_BASE = "https://api.hijazi-apartments.com";
 

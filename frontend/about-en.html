@@ -292,7 +292,56 @@
 </head>
 
 <body class="am-page">
-    <div id="sharedHeader"></div>
+    <div id="sharedHeader" data-static-lang="en" data-static-active="about"><!-- HEADER:START -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
+            <div class="container">
+                <a class="navbar-brand gold " href="index-en.html">
+                    HIJAZI Apartments
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbarCollapse" aria-controls="mainNavbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbarCollapse">
+                    <ul class="navbar-nav mx-auto align-items-lg-center">
+                        <li class="nav-item">
+                            <a class="nav-link " href="index-en.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="apartments-en.html">Apartments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="booking.html">Booking</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="amenities-en.html">Amenities</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="about-en.html">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="faq-en.html">FAQ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="reviews-en.html">Reviews</a>
+                        </li>
+                    </ul>
+
+                    <div class="lang-switcher-wrapper">
+                        <div class="lang-switcher">
+                            <button type="button" class="lang-btn " onclick="switchLanguage('ar')">
+                                العربية
+                            </button>
+                            <button type="button" class="lang-btn active" onclick="switchLanguage('en')">
+                                English
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- HEADER:END --></div>
 
     <section class="am-page-hero">
         <p class="am-page-eyebrow">About HIJAZI Apartments</p>
@@ -325,8 +374,8 @@
         window.HIJAZI_ALT_PAGES = { ar: "about.html", en: "about-en.html" };
         try { localStorage.setItem("siteLang", "en"); } catch (e) { }
     </script>
-    <script src="js/main.js?v=22"></script>
-    <script src="js/scroll-reveal.js?v=1" defer></script>
+    <script src="js/main.js?v=23"></script>
+    <script src="js/scroll-reveal.js?v=2" defer></script>
     <script>
         renderSharedHeader("about", false);
         renderSharedFooter();
