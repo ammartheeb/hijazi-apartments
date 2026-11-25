@@ -203,7 +203,7 @@
             { ar: "كراسي وطاولة خارجية", en: "Outdoor chairs and table" }
         ],
         others: [
-            { ar: "نظام دخول ذكي لباب الشقة", en: "Smart lock on the apartment door" },
+            { ar: "باب الشقة مزوّد بقفلين وقفل يدوي من الداخل", en: "Apartment door with two deadbolts and a manual lock on the inside" },
             { ar: "دخول ذكي لأبواب المبنى، ومصاعد", en: "Smart access at the building doors, and elevators" },
             { ar: "كاميرات مراقبة في المداخل والممرات والمواقف", en: "CCTV at the entrances, corridors and parking" },
             { ar: "حارس أمن", en: "Security guard" },
@@ -523,8 +523,8 @@
             id: "building",
             titleAr: "المبنى ومواقف السيارات والأمان",
             titleEn: "Building, parking & security",
-            introAr: "مواقف داخلية مؤمَّنة، ومراقبة وحراسة، ودخول ذكي من باب المبنى حتى باب الشقة.",
-            introEn: "Secure indoor parking, surveillance and security staff, and smart access from the building entrance to your apartment door.",
+            introAr: "مواقف داخلية مؤمَّنة، ومراقبة وحراسة، ودخول ذكي لباب المبنى الرئيسي وللباب الواصل بين الكراج والمبنى.",
+            introEn: "Secure indoor parking, surveillance and security staff, and smart access at the main building door and the door from the garage into the building.",
             groups: [
                 {
                     id: "parking",
@@ -546,8 +546,8 @@
                     items: [
                         { ar: "كاميرات مراقبة في مداخل المباني والممرات ومواقف السيارات", en: "CCTV at building entrances, in corridors and in the parking areas" },
                         { ar: "حارس أمن", en: "Security guard" },
-                        { ar: "نظام دخول ذكي للأبواب الرئيسية للمباني", en: "Smart access at the main building doors" },
-                        { ar: "نظام دخول ذكي لباب الشقة", en: "Smart lock on the apartment door" },
+                        { ar: "نظام دخول ذكي لباب المبنى الرئيسي وللباب الواصل بين الكراج والمبنى", en: "Smart access at the main building door and the door from the garage into the building" },
+                        { ar: "باب الشقة مزوّد بقفلين وقفل يدوي من الداخل", en: "Apartment door with two deadbolts and a manual lock on the inside" },
                         { ar: "مفاتيح عادية للاستخدام داخل الشقة", en: "Regular keys for use inside the apartment" }
                     ]
                 },
