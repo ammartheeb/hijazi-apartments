@@ -69,13 +69,6 @@
             position: relative;
         }
 
-        .page-header {
-            text-align: center;
-            padding: 130px 16px 40px;
-            background: linear-gradient(90deg, #c89116, #000);
-            color: #fff;
-        }
-
         .page-header h1 {
             margin: 0 0 10px;
             font-size: 40px;
@@ -118,18 +111,6 @@
             flex-wrap: wrap;
         }
 
-        .top-bar-right {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .top-bar label {
-            font-size: 14px;
-            font-weight: 700;
-            color: #f2f2f2;
-            margin-bottom: 8px;
-        }
-
         .top-bar select {
             width: 100%;
             min-width: 220px;
@@ -169,15 +150,6 @@
             grid-template-columns: 1fr 1fr;
             gap: 20px;
             align-items: start;
-        }
-
-        .card {
-            background: #fff;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, .08);
-            border: 1px solid #eee;
-            color: #111;
         }
 
         .card-body {
@@ -234,10 +206,6 @@
             font-size: 15px;
         }
 
-        .form-section {
-            padding: 18px;
-        }
-
         .form-section label {
             display: block;
             margin: 10px 0 5px;
@@ -281,12 +249,6 @@
             cursor: not-allowed;
         }
 
-        .price {
-            font-weight: bold;
-            color: #c89116;
-            font-size: 18px;
-        }
-
         .hint {
             margin-top: 6px;
             color: #666;
@@ -301,72 +263,10 @@
             display: none;
         }
 
-        .input-error {
-            border-color: #f5c2c7 !important;
-            background: #fff9f9 !important;
-        }
-
-        #calendar {
-            background: rgba(255, 255, 255, 0.88);
-            border-radius: 24px;
-            padding: 18px;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
-            border: 1px solid rgba(212, 160, 23, 0.18);
-            margin-top: 20px;
-            overflow: hidden;
-            backdrop-filter: blur(10px) saturate(130%);
-            -webkit-backdrop-filter: blur(10px) saturate(130%);
-        }
-
         .calendar-title {
             margin: 25px 0 10px;
             font-size: 22px;
             font-weight: 700;
-        }
-
-        .slider-box {
-            position: relative;
-            width: 100%;
-            height: 340px;
-            overflow: hidden;
-            background: #000;
-        }
-
-        .slider-box img {
-            width: 100%;
-            height: 340px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, .55);
-            color: #fff;
-            border: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 20px;
-            z-index: 2;
-            min-height: auto;
-            padding: 0;
-            margin-top: 0;
-        }
-
-        .slider-btn:hover {
-            background: #c89116;
-        }
-
-        .slider-prev {
-            left: 12px;
-        }
-
-        .slider-next {
-            right: 12px;
         }
 
         .thumbs {
@@ -609,9 +509,6 @@
         }
 
         /* رسالة بجانب مكان الحدث (تحت زر الحجز، تحت التحقق الأمني، فوق التقويم) */
-        .action-msg[hidden] {
-            display: none !important;
-        }
 
         .action-msg {
             margin: 10px 0 0;
@@ -701,13 +598,6 @@
             line-height: 1.8;
         }
 
-        .room-cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 12px;
-            margin-top: 18px;
-        }
-
         .room-card {
             border: 1px solid #eee;
             border-radius: 14px;
@@ -724,13 +614,6 @@
         .room-card.active {
             border-color: #c89116;
             box-shadow: 0 8px 20px rgba(200, 145, 22, .16);
-        }
-
-        .room-gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 12px;
-            margin-top: 18px;
         }
 
         .room-gallery-grid img {
@@ -753,9 +636,6 @@
         }
 
         @media (max-width: 900px) {
-            .layout {
-                grid-template-columns: 1fr;
-            }
 
             .slider-box,
             .slider-box img,
@@ -763,36 +643,9 @@
                 height: 240px;
             }
 
-            .top-bar {
-                grid-template-columns: 1fr;
-                max-width: 100%;
-                padding: 18px;
-            }
-
-            .top-bar-right,
-            .top-bar-left {
-                width: 100%;
-            }
-
-            .top-bar-right {
-                align-items: stretch;
-            }
-
-            .top-bar select {
-                min-width: unset;
-                width: 100%;
-            }
-
-            .back-btn {
-                width: 100%;
-                min-width: unset;
-            }
         }
 
         @media (max-width: 768px) {
-            .page-header {
-                padding: 110px 14px 34px;
-            }
 
             .page-header h1 {
                 font-size: 30px;
@@ -839,9 +692,6 @@
                 font-size: 20px;
             }
 
-            #calendar {
-                padding: 8px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -853,12 +703,6 @@
             .slider-box img,
             .placeholder-box {
                 height: 220px;
-            }
-
-            .slider-btn {
-                width: 38px;
-                height: 38px;
-                font-size: 18px;
             }
 
             .thumbs img {
@@ -1140,177 +984,22 @@
 
         /* ===== PROFESSIONAL FULLCALENDAR STYLE ===== */
 
-        .calendar-title {
-            color: #111;
-            font-weight: 900;
-            position: relative;
-            z-index: 2;
-        }
-
-        .fc {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-        }
-
-        .fc .fc-toolbar {
-            gap: 12px;
-            margin-bottom: 18px !important;
-        }
-
-        .fc .fc-toolbar-title {
-            font-size: 24px;
-            font-weight: 900;
-            color: #111;
-        }
-
-        .fc .fc-button {
-            border: none !important;
-            border-radius: 12px !important;
-            padding: 9px 14px !important;
-            font-weight: 800 !important;
-            box-shadow: none !important;
-        }
-
-        .fc .fc-button-primary {
-            background: linear-gradient(135deg, #d4a017, #8a6508) !important;
-            color: #fff !important;
-        }
-
         .fc .fc-button-primary:hover,
         .fc .fc-button-primary:focus {
             background: linear-gradient(135deg, #000, #2a2a2a) !important;
             color: #fff !important;
         }
 
-        .fc .fc-button-primary:disabled {
-            background: #ddd !important;
-            color: #777 !important;
-        }
-
-        .fc-theme-standard .fc-scrollgrid {
-            border: none !important;
-        }
-
-        .fc-theme-standard td,
-        .fc-theme-standard th {
-            border-color: rgba(0, 0, 0, 0.06) !important;
-        }
-
-        .fc-col-header-cell {
-            background: linear-gradient(135deg, #111, #2a2a2a);
-            padding: 10px 0 !important;
-        }
-
-        .fc-col-header-cell-cushion {
-            color: #fff !important;
-            font-weight: 800;
-            text-decoration: none !important;
-        }
-
-        .fc-daygrid-day {
-            background: rgba(255, 255, 255, 0.72);
-            transition: all 0.22s ease;
-        }
-
         .fc-daygrid-day:hover {
             background: rgba(212, 160, 23, 0.10);
-        }
-
-        .fc .fc-daygrid-day-frame {
-            min-height: 82px;
-            padding: 5px;
-        }
-
-        .fc .fc-daygrid-day-number {
-            color: #222;
-            font-weight: 800;
-            text-decoration: none;
-            width: 30px;
-            height: 30px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-
-        .fc .fc-day-today {
-            background: rgba(212, 160, 23, 0.16) !important;
-        }
-
-        .fc .fc-day-today .fc-daygrid-day-number {
-            background: #d4a017;
-            color: #fff;
-        }
-
-        .fc-event {
-            border: none !important;
-            border-radius: 999px !important;
-            padding: 4px 8px !important;
-            background: linear-gradient(135deg, #111, #000) !important;
-            color: #fff !important;
-            font-size: 12px !important;
-            font-weight: 800 !important;
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
         }
 
         .fc-daygrid-event-dot {
             display: none !important;
         }
 
-        .fc-day-past {
-            background: rgba(0, 0, 0, 0.025) !important;
-        }
-
-        .fc-day-past .fc-daygrid-day-number {
-            color: #aaa !important;
-        }
-
         .fc-highlight {
             background: rgba(212, 160, 23, 0.22) !important;
-        }
-
-        @media (max-width: 768px) {
-            #calendar {
-                padding: 12px;
-                border-radius: 18px;
-            }
-
-            .fc .fc-toolbar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .fc .fc-toolbar-title {
-                font-size: 20px;
-                text-align: center;
-            }
-
-            .fc .fc-toolbar-chunk {
-                display: flex;
-                justify-content: center;
-                gap: 8px;
-                flex-wrap: wrap;
-            }
-
-            .fc .fc-button {
-                padding: 8px 12px !important;
-                font-size: 13px !important;
-            }
-
-            .fc .fc-daygrid-day-frame {
-                min-height: 64px;
-                padding: 3px;
-            }
-
-            .fc .fc-daygrid-day-number {
-                width: 26px;
-                height: 26px;
-                font-size: 12px;
-            }
-
-            .fc-event {
-                font-size: 10px !important;
-                padding: 2px 5px !important;
-            }
         }
 
         /* ===== BOOKING ANIMATED LUXURY HEADER - SAME APARTMENTS ===== */
@@ -1408,7 +1097,6 @@
                 opacity: 0;
             }
         }
-
 
         /* ===== MORE GLASS CALENDAR - BOOKING PAGE ===== */
 
@@ -1584,11 +1272,6 @@
                 -webkit-backdrop-filter: blur(18px) saturate(150%) !important;
             }
 
-            .fc .fc-toolbar {
-                flex-direction: column !important;
-                align-items: stretch !important;
-            }
-
             .fc .fc-toolbar-title {
                 font-size: 20px !important;
                 text-align: center !important;
@@ -1611,16 +1294,6 @@
                 padding: 3px !important;
             }
 
-            .fc .fc-daygrid-day-number {
-                width: 26px !important;
-                height: 26px !important;
-                font-size: 12px !important;
-            }
-
-            .fc-event {
-                font-size: 10px !important;
-                padding: 2px 5px !important;
-            }
         }
 
         /* ===== GLASS TOP BAR - BOOKING PAGE ===== */
@@ -1642,11 +1315,6 @@
             align-items: end !important;
             position: relative !important;
             z-index: 3 !important;
-        }
-
-        .top-bar-left,
-        .top-bar-right {
-            width: 100% !important;
         }
 
         .top-bar-right {
@@ -1712,10 +1380,6 @@
                 border-radius: 20px !important;
             }
 
-            .back-btn,
-            .top-bar select {
-                height: 46px !important;
-            }
         }
 
         /* ===== FIX CALENDAR WEEK DAYS ON MOBILE ===== */
@@ -1961,16 +1625,6 @@
             margin-inline-start: 5px;
         }
 
-        .photo-album-modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 999999;
-            background: #fff;
-            color: #111;
-            overflow: auto;
-        }
-
         .photo-album-header {
             position: sticky;
             top: 0;
@@ -1984,28 +1638,6 @@
             justify-content: space-between;
             padding: 0 22px;
             border-bottom: 1px solid #eee;
-        }
-
-        .photo-album-title {
-            font-weight: 900;
-            font-size: 18px;
-        }
-
-        .album-close-btn {
-            border: none;
-            background: #111;
-            color: #fff;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            font-size: 22px;
-            cursor: pointer;
-        }
-
-        .photo-album-body {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 24px 18px 40px;
         }
 
         .photo-album-stage {
@@ -2097,33 +1729,10 @@
         }
 
         @media (max-width: 768px) {
-            .airbnb-gallery-grid {
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: 190px 120px 120px;
-                gap: 8px;
-            }
-
-            .airbnb-gallery-item.main {
-                grid-column: span 2;
-                grid-row: span 1;
-            }
 
             .airbnb-gallery-label {
                 font-size: 11px;
                 padding: 6px 9px;
-            }
-
-            .photo-album-header {
-                height: 58px;
-                padding: 0 14px;
-            }
-
-            .photo-album-title {
-                font-size: 15px;
-            }
-
-            .photo-album-body {
-                padding: 16px 12px 30px;
             }
 
             .photo-album-stage {
@@ -2606,18 +2215,6 @@
             }
         }
 
-        @media (max-width: 480px) {
-
-            .photo-tour-photo,
-            .photo-tour-photo.wide {
-                height: 230px;
-            }
-
-            .photo-tour-room-info h2 {
-                font-size: 28px;
-            }
-        }
-
         /* ===== LUXURY GLASS BOOKING FORM ===== */
 
         /* كرت نموذج الحجز نفسه */
@@ -2634,48 +2231,9 @@
             color: #fff !important;
         }
 
-        .layout>.card:nth-child(2) .form-section {
-            padding: 22px !important;
-            color: #fff !important;
-        }
-
-        #formTitle {
-            color: #fff !important;
-            font-size: 28px !important;
-            font-weight: 950 !important;
-            text-align: center !important;
-            margin-bottom: 18px !important;
-        }
-
         /* عناوين الحقول */
-        .form-section label {
-            color: rgba(255, 255, 255, 0.90) !important;
-            font-size: 12px !important;
-            font-weight: 900 !important;
-            margin: 12px 0 7px !important;
-        }
 
         /* الحقول */
-        .form-section input,
-        .form-section select {
-            width: 100% !important;
-            min-height: 48px !important;
-            border-radius: 14px !important;
-            border: 1px solid rgba(255, 255, 255, 0.24) !important;
-            background: rgba(255, 255, 255, 0.11) !important;
-            color: #fff !important;
-            font-weight: 800 !important;
-            outline: none !important;
-            box-shadow:
-                inset 0 1px 0 rgba(255, 255, 255, 0.08),
-                0 10px 24px rgba(0, 0, 0, 0.08) !important;
-            backdrop-filter: blur(10px) saturate(145%) !important;
-            -webkit-backdrop-filter: blur(10px) saturate(145%) !important;
-        }
-
-        .form-section input::placeholder {
-            color: rgba(255, 255, 255, 0.58) !important;
-        }
 
         .form-section input:focus,
         .form-section select:focus {
@@ -2699,33 +2257,8 @@
         }
 
         /* الملاحظات والسعر */
-        .form-section .hint {
-            color: rgba(255, 255, 255, 0.72) !important;
-            font-weight: 700 !important;
-        }
-
-        #finalPriceLabel {
-            color: rgba(255, 255, 255, 0.88) !important;
-            font-weight: 900 !important;
-        }
-
-        .price,
-        #totalPrice {
-            color: #ffd36a !important;
-            font-weight: 950 !important;
-        }
 
         /* زر تأكيد الحجز */
-        #submitBtn {
-            min-height: 52px !important;
-            border-radius: 15px !important;
-            background: linear-gradient(135deg, #d4a017, #8a6508) !important;
-            color: #fff !important;
-            font-weight: 950 !important;
-            font-size: 16px !important;
-            box-shadow: 0 12px 28px rgba(212, 160, 23, 0.30) !important;
-            transition: 0.25s ease !important;
-        }
 
         #submitBtn:hover {
             background: linear-gradient(135deg, #000, #2a2a2a) !important;
@@ -2733,15 +2266,6 @@
         }
 
         /* رسائل الخطأ داخل الكرت الزجاجي */
-        .field-error {
-            color: #ffd1d1 !important;
-            font-weight: 800 !important;
-        }
-
-        .input-error {
-            border-color: rgba(255, 120, 120, 0.85) !important;
-            background: rgba(120, 0, 0, 0.18) !important;
-        }
 
         /* ===== CUSTOM GLASS APARTMENT SELECT IN FORM ===== */
 
@@ -2853,25 +2377,11 @@
         }
 
         /* نخلي كرت النموذج ما يقص القائمة */
-        .layout,
-        .layout>.card:nth-child(2),
-        .form-section,
-        #bookingForm {
-            overflow: visible !important;
-        }
 
         @media (max-width: 768px) {
             .layout>.card:nth-child(2) {
                 border-radius: 22px !important;
                 background: rgba(0, 0, 0, 0.20) !important;
-            }
-
-            .layout>.card:nth-child(2) .form-section {
-                padding: 18px !important;
-            }
-
-            #formTitle {
-                font-size: 24px !important;
             }
 
             .booking-form-glass-current,
@@ -2898,10 +2408,6 @@
         }
 
         /* جسم كرت تفاصيل الشقة */
-        .layout>.card .card-body {
-            background: transparent !important;
-            color: #fff !important;
-        }
 
         /* النصوص داخل تفاصيل الشقة */
         .layout>.card h2,
@@ -3068,10 +2574,6 @@
             -webkit-backdrop-filter: blur(10px) saturate(145%) !important;
         }
 
-        .form-section input::placeholder {
-            color: rgba(255, 255, 255, 0.58) !important;
-        }
-
         .form-section input:focus,
         .form-section select:focus {
             border-color: rgba(212, 160, 23, 0.85) !important;
@@ -3125,24 +2627,8 @@
         }
 
         /* أخطاء الحقول */
-        .field-error {
-            color: #ffd1d1 !important;
-            font-weight: 800 !important;
-        }
-
-        .input-error {
-            border-color: rgba(255, 120, 120, 0.85) !important;
-            background: rgba(120, 0, 0, 0.18) !important;
-        }
 
         /* مهم حتى القوائم الزجاجية ما تنقص */
-        .layout,
-        .layout>.card,
-        .card-body,
-        .form-section,
-        #bookingForm {
-            overflow: visible !important;
-        }
 
         @media (max-width: 768px) {
             .layout>.card {
@@ -3295,10 +2781,6 @@
             -webkit-backdrop-filter: blur(10px) saturate(145%) !important;
         }
 
-        .form-section textarea::placeholder {
-            color: rgba(255, 255, 255, 0.58) !important;
-        }
-
         .form-section textarea:focus {
             border-color: rgba(212, 160, 23, 0.85) !important;
             background: rgba(255, 255, 255, 0.16) !important;
@@ -3324,11 +2806,6 @@
             line-height: 1.35 !important;
         }
 
-        @media (max-width: 768px) {
-            .fc .fc-event-title {
-                font-size: 9px !important;
-            }
-        }
     </style>
     <script src="js/booking-security.js?v=5" defer></script>
     <style>
@@ -3446,11 +2923,6 @@
         /* التقويم: أرقام الأيام وأسماء الحجوزات أوضح */
         .fc .fc-daygrid-day-number {
             font-size: 14px !important;
-        }
-
-        .fc-event,
-        .fc-event .fc-event-title {
-            font-size: 12px !important;
         }
 
         /* شريط التقويم: السهمان على طرفي اسم الشهر، و«اليوم» زر صغير تحته */
