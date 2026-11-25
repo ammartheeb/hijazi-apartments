@@ -559,7 +559,8 @@
                     items: [
                         { ar: "مصاعد في جميع المباني", en: "Elevators in all buildings" },
                         { ar: "مداخل مناسبة للكراسي المتحركة", en: "Wheelchair-friendly entrances" },
-                        { ar: "المباني مناسبة لدخول مستخدمي الكراسي المتحركة", en: "Buildings accessible to wheelchair users" }
+                        { ar: "المباني مناسبة لدخول مستخدمي الكراسي المتحركة", en: "Buildings accessible to wheelchair users" },
+                        { ar: "كراسي متحركة لنقل النزيل بين الكراج وباب الشقة", en: "Wheelchairs to take guests between the garage and the apartment door", tag: "free" }
                     ]
                 }
             ]
@@ -585,6 +586,18 @@
                         { ar: "توفير مستلزمات إضافية عند الطلب", en: "Additional supplies available on request" },
                         { ar: "سرير إضافي أو فرشة إضافية عند الطلب", en: "Extra bed or extra mattress on request", tag: "free" },
                         { ar: "إقامة شهرية وطويلة الأمد بأسعار خاصة وخصومات ذهبية", en: "Monthly and long-term stays at special rates with golden discounts" }
+                    ]
+                },
+                {
+                    id: "medical-discounts",
+                    icon: "gift",
+                    titleAr: "خصومات طبية لنزلائنا",
+                    titleEn: "Medical discounts for our guests",
+                    items: [
+                        { ar: "خصم 50% على التحاليل في المختبرات", en: "50% off laboratory tests" },
+                        { ar: "خصم 30% على الأشعة", en: "30% off radiology" },
+                        { ar: "خصم يصل إلى 15% في جميع مستشفيات عمّان", en: "Up to 15% off at all hospitals in Amman" },
+                        { ar: "نرتّب الخصم عن طريقنا بالتواصل المباشر مع الأطباء", en: "We arrange the discount for you by contacting the doctors directly" }
                     ]
                 },
                 {
@@ -702,6 +715,12 @@
             aEn: "Yes. Airport pick-up and transfers to and from the airport can be arranged for an extra charge."
         },
         {
+            qAr: "هل تقدمون خصومات على العلاج لنزلائكم؟",
+            aAr: "نعم. عند الإقامة في شقق حجازي المفروشة نرتّب لك خصمًا عن طريقنا بالتواصل المباشر مع الأطباء: 50% على التحاليل في المختبرات، و30% على الأشعة، وحتى 15% في جميع مستشفيات عمّان. أخبرنا بموعدك عبر واتساب لنرتّب الخصم قبل زيارتك.",
+            qEn: "Do you offer treatment discounts to your guests?",
+            aEn: "Yes. When you stay at HIJAZI Apartments, we arrange a discount for you by contacting the doctors directly: 50% on laboratory tests, 30% on radiology and up to 15% at all hospitals in Amman. Tell us about your appointment on WhatsApp so we can arrange it before your visit."
+        },
+        {
             qAr: "هل يوجد غسالة داخل الشقة؟",
             aAr: "نعم، في كل شقة غرفة غسيل مستقلة فيها غسالة ملابس ومنشر ومكواة وسائل غسيل. وتتوفر أيضًا خدمة غسيل وكي الملابس مقابل رسوم إضافية.",
             qEn: "Is there a washing machine in the apartment?",
@@ -709,9 +728,9 @@
         },
         {
             qAr: "هل المباني مناسبة لمستخدمي الكراسي المتحركة؟",
-            aAr: "نعم، في جميع المباني مصاعد، والمداخل مناسبة لمستخدمي الكراسي المتحركة.",
+            aAr: "نعم، في جميع المباني مصاعد، والمداخل مناسبة لمستخدمي الكراسي المتحركة، ولدينا كراسي متحركة لنقل النزيل بين الكراج وباب الشقة.",
             qEn: "Are the buildings wheelchair accessible?",
-            aEn: "Yes. All buildings have elevators and wheelchair-friendly entrances."
+            aEn: "Yes. All buildings have elevators and wheelchair-friendly entrances, and we have wheelchairs to take guests between the garage and the apartment door."
         },
         {
             qAr: "هل يُسمح بإقامة غير المتزوجين؟",
